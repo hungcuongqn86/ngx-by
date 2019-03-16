@@ -4,14 +4,13 @@ import {AppGuard} from './app.guard.service';
 import {Error404Component} from './messages/error404.component';
 import {LoginComponent} from './auth/login.component';
 import {DefaultLayoutComponent} from './layout';
-import {VersionsModule} from './modules/versions/versions.module';
 
 const appRoutes: Routes = [
     {
         path: '',
         component: DefaultLayoutComponent,
         data: {
-            title: 'Trang quản trị'
+            title: 'Quản lý đơn hàng'
         },
         children: [
             {
@@ -20,24 +19,12 @@ const appRoutes: Routes = [
                 data: {
                     title: 'Bảng điều khiển'
                 }
-            }, {
-                path: 'version',
-                loadChildren: './modules/versions/versions.module#VersionsModule',
+            },
+            {
+                path: 'cart',
+                loadChildren: './modules/cart/cart.module#CartModule',
                 data: {
-                    title: 'Version'
-                }
-            }, {
-                path: 'mowner',
-                loadChildren: './modules/mowner/mowner.module#MownerModule',
-                data: {
-                    title: 'Owner'
-                }
-            }
-            , {
-                path: 'mpet',
-                loadChildren: './modules/mpet/mpet.module#MpetModule',
-                data: {
-                    title: 'Pet'
+                    title: 'Giỏ hàng'
                 }
             }
         ],

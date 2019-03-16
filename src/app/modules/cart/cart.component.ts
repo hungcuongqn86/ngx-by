@@ -1,18 +1,18 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {OwnerService} from '../../../services/mowner/owner.service';
-import {Owner} from '../../../models/Owner';
+import {OwnerService} from '../../services/mowner/owner.service';
+import {Owner} from '../../models/Owner';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
-    selector: 'app-owner',
-    templateUrl: './owner.component.html',
-    styleUrls: ['./owner.component.css'],
+    selector: 'app-cart',
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.css'],
     encapsulation: ViewEncapsulation.None
 })
 
-export class OwnerComponent implements OnInit {
+export class CartComponent implements OnInit {
     owner: Owner;
     owners: Owner[];
     totalItems = 0;
@@ -52,7 +52,7 @@ export class OwnerComponent implements OnInit {
     }
 
     public searchOwners() {
-        this.ownerService.showLoading(true);
+        // this.ownerService.showLoading(true);
         this.ownerService.getOwners()
             .subscribe(owners => {
                 this.owners = owners.data.data;

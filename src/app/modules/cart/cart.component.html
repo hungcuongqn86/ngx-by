@@ -4,8 +4,8 @@
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="javascript:void(0)" (click)="addBase()"><i class="fa fa-plus"></i> &nbsp;Thêm</a>
-            <a class="btn" href="#"><i class="fa fa-remove"></i> &nbsp;Xóa</a>
+            <a class="btn" href="javascript:void(0)" (click)="addOwner()"><i class="fa fa-plus"></i> &nbsp;Kết đơn tất cả</a>
+            <a class="btn" href="javascript:void(0)"><i class="fa fa-remove"></i> &nbsp;Xóa</a>
         </div>
     </li>
 </ol>
@@ -14,18 +14,18 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> <strong>Danh sách loài</strong>
+                    <i class="fa fa-align-justify"></i> <strong>Danh sách chủ pet</strong>
                 </div>
                 <div class="card-body">
-                    <form novalidate (ngSubmit)="searchPetType()" #form="ngForm">
+                    <form novalidate (ngSubmit)="searchOwners()" #form="ngForm">
                         <div class="form-group row">
                             <div class="col-md-10">
-                                <input [(ngModel)]="petTypeService.search.key" type="text" id="key" name="key"
+                                <input [(ngModel)]="ownerService.search.key" type="text" id="key" name="key"
                                        class="form-control"
-                                       placeholder="Tìm kiếm theo tên loài">
+                                       placeholder="Tìm kiếm theo name, phone number, email, facebook...">
                             </div>
                             <div class="col-md-2">
-                                <button type="button" (click)="searchPetType()"
+                                <button type="button" (click)="searchOwners()"
                                         class="btn btn-primary">Tìm kiếm
                                 </button>
                             </div>
@@ -34,17 +34,20 @@
                     <table class="table table-striped table-sm">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Tên</th>
+                            <th>Tên - Phone number</th>
+                            <th>Facebook</th>
+                            <th>Email</th>
                             <th class="text-right">Tác vụ</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let item of pettypes">
-                            <td>{{item.id}}</td>
-                            <td>{{item.name}}</td>
+                        <tr *ngFor="let item of owners">
+                            <td><i class="fa fa-user"></i> {{item.name}} - <i class="fa fa-phone-square"></i> <a href="{{item.phone_number}}"> {{item.phone_number}}</a></td>
+                            <td><i class="fa fa-facebook-square"></i> <a href="{{item.facebook}}"> {{item.facebook}}</a></td>
+                            <td><i class="fa fa-envelope-square"></i> <a href="{{item.email}}"> {{item.email}}</a></td>
                             <td class="text-right">
-                                <button (click)="editBase(item.id)" class="btn btn-sm btn-ghost-primary" type="button">
+                                <button (click)="editOwner(item.id)" class="btn btn-sm btn-ghost-primary"
+                                        type="button">
                                     Sửa
                                 </button>
                                 <button (click)="openModal(template,item)" class="btn btn-sm btn-ghost-danger"
@@ -54,6 +57,11 @@
                         </tr>
                         </tbody>
                     </table>
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="ownerService.search.page"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
                 </div>
             </div>
         </div>
@@ -62,7 +70,7 @@
 </div><!-- /.container-fluid -->
 <ng-template #template>
     <div class="modal-body text-center">
-        <p>Bạn có chắc chắn muốn xóa Loại thú này!?</p>
+        <p>Bạn có chắc chắn muốn xóa chủ pet này!?</p>
         <div class="btn-group btn-group-toggle">
             <button type="button" class="btn btn-warning" (click)="confirm()">Yes</button>
             <button type="button" class="btn btn-primary" (click)="decline()">No</button>
