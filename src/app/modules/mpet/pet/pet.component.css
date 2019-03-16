@@ -1,0 +1,7 @@
+.pager li.btn:active {
+    box-shadow: none;
+}
+
+img {
+    max-width: 100%;
+}

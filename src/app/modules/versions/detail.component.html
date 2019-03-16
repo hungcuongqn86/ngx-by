@@ -1,0 +1,88 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="btn" href="javascript:void(0)" (click)="versionsService.updateVersion()"><i
+                    class="fa fa-check-square"></i> &nbsp;Cập nhật</a>
+            <a class="btn" href="javascript:void(0)" (click)="backlist()"
+               target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Chi tiết Version</strong>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 mb-4">
+                        <form novalidate #form="ngForm" class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="app_code">
+                                    App <code class="highlighter-rouge">*</code>
+                                </label>
+                                <div class="col-md-9">
+                                    <select [(ngModel)]="versionsService.version.app_code" #app_code="ngModel"
+                                            id="app_code" name="app_code"
+                                            required
+                                            class="form-control">
+                                        <option value="">Chọn App</option>
+                                        <option *ngFor="let item of applist" value="{{item.code}}">{{item.name}}
+                                        </option>
+                                    </select>
+
+                                    <div [hidden]="app_code.valid || app_code.untouched">
+                                <span *ngIf="app_code.errors && app_code.errors.required" class="badge badge-warning">
+                                    Phải chọn App!
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="version_code">
+                                    Version code <code class="highlighter-rouge">*</code>
+                                </label>
+                                <div class="col-md-9">
+                                    <input [(ngModel)]="versionsService.version.version_code" #version_code="ngModel"
+                                           type="text"
+                                           id="version_code" name="version_code"
+                                           required
+                                           class="form-control"
+                                           placeholder="Version code">
+                                    <div [hidden]="version_code.valid || version_code.untouched">
+                                <span *ngIf="version_code.errors && version_code.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Version code!
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="link_apk">Link apk <code
+                                        class="highlighter-rouge">*</code></label>
+                                <div class="col-md-9">
+                                    <input [(ngModel)]="versionsService.version.link_apk" #link_apk="ngModel"
+                                           type="text" id="link_apk" name="link_apk"
+                                           class="form-control"
+                                           required
+                                           placeholder="Link apk">
+                                    <div [hidden]="link_apk.valid || link_apk.untouched">
+                                <span *ngIf="link_apk.errors && link_apk.errors.required" class="badge badge-warning">
+                                    Phải nhập Link apk!
+                                </span></div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--/.col-->
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>

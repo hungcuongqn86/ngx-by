@@ -1,0 +1,102 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="btn" href="javascript:void(0)" (click)="addPet()"><i class="fa fa-plus"></i> &nbsp;Thêm</a>
+            <a class="btn" href="#"><i class="fa fa-remove"></i> &nbsp;Xóa</a>
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> <strong>Danh sách thú</strong>
+                </div>
+                <div class="card-body">
+                    <form novalidate (ngSubmit)="searchPets()" #form="ngForm">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input [(ngModel)]="petService.search.key" type="text" id="key" name="key"
+                                       class="form-control"
+                                       placeholder="Tìm kiếm theo tên thú, tên chủ">
+                            </div>
+                            <div class="col-md-4">
+                                <select [(ngModel)]="petService.search.species" class="form-control" name="pettype" id="pettype">
+                                    <option value="">Tất cả</option>
+                                    <option *ngFor="let type of types" [value]="type.id">
+                                        {{type.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" (click)="searchPets()"
+                                        class="btn btn-primary">Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <th width="8%">Tên Pet</th>
+                            <th width="10%">Loài - giống</th>
+                            <th width="15%">Chủ sở hữu</th>
+                            <th width="5%">Giới tính</th>
+                            <th width="10%" class="text-right">Ngày sinh</th>
+                            <th width="10%" class="text-right">Ngày chết</th>
+                            <th>Story</th>
+                            <th width="3%" class="text-center">#</th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf="pets && pets.length > 0">
+                        <tr *ngFor="let item of pets">
+                            <td>
+                                <p><i class="fa fa-paw"></i> {{item.name}}</p>
+                                <img *ngIf="item.media.length" src="{{item.media[0].url}}">
+                            </td>
+                            <td>
+                                {{item.species.name}}
+                                <p *ngIf="item.breed">{{item.breed.name}}</p>
+                            </td>
+                            <td>
+                                <p *ngFor="let owner of item.owners"><i class="fa fa-user"></i> {{owner.name}}</p>
+                            </td>
+                            <td>{{item.gender_name}}</td>
+                            <td class="text-right">{{item.birth_day_vi}}</td>
+                            <td class="text-right">{{item.dead_day_vi}}</td>
+                            <td>{{item.story}}</td>
+                            <td class="text-right">
+                                <button (click)="editPet(item.id)" class="btn btn-sm btn-ghost-primary" type="button">
+                                    Sửa
+                                </button>
+                                <button (click)="openModal(template,item)" class="btn btn-sm btn-ghost-danger"
+                                        type="button">Xóa
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="petService.search.page"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6" [itemsPerPage]="petService.search.limit"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div><!-- /.container-fluid -->
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>Bạn có chắc chắn muốn xóa Pet này!?</p>
+        <div class="btn-group btn-group-toggle">
+            <button type="button" class="btn btn-warning" (click)="confirm()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </div>
+</ng-template>

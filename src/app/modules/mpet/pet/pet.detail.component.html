@@ -1,0 +1,54 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Breadcrumb Menu-->
+    <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <a class="btn" href="javascript:void(0)" (click)="petService.updatePet()"><i class="fa fa-check-square"></i>
+                &nbsp;Cập nhật</a>
+            <a class="btn" href="javascript:void(0)" (click)="backlist()"
+               target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
+        </div>
+    </li>
+</ol>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Chi tiết pet</strong>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 mb-4">
+                        <!-- Nav tabs -->
+                        <tabset>
+                            <tab>
+                                <ng-template tabHeading><i class="icon-list"></i> &nbsp;Thông tin cơ bản</ng-template>
+                                <app-mpet-pet-detail-info></app-mpet-pet-detail-info>
+                            </tab>
+                            <tab *ngIf="this.petService.pet.id !== null">
+                                <ng-template tabHeading><i class="cui-user"></i> &nbsp;Thông tin chủ pet</ng-template>
+                                <app-mpet-pet-detail-owners></app-mpet-pet-detail-owners>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="fa fa-file-image-o"></i> &nbsp;Media</ng-template>
+                                <app-mpet-pet-detail-media></app-mpet-pet-detail-media>
+                            </tab>
+                            <tab *ngIf="this.petService.pet.id !== null">
+                                <ng-template tabHeading><i class="fa fa-history"></i> &nbsp;Lịch sử khám chữa bệnh
+                                </ng-template>
+                                <p>...</p>
+                            </tab>
+                            <tab *ngIf="this.petService.pet.id !== null">
+                                <ng-template tabHeading><i class="fa fa-sitemap"></i> &nbsp;Phả hệ
+                                </ng-template>
+                                <p>...</p>
+                            </tab>
+                        </tabset>
+                    </div><!--/.col-->
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>
