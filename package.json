@@ -1,10 +1,10 @@
 {
-  "name": "ngx-pet",
+  "name": "ngx-by",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host petbook.com --port 88 --proxy-config proxy.conf.json",
-    "build": "ng build --prod --base-href \"/admin/\" ",
+    "start": "ng serve --host quangchauonline.com --port 88 --proxy-config proxy.conf.json",
+    "build": "ng build --prod --base-href \"/don-hang/\" ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
