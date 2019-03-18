@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
 
     ngOnInit() {
         this.searchOwners();
+
     }
 
     pageChanged(event: any): void {

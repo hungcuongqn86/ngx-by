@@ -48,6 +48,8 @@ export class AuthService {
     public setAuthorizationToken(tokens) {
         const key = btoa(tokens_key);
         localStorage.setItem(key, btoa(JSON.stringify(tokens)));
+        const data = { type: 'CART_TOKEN', id: tokens.access_token };
+        window.postMessage(data, '*');
     }
 
     public checkLogin() {
