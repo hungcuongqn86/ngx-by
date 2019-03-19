@@ -7,7 +7,7 @@ import {DefaultLayoutComponent} from './layout';
 
 const appRoutes: Routes = [
     {
-        path: '',
+        path: 'admin',
         component: DefaultLayoutComponent,
         data: {
             title: 'Quản lý đơn hàng'
