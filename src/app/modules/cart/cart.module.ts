@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
-import {OwnerService} from '../../services/mowner/owner.service';
+import {CartService} from '../../services/cart/cart.service';
 import {CartComponent} from './cart.component';
 import {CartRoutingModule} from './cart.routing.module';
 import {SharedModule} from '../../shared.module';
@@ -15,7 +15,7 @@ import {PetService} from '../../services/mpet/pet.service';
         CartComponent
     ],
     exports: [],
-    providers: [OwnerService, PetService]
+    providers: [CartService, PetService]
 })
 export class CartModule {
 }

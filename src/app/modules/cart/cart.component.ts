@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {OwnerService} from '../../services/mowner/owner.service';
-import {Owner} from '../../models/Owner';
+import {CartService} from '../../services/cart/cart.service';
+import {Cart} from '../../models/Cart';
+import {Shop} from '../../models/Shop';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -13,28 +14,27 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 
 export class CartComponent implements OnInit {
-    owner: Owner;
-    owners: Owner[];
-    totalItems = 0;
+    shops: Shop[];
+    shop: Shop;
     modalRef: BsModalRef;
 
-    constructor(public ownerService: OwnerService,
+    constructor(public cartService: CartService,
                 private router: Router, private modalService: BsModalService) {
 
     }
 
     ngOnInit() {
-        this.searchOwners();
+        this.getCarts();
 
     }
 
     pageChanged(event: any): void {
-        this.ownerService.search.page = event.page;
-        this.searchOwners();
+        this.cartService.search.page = event.page;
+        this.getCarts();
     }
 
     public addOwner() {
-        this.ownerService.owner.id = null;
+        this.cartService.shop.id = null;
         this.router.navigate(['/mowner/owner/add']);
     }
 
@@ -43,27 +43,26 @@ export class CartComponent implements OnInit {
     }
 
     public deleteOwner() {
-        if (this.owner) {
-            this.owner.is_deleted = 1;
-            this.ownerService.editOwner(this.owner)
+        if (this.shop) {
+            this.shop.is_deleted = 1;
+            this.cartService.editShop()
                 .subscribe(res => {
-                    this.searchOwners();
+                    this.getCarts();
                 });
         }
     }
 
-    public searchOwners() {
-        // this.ownerService.showLoading(true);
-        this.ownerService.getOwners()
-            .subscribe(owners => {
-                this.owners = owners.data.data;
-                this.totalItems = owners.data.total;
-                this.ownerService.showLoading(false);
+    public getCarts() {
+        this.cartService.showLoading(true);
+        this.cartService.getShops()
+            .subscribe(shops => {
+                this.shops = shops.data;
+                this.cartService.showLoading(false);
             });
     }
 
     openModal(template: TemplateRef<any>, member) {
-        this.owner = member;
+        this.shop = member;
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     }
 

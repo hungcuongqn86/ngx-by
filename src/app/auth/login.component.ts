@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
             .subscribe((token: Token) => {
                 if (token.access_token) {
                     this.authService.setAuthorizationToken(token);
-                    console.log(token);
+                    // console.log(token);
                     this.router.navigate(['/dashboard']);
                 }
             });

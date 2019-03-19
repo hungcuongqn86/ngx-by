@@ -1,3 +1,7 @@
 .pager li.btn:active {
     box-shadow: none;
 }
+
+table > tbody > tr > td img {
+    max-width: 100px;
+}
