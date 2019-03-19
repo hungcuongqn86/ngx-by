@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
                 if (token.access_token) {
                     this.authService.setAuthorizationToken(token);
                     console.log(token);
-                    this.router.navigate(['/admin/dashboard']);
+                    this.router.navigate(['/dashboard']);
                 }
             });
     }

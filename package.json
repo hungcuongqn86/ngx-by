@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host quangchauonline.com --port 88 --proxy-config proxy.conf.json",
-    "build": "ng build --prod --base-href \"/don-hang/\" ",
+    "build": "ng build --prod --base-href \"/admin/\" ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
