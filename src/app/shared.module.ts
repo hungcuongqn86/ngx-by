@@ -7,13 +7,15 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {AlertModule} from 'ngx-bootstrap/alert';
 import {AppBreadcrumbModule} from '@coreui/angular';
+import {TempPricePipe} from './pipes/price';
+import {TempTotalPricePipe} from './pipes/totalPrice';
 
 @NgModule({
     imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
         ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
-    declarations: [MessageDirective],
+    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe],
     exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
-        AppBreadcrumbModule, BsDatepickerModule, AlertModule],
+        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe],
     providers: []
 })
 export class SharedModule {

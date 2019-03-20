@@ -34,7 +34,7 @@ export class CartService {
 
     reset() {
         this.shop = {
-            id: null, name: null, url: null, cart: null, is_deleted: 0, created_at: '', updated_at: ''
+            id: null, name: null, url: null, cart: null, rate: 1, is_deleted: 0, created_at: '', updated_at: ''
         };
     }
 

@@ -20,47 +20,77 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-8">
-                            <table class="table table-striped table-sm">
+                            <table class="table table-sm">
                                 <thead>
                                 <tr>
-                                    <th>Sản phẩn</th>
+                                    <th width="30%">Sản phẩn</th>
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Tiền hàng</th>
                                 </tr>
                                 </thead>
                                 <tbody *ngIf="shopItem.cart && shopItem.cart.length > 0">
-                                <tr *ngFor="let item of shopItem.cart">
-                                    <td>
-                                        <p>{{item.name}}</p>
-                                        <img src="{{item.image}}">
-                                    </td>
-                                    <td>
-                                        <p>{{item.amount}}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{item.price}}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{item.price}}</p>
-                                    </td>
-                                </tr>
+                                <ng-template ngFor let-item [ngForOf]="shopItem.cart" let-i="index">
+                                    <tr>
+                                        <td rowspan="3">
+                                            <div class="pull-left">
+                                                <img src="{{item.image}}">
+                                            </div>
+                                            <p class="pull-left m-1">{{item.colortxt}}</p>
+                                        </td>
+                                        <td>
+                                            <p><input [(ngModel)]="shopItem.cart[i].amount" type="number" id="amount"
+                                                      name="amount" class="form-control"></p>
+                                        </td>
+                                        <td>
+                                            <p>{{item.price | tempPrice: shopItem.rate : 1}}<sup>đ</sup></p>
+                                            <p><span>¥</span>{{item.price | tempPrice: 1 : 1}}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{item.price | tempPrice: shopItem.rate : shopItem.cart[i].amount}}<sup>đ</sup></p>
+                                            <p><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="border-top: none;"><input type="text"
+                                                                                         class="form-control"
+                                                                                         placeholder="Ghi chú link"
+                                                                                         value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="border-top: none; padding: 15px 0;">
+                                            <div>
+                                                <a style="margin-right: 25px;">
+                                                    <span class="ng-binding">1</span><span> / </span><span>1</span><span> Link</span>
+                                                </a>
+                                                <a href="javascript:void(0)"><i class="fa fa-trash-o"
+                                                                                aria-hidden="true"></i> Xóa shop</a><br>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-lg-3">
+                        <div *ngIf="shopItem.cart && shopItem.cart.length > 0" class="col-lg-3">
                             <table class="table table-sm">
                                 <tbody>
                                 <tr>
                                     <td>Tiền hàng</td>
-                                    <td>12121<sup>đ</sup></td>
+                                    <td>{{shopItem.cart|tempTotalPrice}}<sup>đ</sup></td>
                                 </tr>
                                 <tr>
                                     <td>Phí tạm tính</td>
-                                    <td>12121<sup>đ</sup></td>
+                                    <td>0<sup>đ</sup></td>
                                 </tr>
-                                <tr><td>#</td><td>#</td></tr>
-                                <tr><td>Tổng</td><td><strong>5456456<sup>đ</sup></strong></td></tr>
+                                <tr>
+                                    <td>#</td>
+                                    <td>#</td>
+                                </tr>
+                                <tr>
+                                    <td>Tổng</td>
+                                    <td>{{shopItem.cart|tempTotalPrice}}<sup>đ</sup></td>
+                                </tr>
                                 <tr>
                                     <td colspan="2">
                                         <button class="btn btn-block btn-primary" type="button">Kết đơn</button>
