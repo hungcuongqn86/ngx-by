@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {AppGuard} from './app.guard.service';
 import {Error404Component} from './messages/error404.component';
 import {LoginComponent} from './auth/login.component';
+import {RegisterComponent} from './auth/register.component';
 import {DefaultLayoutComponent} from './layout';
 
 const appRoutes: Routes = [
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
         canActivate: [AppGuard]
     },
     {path: 'login', component: LoginComponent, pathMatch: 'full'},
+    {path: 'register', component: RegisterComponent, pathMatch: 'full'},
     {path: '**', component: Error404Component, pathMatch: 'full'}
 ];
 

@@ -16,6 +16,7 @@ import {LoadingService} from './loading.service';
 import {MessagesComponent} from './messages/messages.component';
 import {Error404Component} from './messages/error404.component';
 import {LoginComponent} from './auth/login.component';
+import {RegisterComponent} from './auth/register.component';
 import {MessageService} from './message.service';
 import {NgxCaptchaModule} from 'ngx-captcha';
 import {TabsModule} from 'ngx-bootstrap/tabs';
@@ -89,7 +90,8 @@ import {captchar_key} from './const';
         ...APP_CONTAINERS,
         MessagesComponent,
         Error404Component,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [
         AppGuard,

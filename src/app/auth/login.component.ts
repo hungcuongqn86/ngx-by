@@ -56,4 +56,8 @@ export class LoginComponent implements OnInit {
                 this.alert = 'Đăng nhập không thành công!';
             });
     }
+
+    public register() {
+        this.router.navigate(['/register']);
+    }
 }
