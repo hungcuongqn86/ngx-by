@@ -63,6 +63,14 @@ export class AuthService {
             );
     }
 
+    public register(useri): Observable<{}> {
+        const url = Util.getUri(apiV1Url) + `register`;
+        return this.http.post(url, useri, httpOptions)
+            .pipe(
+                catchError(this.handleError('register'))
+            );
+    }
+
     public login(useri): Observable<{}> {
         const url = Util.getUri(apiV1Url) + `login`;
         return this.http.post(url, useri, httpOptions)
