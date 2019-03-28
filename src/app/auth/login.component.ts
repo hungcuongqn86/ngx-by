@@ -9,7 +9,10 @@ export interface User {
 }
 
 export interface Token {
+    status: boolean;
     access_token: string;
+    token_type: string;
+    expires_at: string;
 }
 
 @Component({
@@ -41,11 +44,16 @@ export class LoginComponent implements OnInit {
         };
         this.authService.login(useri)
             .subscribe((token: Token) => {
-                if (token.access_token) {
+                if (token.status) {
                     this.authService.setAuthorizationToken(token);
-                    // console.log(token);
                     this.router.navigate(['/dashboard']);
+                } else {
+                    this.rError = true;
+                    this.alert = 'Đăng nhập không thành công!';
                 }
+            }, (error) => {
+                this.rError = true;
+                this.alert = 'Đăng nhập không thành công!';
             });
     }
 }

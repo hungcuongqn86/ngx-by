@@ -1,7 +1,6 @@
-export interface Owner {
+export interface Partner {
     id: number;
     name: string;
-    gender: number;
     phone_number: string;
     facebook: string;
     email: string;

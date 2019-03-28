@@ -18,9 +18,9 @@ export class AppGuard implements CanActivate {
 
         return this.auth.checkAccess()
             .pipe(
-                map((response) => {
+                map((response: any) => {
                     if (response) {
-                        this.pass();
+                        this.pass(response.success);
                         return true;
                     } else {
                         this.fall();
@@ -31,9 +31,8 @@ export class AppGuard implements CanActivate {
             );
     }
 
-    private pass() {
-        console.log('pass');
-        // this.auth.getProfile();
+    private pass(user) {
+        this.auth.user = user;
     }
 
     private fall() {

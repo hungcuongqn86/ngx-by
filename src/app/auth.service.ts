@@ -8,18 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {HttpErrorHandler, HandleError} from './http-error-handler.service';
 import {Util} from './helper/lib';
-
-export interface FooInterface {
-    status: string;
-    fooString: string;
-    fooNumber: number;
-}
-
-export interface User {
-    email: string;
-    password: string;
-    remember_me: boolean;
-}
+import {User} from './models/User';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -30,10 +19,13 @@ const httpOptions = {
 /** Mock client-side authentication/authorization service */
 @Injectable()
 export class AuthService {
+    static instance: AuthService;
     private handleError: HandleError;
+    public user: User;
 
     constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandler, private router: Router) {
         this.handleError = httpErrorHandler.createHandleError('AuthService');
+        return AuthService.instance = AuthService.instance || this;
     }
 
     public getAuthorizationToken() {
@@ -48,8 +40,6 @@ export class AuthService {
     public setAuthorizationToken(tokens) {
         const key = btoa(tokens_key);
         localStorage.setItem(key, btoa(JSON.stringify(tokens)));
-        const data = { type: 'CART_TOKEN', id: tokens.access_token };
-        window.postMessage(data, '*');
     }
 
     public checkLogin() {
@@ -57,15 +47,23 @@ export class AuthService {
         return localStorage[key] ? key : '';
     }
 
-    public checkAccess(): Observable<FooInterface[]> {
-        const url = apiUrl + `auth/user`;
+    public checkAccess(): any {
+        const url = Util.getUri(apiV1Url) + `checklogin`;
         return this.http
-            .get<FooInterface[]>(url).pipe(
+            .get<any>(url).pipe(
                 catchError(this.handleError('checkAccess', []))
             );
     }
 
-    public login(useri: User): Observable<{}> {
+    public getNav(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `getnav`;
+        return this.http
+            .get<any>(url).pipe(
+                catchError(this.handleError('getNav', []))
+            );
+    }
+
+    public login(useri): Observable<{}> {
         const url = Util.getUri(apiV1Url) + `login`;
         return this.http.post(url, useri, httpOptions)
             .pipe(
