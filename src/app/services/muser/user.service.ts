@@ -8,24 +8,24 @@ import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {Owner} from '../../models/Owner';
+import {User} from '../../models/User';
 import {LoadingService} from '../../loading.service';
 
 @Injectable()
-export class OwnerService {
-    static instance: OwnerService;
+export class UserService {
+    static instance: UserService;
     private handleError: HandleError;
-    private moduleUri = 'mowner/owner/';
+    private moduleUri = 'muser/user/';
     public search = {key: '', page_size: 10, page: 1};
-    public owner: Owner;
+    public user: User;
 
     constructor(private router: Router, private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
-        this.handleError = httpErrorHandler.createHandleError('OwnerService');
-        if (!this.owner) {
+        this.handleError = httpErrorHandler.createHandleError('UsserService');
+        if (!this.user) {
             this.reset();
         }
-        return OwnerService.instance = OwnerService.instance || this;
+        return UserService.instance = UserService.instance || this;
     }
 
     showLoading(value: boolean) {
@@ -33,13 +33,22 @@ export class OwnerService {
     }
 
     reset() {
-        this.owner = {
-            id: null, name: null, gender: null, phone_number: null, facebook: null, email: null
-            , status: 1, is_deleted: 0, created_at: '', updated_at: ''
+        this.user = {
+            id: null, name: null, partner_id: null, partner: null, role_id: null, roles: null,
+            phone_number: null, password: null, c_password: null,
+            email: null, is_deleted: 0, created_at: '', updated_at: ''
         };
     }
 
-    getOwners(): Observable<any> {
+    getRoles(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `muser/role/search`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getRoles', []))
+            );
+    }
+
+    getUsers(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
         let params = new HttpParams();
         Object.keys(this.search).map((key) => {
@@ -47,28 +56,28 @@ export class OwnerService {
         });
         return this.http.get<any>(url, {params: params})
             .pipe(
-                catchError(this.handleError('getOwners', []))
+                catchError(this.handleError('getUsers', []))
             );
     }
 
-    getOwner(id): Observable<any> {
+    getUser(id): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
         return this.http.get<any>(url)
             .pipe(
-                catchError(this.handleError('getOwner', []))
+                catchError(this.handleError('getUser', []))
             );
     }
 
-    updateOwner() {
+    updateUser() {
         this.showLoading(true);
-        if (this.owner.id === null) {
-            this.addOwner(this.owner).subscribe(
+        if (this.user.id === null) {
+            this.addUser(this.user).subscribe(
                 res => {
                     this.updateSuccess(res);
                 }
             );
         } else {
-            this.editOwner(this.owner).subscribe(
+            this.editUser(this.user).subscribe(
                 res => {
                     this.updateSuccess(res);
                 }
@@ -83,19 +92,19 @@ export class OwnerService {
         this.showLoading(false);
     }
 
-    public addOwner(owner: Owner): Observable<any> {
+    public addUser(user: User): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
-        return this.http.post<Owner>(url, owner)
+        return this.http.post<User>(url, user)
             .pipe(
-                catchError(this.handleError('addOwner', owner))
+                catchError(this.handleError('addOwner', user))
             );
     }
 
-    public editOwner(owner: Owner): Observable<any> {
+    public editUser(user: User): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-        return this.http.put<Owner>(url, owner)
+        return this.http.put<User>(url, user)
             .pipe(
-                catchError(this.handleError('editOwner', owner))
+                catchError(this.handleError('editOwner', user))
             );
     }
 }
