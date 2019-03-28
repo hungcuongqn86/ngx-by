@@ -7,7 +7,7 @@ import {AuthService} from '../../auth.service';
     templateUrl: './default-layout.component.html'
 })
 export class DefaultLayoutComponent {
-    public navItems = navItems;
+    public navItems = [];
     public sidebarMinimized = true;
     private changes: MutationObserver;
     public element: HTMLElement = document.body;
@@ -21,5 +21,13 @@ export class DefaultLayoutComponent {
         this.changes.observe(<Element>this.element, {
             attributes: true
         });
+        this.getNavItems();
+    }
+
+    public getNavItems() {
+        this.auth.getNav()
+            .subscribe(navdata => {
+                this.navItems = navdata.success;
+            });
     }
 }
