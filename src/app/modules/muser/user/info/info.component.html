@@ -89,27 +89,6 @@
             </div>
         </div>
     </div>
-    <div class="form-group row">
-        <label class="col-md-3 col-form-label" for="partner_id">
-            Đối tác<code class="highlighter-rouge">*</code>
-        </label>
-        <div class="col-md-9">
-            <select [(ngModel)]="userService.user.partner_id" #partner_id="ngModel"
-                    required class="form-control"
-                    name="partner_id" id="partner_id">
-                <option value="null">Chọn đối tác ...</option>
-                <option *ngFor="let partner of partners" [value]="partner.id">
-                    {{partner.name}}
-                </option>
-            </select>
-            <div [hidden]="partner_id.valid || partner_id.untouched">
-                                <span *ngIf="partner_id.errors && partner_id.errors.required"
-                                      class="badge badge-warning">
-                                    Phải chọn đối tác!
-                                </span>
-            </div>
-        </div>
-    </div>
 
     <div class="form-group row">
         <label class="col-md-3 col-form-label" for="role_id">

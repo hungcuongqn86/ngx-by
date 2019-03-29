@@ -6,7 +6,7 @@ import {catchError} from 'rxjs/operators';
 
 import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
-import {apiV1Url} from '../../const';
+import {apiV1Url, clientid} from '../../const';
 import {Router} from '@angular/router';
 import {User} from '../../models/User';
 import {LoadingService} from '../../loading.service';
@@ -34,8 +34,8 @@ export class UserService {
 
     reset() {
         this.user = {
-            id: null, name: null, partner_id: null, partner: null, role_id: null, roles: null,
-            phone_number: null, password: null, c_password: null,
+            id: null, name: null, partner: null, role_id: null, roles: null,
+            phone_number: null, password: null, c_password: null, partner_id: clientid,
             email: null, is_deleted: 0, created_at: '', updated_at: ''
         };
     }
