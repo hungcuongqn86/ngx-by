@@ -5,7 +5,7 @@ import {Role} from '../../../../models/User';
 import {Partner} from '../../../../models/Partner';
 
 @Component({
-    selector: 'app-muser-user-detail-info',
+    selector: 'app-mcustumer-custumer-detail-info',
     templateUrl: './info.component.html',
     styleUrls: ['./info.component.css']
 })

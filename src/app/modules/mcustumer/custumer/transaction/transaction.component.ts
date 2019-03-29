@@ -1,35 +1,15 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../../../services/muser/user.service';
-import {PartnerService} from '../../../../services/mpartner/partner.service';
-import {Role} from '../../../../models/User';
-import {Partner} from '../../../../models/Partner';
 
 @Component({
-    selector: 'app-muser-user-detail-info',
-    templateUrl: './info.component.html',
-    styleUrls: ['./info.component.css']
+    selector: 'app-mcustumer-custumer-detail-transaction',
+    templateUrl: './transaction.component.html',
+    styleUrls: ['./transaction.component.css']
 })
 
-export class InfoComponent {
-    roles: Role[];
-    partners: Partner[];
+export class TransactionComponent {
 
-    constructor(public userService: UserService, private partnerService: PartnerService) {
-        this.getRoles();
-        this.getPartners();
-    }
+    constructor(public userService: UserService) {
 
-    public getRoles() {
-        this.userService.getRoles()
-            .subscribe(roles => {
-                this.roles = roles.data;
-            });
-    }
-
-    public getPartners() {
-        this.partnerService.getPartners()
-            .subscribe(partners => {
-                this.partners = partners.data.data;
-            });
     }
 }

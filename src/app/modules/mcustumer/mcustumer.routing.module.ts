@@ -12,15 +12,9 @@ const routes: Routes = [
         }
     },
     {
-        path: 'custumer/add', component: CustumerDetailComponent,
-        data: {
-            title: 'Thêm khách hàng'
-        }
-    },
-    {
         path: 'custumer/edit/:id', component: CustumerDetailComponent,
         data: {
-            title: 'Sửa khách hàng'
+            title: 'Thông tin khách hàng'
         }
     }
 ];

@@ -8,6 +8,7 @@ import {PartnerService} from '../../services/mpartner/partner.service';
 import {CustumerComponent} from './custumer/custumer.component';
 import {CustumerDetailComponent} from './custumer/custumer.detail.component';
 import {InfoComponent} from './custumer/info/info.component';
+import {TransactionComponent} from './custumer/transaction/transaction.component';
 
 import {McustumerRoutingModule} from './mcustumer.routing.module';
 import {SharedModule} from '../../shared.module';
@@ -17,7 +18,8 @@ import {SharedModule} from '../../shared.module';
     declarations: [
         CustumerComponent,
         CustumerDetailComponent,
-        InfoComponent
+        InfoComponent,
+        TransactionComponent
     ],
     exports: [],
     providers: [UserService, PartnerService]
