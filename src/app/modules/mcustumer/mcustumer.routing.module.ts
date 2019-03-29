@@ -8,19 +8,19 @@ const routes: Routes = [
     {
         path: 'custumer', component: CustumerComponent,
         data: {
-            title: 'Người dùng'
+            title: 'Khách hàng'
         }
     },
     {
         path: 'custumer/add', component: CustumerDetailComponent,
         data: {
-            title: 'Thêm người dùng'
+            title: 'Thêm khách hàng'
         }
     },
     {
         path: 'custumer/edit/:id', component: CustumerDetailComponent,
         data: {
-            title: 'Sửa người dùng'
+            title: 'Sửa khách hàng'
         }
     }
 ];

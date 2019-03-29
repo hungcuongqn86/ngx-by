@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {User} from '../models/User';
+import {clientid} from '../const';
 
 export interface Register {
     name: string;
@@ -9,6 +10,7 @@ export interface Register {
     password: string;
     c_password: string;
     phone_number: string;
+    partner_id: number;
 }
 
 @Component({
@@ -28,7 +30,8 @@ export class RegisterComponent {
             email: null,
             password: null,
             c_password: null,
-            phone_number: null
+            phone_number: null,
+            partner_id: clientid
         };
     }
 

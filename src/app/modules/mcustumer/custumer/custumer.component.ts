@@ -34,11 +34,11 @@ export class CustumerComponent implements OnInit {
 
     public addPartner() {
         this.userService.user.id = null;
-        this.router.navigate(['/muser/user/add']);
+        this.router.navigate(['/mcustumer/custumer/add']);
     }
 
     public editPartner(id) {
-        this.router.navigate([`/muser/user/edit/${id}`]);
+        this.router.navigate([`/mcustumer/custumer/edit/${id}`]);
     }
 
     public deletePartner() {

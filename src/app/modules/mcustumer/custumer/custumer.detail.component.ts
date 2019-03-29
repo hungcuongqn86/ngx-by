@@ -33,6 +33,6 @@ export class CustumerDetailComponent implements OnInit {
     }
 
     public backlist() {
-        this.router.navigate(['/muser/user']);
+        this.router.navigate(['/mcustumer/custumer']);
     }
 }
