@@ -53,7 +53,7 @@ export class CustumerComponent implements OnInit {
 
     public searchUsers() {
         this.userService.showLoading(true);
-        this.userService.getUsers()
+        this.userService.getCustumers()
             .subscribe(users => {
                 this.users = users.data.data;
                 this.totalItems = users.data.total;

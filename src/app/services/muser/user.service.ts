@@ -60,6 +60,18 @@ export class UserService {
             );
     }
 
+    getCustumers(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}custumers`;
+        let params = new HttpParams();
+        Object.keys(this.search).map((key) => {
+            params = params.append(key, this.search[key]);
+        });
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getCustumers', []))
+            );
+    }
+
     getUser(id): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
         return this.http.get<any>(url)
