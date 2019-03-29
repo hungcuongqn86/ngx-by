@@ -20,19 +20,29 @@ const appRoutes: Routes = [
                 data: {
                     title: 'Bảng điều khiển'
                 }
-            }, {
+            }
+            , {
                 path: 'mpartner',
                 loadChildren: './modules/mpartner/mpartner.module#MpartnerModule',
                 data: {
                     title: 'Đối tác'
                 }
-            }, {
+            }
+            , {
                 path: 'muser',
                 loadChildren: './modules/muser/muser.module#MuserModule',
                 data: {
                     title: 'Người dùng'
                 }
-            }, {
+            }
+            , {
+                path: 'mcustumer',
+                loadChildren: './modules/mcustumer/mcustumer.module#McustumerModule',
+                data: {
+                    title: 'Khách hàng'
+                }
+            }
+            , {
                 path: 'cart',
                 loadChildren: './modules/cart/cart.module#CartModule',
                 data: {

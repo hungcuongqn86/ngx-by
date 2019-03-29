@@ -7,7 +7,6 @@ import {CartService} from '../../services/cart/cart.service';
 import {CartComponent} from './cart.component';
 import {CartRoutingModule} from './cart.routing.module';
 import {SharedModule} from '../../shared.module';
-import {PetService} from '../../services/mpet/pet.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, CartRoutingModule, SharedModule, CollapseModule.forRoot()],
@@ -15,7 +14,7 @@ import {PetService} from '../../services/mpet/pet.service';
         CartComponent
     ],
     exports: [],
-    providers: [CartService, PetService]
+    providers: [CartService]
 })
 export class CartModule {
 }
