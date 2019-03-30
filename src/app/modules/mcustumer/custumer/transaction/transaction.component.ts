@@ -11,12 +11,16 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 export class TransactionComponent {
     modalRef: BsModalRef;
+
     constructor(public userService: UserService, private modalService: BsModalService) {
 
     }
 
     public confirm(): void {
-        this.modalRef.hide();
+        this.userService.addTransaction()
+            .subscribe(transaction => {
+                this.modalRef.hide();
+            });
     }
 
     public decline(): void {

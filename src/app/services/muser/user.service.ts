@@ -126,4 +126,13 @@ export class UserService {
                 catchError(this.handleError('editOwner', user))
             );
     }
+
+    public addTransaction(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `muser/transaction/create`;
+        this.transaction.user_id = this.user.id;
+        return this.http.post<User>(url, this.transaction)
+            .pipe(
+                catchError(this.handleError('addTransaction', this.transaction))
+            );
+    }
 }
