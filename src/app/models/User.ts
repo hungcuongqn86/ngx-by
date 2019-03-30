@@ -1,4 +1,5 @@
 import {Partner} from './Partner';
+import {Transaction} from './Transaction';
 
 export interface Role {
     id: number;
@@ -9,6 +10,7 @@ export interface User {
     id: number;
     partner_id: number;
     partner: Partner;
+    transaction: Transaction[];
     name: string;
     email: string;
     password: string;

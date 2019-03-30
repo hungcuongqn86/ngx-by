@@ -9,6 +9,7 @@ import {Util} from '../../helper/lib';
 import {apiV1Url, clientid} from '../../const';
 import {Router} from '@angular/router';
 import {User} from '../../models/User';
+import {Transaction} from '../../models/Transaction';
 import {LoadingService} from '../../loading.service';
 
 @Injectable()
@@ -18,12 +19,18 @@ export class UserService {
     private moduleUri = 'muser/user/';
     public search = {key: '', page_size: 10, page: 1};
     public user: User;
+    public transaction: Transaction;
 
     constructor(private router: Router, private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
         this.handleError = httpErrorHandler.createHandleError('UsserService');
         if (!this.user) {
             this.reset();
+        }
+        if (!this.transaction) {
+            this.transaction = {
+                id: null, user_id: null, code: null, content: null, type: null, value: null, is_deleted: 0, created_at: '', updated_at: ''
+            };
         }
         return UserService.instance = UserService.instance || this;
     }
@@ -34,7 +41,7 @@ export class UserService {
 
     reset() {
         this.user = {
-            id: null, name: null, partner: null, role_id: null, roles: null,
+            id: null, name: null, partner: null, role_id: null, roles: null, transaction: null,
             phone_number: null, password: null, c_password: null, partner_id: clientid,
             email: null, is_deleted: 0, created_at: '', updated_at: ''
         };

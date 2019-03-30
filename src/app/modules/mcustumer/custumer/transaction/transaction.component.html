@@ -111,36 +111,58 @@
         <h5 class="modal-title">Thêm giao dịch</h5>
     </div>
     <div class="modal-body">
-        <div class="form-group">
-            <label for="code">Mã giao dịch <code class="highlighter-rouge">*</code></label>
-            <input class="form-control" id="code"
-                   placeholder="Nhập mã giao dịch"
-                   type="text">
-        </div>
-        <div class="form-group">
-            <label for="type">Loại giao dịch <code class="highlighter-rouge">*</code></label>
-            <select
-                    id="type"
-                    name="type"
-                    class="form-control">
-                <option value="">Chọn loại giao dịch</option>
-                <option value="">1</option>
-                <option value="">1</option>
-                <option value="">1</option>
-                <option value="">1</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="content">Nội dung</label>
-            <textarea class="form-control" id="content" name="content"
-                      placeholder="..." rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="value">Giá trị <code class="highlighter-rouge">*</code></label>
-            <input class="form-control" id="value"
-                   placeholder="Giá trị giao dịch"
-                   type="number">
-        </div>
+        <form novalidate #form="ngForm">
+            <div class="form-group">
+                <label for="code">Mã giao dịch <code class="highlighter-rouge">*</code></label>
+                <input [(ngModel)]="userService.transaction.code" #code="ngModel" class="form-control" id="code"
+                       name="code"
+                       placeholder="Nhập mã giao dịch"
+                       type="text">
+                <div [hidden]="code.valid || code.untouched">
+                                <span *ngIf="code.errors && code.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Mã giao dịch!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type">Loại giao dịch <code class="highlighter-rouge">*</code></label>
+                <select [(ngModel)]="userService.transaction.type" #type="ngModel"
+                        id="type"
+                        name="type"
+                        class="form-control">
+                    <option value="">Chọn loại giao dịch</option>
+                    <option value="">1</option>
+                    <option value="">1</option>
+                    <option value="">1</option>
+                    <option value="">1</option>
+                </select>
+                <div [hidden]="type.valid || type.untouched">
+                                <span *ngIf="type.errors && type.errors.required"
+                                      class="badge badge-warning">
+                                    Phải chọn loại giao dịch!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content">Nội dung</label>
+                <textarea [(ngModel)]="userService.transaction.content" class="form-control" id="content" name="content"
+                          placeholder="..." rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="value">Giá trị <code class="highlighter-rouge">*</code></label>
+                <input [(ngModel)]="userService.transaction.value" #value="ngModel" class="form-control" id="value"
+                       name="value"
+                       placeholder="Giá trị giao dịch"
+                       type="number">
+                <div [hidden]="value.valid || value.untouched">
+                                <span *ngIf="value.errors && value.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập giá trị giao dịch!
+                                </span>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
