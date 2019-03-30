@@ -15,11 +15,10 @@ export class AppGuard implements CanActivate {
             this.fall();
             return of(false);
         }
-
         return this.auth.checkAccess()
             .pipe(
                 map((response: any) => {
-                    if (response) {
+                    if (response.success) {
                         this.pass(response.success);
                         return true;
                     } else {
@@ -27,7 +26,10 @@ export class AppGuard implements CanActivate {
                         return of(false);
                     }
                 }),
-                catchError(error => of(false))
+                catchError(() => {
+                    this.fall();
+                    return of(false);
+                })
             );
     }
 
