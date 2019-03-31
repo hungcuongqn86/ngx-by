@@ -58,8 +58,7 @@
                         name="type"
                         class="form-control">
                     <option value="null">Chọn loại giao dịch</option>
-                    <option value="1">Nạp tiền</option>
-                    <option value="2">Rút tiền</option>
+                    <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
                 </select>
                 <div [hidden]="type.valid || type.untouched">
                                 <span *ngIf="type.errors && type.errors.required"

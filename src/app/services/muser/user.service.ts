@@ -29,7 +29,7 @@ export class UserService {
         }
         if (!this.transaction) {
             this.transaction = {
-                id: null, user_id: null, code: null, content: null, type: null, value: null,
+                id: null, user_id: null, code: null, content: null, type: null, value: null, type_name: null,
                 debt: null, is_deleted: 0, created_at: '', updated_at: ''
             };
         }
@@ -77,6 +77,14 @@ export class UserService {
         return this.http.get<any>(url, {params: params})
             .pipe(
                 catchError(this.handleError('getCustumers', []))
+            );
+    }
+
+    getTransactionTypes() {
+        const url = Util.getUri(apiV1Url) + `muser/transaction/types`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getTransactionTypes', []))
             );
     }
 

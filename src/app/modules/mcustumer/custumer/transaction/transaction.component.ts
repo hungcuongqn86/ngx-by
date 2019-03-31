@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {UserService} from '../../../../services/muser/user.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {TransactionType} from '../../../../models/Transaction';
 
 @Component({
     selector: 'app-mcustumer-custumer-detail-transaction',
@@ -11,9 +12,17 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 export class TransactionComponent {
     modalRef: BsModalRef;
+    types: TransactionType[];
 
     constructor(public userService: UserService, private modalService: BsModalService) {
+        this.getType();
+    }
 
+    private getType() {
+        this.userService.getTransactionTypes()
+            .subscribe(types => {
+                this.types = types.data;
+            });
     }
 
     public confirm(): void {
