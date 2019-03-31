@@ -49,6 +49,13 @@ const appRoutes: Routes = [
                     title: 'Giỏ hàng'
                 }
             }
+            , {
+                path: 'wallet',
+                loadChildren: './modules/wallet/wallet.module#WalletModule',
+                data: {
+                    title: 'Ví điện tử'
+                }
+            }
         ],
         canActivate: [AppGuard]
     },
