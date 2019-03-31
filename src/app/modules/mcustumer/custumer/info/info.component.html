@@ -53,4 +53,22 @@
             </div>
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="cost_percent">
+            Phí dự kiến (%) <code class="highlighter-rouge">*</code>
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.cost_percent" #cost_percent="ngModel" type="text" id="cost_percent"
+                   name="cost_percent"
+                   required
+                   class="form-control"
+                   placeholder="Phí dự kiến (%)">
+            <div [hidden]="cost_percent.valid || cost_percent.untouched">
+                                <span *ngIf="cost_percent.errors && cost_percent.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Phí dự kiến!
+                                </span>
+            </div>
+        </div>
+    </div>
 </form>

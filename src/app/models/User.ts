@@ -18,6 +18,7 @@ export interface User {
     phone_number: string;
     role_id: number;
     roles: Role[];
+    cost_percent: number;
     is_deleted: number;
     created_at: string;
     updated_at: string;
