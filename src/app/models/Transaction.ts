@@ -8,7 +8,7 @@ export interface Transaction {
     id: number;
     user_id: number;
     type: number;
-    type_name: string;
+    otype: TransactionType;
     debt: number;
     code: string;
     value: number;

@@ -22,10 +22,16 @@
             <tr *ngFor="let item of userService.user.transaction; let i = index">
                 <td>{{item.created_at}}</td>
                 <td>{{item.code}}</td>
-                <td><span class="badge badge-success">{{item.type}}</span></td>
+                <td>
+                    <span *ngIf="item.otype.value > 0" class="badge badge-success">{{item.otype.name}}</span>
+                    <span *ngIf="item.otype.value < 0" class="badge badge-warning">{{item.otype.name}}</span>
+                </td>
                 <td>{{item.content}}</td>
-                <td class="text-right">{{item.value}}</td>
-                <td *ngIf="i===0" class="text-right"><span class="badge badge-success">{{item.debt}}</span></td>
+                <td class="text-right">
+                    <span *ngIf="item.otype.value > 0" class="badge badge-success float-left">+</span>
+                    <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value}}
+                </td>
+                <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.debt}}</span></td>
                 <td *ngIf="i>0" class="text-right">{{item.debt}}</td>
             </tr>
             </tbody>
