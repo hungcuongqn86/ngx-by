@@ -2,6 +2,7 @@ export interface Transaction {
     id: number;
     user_id: number;
     type: number;
+    debt: number;
     code: string;
     value: number;
     content: string;

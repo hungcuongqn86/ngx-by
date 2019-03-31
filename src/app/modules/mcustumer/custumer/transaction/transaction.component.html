@@ -19,19 +19,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of userService.user.transaction">
+            <tr *ngFor="let item of userService.user.transaction; let i = index">
                 <td>{{item.created_at}}</td>
                 <td>{{item.code}}</td>
                 <td><span class="badge badge-success">{{item.type}}</span></td>
                 <td>{{item.content}}</td>
-                <td class="text-right"><span class="badge badge-success">{{item.value}}</span></td>
-                <td class="text-right"><span class="badge badge-success">{{item.value}}</span></td>
+                <td class="text-right">{{item.value}}</td>
+                <td *ngIf="i===0" class="text-right"><span class="badge badge-success">{{item.debt}}</span></td>
+                <td *ngIf="i>0" class="text-right">{{item.debt}}</td>
             </tr>
             </tbody>
         </table>
-    </div>
-    <div class="card-footer">
-        <button class="btn btn-primary" type="button">Làm mới</button>
     </div>
 </div>
 <ng-template #templateAddTransaction>
@@ -59,11 +57,9 @@
                         id="type"
                         name="type"
                         class="form-control">
-                    <option value="">Chọn loại giao dịch</option>
-                    <option value="1">1</option>
-                    <option value="1">1</option>
-                    <option value="1">1</option>
-                    <option value="1">1</option>
+                    <option value="null">Chọn loại giao dịch</option>
+                    <option value="1">Nạp tiền</option>
+                    <option value="2">Rút tiền</option>
                 </select>
                 <div [hidden]="type.valid || type.untouched">
                                 <span *ngIf="type.errors && type.errors.required"

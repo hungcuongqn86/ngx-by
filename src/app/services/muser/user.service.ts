@@ -29,7 +29,8 @@ export class UserService {
         }
         if (!this.transaction) {
             this.transaction = {
-                id: null, user_id: null, code: null, content: null, type: null, value: null, is_deleted: 0, created_at: '', updated_at: ''
+                id: null, user_id: null, code: null, content: null, type: null, value: null,
+                debt: null, is_deleted: 0, created_at: '', updated_at: ''
             };
         }
         return UserService.instance = UserService.instance || this;
