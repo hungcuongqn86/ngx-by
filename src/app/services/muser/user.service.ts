@@ -88,6 +88,16 @@ export class UserService {
             );
     }
 
+    getTransactions(userid: number) {
+        const url = Util.getUri(apiV1Url) + `muser/transaction/search`;
+        let params = new HttpParams();
+        params = params.append('user_id', userid.toString());
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getTransactionTypes', []))
+            );
+    }
+
     getUser(id): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
         return this.http.get<any>(url)
