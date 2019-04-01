@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
 import {CartService} from '../../services/cart/cart.service';
+import {OrderService} from '../../services/order/order.service';
 import {CartComponent} from './cart.component';
 import {CartRoutingModule} from './cart.routing.module';
 import {SharedModule} from '../../shared.module';
@@ -14,7 +15,7 @@ import {SharedModule} from '../../shared.module';
         CartComponent
     ],
     exports: [],
-    providers: [CartService]
+    providers: [CartService, OrderService]
 })
 export class CartModule {
 }

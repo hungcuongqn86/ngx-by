@@ -1,12 +1,11 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {CartService} from '../../services/cart/cart.service';
-import {Cart} from '../../models/Cart';
+import {OrderService, OrderCreate} from '../../services/order/order.service';
 import {Shop} from '../../models/Shop';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
-import {s} from '@angular/core/src/render3';
 
 @Component({
     selector: 'app-cart',
@@ -20,7 +19,7 @@ export class CartComponent implements OnInit {
     shop: Shop;
     modalRef: BsModalRef;
 
-    constructor(public cartService: CartService, private authService: AuthService,
+    constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
                 private router: Router, private modalService: BsModalService) {
 
     }
@@ -85,6 +84,23 @@ export class CartComponent implements OnInit {
             res.push(shop);
         }
         return res;
+    }
+
+    public ketDon(item: Shop) {
+        this.orderService.order.shop_id = item.id;
+        this.orderService.order.rate = item.rate;
+        this.orderService.order.count_product = item.count_product;
+        this.orderService.order.count_link = item.count_link;
+        this.orderService.order.tien_hang = item.tien_hang;
+        this.orderService.order.phi_tam_tinh = item.phi_tam_tinh;
+        this.orderService.order.tong = item.tong;
+
+        const cartids = [];
+        for (let j = 0; j < item.cart.length; j++) {
+            cartids.push(item.cart[j].id);
+        }
+        this.orderService.order.cart_ids = cartids.join(',');
+        this.orderService.updateOrder();
     }
 
     openModal(template: TemplateRef<any>, member) {
