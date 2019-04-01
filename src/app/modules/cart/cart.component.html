@@ -6,7 +6,6 @@
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <a class="btn" href="javascript:void(0)" (click)="addOwner()"><i class="fa fa-plus"></i> &nbsp;Kết đơn tất
                 cả</a>
-            <a class="btn" href="javascript:void(0)"><i class="fa fa-remove"></i> &nbsp;Xóa</a>
         </div>
     </li>
 </ol>
@@ -27,19 +26,21 @@
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Tiền hàng</th>
+                                    <th>#</th>
                                 </tr>
                                 </thead>
                                 <tbody *ngIf="shopItem.cart && shopItem.cart.length > 0">
                                 <ng-template ngFor let-item [ngForOf]="shopItem.cart" let-i="index">
                                     <tr>
-                                        <td rowspan="3">
+                                        <td rowspan="2">
                                             <div class="pull-left">
                                                 <img src="{{item.image}}">
                                             </div>
                                             <p class="pull-left m-1">{{item.colortxt}}</p>
                                         </td>
                                         <td>
-                                            <p><input [(ngModel)]="shopItem.cart[i].amount" type="number" id="amount"
+                                            <p><input disabled [(ngModel)]="shopItem.cart[i].amount" type="number"
+                                                      id="amount"
                                                       name="amount" class="form-control"></p>
                                         </td>
                                         <td>
@@ -47,26 +48,18 @@
                                             <p><span>¥</span>{{item.price | tempPrice: 1 : 1}}</p>
                                         </td>
                                         <td>
-                                            <p>{{item.price | tempPrice: shopItem.rate : shopItem.cart[i].amount}}<sup>đ</sup></p>
+                                            <p>{{item.price | tempPrice: shopItem.rate :
+                                                shopItem.cart[i].amount}}<sup>đ</sup></p>
                                             <p><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount}}</p>
                                         </td>
+                                        <td><a href="javascript:void(0)"><i class="fa fa-trash-o"
+                                                                            aria-hidden="true"></i></a><br></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="border-top: none;"><input type="text"
                                                                                          class="form-control"
                                                                                          placeholder="Ghi chú link"
                                                                                          value=""></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="border-top: none; padding: 15px 0;">
-                                            <div>
-                                                <a style="margin-right: 25px;">
-                                                    <span class="ng-binding">1</span><span> / </span><span>1</span><span> Link</span>
-                                                </a>
-                                                <a href="javascript:void(0)"><i class="fa fa-trash-o"
-                                                                                aria-hidden="true"></i> Xóa shop</a><br>
-                                            </div>
-                                        </td>
                                     </tr>
                                 </ng-template>
                                 </tbody>
@@ -77,19 +70,19 @@
                                 <tbody>
                                 <tr>
                                     <td>Tiền hàng</td>
-                                    <td>{{shopItem.cart|tempTotalPrice}}<sup>đ</sup></td>
+                                    <td>{{shopItem.tien_hang | tempPrice: 1 : 1}}<sup>đ</sup></td>
                                 </tr>
                                 <tr>
                                     <td>Phí tạm tính</td>
-                                    <td>0<sup>đ</sup></td>
+                                    <td>{{shopItem.phi_tam_tinh | tempPrice: 1 : 1}}<sup>đ</sup></td>
                                 </tr>
                                 <tr>
                                     <td>#</td>
-                                    <td>#</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Tổng</td>
-                                    <td>{{shopItem.cart|tempTotalPrice}}<sup>đ</sup></td>
+                                    <td>{{shopItem.tong | tempPrice: 1 : 1}}<sup>đ</sup></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
@@ -99,6 +92,15 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <a style="margin-right: 25px;">
+                            <span class="ng-binding">{{shopItem.count_product}}</span><span> / </span><span>{{shopItem.count_link}}</span><span> Link</span>
+                        </a>
+                        <a href="javascript:void(0)"><i class="fa fa-trash-o"
+                                                        aria-hidden="true"></i> Xóa shop</a><br>
                     </div>
                 </div>
             </div>
