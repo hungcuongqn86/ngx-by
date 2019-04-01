@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {SettingService} from '../../services/setting/setting.service';
 import {Setting} from '../../models/Setting';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-setting',
@@ -11,7 +12,7 @@ import {Setting} from '../../models/Setting';
 export class SettingComponent {
     settings: Setting[];
 
-    constructor(public settingService: SettingService) {
+    constructor(public settingService: SettingService, private router: Router) {
         this.getSetting();
     }
 
@@ -22,7 +23,7 @@ export class SettingComponent {
             });
     }
 
-    public editSetting(setting: Setting) {
-
+    public editSetting(id) {
+        this.router.navigate([`/setting/edit/${id}`]);
     }
 }

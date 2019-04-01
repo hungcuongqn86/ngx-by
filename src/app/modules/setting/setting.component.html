@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"><i class="cui-user icons"></i> <strong>Danh mục tham số hệ thống</strong></div>
+    <div class="card-header"><i class="fa fa-cogs"></i> <strong>Danh mục tham số hệ thống</strong></div>
     <div class="card-body">
         <table class="table table-bordered table-striped table-sm">
             <thead>
@@ -15,7 +15,7 @@
                 <td>{{item.title}}</td>
                 <td>{{item.key}}</td>
                 <td>{{item.value}}</td>
-                <td>
+                <td class="text-right">
                     <button (click)="editSetting(item.id)" class="btn btn-sm btn-ghost-primary"
                             type="button">
                         Sửa
