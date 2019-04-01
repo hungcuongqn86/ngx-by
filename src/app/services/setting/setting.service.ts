@@ -8,7 +8,7 @@ import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiV1Url} from '../../const';
 import {Router} from '@angular/router';
-import {Partner} from '../../models/Partner';
+import {Setting} from '../../models/Setting';
 import {LoadingService} from '../../loading.service';
 
 @Injectable()
@@ -17,12 +17,12 @@ export class SettingService {
     private handleError: HandleError;
     private moduleUri = 'setting/';
     public search = {key: '', page_size: 100, page: 1};
-    public partner: Partner;
+    public setting: Setting;
 
     constructor(private router: Router, private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
         this.handleError = httpErrorHandler.createHandleError('SettingService');
-        if (!this.partner) {
+        if (!this.setting) {
             this.reset();
         }
         return SettingService.instance = SettingService.instance || this;
@@ -33,13 +33,12 @@ export class SettingService {
     }
 
     reset() {
-        this.partner = {
-            id: null, name: null, phone_number: null, facebook: null, email: null
-            , status: 1, is_deleted: 0, created_at: '', updated_at: ''
+        this.setting = {
+            id: null, title: null, key: null, value: null, is_deleted: 0, created_at: '', updated_at: ''
         };
     }
 
-    getPartners(): Observable<any> {
+    getSettings(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
         let params = new HttpParams();
         Object.keys(this.search).map((key) => {
@@ -47,28 +46,28 @@ export class SettingService {
         });
         return this.http.get<any>(url, {params: params})
             .pipe(
-                catchError(this.handleError('getPartners', []))
+                catchError(this.handleError('getSettings', []))
             );
     }
 
-    getPartner(id): Observable<any> {
+    getSetting(id): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
         return this.http.get<any>(url)
             .pipe(
-                catchError(this.handleError('getPartner', []))
+                catchError(this.handleError('getSetting', []))
             );
     }
 
-    updatePartner() {
+    updateSetting() {
         this.showLoading(true);
-        if (this.partner.id === null) {
-            this.addPartner(this.partner).subscribe(
+        if (this.setting.id === null) {
+            this.addSetting(this.setting).subscribe(
                 res => {
                     this.updateSuccess(res);
                 }
             );
         } else {
-            this.editPartner(this.partner).subscribe(
+            this.editSetting(this.setting).subscribe(
                 res => {
                     this.updateSuccess(res);
                 }
@@ -83,19 +82,19 @@ export class SettingService {
         this.showLoading(false);
     }
 
-    public addPartner(owner: Partner): Observable<any> {
+    public addSetting(setting: Setting): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
-        return this.http.post<Partner>(url, owner)
+        return this.http.post<Setting>(url, setting)
             .pipe(
-                catchError(this.handleError('addPartner', owner))
+                catchError(this.handleError('addSetting', setting))
             );
     }
 
-    public editPartner(owner: Partner): Observable<any> {
+    public editSetting(setting: Setting): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-        return this.http.put<Partner>(url, owner)
+        return this.http.put<Setting>(url, setting)
             .pipe(
-                catchError(this.handleError('editPartner', owner))
+                catchError(this.handleError('editSetting', setting))
             );
     }
 }

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {UserService} from '../../services/muser/user.service';
-import {AuthService} from '../../auth.service';
-import {Transaction} from '../../models/Transaction';
+import {SettingService} from '../../services/setting/setting.service';
+import {Setting} from '../../models/Setting';
 
 @Component({
     selector: 'app-setting',
@@ -10,16 +9,20 @@ import {Transaction} from '../../models/Transaction';
 })
 
 export class SettingComponent {
-    transactions: Transaction[];
+    settings: Setting[];
 
-    constructor(public userService: UserService, public authService: AuthService) {
-        this.getTransactions();
+    constructor(public settingService: SettingService) {
+        this.getSetting();
     }
 
-    private getTransactions() {
-        this.userService.getTransactions(this.authService.user.id)
-            .subscribe(transactions => {
-                this.transactions = transactions.data.data;
+    private getSetting() {
+        this.settingService.getSettings()
+            .subscribe(setting => {
+                this.settings = setting.data.data;
             });
+    }
+
+    public editSetting(setting: Setting) {
+
     }
 }

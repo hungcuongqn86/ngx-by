@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
-import {UserService} from '../../services/muser/user.service';
+import {SettingService} from '../../services/setting/setting.service';
 import {SettingComponent} from './setting.component';
 
 import {SettingRoutingModule} from './setting.routing.module';
@@ -15,7 +15,7 @@ import {SharedModule} from '../../shared.module';
         SettingComponent
     ],
     exports: [],
-    providers: [UserService]
+    providers: [SettingService]
 })
 export class SettingModule {
 }
