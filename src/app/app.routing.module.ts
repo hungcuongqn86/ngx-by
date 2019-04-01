@@ -5,6 +5,7 @@ import {Error404Component} from './messages/error404.component';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {DefaultLayoutComponent} from './layout';
+import {SettingModule} from './modules/setting/setting.module';
 
 const appRoutes: Routes = [
     {
@@ -52,6 +53,13 @@ const appRoutes: Routes = [
             , {
                 path: 'wallet',
                 loadChildren: './modules/wallet/wallet.module#WalletModule',
+                data: {
+                    title: 'Ví điện tử'
+                }
+            }
+            , {
+                path: 'setting',
+                loadChildren: './modules/setting/setting.module#SettingModule',
                 data: {
                     title: 'Ví điện tử'
                 }
