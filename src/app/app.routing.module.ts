@@ -61,7 +61,7 @@ const appRoutes: Routes = [
                 path: 'setting',
                 loadChildren: './modules/setting/setting.module#SettingModule',
                 data: {
-                    title: 'Ví điện tử'
+                    title: 'Cấu hình hệ thống'
                 }
             }
         ],
