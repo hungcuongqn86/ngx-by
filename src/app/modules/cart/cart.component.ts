@@ -17,6 +17,7 @@ import {AuthService} from '../../auth.service';
 
 export class CartComponent implements OnInit {
     shops: Shop[];
+    shop: Shop;
     cart: Cart;
     modalRef: BsModalRef;
 
@@ -28,16 +29,6 @@ export class CartComponent implements OnInit {
     ngOnInit() {
         this.getCarts();
 
-    }
-
-    public deleteCart() {
-        if (this.cart) {
-            this.cart.is_deleted = 1;
-            this.cartService.updateCart(this.cart)
-                .subscribe(res => {
-                    this.getCarts();
-                });
-        }
     }
 
     public getCarts() {
@@ -103,5 +94,42 @@ export class CartComponent implements OnInit {
 
     declineDeleteCart(): void {
         this.modalRef.hide();
+    }
+
+    public deleteCart() {
+        if (this.cart) {
+            this.cart.is_deleted = 1;
+            this.cartService.updateCart(this.cart)
+                .subscribe(res => {
+                    this.getCarts();
+                });
+        }
+    }
+
+    openModalDeleteShop(template: TemplateRef<any>, shop: Shop) {
+        this.shop = shop;
+        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    }
+
+    confirmDeleteShop(): void {
+        this.deleteCartOfShop();
+        this.modalRef.hide();
+    }
+
+    declineDeleteShop(): void {
+        this.modalRef.hide();
+    }
+
+    public deleteCartOfShop() {
+        if (this.shop) {
+            const arrId = [];
+            for (let i = 0; i < this.shop.cart.length; i++) {
+                arrId.push(this.shop.cart[i].id);
+            }
+            this.cartService.deleteCart(arrId.join(','))
+                .subscribe(res => {
+                    this.getCarts();
+                });
+        }
     }
 }

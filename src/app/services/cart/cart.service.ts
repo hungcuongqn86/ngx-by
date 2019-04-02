@@ -46,4 +46,12 @@ export class CartService {
                 catchError(this.handleError('updateCart', cart))
             );
     }
+
+    public deleteCart(ids: string) {
+        const url = Util.getUri(apiUrl) + `${this.moduleUri}delete`;
+        return this.http.put<any>(url, {ids: ids})
+            .pipe(
+                catchError(this.handleError('updateCart', {ids: ids}))
+            );
+    }
 }
