@@ -4,8 +4,9 @@
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="javascript:void(0)" (click)="addOwner()"><i class="fa fa-plus"></i> &nbsp;Kết đơn tất
-                cả</a>
+            <a class="btn" href="javascript:void(0)">
+                <i class="fa fa-plus"></i> &nbsp;Kết đơn tất cả
+            </a>
         </div>
     </li>
 </ol>
@@ -52,11 +53,12 @@
                                                 shopItem.cart[i].amount}}<sup>đ</sup></p>
                                             <p><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount}}</p>
                                         </td>
-                                        <td><a href="javascript:void(0)"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a><br></td>
+                                        <td><a href="javascript:void(0)" (click)="openModalDeleteCart(template,item)"><i
+                                                class="fa fa-trash-o"
+                                                aria-hidden="true"></i></a><br></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" style="border-top: none;"><input type="text"
+                                        <td colspan="3" style="border-top: none;"><input [(ngModel)]="shopItem.cart[i].note" type="text"
                                                                                          class="form-control"
                                                                                          placeholder="Ghi chú link"
                                                                                          value=""></td>
@@ -86,7 +88,9 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <button class="btn btn-block btn-primary" (click)="ketDon(shopItem)" type="button">Kết đơn</button>
+                                        <button class="btn btn-block btn-primary" (click)="ketDon(shopItem)"
+                                                type="button">Kết đơn
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -110,10 +114,10 @@
 </div><!-- /.container-fluid -->
 <ng-template #template>
     <div class="modal-body text-center">
-        <p>Bạn có chắc chắn muốn xóa chủ pet này!?</p>
+        <p>Bạn có chắc chắn muốn xóa sản phẩm này!?</p>
         <div class="btn-group btn-group-toggle">
-            <button type="button" class="btn btn-warning" (click)="confirm()">Yes</button>
-            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+            <button type="button" class="btn btn-warning" (click)="confirmDeleteCart()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="declineDeleteCart()">No</button>
         </div>
     </div>
 </ng-template>

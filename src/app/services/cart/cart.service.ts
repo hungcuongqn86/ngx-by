@@ -7,9 +7,8 @@ import {catchError} from 'rxjs/operators';
 import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiUrl} from '../../const';
-import {Cart} from '../../models/Cart';
-import {Shop} from '../../models/Shop';
 import {LoadingService} from '../../loading.service';
+import {Cart} from '../../models/Cart';
 
 @Injectable()
 export class CartService {
@@ -17,14 +16,10 @@ export class CartService {
     private handleError: HandleError;
     private moduleUri = 'cart/';
     public search = {page_size: 10, page: 1};
-    public shop: Shop;
 
     constructor(private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
         this.handleError = httpErrorHandler.createHandleError('OwnerService');
-        if (!this.shop) {
-            this.reset();
-        }
         return CartService.instance = CartService.instance || this;
     }
 
@@ -32,14 +27,7 @@ export class CartService {
         this.loadingService.setLoading(value);
     }
 
-    reset() {
-        this.shop = {
-            id: null, name: null, url: null, cart: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
-            count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, tong: 0
-        };
-    }
-
-    getShops(): Observable<any> {
+    getCartWithShops(): Observable<any> {
         const url = Util.getUri(apiUrl) + `${this.moduleUri}search`;
         let params = new HttpParams();
         Object.keys(this.search).map((key) => {
@@ -47,15 +35,15 @@ export class CartService {
         });
         return this.http.get<any>(url, {params: params})
             .pipe(
-                catchError(this.handleError('getShops', []))
+                catchError(this.handleError('getCartWithShops', []))
             );
     }
 
-    public editShop(): Observable<any> {
+    public updateCart(cart: Cart): Observable<any> {
         const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
-        return this.http.put<Shop>(url, this.shop)
+        return this.http.put<Cart>(url, cart)
             .pipe(
-                catchError(this.handleError('editShop', this.shop))
+                catchError(this.handleError('updateCart', cart))
             );
     }
 }

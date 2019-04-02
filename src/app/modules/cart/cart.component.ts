@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {CartService} from '../../services/cart/cart.service';
-import {OrderService, OrderCreate} from '../../services/order/order.service';
+import {OrderService} from '../../services/order/order.service';
 import {Shop} from '../../models/Shop';
+import {Cart} from '../../models/Cart';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
@@ -16,7 +17,7 @@ import {AuthService} from '../../auth.service';
 
 export class CartComponent implements OnInit {
     shops: Shop[];
-    shop: Shop;
+    cart: Cart;
     modalRef: BsModalRef;
 
     constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
@@ -29,24 +30,10 @@ export class CartComponent implements OnInit {
 
     }
 
-    pageChanged(event: any): void {
-        this.cartService.search.page = event.page;
-        this.getCarts();
-    }
-
-    public addOwner() {
-        this.cartService.shop.id = null;
-        this.router.navigate(['/mowner/owner/add']);
-    }
-
-    public editOwner(id) {
-        this.router.navigate([`/mowner/owner/edit/${id}`]);
-    }
-
-    public deleteOwner() {
-        if (this.shop) {
-            this.shop.is_deleted = 1;
-            this.cartService.editShop()
+    public deleteCart() {
+        if (this.cart) {
+            this.cart.is_deleted = 1;
+            this.cartService.updateCart(this.cart)
                 .subscribe(res => {
                     this.getCarts();
                 });
@@ -55,7 +42,7 @@ export class CartComponent implements OnInit {
 
     public getCarts() {
         this.cartService.showLoading(true);
-        this.cartService.getShops()
+        this.cartService.getCartWithShops()
             .subscribe(shops => {
                 this.shops = this.convertShopsData(shops.data);
                 this.cartService.showLoading(false);
@@ -87,6 +74,7 @@ export class CartComponent implements OnInit {
     }
 
     public ketDon(item: Shop) {
+        console.log(this.shops);
         this.orderService.order.shop_id = item.id;
         this.orderService.order.rate = item.rate;
         this.orderService.order.count_product = item.count_product;
@@ -100,20 +88,20 @@ export class CartComponent implements OnInit {
             cartids.push(item.cart[j].id);
         }
         this.orderService.order.cart_ids = cartids.join(',');
-        this.orderService.updateOrder();
+        // this.orderService.updateOrder();
     }
 
-    openModal(template: TemplateRef<any>, member) {
-        this.shop = member;
+    openModalDeleteCart(template: TemplateRef<any>, cart: Cart) {
+        this.cart = cart;
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     }
 
-    confirm(): void {
-        this.deleteOwner();
+    confirmDeleteCart(): void {
+        this.deleteCart();
         this.modalRef.hide();
     }
 
-    decline(): void {
+    declineDeleteCart(): void {
         this.modalRef.hide();
     }
 }
