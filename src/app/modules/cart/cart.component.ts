@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {CartService} from '../../services/cart/cart.service';
-import {OrderService} from '../../services/order/order.service';
+import {OrderCreate, OrderService} from '../../services/order/order.service';
 import {Shop} from '../../models/Shop';
 import {Cart} from '../../models/Cart';
 import {BsModalService} from 'ngx-bootstrap/modal';
@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
     shops: Shop[];
     shop: Shop;
     cart: Cart;
+    order: OrderCreate;
     modalRef: BsModalRef;
 
     constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
@@ -28,7 +29,10 @@ export class CartComponent implements OnInit {
 
     ngOnInit() {
         this.getCarts();
-
+        this.order = {
+            id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
+            count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, tong: 0
+        };
     }
 
     public getCarts() {
@@ -65,21 +69,26 @@ export class CartComponent implements OnInit {
     }
 
     public ketDon(item: Shop) {
-        console.log(this.shops);
-        this.orderService.order.shop_id = item.id;
-        this.orderService.order.rate = item.rate;
-        this.orderService.order.count_product = item.count_product;
-        this.orderService.order.count_link = item.count_link;
-        this.orderService.order.tien_hang = item.tien_hang;
-        this.orderService.order.phi_tam_tinh = item.phi_tam_tinh;
-        this.orderService.order.tong = item.tong;
+        this.order.shop_id = item.id;
+        this.order.rate = item.rate;
+        this.order.count_product = item.count_product;
+        this.order.count_link = item.count_link;
+        this.order.tien_hang = item.tien_hang;
+        this.order.phi_tam_tinh = item.phi_tam_tinh;
+        this.order.tong = item.tong;
 
         const cartids = [];
         for (let j = 0; j < item.cart.length; j++) {
             cartids.push(item.cart[j].id);
         }
-        this.orderService.order.cart_ids = cartids.join(',');
-        // this.orderService.updateOrder();
+        this.order.cart_ids = cartids.join(',');
+        this.cartService.updateMultipleCart(item.cart)
+            .subscribe(res => {
+                this.orderService.addOrder(this.order)
+                    .subscribe(order => {
+                        this.getCarts();
+                    });
+            });
     }
 
     openModalDeleteCart(template: TemplateRef<any>, cart: Cart) {

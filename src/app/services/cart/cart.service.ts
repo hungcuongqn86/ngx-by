@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
-import {Observable} from 'rxjs';
+import {Observable, forkJoin} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
@@ -45,6 +45,16 @@ export class CartService {
             .pipe(
                 catchError(this.handleError('updateCart', cart))
             );
+    }
+
+    public updateMultipleCart(carts: Cart[]): Observable<any[]> {
+        const url = Util.getUri(apiUrl) + `${this.moduleUri}update`;
+        const res = [];
+        for (let i = 0; i < carts.length; i++) {
+            const response = this.http.put<Cart>(url, carts[i]);
+            res.push(response);
+        }
+        return forkJoin(res);
     }
 
     public deleteCart(ids: string) {
