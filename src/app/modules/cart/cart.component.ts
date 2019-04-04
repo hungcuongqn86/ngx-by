@@ -91,6 +91,8 @@ export class CartComponent implements OnInit {
             });
     }
 
+    public ketDonTatCa() {}
+
     openModalDeleteCart(template: TemplateRef<any>, cart: Cart) {
         this.cart = cart;
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
