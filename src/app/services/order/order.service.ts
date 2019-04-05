@@ -8,6 +8,9 @@ import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
+import {Cart} from '../../models/Cart';
+import {User} from '../../models/User';
+import {Shop} from '../../models/Shop';
 
 export interface OrderCreate {
     id: number;
@@ -25,12 +28,31 @@ export interface OrderCreate {
     updated_at: string;
 }
 
+export interface Order {
+    id: number;
+    user_id: number;
+    shop_id: number;
+    status: string;
+    rate: number;
+    count_product: number;
+    count_link: number;
+    tien_hang: number;
+    phi_tam_tinh: number;
+    tong: number;
+    is_deleted: number;
+    created_at: string;
+    updated_at: string;
+    carts: Cart[];
+    user: User;
+    shop: Shop;
+}
+
 @Injectable()
 export class OrderService {
     static instance: OrderService;
     private handleError: HandleError;
     private moduleUri = 'order/';
-    public search = {page_size: 20, page: 1};
+    public search = {key: '', page_size: 20, page: 1};
     public order: OrderCreate;
 
     constructor(private loadingService: LoadingService,
@@ -51,6 +73,26 @@ export class OrderService {
             id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
             count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, tong: 0
         };
+    }
+
+    getOrders(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
+        let params = new HttpParams();
+        Object.keys(this.search).map((key) => {
+            params = params.append(key, this.search[key]);
+        });
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getOrders', []))
+            );
+    }
+
+    getOrder(id): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getOrder', []))
+            );
     }
 
     updateOrder() {

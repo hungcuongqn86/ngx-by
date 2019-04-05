@@ -51,6 +51,13 @@ const appRoutes: Routes = [
                 }
             }
             , {
+                path: 'order',
+                loadChildren: './modules/order/order.module#OrderModule',
+                data: {
+                    title: 'Đơn hàng'
+                }
+            }
+            , {
                 path: 'wallet',
                 loadChildren: './modules/wallet/wallet.module#WalletModule',
                 data: {

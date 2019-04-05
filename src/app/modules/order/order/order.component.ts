@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {OrderCreate, OrderService} from '../../../services/order/order.service';
+import {Order, OrderCreate, OrderService} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -12,8 +12,8 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 
 export class OrderComponent implements OnInit {
-    partner: OrderCreate;
-    partners: OrderCreate[];
+    order: OrderCreate;
+    orders: Order[];
     totalItems = 0;
     modalRef: BsModalRef;
 
@@ -23,50 +23,45 @@ export class OrderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.searchPartners();
+        this.searchOrders();
     }
 
     pageChanged(event: any): void {
         this.orderService.search.page = event.page;
-        this.searchPartners();
+        this.searchOrders();
     }
 
-    public addPartner() {
-        this.orderService.order.id = null;
-        this.router.navigate(['/mpartner/partner/add']);
+    public editOrder(id) {
+        this.router.navigate([`/order/detail/${id}`]);
     }
 
-    public editPartner(id) {
-        this.router.navigate([`/mpartner/partner/edit/${id}`]);
-    }
-
-    public deletePartner() {
-        if (this.partner) {
-            this.partner.is_deleted = 1;
-            this.partnerService.editPartner(this.partner)
+    public deleteOrder() {
+        if (this.order) {
+            this.order.is_deleted = 1;
+            this.orderService.editOrder(this.order)
                 .subscribe(res => {
-                    this.searchPartners();
+                    this.searchOrders();
                 });
         }
     }
 
-    public searchPartners() {
-        this.partnerService.showLoading(true);
-        this.partnerService.getPartners()
-            .subscribe(partners => {
-                this.partners = partners.data.data;
-                this.totalItems = partners.data.total;
-                this.partnerService.showLoading(false);
+    public searchOrders() {
+        this.orderService.showLoading(true);
+        this.orderService.getOrders()
+            .subscribe(orders => {
+                this.orders = orders.data.data;
+                this.totalItems = orders.data.total;
+                this.orderService.showLoading(false);
             });
     }
 
     openModal(template: TemplateRef<any>, item) {
-        this.partner = item;
+        this.order = item;
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     }
 
     confirm(): void {
-        this.deletePartner();
+        this.deleteOrder();
         this.modalRef.hide();
     }
 

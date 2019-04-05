@@ -3,23 +3,23 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
-import {PartnerService} from '../../services/mpartner/partner.service';
-import {PartnerComponent} from './partner/partner.component';
-import {PartnerDetailComponent} from './partner/partner.detail.component';
-import {InfoComponent} from './partner/info/info.component';
+import {OrderService} from '../../services/order/order.service';
+import {OrderComponent} from './order/order.component';
+import {OrderDetailComponent} from './order/order.detail.component';
+import {InfoComponent} from './order/info/info.component';
 
-import {MpartnerRoutingModule} from './mpartner.routing.module';
+import {OrderRoutingModule} from './order.routing.module';
 import {SharedModule} from '../../shared.module';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, MpartnerRoutingModule, SharedModule, CollapseModule.forRoot()],
+    imports: [CommonModule, FormsModule, OrderRoutingModule, SharedModule, CollapseModule.forRoot()],
     declarations: [
-        PartnerComponent,
-        PartnerDetailComponent,
+        OrderComponent,
+        OrderDetailComponent,
         InfoComponent
     ],
     exports: [],
-    providers: [PartnerService]
+    providers: [OrderService]
 })
-export class MpartnerModule {
+export class OrderModule {
 }

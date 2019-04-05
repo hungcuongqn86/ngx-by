@@ -1,35 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PartnerService} from '../../../services/mpartner/partner.service';
+import {OrderService} from '../../../services/order/order.service';
 
 @Component({
-    selector: 'app-mpartner-partner-detail',
-    templateUrl: './partner.detail.component.html',
-    styleUrls: ['./partner.detail.component.css']
+    selector: 'app-order-detail',
+    templateUrl: './order.detail.component.html',
+    styleUrls: ['./order.detail.component.css']
 })
 
-export class PartnerDetailComponent implements OnInit {
+export class OrderDetailComponent implements OnInit {
     constructor(private router: Router, private route: ActivatedRoute
-        , public partnerService: PartnerService) {
+        , public orderService: OrderService) {
         this.route.params.subscribe(params => {
             if (params['id']) {
-                this.partnerService.partner.id = params['id'];
+                this.orderService.order.id = params['id'];
             }
         });
     }
 
     ngOnInit() {
-        if (this.partnerService.partner.id !== null) {
-            this.partnerService.getPartner(this.partnerService.partner.id)
-                .subscribe(partner => {
-                    this.partnerService.partner = partner.data.partner;
+        if (this.orderService.order.id !== null) {
+            this.orderService.getOrder(this.orderService.order.id)
+                .subscribe(order => {
+                    this.orderService.order = order.data.partner;
                 });
         } else {
-            this.partnerService.reset();
+            this.orderService.reset();
         }
     }
 
     public backlist() {
-        this.router.navigate(['/mpartner/partner']);
+        this.router.navigate(['/order']);
     }
 }

@@ -1,26 +1,26 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {PartnerComponent} from './partner/partner.component';
-import {PartnerDetailComponent} from './partner/partner.detail.component';
+import {OrderComponent} from './order/order.component';
+import {OrderDetailComponent} from './order/order.detail.component';
 
 const routes: Routes = [
     {
-        path: 'partner', component: PartnerComponent,
+        path: 'list', component: OrderComponent,
         data: {
-            title: 'Đối tác'
+            title: 'Đơn hàng'
         }
     },
     {
-        path: 'partner/add', component: PartnerDetailComponent,
+        path: 'list/:status', component: OrderComponent,
         data: {
-            title: 'Thêm đối tác'
+            title: 'Đơn hàng'
         }
     },
     {
-        path: 'partner/edit/:id', component: PartnerDetailComponent,
+        path: 'order/detail/:id', component: OrderDetailComponent,
         data: {
-            title: 'Sửa đối tác'
+            title: 'Chi tiết đơn hàng'
         }
     }
 ];
@@ -31,7 +31,7 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 
-export class MpartnerRoutingModule {
+export class OrderRoutingModule {
     constructor() {
     }
 }
