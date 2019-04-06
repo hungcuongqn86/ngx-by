@@ -69,7 +69,7 @@
                                     <sup> đ</sup></p>
                             </td>
                             <td class="text-right">
-                                <button (click)="editPartner(item.id)" class="btn btn-sm btn-ghost-primary"
+                                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
                                         type="button">
                                     Chi tiết
                                 </button>
@@ -88,12 +88,3 @@
         <!--/.col-->
     </div>
 </div><!-- /.container-fluid -->
-<ng-template #template>
-    <div class="modal-body text-center">
-        <p>Bạn có chắc chắn muốn xóa đối tác này!?</p>
-        <div class="btn-group btn-group-toggle">
-            <button type="button" class="btn btn-warning" (click)="confirm()">Yes</button>
-            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
-        </div>
-    </div>
-</ng-template>
