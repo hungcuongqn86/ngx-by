@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {OrderService} from '../../../../services/order/order.service';
+import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -8,7 +8,18 @@ import {OrderService} from '../../../../services/order/order.service';
 })
 
 export class InfoComponent {
+    status: OrderStatus[];
+
     constructor(public orderService: OrderService) {
-        console.log(this.orderService);
+        this.getStatus();
+    }
+
+    public getStatus() {
+        this.orderService.showLoading(true);
+        this.orderService.getStatus()
+            .subscribe(orders => {
+                this.status = orders.data;
+                this.orderService.showLoading(false);
+            });
     }
 }
