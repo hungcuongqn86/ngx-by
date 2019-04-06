@@ -42,8 +42,8 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Đơn hàng</th>
-                            <th>Khách hàng</th>
+                            <th width="20%">Đơn hàng</th>
+                            <th>Sản phẩm</th>
                             <th>Tiền hàng</th>
                             <th width="5%" class="text-right">Tác vụ</th>
                         </tr>
@@ -56,8 +56,14 @@
                                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
                             </td>
                             <td>
-                                <p><i class="fa fa-user"></i> {{item.user.name}} - {{item.user.phone_number}}</p>
-                                <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
+                                <p *ngFor="let cart of item.cart">
+                                    <img style="max-width: 50px;" src="{{cart.image}}">
+                                    <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
+                                    <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
+                                    <span> - Số lượng: {{cart.amount}}</span>
+                                    <span> - Đơn giá: {{cart.price | tempPrice: item.shop.rate : 1}}<sup>đ</sup></span>
+                                    <span> - Thành tiền: {{cart.price | tempPrice: item.shop.rate : cart.amount}}<sup>đ</sup></span>
+                                </p>
                             </td>
                             <td class="text-right">
                                 <p><span class="pull-left">Tiền hàng</span> <span class="money">{{item.tien_hang | tempPrice: 1 : 1}}</span>

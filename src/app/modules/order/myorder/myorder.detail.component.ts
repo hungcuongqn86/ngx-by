@@ -29,6 +29,6 @@ export class MyorderDetailComponent implements OnInit {
     }
 
     public backlist() {
-        this.router.navigate(['/myorder/list']);
+        this.router.navigate(['/order/myorder']);
     }
 }

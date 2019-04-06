@@ -1,27 +1,22 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
             </div>
             <div class="card-body">
-                <p><i class="fa fa-map-marker"></i> Trạng thái: <span class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span></p>
-                <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.id}} <i class="fa fa-calendar"></i></p>
-                <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
-                <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe.tong | tempPrice: 1 : 1}} <sup> đ</sup></p>
-                <p><i class="fa fa-edge"></i> Đặt tại website: <span class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span> </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
-            </div>
-            <div class="card-body">
-                <p><i class="fa fa-user"></i> {{orderService.orderRe.user.name}}</p>
-                <p><i class="fa fa-phone-square"></i> {{orderService.orderRe.user.phone_number}}</p>
-                <p><i class="fa fa-envelope"></i> {{orderService.orderRe.user.email}}</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><i class="fa fa-map-marker"></i> Trạng thái: <span class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span></p>
+                        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.id}} <i class="fa fa-calendar"></i></p>
+                        <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe.tong | tempPrice: 1 : 1}} <sup> đ</sup></p>
+                        <p><i class="fa fa-edge"></i> Đặt tại website: <span class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span> </p>
+                        <p><i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{orderService.orderRe.shop.name}}</span> </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -37,7 +32,7 @@
             <th>Khách đặt</th>
             <th>Đơn giá</th>
             <th>Thành tiền</th>
-            <th>Ghi chú của khách</th>
+            <th>Ghi chú</th>
         </tr>
         </thead>
         <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
