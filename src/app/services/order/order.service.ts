@@ -37,6 +37,8 @@ export interface Order {
     count_product: number;
     count_link: number;
     tien_hang: number;
+    thanh_toan: number;
+    con_thieu: number;
     phi_tam_tinh: number;
     tong: number;
     is_deleted: number;
@@ -47,12 +49,17 @@ export interface Order {
     shop: Shop;
 }
 
+export interface OrderStatus {
+    id: number;
+    name: string;
+}
+
 @Injectable()
 export class OrderService {
     static instance: OrderService;
     private handleError: HandleError;
     private moduleUri = 'order/';
-    public search = {key: '', page_size: 20, page: 1};
+    public search = {key: '', status: '', page_size: 20, page: 1};
     public order: OrderCreate;
 
     constructor(private loadingService: LoadingService,
@@ -84,6 +91,14 @@ export class OrderService {
         return this.http.get<any>(url, {params: params})
             .pipe(
                 catchError(this.handleError('getOrders', []))
+            );
+    }
+
+    getStatus(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}status`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getStatus', []))
             );
     }
 

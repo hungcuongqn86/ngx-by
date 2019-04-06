@@ -18,10 +18,19 @@
                 <div class="card-body">
                     <form novalidate (ngSubmit)="searchOrders()" #form="ngForm">
                         <div class="form-group row">
-                            <div class="col-md-10">
+                            <div class="col-md-3">
                                 <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
                                        class="form-control"
-                                       placeholder="Tìm kiếm theo name, phone number, email, facebook...">
+                                       placeholder="Tìm kiếm...">
+                            </div>
+                            <div class="col-md-3">
+                                <select [(ngModel)]="orderService.search.status" class="form-control" name="status"
+                                        id="status">
+                                    <option value="">Tất cả</option>
+                                    <option *ngFor="let item of status" [value]="item.id">
+                                        {{item.name}}
+                                    </option>
+                                </select>
                             </div>
                             <div class="col-md-2">
                                 <button type="button" (click)="searchOrders()"
@@ -30,36 +39,39 @@
                             </div>
                         </div>
                     </form>
-                    <table class="table table-striped table-sm">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>Đơn hàng</th>
                             <th>Khách hàng</th>
                             <th>Tiền hàng</th>
-                            <th class="text-right">Tác vụ</th>
+                            <th width="5%" class="text-right">Tác vụ</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr *ngFor="let item of orders">
                             <td>
-                                <p>{{item.id}} <span>{{item.status}}</span></p>
-                                <p>{{item.created_at}}</p>
+                                <p>ID: {{item.id}} <span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span>
+                                </p>
+                                <p>Ngày tạo: {{item.created_at | tempDate}}</p>
                             </td>
                             <td>
-                                <p>{{item.user.name}}</p>
-                                <p>{{item.user.email}}</p>
-                                <p>{{item.user.phone_number}}</p>
-                            </td>
-                            <td>
-                                <p>{{item.tien_hang}}</p>
-                                <p></p>
+                                <p><i class="fa fa-user"></i> {{item.user.name}} - {{item.user.phone_number}}</p>
+                                <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
                             </td>
                             <td class="text-right">
-                                <button (click)="editPartner(item.id)" class="btn btn-sm btn-ghost-primary" type="button">
+                                <p><span class="pull-left">Tiền hàng</span> <span class="money">{{item.tien_hang | tempPrice: 1 : 1}}</span>
+                                    <sup> đ</sup></p>
+                                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
+                                                                                   class="money">{{item.thanh_toan | tempPrice: 1 : 1}}</span>
+                                    <sup> đ</sup></p>
+                                <p><span class="pull-left">Còn thiếu</span> <span *ngIf="item.con_thieu" class="money">{{item.con_thieu | tempPrice: 1 : 1}}</span>
+                                    <sup> đ</sup></p>
+                            </td>
+                            <td class="text-right">
+                                <button (click)="editPartner(item.id)" class="btn btn-sm btn-ghost-primary"
+                                        type="button">
                                     Chi tiết
-                                </button>
-                                <button (click)="openModal(template,item)" class="btn btn-sm btn-ghost-danger" type="button">
-                                    Xóa
                                 </button>
                             </td>
                         </tr>

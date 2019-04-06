@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {Order, OrderCreate, OrderService} from '../../../services/order/order.service';
+import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -14,6 +14,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class OrderComponent implements OnInit {
     order: OrderCreate;
     orders: Order[];
+    status: OrderStatus[];
     totalItems = 0;
     modalRef: BsModalRef;
 
@@ -24,6 +25,7 @@ export class OrderComponent implements OnInit {
 
     ngOnInit() {
         this.searchOrders();
+        this.getStatus();
     }
 
     pageChanged(event: any): void {
@@ -51,6 +53,15 @@ export class OrderComponent implements OnInit {
             .subscribe(orders => {
                 this.orders = orders.data.data;
                 this.totalItems = orders.data.total;
+                this.orderService.showLoading(false);
+            });
+    }
+
+    public getStatus() {
+        this.orderService.showLoading(true);
+        this.orderService.getStatus()
+            .subscribe(orders => {
+                this.status = orders.data;
                 this.orderService.showLoading(false);
             });
     }

@@ -9,13 +9,15 @@ import {AlertModule} from 'ngx-bootstrap/alert';
 import {AppBreadcrumbModule} from '@coreui/angular';
 import {TempPricePipe} from './pipes/price';
 import {TempTotalPricePipe} from './pipes/totalPrice';
+import {TempStatusPipe} from './pipes/status';
+import {TempDatePipe} from './pipes/date';
 
 @NgModule({
     imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
         ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
-    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe],
+    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempStatusPipe, TempDatePipe],
     exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
-        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe],
+        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe, TempStatusPipe, TempDatePipe],
     providers: []
 })
 export class SharedModule {
