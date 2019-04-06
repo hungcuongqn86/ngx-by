@@ -31,12 +31,12 @@ export class MyorderComponent implements OnInit {
     }
 
     public editOrder(id) {
-        this.router.navigate([`/order/list/detail/${id}`]);
+        this.router.navigate([`/myorder/list/detail/${id}`]);
     }
 
     public searchOrders() {
         this.orderService.showLoading(true);
-        this.orderService.getOrders()
+        this.orderService.getMyOrders()
             .subscribe(orders => {
                 this.orders = orders.data.data;
                 this.totalItems = orders.data.total;

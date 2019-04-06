@@ -118,6 +118,18 @@ export class OrderService {
             );
     }
 
+    getMyOrders(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}myorder`;
+        let params = new HttpParams();
+        Object.keys(this.search).map((key) => {
+            params = params.append(key, this.search[key]);
+        });
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getMyOrders', []))
+            );
+    }
+
     getStatus(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}status`;
         return this.http.get<any>(url)
