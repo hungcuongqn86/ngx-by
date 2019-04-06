@@ -8,6 +8,10 @@ import {OrderComponent} from './order/order.component';
 import {OrderDetailComponent} from './order/order.detail.component';
 import {InfoComponent} from './order/info/info.component';
 
+import {MyorderComponent} from './myorder/myorder.component';
+import {MyorderDetailComponent} from './myorder/myorder.detail.component';
+import {MyinfoComponent} from './myorder/myinfo/myinfo.component';
+
 import {OrderRoutingModule} from './order.routing.module';
 import {SharedModule} from '../../shared.module';
 
@@ -16,7 +20,10 @@ import {SharedModule} from '../../shared.module';
     declarations: [
         OrderComponent,
         OrderDetailComponent,
-        InfoComponent
+        InfoComponent,
+        MyorderComponent,
+        MyorderDetailComponent,
+        MyinfoComponent
     ],
     exports: [],
     providers: [OrderService]
