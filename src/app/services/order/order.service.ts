@@ -44,7 +44,7 @@ export interface Order {
     is_deleted: number;
     created_at: string;
     updated_at: string;
-    carts: Cart[];
+    cart: Cart[];
     user: User;
     shop: Shop;
 }
@@ -61,12 +61,36 @@ export class OrderService {
     private moduleUri = 'order/';
     public search = {key: '', status: '', page_size: 20, page: 1};
     public order: OrderCreate;
+    public orderRe: Order;
 
     constructor(private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
         this.handleError = httpErrorHandler.createHandleError('OrderService');
         if (!this.order) {
             this.reset();
+        }
+
+        if (!this.orderRe) {
+            this.orderRe = {
+                id: null,
+                user_id: null,
+                shop_id: null,
+                rate: 1,
+                is_deleted: 0,
+                created_at: '',
+                updated_at: '',
+                count_product: 0,
+                count_link: 0,
+                tien_hang: 0,
+                phi_tam_tinh: 0,
+                tong: 0,
+                carts: null,
+                user: null,
+                status: null,
+                con_thieu: 0,
+                thanh_toan: 0,
+                shop: null
+            };
         }
         return OrderService.instance = OrderService.instance || this;
     }

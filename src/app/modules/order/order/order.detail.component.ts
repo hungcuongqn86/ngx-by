@@ -9,25 +9,22 @@ import {OrderService, Order} from '../../../services/order/order.service';
 })
 
 export class OrderDetailComponent implements OnInit {
-    public order: Order;
-
     constructor(private router: Router, private route: ActivatedRoute
         , public orderService: OrderService) {
         this.route.params.subscribe(params => {
             if (params['id']) {
-                this.orderService.order.id = params['id'];
+                this.orderService.orderRe.id = params['id'];
             }
         });
     }
 
     ngOnInit() {
-        if (this.orderService.order.id !== null) {
-            this.orderService.getOrder(this.orderService.order.id)
+        if (this.orderService.orderRe.id !== null) {
+            this.orderService.getOrder(this.orderService.orderRe.id)
                 .subscribe(order => {
-                    this.order = order.data.order;
+                    this.orderService.orderRe = order.data.order;
+                    console.log(this.orderService.orderRe);
                 });
-        } else {
-            this.orderService.reset();
         }
     }
 

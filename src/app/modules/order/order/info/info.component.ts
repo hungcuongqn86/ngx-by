@@ -9,6 +9,6 @@ import {OrderService} from '../../../../services/order/order.service';
 
 export class InfoComponent {
     constructor(public orderService: OrderService) {
-
+        console.log(this.orderService);
     }
 }

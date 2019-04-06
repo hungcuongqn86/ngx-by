@@ -1,3 +1,37 @@
 <form novalidate #form="ngForm" class="form-horizontal">
-
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th width="30%">Sản phẩn</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Tiền hàng</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
+        <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
+            <tr>
+                <td>
+                    <div class="pull-left">
+                        <img src="{{item.image}}">
+                    </div>
+                    <p class="pull-left m-1">{{item.colortxt}}</p>
+                </td>
+                <td>
+                    <p><input disabled [(ngModel)]="item.amount" type="number"
+                              id="amount"
+                              name="amount" class="form-control"></p>
+                </td>
+                <td>
+                    <p>{{item.price | tempPrice: item.shop.rate : 1}}<sup>đ</sup></p>
+                    <p><span>¥</span>{{item.price | tempPrice: 1 : 1}}</p>
+                </td>
+                <td>
+                    <p>{{item.price | tempPrice: item.shop.rate : item.amount}}<sup>đ</sup></p>
+                    <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount}}</p>
+                </td>
+            </tr>
+        </ng-template>
+        </tbody>
+    </table>
 </form>
