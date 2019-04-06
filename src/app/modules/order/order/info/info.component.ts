@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {PartnerService} from '../../../../services/mpartner/partner.service';
+import {OrderService} from '../../../../services/order/order.service';
 
 @Component({
-    selector: 'app-mpartner-partner-detail-info',
+    selector: 'app-order-detail-info',
     templateUrl: './info.component.html',
     styleUrls: ['./info.component.css']
 })
 
 export class InfoComponent {
-    constructor(public partnerService: PartnerService) {
+    constructor(public orderService: OrderService) {
 
     }
 }

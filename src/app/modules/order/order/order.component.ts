@@ -31,7 +31,7 @@ export class OrderComponent implements OnInit {
     }
 
     public editOrder(id) {
-        this.router.navigate([`/order/detail/${id}`]);
+        this.router.navigate([`/order/list/detail/${id}`]);
     }
 
     public searchOrders() {

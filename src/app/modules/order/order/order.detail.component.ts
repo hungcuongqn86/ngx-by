@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService} from '../../../services/order/order.service';
+import {OrderService, Order} from '../../../services/order/order.service';
 
 @Component({
     selector: 'app-order-detail',
@@ -9,6 +9,8 @@ import {OrderService} from '../../../services/order/order.service';
 })
 
 export class OrderDetailComponent implements OnInit {
+    public order: Order;
+
     constructor(private router: Router, private route: ActivatedRoute
         , public orderService: OrderService) {
         this.route.params.subscribe(params => {
@@ -22,7 +24,7 @@ export class OrderDetailComponent implements OnInit {
         if (this.orderService.order.id !== null) {
             this.orderService.getOrder(this.orderService.order.id)
                 .subscribe(order => {
-                    this.orderService.order = order.data.partner;
+                    this.order = order.data.order;
                 });
         } else {
             this.orderService.reset();
@@ -30,6 +32,6 @@ export class OrderDetailComponent implements OnInit {
     }
 
     public backlist() {
-        this.router.navigate(['/order']);
+        this.router.navigate(['/order/list']);
     }
 }

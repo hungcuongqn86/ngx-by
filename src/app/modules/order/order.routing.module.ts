@@ -12,13 +12,7 @@ const routes: Routes = [
         }
     },
     {
-        path: 'list/:status', component: OrderComponent,
-        data: {
-            title: 'Đơn hàng'
-        }
-    },
-    {
-        path: 'order/detail/:id', component: OrderDetailComponent,
+        path: 'list/detail/:id', component: OrderDetailComponent,
         data: {
             title: 'Chi tiết đơn hàng'
         }

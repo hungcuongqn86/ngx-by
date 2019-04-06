@@ -4,7 +4,7 @@
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="javascript:void(0)" (click)="partnerService.updatePartner()"><i class="fa fa-check-square"></i>
+            <a class="btn" href="javascript:void(0)" (click)="orderService.updateOrder()"><i class="fa fa-check-square"></i>
                 &nbsp;Cập nhật</a>
             <a class="btn" href="javascript:void(0)" (click)="backlist()"
                target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
@@ -12,12 +12,11 @@
     </li>
 </ol>
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <strong>Chi tiết đối tác</strong>
+                    <strong>Chi tiết đơn hàng</strong>
                 </div>
                 <div class="card-body">
                     <div class="col-md-12 mb-4">
@@ -25,7 +24,10 @@
                         <tabset>
                             <tab>
                                 <ng-template tabHeading><i class="icon-list"></i> &nbsp;Thông tin cơ bản</ng-template>
-                                <app-mpartner-partner-detail-info></app-mpartner-partner-detail-info>
+                                <app-order-detail-info></app-order-detail-info>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử đơn hàng</ng-template>
                             </tab>
                         </tabset>
                     </div><!--/.col-->
