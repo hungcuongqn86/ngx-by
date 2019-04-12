@@ -7,6 +7,7 @@ import {OrderService} from '../../services/order/order.service';
 import {OrderComponent} from './order/order.component';
 import {OrderDetailComponent} from './order/order.detail.component';
 import {InfoComponent} from './order/info/info.component';
+import {HistoryComponent} from './order/history/history.component';
 
 import {MyorderComponent} from './myorder/myorder.component';
 import {MyorderDetailComponent} from './myorder/myorder.detail.component';
@@ -21,6 +22,7 @@ import {SharedModule} from '../../shared.module';
         OrderComponent,
         OrderDetailComponent,
         InfoComponent,
+        HistoryComponent,
         MyorderComponent,
         MyorderDetailComponent,
         MyinfoComponent

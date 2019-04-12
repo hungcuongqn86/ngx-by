@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Ngày giờ</th>
+                <th>Người thực hiện</th>
+                <th>Công việc</th>
+                <th>Nội dung</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of orderService.orderRe.history">
+                <td><p>{{item.created_at}}</p></td>
+                <td><p><i class="fa fa-user"></i> {{item.user.name}}</p></td>
+                <td><p>{{item.type}}</p></td>
+                <td><p>{{item.content}}</p></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

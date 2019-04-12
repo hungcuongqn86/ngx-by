@@ -28,6 +28,18 @@ export interface OrderCreate {
     updated_at: string;
 }
 
+export interface History {
+    id: number;
+    user_id: number;
+    user: User;
+    order_id: number;
+    type: number;
+    content: string;
+    is_deleted: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface Order {
     id: number;
     user_id: number;
@@ -45,8 +57,14 @@ export interface Order {
     created_at: string;
     updated_at: string;
     cart: Cart[];
+    history: History[];
     user: User;
     shop: Shop;
+}
+
+export interface HistoryType {
+    id: number;
+    name: string;
 }
 
 export interface OrderStatus {
@@ -89,7 +107,8 @@ export class OrderService {
                 status: null,
                 con_thieu: 0,
                 thanh_toan: 0,
-                shop: null
+                shop: null,
+                history: null
             };
         }
         return OrderService.instance = OrderService.instance || this;
@@ -135,6 +154,14 @@ export class OrderService {
         return this.http.get<any>(url)
             .pipe(
                 catchError(this.handleError('getStatus', []))
+            );
+    }
+
+    getHistoryTypes(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}history/types`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getHistoryTypes', []))
             );
     }
 
