@@ -62,6 +62,7 @@ export class MyorderComponent implements OnInit {
     openModal(template: TemplateRef<any>, order: Order) {
         this.inputDatCoc.id = order.id;
         this.inputDatCoc.tien_hang = order.tien_hang;
+        this.calTienCoc();
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     }
 
@@ -81,5 +82,6 @@ export class MyorderComponent implements OnInit {
 
     calTienCoc() {
         this.inputDatCoc.dc_value = this.inputDatCoc.dc_percent_value * this.inputDatCoc.tien_hang / 100;
+        this.inputDatCoc.content = `Đặt cọc ${this.inputDatCoc.dc_percent_value}%, tương đương ${this.inputDatCoc.dc_value}(vnđ)`;
     }
 }
