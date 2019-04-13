@@ -54,7 +54,8 @@
                                 <p>ID: {{item.id}} <span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span>
                                 </p>
                                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
-                                <p><i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{item.shop.name}}</span> </p>
+                                <p><i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{item.shop.name}}</span>
+                                </p>
                             </td>
                             <td>
                                 <p *ngFor="let cart of item.cart">
@@ -80,6 +81,11 @@
                                         type="button">
                                     Chi tiết
                                 </button>
+                                <button *ngIf="item.status===2" (click)="openModal(template,item)"
+                                        class="btn btn-sm btn-ghost-primary"
+                                        type="button">
+                                    Đặt cọc
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -95,3 +101,50 @@
         <!--/.col-->
     </div>
 </div><!-- /.container-fluid -->
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Đặt cọc</h5>
+    </div>
+    <div class="modal-body">
+        <form novalidate #form="ngForm">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="content">Tiền hàng </label>
+                        <p><strong>{{inputDatCoc.tien_hang | tempPrice: 1 : 1}}</strong><sup>đ</sup></p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="content">Dư nợ hiện tại</label>
+                        <p><strong>{{inputDatCoc.tien_hang | tempPrice: 1 : 1}}</strong><sup>đ</sup></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <input [(ngModel)]="inputDatCoc.dc_percent_value" class="input-group-prepend form-control"
+                       id="dc_percent_value" name="dc_percent_value"
+                       (change)="calTienCoc()"
+                       placeholder="Định mức (%)" type="number">
+                <input [(ngModel)]="inputDatCoc.dc_value" class="form-control" required id="dc_value" name="dc_value"
+                       placeholder="Tiền cọc" type="number">
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label for="content">Nội dung</label>
+                <textarea [(ngModel)]="inputDatCoc.content" #content="ngModel" id="content" name="content" rows="3"
+                          class="form-control"
+                          placeholder="Nội dung ..."></textarea>
+            </div>
+            <p></p>
+            <alert type="danger" *ngIf="errorMessage.length > 0">
+                <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+            </alert>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmDatCoc()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="declineDatCoc()">Cancel</button>
+    </div>
+</ng-template>

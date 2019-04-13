@@ -215,12 +215,19 @@ export class OrderService {
             );
     }
 
-
     public postBaoGia(data: { id: number; content: string }): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}baogia`;
         return this.http.post<any>(url, data)
             .pipe(
                 catchError(this.handleError('postBaoGia', data))
+            );
+    }
+
+    public postDatCoc(data: { id: number; dc_percent_value: number; dc_value: number; content: string; }): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}datcoc`;
+        return this.http.post<any>(url, data)
+            .pipe(
+                catchError(this.handleError('postDatCoc', data))
             );
     }
 }
