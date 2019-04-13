@@ -19,6 +19,7 @@ export interface User {
     role_id: number;
     roles: Role[];
     image: string;
+    debt: number;
     cost_percent: number;
     is_deleted: number;
     created_at: string;

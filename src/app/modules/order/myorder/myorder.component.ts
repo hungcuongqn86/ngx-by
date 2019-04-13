@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-myorder',
@@ -21,6 +22,7 @@ export class MyorderComponent implements OnInit {
     errorMessage: string[] = [];
 
     constructor(public orderService: OrderService, private modalService: BsModalService,
+                public auth: AuthService,
                 private router: Router) {
         this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
     }

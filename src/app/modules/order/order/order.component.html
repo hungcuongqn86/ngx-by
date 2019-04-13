@@ -66,8 +66,8 @@
                                     <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
                                     <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
                                     <span> - Số lượng: {{cart.amount}}</span>
-                                    <span> - Đơn giá: {{cart.price | tempPrice: item.shop.rate : 1}}<sup>đ</sup></span>
-                                    <span> - Thành tiền: {{cart.price | tempPrice: item.shop.rate : cart.amount}}<sup>đ</sup></span>
+                                    <span> - Đơn giá: {{cart.price | tempPrice: item.rate : 1}}<sup>đ</sup></span>
+                                    <span> - Thành tiền: {{cart.price | tempPrice: item.rate : cart.amount}}<sup>đ</sup></span>
                                 </p>
                             </td>
                             <td class="text-right">
@@ -76,7 +76,8 @@
                                 <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
                                                                                    class="money">{{item.thanh_toan | tempPrice: 1 : 1}}</span>
                                     <sup> đ</sup></p>
-                                <p><span class="pull-left">Còn thiếu</span> <span *ngIf="item.con_thieu" class="money">{{item.con_thieu | tempPrice: 1 : 1}}</span>
+                                <p><span class="pull-left">Còn thiếu</span> <span
+                                        *ngIf="item.tien_hang && item.thanh_toan" class="money">{{(item.tien_hang - item.thanh_toan) | tempPrice: 1 : 1}}</span>
                                     <sup> đ</sup></p>
                             </td>
                             <td class="text-right">
