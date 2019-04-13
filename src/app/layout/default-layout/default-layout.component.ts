@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {navItems} from '../_nav';
+import {Router} from '@angular/router';
 import {AuthService} from '../../auth.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class DefaultLayoutComponent {
     private changes: MutationObserver;
     public element: HTMLElement = document.body;
 
-    constructor(public auth: AuthService) {
+    constructor(public auth: AuthService, private router: Router) {
 
         this.changes = new MutationObserver((mutations) => {
             this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
@@ -29,5 +29,9 @@ export class DefaultLayoutComponent {
             .subscribe(navdata => {
                 this.navItems = navdata.success;
             });
+    }
+
+    public profile() {
+        this.router.navigate([`/account/profile`]);
     }
 }

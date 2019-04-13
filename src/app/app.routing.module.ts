@@ -35,6 +35,12 @@ const appRoutes: Routes = [
                 data: {
                     title: 'Người dùng'
                 }
+            }, {
+                path: 'account',
+                loadChildren: './modules/account/account.module#AccountModule',
+                data: {
+                    title: 'Tài khoản'
+                }
             }
             , {
                 path: 'mcustumer',

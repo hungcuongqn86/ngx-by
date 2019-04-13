@@ -44,7 +44,7 @@ export interface Order {
     id: number;
     user_id: number;
     shop_id: number;
-    status: string;
+    status: number;
     rate: number;
     count_product: number;
     count_link: number;

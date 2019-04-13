@@ -84,6 +84,10 @@
                                         type="button">
                                     Chi tiết
                                 </button>
+                                <button *ngIf="item.status===1" (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
+                                        type="button">
+                                    Chi tiết
+                                </button>
                             </td>
                         </tr>
                         </tbody>
