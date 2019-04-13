@@ -31,7 +31,7 @@ export interface OrderCreate {
 export interface History {
     id: number;
     user_id: number;
-    user: User;
+    user_name: string;
     order_id: number;
     type: number;
     content: string;
