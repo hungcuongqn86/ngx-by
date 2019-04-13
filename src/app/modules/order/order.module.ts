@@ -12,6 +12,7 @@ import {HistoryComponent} from './order/history/history.component';
 import {MyorderComponent} from './myorder/myorder.component';
 import {MyorderDetailComponent} from './myorder/myorder.detail.component';
 import {MyinfoComponent} from './myorder/myinfo/myinfo.component';
+import {MyhistoryComponent} from './myorder/myhistory/myhistory.component';
 
 import {OrderRoutingModule} from './order.routing.module';
 import {SharedModule} from '../../shared.module';
@@ -25,7 +26,8 @@ import {SharedModule} from '../../shared.module';
         HistoryComponent,
         MyorderComponent,
         MyorderDetailComponent,
-        MyinfoComponent
+        MyinfoComponent,
+        MyhistoryComponent
     ],
     exports: [],
     providers: [OrderService]
