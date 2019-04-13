@@ -14,7 +14,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class OrderComponent implements OnInit {
     order: OrderCreate;
     orders: Order[];
-    status: OrderStatus[];
+    status: OrderStatus[] = [];
     totalItems = 0;
     modalRef: BsModalRef;
     errorMessage: string[] = [];

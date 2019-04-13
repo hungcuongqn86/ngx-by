@@ -8,7 +8,7 @@ import {OrderService, HistoryType} from '../../../../services/order/order.servic
 })
 
 export class HistoryComponent {
-    types: HistoryType[];
+    types: HistoryType[] = [];
 
     constructor(public orderService: OrderService) {
         this.getTypes();

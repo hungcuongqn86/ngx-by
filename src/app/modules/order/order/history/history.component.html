@@ -13,7 +13,7 @@
             <tr *ngFor="let item of orderService.orderRe.history">
                 <td><p>{{item.created_at}}</p></td>
                 <td><p *ngIf="item.user"><i class="fa fa-user"></i> {{item.user.name}}</p></td>
-                <td><p>{{item.type}}</p></td>
+                <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
                 <td><p>{{item.content}}</p></td>
             </tr>
             </tbody>

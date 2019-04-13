@@ -10,14 +10,16 @@ import {AppBreadcrumbModule} from '@coreui/angular';
 import {TempPricePipe} from './pipes/price';
 import {TempTotalPricePipe} from './pipes/totalPrice';
 import {TempStatusPipe} from './pipes/status';
+import {TempHistoryTypePipe} from './pipes/historyType';
 import {TempDatePipe} from './pipes/date';
 
 @NgModule({
     imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
         ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
-    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempStatusPipe, TempDatePipe],
+    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempStatusPipe, TempDatePipe, TempHistoryTypePipe],
     exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
-        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe, TempStatusPipe, TempDatePipe],
+        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe, TempStatusPipe,
+        TempDatePipe, TempHistoryTypePipe],
     providers: []
 })
 export class SharedModule {

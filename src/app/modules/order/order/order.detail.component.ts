@@ -23,7 +23,6 @@ export class OrderDetailComponent implements OnInit {
             this.orderService.getOrder(this.orderService.orderRe.id)
                 .subscribe(order => {
                     this.orderService.orderRe = order.data.order;
-                    console.log(this.orderService.orderRe);
                 });
         }
     }
