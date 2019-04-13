@@ -1,6 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
     selector: 'app-order',
@@ -14,8 +16,12 @@ export class OrderComponent implements OnInit {
     orders: Order[];
     status: OrderStatus[];
     totalItems = 0;
+    modalRef: BsModalRef;
+    errorMessage: string[] = [];
 
-    constructor(public orderService: OrderService,
+    inputBaoGia = {id: null, content: null};
+
+    constructor(public orderService: OrderService, private modalService: BsModalService,
                 private router: Router) {
 
     }
@@ -51,5 +57,24 @@ export class OrderComponent implements OnInit {
                 this.status = orders.data;
                 this.orderService.showLoading(false);
             });
+    }
+
+    openModal(template: TemplateRef<any>, order: Order) {
+        this.inputBaoGia.id = order.id;
+        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    }
+
+    confirmBaoGia(): void {
+        if (this.inputBaoGia.id > 0) {
+            this.orderService.postBaoGia(this.inputBaoGia)
+                .subscribe(res => {
+                    this.searchOrders();
+                    this.modalRef.hide();
+                });
+        }
+    }
+
+    declineBaoGia(): void {
+        this.modalRef.hide();
     }
 }

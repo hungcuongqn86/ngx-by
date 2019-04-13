@@ -60,6 +60,7 @@ export interface Order {
     history: History[];
     user: User;
     shop: Shop;
+    baogia_content: string;
 }
 
 export interface HistoryType {
@@ -108,7 +109,8 @@ export class OrderService {
                 con_thieu: 0,
                 thanh_toan: 0,
                 shop: null,
-                history: null
+                history: null,
+                baogia_content: null
             };
         }
         return OrderService.instance = OrderService.instance || this;
@@ -210,6 +212,15 @@ export class OrderService {
         return this.http.put<OrderCreate>(url, order)
             .pipe(
                 catchError(this.handleError('editOrder', order))
+            );
+    }
+
+
+    public postBaoGia(data: { id: number; content: string }): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}baogia`;
+        return this.http.post<any>(url, data)
+            .pipe(
+                catchError(this.handleError('postBaoGia', data))
             );
     }
 }
