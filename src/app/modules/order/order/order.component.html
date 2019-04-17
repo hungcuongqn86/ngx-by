@@ -19,11 +19,6 @@
                     <form novalidate (ngSubmit)="searchOrders()" #form="ngForm">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
-                                       class="form-control"
-                                       placeholder="Tìm kiếm...">
-                            </div>
-                            <div class="col-md-3">
                                 <select [(ngModel)]="orderService.search.status" class="form-control" name="status"
                                         id="status">
                                     <option value="">Tất cả</option>
@@ -31,6 +26,11 @@
                                         {{item.name}}
                                     </option>
                                 </select>
+                            </div>
+                            <div class="col-md-6">
+                                <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
+                                       class="form-control"
+                                       placeholder="Tìm kiếm theo mã đơn hàng, tên khách hàng, email, số điện thoại">
                             </div>
                             <div class="col-md-2">
                                 <button type="button" (click)="searchOrders()"

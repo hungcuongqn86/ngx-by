@@ -83,7 +83,14 @@ export class MyorderComponent implements OnInit {
     }
 
     calTienCoc() {
-        this.inputDatCoc.dc_value = this.inputDatCoc.dc_percent_value * this.inputDatCoc.tien_hang / 100;
-        this.inputDatCoc.content = `Đặt cọc ${this.inputDatCoc.dc_percent_value}%, tương đương ${this.inputDatCoc.dc_value}(vnđ)`;
+        this.inputDatCoc.dc_value = Math.ceil(this.inputDatCoc.dc_percent_value * this.inputDatCoc.tien_hang / 100);
+        const vnd = this.formatCurrency(this.inputDatCoc.dc_value.toString());
+        this.inputDatCoc.content = `Đặt cọc ${this.inputDatCoc.dc_percent_value}%, tương đương ${vnd}(vnđ)`;
+    }
+
+    formatCurrency(number: string) {
+        const n = number.split('').reverse().join('');
+        const n2 = n.replace(/\d\d\d(?!$)/g, '$&,');
+        return n2.split('').reverse().join('');
     }
 }

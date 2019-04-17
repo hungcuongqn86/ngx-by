@@ -21,7 +21,7 @@
                             <div class="col-md-3">
                                 <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
                                        class="form-control"
-                                       placeholder="Tìm kiếm...">
+                                       placeholder="Tìm kiếm mã đơn hàng">
                             </div>
                             <div class="col-md-3">
                                 <select [(ngModel)]="orderService.search.status" class="form-control" name="status"
@@ -132,13 +132,15 @@
                        id="dc_percent_value" name="dc_percent_value"
                        (change)="calTienCoc()"
                        placeholder="Định mức (%)" type="number">
-                <input [(ngModel)]="inputDatCoc.dc_value" class="form-control" required id="dc_value" name="dc_value"
-                       placeholder="Tiền cọc" type="number">
+                <input class="form-control" required id="dc_value" name="dc_value" disabled
+                       value="% tiền hàng"
+                       placeholder="Tiền cọc" type="text">
             </div>
             <p></p>
             <div class="form-group">
                 <label for="content">Nội dung</label>
                 <textarea [(ngModel)]="inputDatCoc.content" #content="ngModel" id="content" name="content" rows="3"
+                          disabled
                           class="form-control"
                           placeholder="Nội dung ..."></textarea>
             </div>

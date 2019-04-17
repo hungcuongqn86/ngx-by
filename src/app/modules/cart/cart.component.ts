@@ -58,10 +58,10 @@ export class CartComponent implements OnInit {
                 const ndt = parseFloat(detailData[j].price);
                 const tigia = parseFloat(detailData[j].rate);
                 const soluong = detailData[j].amount;
-                const vnd = ndt * tigia * soluong;
+                const vnd = Math.ceil(ndt * tigia * soluong);
                 shop.tien_hang = shop.tien_hang + vnd;
             }
-            shop.phi_tam_tinh = (shop.tien_hang * chiet_khau) / 100;
+            shop.phi_tam_tinh = Math.ceil((shop.tien_hang * chiet_khau) / 100);
             shop.tong = shop.tien_hang + shop.phi_tam_tinh;
             res.push(shop);
         }
