@@ -3,6 +3,8 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {CustumerComponent} from './custumer/custumer.component';
 import {CustumerDetailComponent} from './custumer/custumer.detail.component';
+import {InternalComponent} from './internal/internal.component';
+import {InternalDetailComponent} from './internal/internal.detail.component';
 
 const routes: Routes = [
     {
@@ -15,6 +17,18 @@ const routes: Routes = [
         path: 'custumer/edit/:id', component: CustumerDetailComponent,
         data: {
             title: 'Thông tin khách hàng'
+        }
+    },
+    {
+        path: 'internal', component: InternalComponent,
+        data: {
+            title: 'Tài khoản nội bộ'
+        }
+    },
+    {
+        path: 'internal/edit/:id', component: InternalDetailComponent,
+        data: {
+            title: 'Thông tin tài khoản'
         }
     }
 ];

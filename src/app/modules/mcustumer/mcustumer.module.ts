@@ -10,6 +10,11 @@ import {CustumerDetailComponent} from './custumer/custumer.detail.component';
 import {InfoComponent} from './custumer/info/info.component';
 import {TransactionComponent} from './custumer/transaction/transaction.component';
 
+import {InternalComponent} from './internal/internal.component';
+import {InternalDetailComponent} from './internal/internal.detail.component';
+import {IinfoComponent} from './internal/iinfo/iinfo.component';
+import {ItransactionComponent} from './internal/itransaction/itransaction.component';
+
 import {McustumerRoutingModule} from './mcustumer.routing.module';
 import {SharedModule} from '../../shared.module';
 
@@ -19,7 +24,11 @@ import {SharedModule} from '../../shared.module';
         CustumerComponent,
         CustumerDetailComponent,
         InfoComponent,
-        TransactionComponent
+        TransactionComponent,
+        InternalComponent,
+        InternalDetailComponent,
+        IinfoComponent,
+        ItransactionComponent
     ],
     exports: [],
     providers: [UserService, PartnerService]
