@@ -14,6 +14,7 @@ export interface BankAccount {
     id: number;
     name: string;
     status: number;
+    bank_debt: number;
     is_deleted: number;
     created_at: string;
     updated_at: string;
@@ -41,7 +42,7 @@ export class BankAccountService {
 
     reset() {
         this.account = {
-            id: null, name: null, status: 1, is_deleted: 0, created_at: '', updated_at: ''
+            id: null, name: null, status: 1, is_deleted: 0, created_at: '', updated_at: '', bank_debt: null
         };
     }
 
