@@ -60,4 +60,14 @@ export class BankAccountService {
                 catchError(this.handleError('getBankAccount', []))
             );
     }
+
+    getTransactions(accountid: number) {
+        const url = Util.getUri(apiV1Url) + `muser/transaction/search`;
+        let params = new HttpParams();
+        params = params.append('account_id', accountid.toString());
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getTransactionTypes', []))
+            );
+    }
 }

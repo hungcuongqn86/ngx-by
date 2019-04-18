@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {UserService} from '../../../../services/muser/user.service';
+import {BankAccountService} from '../../../../services/bankAccount.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {TransactionType, Transaction} from '../../../../models/Transaction';
@@ -15,13 +16,13 @@ export class ItransactionComponent {
     types: TransactionType[];
     transactions: Transaction[];
 
-    constructor(public userService: UserService, private modalService: BsModalService) {
+    constructor(public userService: UserService, public bankAccountService: BankAccountService, private modalService: BsModalService) {
         this.getTypes();
         this.getTransactions();
     }
 
     private getTransactions() {
-        this.userService.getTransactions(this.userService.user.id)
+        this.bankAccountService.getTransactions(this.bankAccountService.account.id)
             .subscribe(transactions => {
                 this.transactions = transactions.data.data;
             });
@@ -39,6 +40,10 @@ export class ItransactionComponent {
             .subscribe(transaction => {
                 this.modalRef.hide();
                 this.getTransactions();
+                this.userService.transaction = {
+                    id: null, user_id: null, code: null, content: null, type: null, value: null, otype: null,
+                    debt: null, is_deleted: 0, created_at: '', updated_at: '', bank_account: null, bank_debt: null, user: null
+                };
             });
     }
 
@@ -47,6 +52,7 @@ export class ItransactionComponent {
     }
 
     public addTransaction(template) {
+        this.userService.transaction.bank_account = this.bankAccountService.account.id;
         this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
     }
 }

@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header"><i class="cui-user icons"></i> <strong>{{userService.user.name}}</strong>
+    <div class="card-header"><i class="fa fa-credit-card-alt"></i> <strong>{{bankAccountService.account.name}}</strong>
         <div class="card-header-actions">
             <button (click)="addTransaction(templateAddTransaction)" class="btn btn-block btn-outline-primary btn-sm"
                     type="button">Thêm
@@ -23,16 +23,19 @@
                 <td>{{item.created_at}}</td>
                 <td>{{item.code}}</td>
                 <td>
+                    <span *ngIf="item.user" class="badge badge-info">Giao dịch từ tài khoản khách: {{item.user.name}}</span>
                     <span *ngIf="item.otype.value > 0" class="badge badge-success">{{item.otype.name}}</span>
                     <span *ngIf="item.otype.value < 0" class="badge badge-warning">{{item.otype.name}}</span>
                 </td>
                 <td>{{item.content}}</td>
                 <td class="text-right">
                     <span *ngIf="item.otype.value > 0" class="badge badge-success float-left">+</span>
-                    <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value | tempPrice : 1 : 1}} <sup>đ</sup>
+                    <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value |
+                    tempPrice : 1 : 1}} <sup>đ</sup>
                 </td>
-                <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></span></td>
-                <td *ngIf="i>0" class="text-right">{{item.debt}} <sup>đ</sup></td>
+                <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.bank_debt | tempPrice : 1 : 1}} <sup>đ</sup></span>
+                </td>
+                <td *ngIf="i>0" class="text-right">{{item.bank_debt}} <sup>đ</sup></td>
             </tr>
             </tbody>
         </table>
@@ -74,11 +77,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="content">Nội dung</label>
-                <textarea [(ngModel)]="userService.transaction.content" class="form-control" id="content" name="content"
-                          placeholder="..." rows="3"></textarea>
-            </div>
-            <div class="form-group">
                 <label for="value">Giá trị <code class="highlighter-rouge">*</code></label>
                 <input [(ngModel)]="userService.transaction.value" #value="ngModel" class="form-control" id="value"
                        name="value"
@@ -90,6 +88,11 @@
                                     Phải nhập giá trị giao dịch!
                                 </span>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="content">Nội dung</label>
+                <textarea [(ngModel)]="userService.transaction.content" class="form-control" id="content" name="content"
+                          placeholder="..." rows="3"></textarea>
             </div>
         </form>
     </div>
