@@ -28,7 +28,7 @@ const routes: Routes = [
     {
         path: 'internal/edit/:id', component: InternalDetailComponent,
         data: {
-            title: 'Thông tin tài khoản'
+            title: 'Lịch sử giao dịch'
         }
     }
 ];

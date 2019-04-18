@@ -1,9 +1,6 @@
-import {Component, OnInit, ViewEncapsulation, TemplateRef} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from '../../../services/muser/user.service';
-import {User} from '../../../models/User';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {BankAccountService, BankAccount} from '../../../services/bankAccount.service';
 
 @Component({
     selector: 'app-internal',
@@ -13,65 +10,28 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 
 export class InternalComponent implements OnInit {
-    user: User;
-    users: User[];
-    totalItems = 0;
-    modalRef: BsModalRef;
+    accounts: BankAccount[];
 
-    constructor(public userService: UserService,
-                private router: Router, private modalService: BsModalService) {
+    constructor(public bankAccountService: BankAccountService,
+                private router: Router) {
 
     }
 
     ngOnInit() {
-        this.searchUsers();
-    }
-
-    pageChanged(event: any): void {
-        this.userService.search.page = event.page;
-        this.searchUsers();
-    }
-
-    public addPartner() {
-        this.userService.user.id = null;
-        this.router.navigate(['/mcustumer/internal/add']);
+        this.getBank();
     }
 
     public editPartner(id) {
         this.router.navigate([`/mcustumer/internal/edit/${id}`]);
     }
 
-    public deletePartner() {
-        if (this.user) {
-            this.user.is_deleted = 1;
-            this.userService.editUser(this.user)
-                .subscribe(res => {
-                    this.searchUsers();
-                });
-        }
-    }
 
-    public searchUsers() {
-        this.userService.showLoading(true);
-        this.userService.getCustumers()
-            .subscribe(users => {
-                this.users = users.data.data;
-                this.totalItems = users.data.total;
-                this.userService.showLoading(false);
+    public getBank() {
+        this.bankAccountService.showLoading(true);
+        this.bankAccountService.getBankAccounts()
+            .subscribe(accounts => {
+                this.accounts = accounts.data;
+                this.bankAccountService.showLoading(false);
             });
-    }
-
-    openModal(template: TemplateRef<any>, item) {
-        this.user = item;
-        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-    }
-
-    confirm(): void {
-        this.deletePartner();
-        this.modalRef.hide();
-    }
-
-    decline(): void {
-        this.modalRef.hide();
     }
 }

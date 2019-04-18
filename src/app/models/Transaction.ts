@@ -10,6 +10,8 @@ export interface Transaction {
     type: number;
     otype: TransactionType;
     debt: number;
+    bank_account: string;
+    bank_debt: number;
     code: string;
     value: number;
     content: string;

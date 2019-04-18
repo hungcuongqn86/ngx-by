@@ -3,6 +3,7 @@ import {UserService} from '../../../../services/muser/user.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {TransactionType, Transaction} from '../../../../models/Transaction';
+import {BankAccountService, BankAccount} from '../../../../services/bankAccount.service';
 
 @Component({
     selector: 'app-mcustumer-custumer-detail-transaction',
@@ -13,11 +14,13 @@ import {TransactionType, Transaction} from '../../../../models/Transaction';
 export class TransactionComponent {
     modalRef: BsModalRef;
     types: TransactionType[];
+    accounts: BankAccount[];
     transactions: Transaction[];
 
-    constructor(public userService: UserService, private modalService: BsModalService) {
+    constructor(public userService: UserService, private modalService: BsModalService, public bankAccountService: BankAccountService) {
         this.getTypes();
         this.getTransactions();
+        this.getBank();
     }
 
     private getTransactions() {
@@ -31,6 +34,15 @@ export class TransactionComponent {
         this.userService.getTransactionTypes()
             .subscribe(types => {
                 this.types = types.data;
+            });
+    }
+
+    public getBank() {
+        this.bankAccountService.showLoading(true);
+        this.bankAccountService.getBankAccounts()
+            .subscribe(accounts => {
+                this.accounts = accounts.data;
+                this.bankAccountService.showLoading(false);
             });
     }
 
