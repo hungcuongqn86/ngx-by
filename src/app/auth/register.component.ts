@@ -37,10 +37,16 @@ export class RegisterComponent {
 
     public registerAcc() {
         this.authService.register(this.register)
-            .subscribe((user: User) => {
-                this.sSuccess = true;
-                this.rError = false;
-                this.alert = 'Đăng ký thành công! thành viên mới ' + user.name + '!!!';
+            .subscribe((res: any) => {
+                if (res.status) {
+                    this.sSuccess = true;
+                    this.rError = false;
+                    this.alert = `Đăng ký thành công! Chúng tôi gửi cho bạn 1 link kích hoạt đến địa chỉ email: ${this.register.email}, bạn hãy kiểm tra hòm thư và kích hoạt tài khoản!`;
+                } else {
+                    this.rError = true;
+                    this.sSuccess = false;
+                    this.alert = res.data[0];
+                }
             }, (error) => {
                 this.rError = true;
                 this.sSuccess = false;
