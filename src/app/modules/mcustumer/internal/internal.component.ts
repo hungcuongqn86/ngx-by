@@ -11,6 +11,7 @@ import {BankAccountService, BankAccount} from '../../../services/bankAccount.ser
 
 export class InternalComponent implements OnInit {
     accounts: BankAccount[];
+    total = 0;
 
     constructor(public bankAccountService: BankAccountService,
                 private router: Router) {
@@ -31,7 +32,15 @@ export class InternalComponent implements OnInit {
         this.bankAccountService.getBankAccounts()
             .subscribe(accounts => {
                 this.accounts = accounts.data;
+                this.getTotal();
                 this.bankAccountService.showLoading(false);
             });
+    }
+
+    private getTotal() {
+        this.total = 0;
+        for (let i = 0; i < this.accounts.length; i++) {
+            this.total = this.total + this.accounts[i].bank_debt;
+        }
     }
 }
