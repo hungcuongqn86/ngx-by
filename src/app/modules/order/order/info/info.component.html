@@ -72,7 +72,7 @@
                 <td></td>
                 <td></td>
                 <td>
-                    <p style="margin: 0;"><a style="cursor: pointer;" (click)="editPackage(item);"
+                    <p style="margin: 0;"><a style="cursor: pointer;" (click)="editPackage(item, template);"
                                              href="javascript:void(0);">Sửa</a></p>
                     <p *ngIf="i!==0" style="margin: 0;"><a style="cursor: pointer;" (click)="deletePackage(item);"
                                                            href="javascript:void(0);">Hủy</a></p>
@@ -126,3 +126,31 @@
         </tbody>
     </table>
 </form>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Sửa mã vận đơn</h5>
+    </div>
+    <div class="modal-body">
+        <form novalidate #form="ngForm">
+            <div class="form-group">
+                <label for="package_code">Mã vận đơn</label>
+                <input [(ngModel)]="package.package_code" #package_code="ngModel" class="form-control" id="package_code"
+                       name="package_code"
+                       placeholder="Nhập mã vận đơn"
+                       type="text">
+            </div>
+            <div class="form-group">
+                <label for="contract_code">Mã hợp đồng</label>
+                <input [(ngModel)]="package.contract_code" #contract_code="ngModel" class="form-control"
+                       id="contract_code"
+                       name="contract_code"
+                       placeholder="Nhập mã hợp đồng"
+                       type="text">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    </div>
+</ng-template>

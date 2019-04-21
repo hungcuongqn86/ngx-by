@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {Package} from '../../../../models/Package';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -10,8 +12,20 @@ import {Package} from '../../../../models/Package';
 
 export class InfoComponent {
     status: OrderStatus[];
+    package: Package;
+    modalRef: BsModalRef;
 
-    constructor(public orderService: OrderService) {
+    constructor(public orderService: OrderService, private modalService: BsModalService) {
+        this.package = {
+            id: null,
+            is_deleted: null,
+            contract_code: null,
+            created_at: null,
+            order_id: null,
+            package_code: null,
+            status: null,
+            updated_at: null
+        };
         this.getStatus();
     }
 
@@ -41,8 +55,9 @@ export class InfoComponent {
             });
     }
 
-    public editPackage() {
-
+    public editPackage(item: Package, template) {
+        this.package = item;
+        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
     }
 
     public getOrder() {
@@ -51,5 +66,18 @@ export class InfoComponent {
                 this.orderService.orderRe = order.data.order;
                 this.orderService.showLoading(false);
             });
+    }
+
+    public confirm(): void {
+        this.orderService.showLoading(true);
+        this.orderService.editPackage(this.package)
+            .subscribe(res => {
+                this.modalRef.hide();
+                this.getOrder();
+            });
+    }
+
+    public decline(): void {
+        this.modalRef.hide();
     }
 }
