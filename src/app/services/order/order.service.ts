@@ -11,6 +11,7 @@ import {LoadingService} from '../../loading.service';
 import {Cart} from '../../models/Cart';
 import {User} from '../../models/User';
 import {Shop} from '../../models/Shop';
+import {Package} from '../../models/Package';
 
 export interface OrderCreate {
     id: number;
@@ -60,6 +61,7 @@ export interface Order {
     history: History[];
     user: User;
     shop: Shop;
+    package: Package[];
     baogia_content: string;
 }
 
@@ -110,6 +112,7 @@ export class OrderService {
                 thanh_toan: 0,
                 shop: null,
                 history: null,
+                package: null,
                 baogia_content: null
             };
         }
@@ -228,6 +231,14 @@ export class OrderService {
         return this.http.post<any>(url, data)
             .pipe(
                 catchError(this.handleError('postDatCoc', data))
+            );
+    }
+
+    public addPackage(order: number) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/create`;
+        return this.http.post<any>(url, {order_id: order})
+            .pipe(
+                catchError(this.handleError('addPackage', {order_id: order}))
             );
     }
 }

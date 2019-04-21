@@ -22,4 +22,20 @@ export class InfoComponent {
                 this.orderService.showLoading(false);
             });
     }
+
+    public addPackage() {
+        this.orderService.showLoading(true);
+        this.orderService.addPackage(this.orderService.orderRe.id)
+            .subscribe(res => {
+                this.getOrder();
+            });
+    }
+
+    public getOrder() {
+        this.orderService.getOrder(this.orderService.orderRe.id)
+            .subscribe(order => {
+                this.orderService.orderRe = order.data.order;
+                this.orderService.showLoading(false);
+            });
+    }
 }
