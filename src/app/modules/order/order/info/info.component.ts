@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
+import {Package} from '../../../../models/Package';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -29,6 +30,19 @@ export class InfoComponent {
             .subscribe(res => {
                 this.getOrder();
             });
+    }
+
+    public deletePackage(item: Package) {
+        this.orderService.showLoading(true);
+        item.is_deleted = 1;
+        this.orderService.editPackage(item)
+            .subscribe(res => {
+                this.getOrder();
+            });
+    }
+
+    public editPackage() {
+
     }
 
     public getOrder() {

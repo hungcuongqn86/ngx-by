@@ -58,9 +58,9 @@
         <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
             <tr>
                 <td>{{item.id}}</td>
-                <td>{{orderService.orderRe.shop.name}}</td>
+                <td><p *ngIf="i===0">{{orderService.orderRe.shop.name}}</p></td>
                 <td></td>
-                <td>{{orderService.orderRe.count_link}}/{{orderService.orderRe.count_product}}</td>
+                <td><p *ngIf="i===0">{{orderService.orderRe.count_link}}/{{orderService.orderRe.count_product}}</p></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -71,11 +71,18 @@
                 <td>{{item.contract_code}}</td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td>
+                    <p style="margin: 0;"><a style="cursor: pointer;" (click)="editPackage(item);"
+                                             href="javascript:void(0);">Sửa</a></p>
+                    <p *ngIf="i!==0" style="margin: 0;"><a style="cursor: pointer;" (click)="deletePackage(item);"
+                                                           href="javascript:void(0);">Hủy</a></p>
+                </td>
             </tr>
         </ng-template>
         <tr>
-            <td colspan="15" class="text-right"><a (click)="addPackage();" href="javascript:void(0);"><i class="fa fa-plus-square"></i> Thêm mã vận đơn</a></td>
+            <td colspan="15" class="text-right"><a (click)="addPackage();" style="cursor: pointer;"
+                                                   href="javascript:void(0);"><i
+                    class="fa fa-plus-square"></i> Thêm mã vận đơn</a></td>
         </tr>
         </tbody>
     </table>

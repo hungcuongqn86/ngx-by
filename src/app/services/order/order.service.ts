@@ -241,4 +241,12 @@ export class OrderService {
                 catchError(this.handleError('addPackage', {order_id: order}))
             );
     }
+
+    public editPackage(item: Package) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/update`;
+        return this.http.post<any>(url, item)
+            .pipe(
+                catchError(this.handleError('editPackage', item))
+            );
+    }
 }
