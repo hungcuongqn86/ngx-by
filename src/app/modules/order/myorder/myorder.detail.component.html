@@ -23,12 +23,16 @@
                         <!-- Nav tabs -->
                         <tabset>
                             <tab>
-                                <ng-template tabHeading><i class="icon-list"></i> &nbsp;Thông tin cơ bản</ng-template>
+                                <ng-template tabHeading><i class="fa fa-info-circle"></i> &nbsp;Thông tin cơ bản</ng-template>
                                 <app-myorder-detail-info></app-myorder-detail-info>
                             </tab>
                             <tab>
                                 <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử đơn hàng</ng-template>
                                 <app-order-detail-myhistory></app-order-detail-myhistory>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="fa fa-exclamation"></i> &nbsp;Khiếu nại</ng-template>
+                                <app-myorder-detail-complain></app-myorder-detail-complain>
                             </tab>
                         </tabset>
                     </div><!--/.col-->
