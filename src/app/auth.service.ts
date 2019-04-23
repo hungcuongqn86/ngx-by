@@ -41,7 +41,6 @@ export class AuthService {
         const key = btoa(tokens_key);
         localStorage.setItem(key, btoa(JSON.stringify(tokens)));
         const data = { type: 'CART_TOKEN', id: tokens.access_token };
-        console.log(data);
         window.postMessage(data, '*');
     }
 
