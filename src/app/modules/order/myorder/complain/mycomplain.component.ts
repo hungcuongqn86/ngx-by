@@ -11,7 +11,7 @@ export class MycomplainComponent {
     types: HistoryType[] = [];
 
     constructor(public orderService: OrderService) {
-        this.getTypes();
+        // this.getTypes();
     }
 
     public getTypes() {

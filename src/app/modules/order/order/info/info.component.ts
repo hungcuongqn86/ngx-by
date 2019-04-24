@@ -20,6 +20,8 @@ export class InfoComponent {
             id: null,
             is_deleted: null,
             contract_code: null,
+            ship_khach: null,
+            ship_tt: null,
             created_at: null,
             order_id: null,
             package_code: null,
