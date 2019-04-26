@@ -3,10 +3,12 @@ import {OrderService, HistoryType} from '../../../../services/order/order.servic
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Complain, ComplainProducts} from '../../../../models/Complain';
+import {UploaderService} from '../../../../uploader.service';
 
 @Component({
     selector: 'app-myorder-detail-complain',
     templateUrl: './mycomplain.component.html',
+    providers: [UploaderService],
     styleUrls: ['./mycomplain.component.css']
 })
 
@@ -15,7 +17,7 @@ export class MycomplainComponent {
     modalRef: BsModalRef;
     complain: Complain;
 
-    constructor(public orderService: OrderService, private modalService: BsModalService) {
+    constructor(public orderService: OrderService, private modalService: BsModalService, private uploaderService: UploaderService) {
         // this.getTypes();
         this.complain = {
             id: null,
@@ -39,6 +41,17 @@ export class MycomplainComponent {
                 this.types = types.data;
                 this.orderService.showLoading(false);
             });
+    }
+
+    public uploadExc(input: HTMLInputElement, item: ComplainProducts) {
+        this.uploaderService.upload(input.files).subscribe(
+            res => {
+                if (res.status) {
+                    console.log(res, item);
+                }
+                input.value = null;
+            }
+        );
     }
 
     public addComplain(template) {

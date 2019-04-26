@@ -33,6 +33,7 @@ export class MessagesComponent {
                 this.modalService.hide(i);
             }
             this.modalRef = null;
+            document.body.classList.remove('modal-open');
         }, 1500);
     }
 }

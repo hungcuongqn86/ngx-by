@@ -35,34 +35,38 @@ export class UploaderService {
     //   ...
     // }
 
-    upload(file: File) {
-        if (!file) {
+    upload(files: FileList) {
+        if (!files) {
             return;
         }
         // XHR progress events.
         const url = Util.getUri(apiV1Url) + `media/upload`;
         const formData = new FormData();
-        formData.append('files', file);
+        console.log(files.item(0));
+        for (let index = 0; index < files.length; index++) {
+            const f = files.item(index);
+            formData.append('files[]', f);
+        }
         const req = new HttpRequest('POST', url, formData, {
             reportProgress: true
         });
         return this.http.request(req).pipe(
-            map(event => this.getEventMessage(event, file)),
+            map(event => this.getEventMessage(event)),
             tap(res => {
                 if (res.type === 'progress') {
                     this.showProgress(res);
                 }
             }),
             last(),
-            catchError(this.handleError(file))
+            catchError(this.handleError())
         );
     }
 
     /** Return distinct message for sent, upload progress, & response events */
-    private getEventMessage(event: HttpEvent<any>, file: File) {
+    private getEventMessage(event: HttpEvent<any>) {
         const res: Res = {
             type: '',
-            name: file.name, size: file.size, progress: 0, data: null
+            name: '', size: 0, progress: 0, data: null
             , message: '', status: false
         };
         switch (event.type) {
@@ -92,24 +96,14 @@ export class UploaderService {
      * When no `UploadInterceptor` and no server,
      * you'll end up here in the error handler.
      */
-    private handleError(file: File) {
+    private handleError() {
         const res: Res = {
             type: '',
-            name: file.name, size: file.size, progress: 0, data: null
+            name: '', size: 0, progress: 0, data: null
             , message: '', status: false
         };
-        const userMessage = `${file.name} upload failed.`;
 
         return (error: HttpErrorResponse) => {
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            const message = (error.error instanceof Error) ?
-                error.error.message :
-                `server returned code ${error.status} with body "${error.error}"`;
-
-            // this.messenger.add(`${userMessage} ${message}`);
-
             // Let app keep running but indicate failure.
             return of(res);
         };

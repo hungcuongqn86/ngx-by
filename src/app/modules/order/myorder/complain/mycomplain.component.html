@@ -85,7 +85,7 @@
                 <thead>
                 <tr>
                     <th width="15%">Sản phẩn</th>
-                    <th>Số lượng</th>
+                    <th width="15%">Số lượng</th>
                     <th>Ảnh khiếu nại</th>
                 </tr>
                 </thead>
@@ -94,7 +94,11 @@
                     <td><a target="_blank" rel="noopener noreferrer" href="{{item.cart.pro_link}}"><img
                             src="{{item.cart.image}}"></a></td>
                     <td><p>Đặt: {{item.cart.amount}}</p></td>
-                    <td></td>
+                    <td>
+                        <input [hidden]="1" type="file" multiple id="files" name="files" #picked
+                               (change)="uploadExc(picked, item)">
+                        <a class="btn" (click)="picked.click()"><i class="fa fa-upload"></i> &nbsp;Upload</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
