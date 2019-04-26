@@ -1,0 +1,26 @@
+import {Cart} from './Cart';
+
+export interface Complain {
+    id: number;
+    order_id: number;
+    type: number;
+    money_request: number;
+    content: string;
+    user_id: number;
+    complain_products: ComplainProducts[];
+    status: number;
+    is_deleted: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ComplainProducts {
+    id: number;
+    complain_id: number;
+    cart_id: number;
+    cart: Cart;
+    note: string;
+    is_deleted: number;
+    created_at: string;
+    updated_at: string;
+}

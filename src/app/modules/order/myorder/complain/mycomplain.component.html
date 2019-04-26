@@ -1,5 +1,12 @@
-<div class="row">
-    <div class="col-lg-12">
+<div class="card">
+    <div class="card-header"><i class="fa fa-cubes"></i> <strong>Danh sách khiếu nại của đơn hàng</strong>
+        <div class="card-header-actions">
+            <button (click)="addComplain(templateComplain)" class="btn btn-block btn-outline-primary btn-sm"
+                    type="button">Thêm
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -12,15 +19,89 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of orderService.orderRe.history">
-                <td><p>{{item.created_at}}</p></td>
-                <td><p><i class="fa fa-user"></i> {{item.user_name}}</p></td>
-                <td><p *ngIf="types">{{item.type | tempHistoryType : types}}</p></td>
-                <td><p>{{item.content}}</p></td>
-                <td><p>{{item.content}}</p></td>
-                <td><p>{{item.content}}</p></td>
+            <tr>
+
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<ng-template #templateComplain>
+    <div class="modal-header">
+        <h5 class="modal-title">Tạo đơn khiếu nại</h5>
+    </div>
+    <div class="modal-body">
+        <form novalidate #form="ngForm">
+            <div class="form-group">
+                <label for="type">Khiếu nại về <code class="highlighter-rouge">*</code></label>
+                <select [(ngModel)]="complain.type" #type="ngModel"
+                        id="type"
+                        name="type"
+                        required
+                        class="form-control">
+                    <option value="null">Chọn vấn đề khiếu nại</option>
+                    <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
+                </select>
+                <div [hidden]="type.valid || type.untouched">
+                                <span *ngIf="type.errors && type.errors.required"
+                                      class="badge badge-warning">
+                                    Phải chọn vấn đề khiếu nại!
+                                </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="money_request">Số tiền mong muốn được bồi thường (VNĐ)<code
+                        class="highlighter-rouge">*</code></label>
+                <input [(ngModel)]="complain.money_request" #money_request="ngModel" class="form-control"
+                       id="money_request"
+                       name="money_request"
+                       required
+                       placeholder="Nhập Số tiền mong muốn được bồi thường"
+                       type="number">
+                <div [hidden]="money_request.valid || money_request.untouched">
+                                <span *ngIf="money_request.errors && money_request.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Số tiền mong muốn được bồi thường!
+                                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content">Nội dung khiếu nại <code
+                        class="highlighter-rouge">*</code></label>
+                <textarea [(ngModel)]="complain.content" #content="ngModel" class="form-control" id="content"
+                          name="content" required
+                          placeholder="..." rows="3"></textarea>
+                <div [hidden]="content.valid || content.untouched">
+                                <span *ngIf="content.errors && content.errors.required"
+                                      class="badge badge-warning">
+                                    Phải nhập Nội dung khiếu nại!
+                                </span>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th width="15%">Sản phẩn</th>
+                    <th>Số lượng</th>
+                    <th>Ảnh khiếu nại</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of complain.complain_products">
+                    <td><a target="_blank" rel="noopener noreferrer" href="{{item.cart.pro_link}}"><img
+                            src="{{item.cart.image}}"></a></td>
+                    <td><p>Đặt: {{item.cart.amount}}</p></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    </div>
+</ng-template>
