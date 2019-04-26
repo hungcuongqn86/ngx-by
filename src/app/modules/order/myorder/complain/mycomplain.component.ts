@@ -47,7 +47,7 @@ export class MycomplainComponent {
         this.uploaderService.upload(input.files).subscribe(
             res => {
                 if (res.status) {
-                    console.log(res, item);
+                    item.media = res.data;
                 }
                 input.value = null;
             }
@@ -59,7 +59,7 @@ export class MycomplainComponent {
         for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
             const pro: ComplainProducts = {
                 id: null, cart_id: null, complain_id: null, note: null, created_at: null, updated_at: null,
-                cart: this.orderService.orderRe.cart[i], is_deleted: null
+                cart: this.orderService.orderRe.cart[i], is_deleted: null, media: null
             };
             this.complain.complain_products.push(pro);
         }

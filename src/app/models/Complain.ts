@@ -19,6 +19,7 @@ export interface ComplainProducts {
     complain_id: number;
     cart_id: number;
     cart: Cart;
+    media: { id: number; url: string }[];
     note: string;
     is_deleted: number;
     created_at: string;
