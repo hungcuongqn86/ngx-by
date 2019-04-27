@@ -286,4 +286,12 @@ export class OrderService {
                 catchError(this.handleError('addComplain', data))
             );
     }
+
+    public editComplain(data: Complain): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/update`;
+        return this.http.post<any>(url, data)
+            .pipe(
+                catchError(this.handleError('editComplain', data))
+            );
+    }
 }

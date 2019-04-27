@@ -92,11 +92,19 @@ export class MycomplainComponent {
 
     public confirm(): void {
         this.orderService.showLoading(true);
-        this.orderService.addComplain(this.complain)
-            .subscribe(res => {
-                this.modalRef.hide();
-                this.getComplains();
-            });
+        if (this.complain && this.complain.id) {
+            this.orderService.editComplain(this.complain)
+                .subscribe(res => {
+                    this.modalRef.hide();
+                    this.getComplains();
+                });
+        } else {
+            this.orderService.addComplain(this.complain)
+                .subscribe(res => {
+                    this.modalRef.hide();
+                    this.getComplains();
+                });
+        }
     }
 
     public decline(): void {

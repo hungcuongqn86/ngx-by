@@ -112,7 +112,7 @@
                         <a class="btn" (click)="picked.click()"><i class="fa fa-upload"></i> &nbsp;Upload</a>
                         <div class="row">
                             <div *ngFor="let img of item.media" class="col-3">
-                                <img style="max-height: 50px;" src="{{img.url}}">
+                                <a target="_blank" rel="noopener noreferrer" href="{{img.url}}"><img style="max-height: 50px;" src="{{img.url}}"></a>
                             </div>
                         </div>
                     </td>
