@@ -33,8 +33,9 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
+                            <th>Khách hàng</th>
                             <th>Đơn hàng</th>
-                            <th>Ngày tạo</th>
+                            <th>Ngày tạo khiếu nại</th>
                             <th>Khiếu nại về</th>
                             <th>Số tiền mong muốn</th>
                             <th>Nội dung</th>
@@ -43,8 +44,19 @@
                         </thead>
                         <tbody>
                         <tr *ngFor="let item of complains">
-                            <td></td>
-                            <td>{{item.created_at}}</td>
+                            <td>
+                                <div *ngIf="item.order">
+                                    <p><i class="fa fa-user"></i> {{item.order.user.name}} -
+                                        {{item.order.user.phone_number}}</p>
+                                    <p><i class="fa fa-envelope"></i> {{item.order.user.email}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p>ID: {{item.order.id}}
+                                </p>
+                                <p>Ngày tạo: {{item.order.created_at | tempDate}}</p>
+                            </td>
+                            <td>{{item.created_at | tempDate}}</td>
                             <td>{{item.otype.name}}</td>
                             <td>{{item.money_request | tempPrice: 1 : 1}} <sup> đ</sup></td>
                             <td>{{item.content}}</td>
@@ -58,7 +70,8 @@
                         </tr>
                         </tbody>
                     </table>
-                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="complainService.search.page"
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems"
+                                [(ngModel)]="complainService.search.page"
                                 (pageChanged)="pageChanged($event)"
                                 class="pagination-sm pull-right" [maxSize]="6"
                                 previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

@@ -43,6 +43,7 @@ export class ComplainService {
             money_request: null,
             status: null,
             order_id: null,
+            order: null,
             complain_products: null,
             otype: null
         };
