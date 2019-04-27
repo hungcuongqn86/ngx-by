@@ -42,6 +42,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
+                            <th>Đơn hàng</th>
                             <th>Ngày tạo</th>
                             <th>Khiếu nại về</th>
                             <th>Số tiền mong muốn</th>
@@ -51,6 +52,7 @@
                         </thead>
                         <tbody>
                         <tr *ngFor="let item of complains">
+                            <td></td>
                             <td>{{item.created_at}}</td>
                             <td>{{item.otype.name}}</td>
                             <td>{{item.money_request | tempPrice: 1 : 1}} <sup> đ</sup></td>
