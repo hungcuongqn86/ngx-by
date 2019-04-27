@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
-import {OrderService} from '../../services/order/order.service';
+import {ComplainService} from '../../services/order/complain.service';
 import {ComplainComponent} from './complain.component';
 import {ComplainRoutingModule} from './complain.routing.module';
 import {SharedModule} from '../../shared.module';
@@ -14,7 +14,7 @@ import {SharedModule} from '../../shared.module';
         ComplainComponent
     ],
     exports: [],
-    providers: [OrderService]
+    providers: [ComplainService]
 })
 export class ComplainModule {
 }

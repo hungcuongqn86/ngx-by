@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {OrderService} from '../../services/order/order.service';
+import {ComplainService} from '../../services/order/complain.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Complain, ComplainType} from '../../models/Complain';
@@ -16,8 +16,9 @@ export class ComplainComponent {
     modalRef: BsModalRef;
     complain: Complain;
     title = '';
+    totalItems = 0;
 
-    constructor(public orderService: OrderService, private modalService: BsModalService) {
+    constructor(public complainService: ComplainService, private modalService: BsModalService) {
         this.getComplains();
         this.getComplainTypes();
         this.complainReset();
@@ -41,16 +42,22 @@ export class ComplainComponent {
     }
 
     public getComplains() {
-        this.orderService.showLoading(true);
-        this.orderService.getComplains({order_id: this.orderService.orderRe.id})
+        this.complainService.showLoading(true);
+        this.complainService.getComplains()
             .subscribe(complains => {
-                this.complains = complains.data;
-                this.orderService.showLoading(false);
+                this.complains = complains.data.data;
+                this.totalItems = complains.data.total;
+                this.complainService.showLoading(false);
             });
     }
 
+    pageChanged(event: any): void {
+        this.complainService.search.page = event.page;
+        this.getComplains();
+    }
+
     public getComplainTypes() {
-        this.orderService.getComplainTypes()
+        this.complainService.getComplainTypes()
             .subscribe(types => {
                 this.types = types.data;
             });
@@ -58,7 +65,7 @@ export class ComplainComponent {
 
     public editComplain(id: number, template) {
         this.title = 'Chi tiết đơn khiếu nại';
-        this.orderService.getComplain(id)
+        this.complainService.getComplain(id)
             .subscribe(res => {
                 this.complain = res.data.complain;
                 this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
@@ -66,8 +73,8 @@ export class ComplainComponent {
     }
 
     public confirm(): void {
-        this.orderService.showLoading(true);
-        this.orderService.editComplain(this.complain)
+        this.complainService.showLoading(true);
+        this.complainService.editComplain(this.complain)
             .subscribe(res => {
                 this.modalRef.hide();
                 this.getComplains();

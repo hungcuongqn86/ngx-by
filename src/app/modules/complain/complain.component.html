@@ -16,24 +16,15 @@
                     <i class="fa fa-cubes"></i> Danh sách khiếu nại
                 </div>
                 <div class="card-body">
-                    <form novalidate (ngSubmit)="searchOrders()" #form="ngForm">
+                    <form novalidate (ngSubmit)="getComplains()" #form="ngForm">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
+                                <input [(ngModel)]="complainService.search.key" type="text" id="key" name="key"
                                        class="form-control"
-                                       placeholder="Tìm kiếm mã đơn hàng">
-                            </div>
-                            <div class="col-md-3">
-                                <select [(ngModel)]="orderService.search.status" class="form-control" name="status"
-                                        id="status">
-                                    <option value="">Tất cả</option>
-                                    <option *ngFor="let item of status" [value]="item.id">
-                                        {{item.name}}
-                                    </option>
-                                </select>
+                                       placeholder="Nhập từ tìm kiếm ">
                             </div>
                             <div class="col-md-2">
-                                <button type="button" (click)="searchOrders()"
+                                <button type="button" (click)="getComplains()"
                                         class="btn btn-primary">Tìm kiếm
                                 </button>
                             </div>
@@ -67,7 +58,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="complainService.search.page"
                                 (pageChanged)="pageChanged($event)"
                                 class="pagination-sm pull-right" [maxSize]="6"
                                 previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
