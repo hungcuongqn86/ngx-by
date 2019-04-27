@@ -62,6 +62,12 @@ const appRoutes: Routes = [
                 data: {
                     title: 'Đơn hàng'
                 }
+            }, {
+                path: 'complain',
+                loadChildren: './modules/complain/complain.module#ComplainModule',
+                data: {
+                    title: 'Khiếu nại'
+                }
             }
             , {
                 path: 'wallet',
