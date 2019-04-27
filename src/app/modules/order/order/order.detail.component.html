@@ -4,7 +4,8 @@
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn" href="javascript:void(0)" (click)="orderService.updateOrder()"><i class="fa fa-check-square"></i>
+            <a class="btn" href="javascript:void(0)" (click)="orderService.updateOrder()"><i
+                    class="fa fa-check-square"></i>
                 &nbsp;Cập nhật</a>
             <a class="btn" href="javascript:void(0)" (click)="backlist()"
                target="_blank"><i class="fa fa-arrow-left"></i> &nbsp;Quay lại</a>
@@ -24,11 +25,16 @@
                         <tabset>
                             <tab>
                                 <ng-template tabHeading><i class="icon-list"></i> &nbsp;Thông tin cơ bản</ng-template>
-                                <app-order-detail-info *ngIf="orderService.orderRe.package && orderService.orderRe.package.length"></app-order-detail-info>
+                                <app-order-detail-info
+                                        *ngIf="orderService.orderRe.package && orderService.orderRe.package.length"></app-order-detail-info>
                             </tab>
                             <tab>
                                 <ng-template tabHeading><i class="icon-list"></i> &nbsp;Lịch sử đơn hàng</ng-template>
                                 <app-order-detail-history></app-order-detail-history>
+                            </tab>
+                            <tab>
+                                <ng-template tabHeading><i class="fa fa-exclamation"></i> &nbsp;Khiếu nại</ng-template>
+                                <app-order-detail-complain></app-order-detail-complain>
                             </tab>
                         </tabset>
                     </div><!--/.col-->

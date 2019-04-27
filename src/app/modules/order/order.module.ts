@@ -8,6 +8,7 @@ import {OrderComponent} from './order/order.component';
 import {OrderDetailComponent} from './order/order.detail.component';
 import {InfoComponent} from './order/info/info.component';
 import {HistoryComponent} from './order/history/history.component';
+import {ComplainComponent} from './order/complain/complain.component';
 
 import {MyorderComponent} from './myorder/myorder.component';
 import {MyorderDetailComponent} from './myorder/myorder.detail.component';
@@ -25,6 +26,7 @@ import {SharedModule} from '../../shared.module';
         OrderDetailComponent,
         InfoComponent,
         HistoryComponent,
+        ComplainComponent,
         MyorderComponent,
         MyorderDetailComponent,
         MyinfoComponent,

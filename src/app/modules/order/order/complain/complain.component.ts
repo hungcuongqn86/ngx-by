@@ -6,13 +6,13 @@ import {Complain, ComplainProducts, ComplainType} from '../../../../models/Compl
 import {UploaderService} from '../../../../uploader.service';
 
 @Component({
-    selector: 'app-myorder-detail-complain',
-    templateUrl: './mycomplain.component.html',
+    selector: 'app-order-detail-complain',
+    templateUrl: './complain.component.html',
     providers: [UploaderService],
-    styleUrls: ['./mycomplain.component.css']
+    styleUrls: ['./complain.component.css']
 })
 
-export class MycomplainComponent {
+export class ComplainComponent {
     types: ComplainType[] = [];
     complains: Complain[] = [];
     modalRef: BsModalRef;
