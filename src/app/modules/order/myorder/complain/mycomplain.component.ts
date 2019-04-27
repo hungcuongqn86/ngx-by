@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {OrderService, HistoryType} from '../../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {Complain, ComplainProducts} from '../../../../models/Complain';
+import {Complain, ComplainProducts, ComplainType} from '../../../../models/Complain';
 import {UploaderService} from '../../../../uploader.service';
 
 @Component({
@@ -13,12 +13,12 @@ import {UploaderService} from '../../../../uploader.service';
 })
 
 export class MycomplainComponent {
-    types: HistoryType[] = [];
+    types: ComplainType[] = [];
     modalRef: BsModalRef;
     complain: Complain;
 
     constructor(public orderService: OrderService, private modalService: BsModalService, private uploaderService: UploaderService) {
-        // this.getTypes();
+        this.getComplainTypes();
         this.complain = {
             id: null,
             complain_products: [],
@@ -34,9 +34,18 @@ export class MycomplainComponent {
         };
     }
 
-    public getTypes() {
+    public getComplain() {
+        /*this.orderService.showLoading(true);
+        this.orderService.getComplain()
+            .subscribe(types => {
+                this.types = types.data;
+                this.orderService.showLoading(false);
+            });*/
+    }
+
+    public getComplainTypes() {
         this.orderService.showLoading(true);
-        this.orderService.getHistoryTypes()
+        this.orderService.getComplainTypes()
             .subscribe(types => {
                 this.types = types.data;
                 this.orderService.showLoading(false);
@@ -55,6 +64,9 @@ export class MycomplainComponent {
     }
 
     public addComplain(template) {
+        this.complain.order_id = this.orderService.orderRe.id;
+        this.complain.status = 1;
+        this.complain.is_deleted = 0;
         this.complain.complain_products = [];
         for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
             const pro: ComplainProducts = {
@@ -67,7 +79,12 @@ export class MycomplainComponent {
     }
 
     public confirm(): void {
-        this.modalRef.hide();
+        this.orderService.showLoading(true);
+        this.orderService.addComplain(this.complain)
+            .subscribe(res => {
+                this.modalRef.hide();
+                this.getComplain();
+            });
     }
 
     public decline(): void {

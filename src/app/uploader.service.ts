@@ -27,14 +27,6 @@ export class UploaderService {
                 private loadingService: LoadingService) {
     }
 
-    // If uploading multiple files, change to:
-    // upload(files: FileList) {
-    //   const formData = new FormData();
-    //   files.forEach(f => formData.append(f.name, f));
-    //   new HttpRequest('POST', '/upload/file', formData, {reportProgress: true});
-    //   ...
-    // }
-
     upload(files: FileList) {
         if (!files) {
             return;
@@ -42,7 +34,6 @@ export class UploaderService {
         // XHR progress events.
         const url = Util.getUri(apiV1Url) + `media/upload`;
         const formData = new FormData();
-        console.log(files.item(0));
         for (let index = 0; index < files.length; index++) {
             const f = files.item(index);
             formData.append('files[]', f);

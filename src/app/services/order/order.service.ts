@@ -12,6 +12,7 @@ import {Cart} from '../../models/Cart';
 import {User} from '../../models/User';
 import {Shop} from '../../models/Shop';
 import {Package} from '../../models/Package';
+import {Complain} from '../../models/Complain';
 
 export interface OrderCreate {
     id: number;
@@ -170,6 +171,14 @@ export class OrderService {
             );
     }
 
+    getComplainTypes(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/types`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getComplainTypes', []))
+            );
+    }
+
     getOrder(id): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}detail/${id}`;
         return this.http.get<any>(url)
@@ -247,6 +256,14 @@ export class OrderService {
         return this.http.post<any>(url, item)
             .pipe(
                 catchError(this.handleError('editPackage', item))
+            );
+    }
+
+    public addComplain(data: Complain): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/create`;
+        return this.http.post<any>(url, data)
+            .pipe(
+                catchError(this.handleError('addComplain', data))
             );
     }
 }

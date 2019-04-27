@@ -25,3 +25,8 @@ export interface ComplainProducts {
     created_at: string;
     updated_at: string;
 }
+
+export interface ComplainType {
+    id: number;
+    name: string;
+}
