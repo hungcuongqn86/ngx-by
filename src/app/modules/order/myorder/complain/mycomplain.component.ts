@@ -34,6 +34,7 @@ export class MycomplainComponent {
             is_deleted: null,
             money_request: null,
             order_id: null,
+            order: null,
             status: null,
             otype: null,
             type: null,
