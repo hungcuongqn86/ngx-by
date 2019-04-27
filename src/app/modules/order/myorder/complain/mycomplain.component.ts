@@ -20,7 +20,7 @@ export class MycomplainComponent {
     title = '';
 
     constructor(public orderService: OrderService, private modalService: BsModalService, private uploaderService: UploaderService) {
-        this.getComplain();
+        this.getComplains();
         this.getComplainTypes();
         this.complain = {
             id: null,
@@ -38,9 +38,9 @@ export class MycomplainComponent {
         };
     }
 
-    public getComplain() {
+    public getComplains() {
         this.orderService.showLoading(true);
-        this.orderService.getComplain({order_id: this.orderService.orderRe.id})
+        this.orderService.getComplains({order_id: this.orderService.orderRe.id})
             .subscribe(complains => {
                 this.complains = complains.data;
                 this.orderService.showLoading(false);
@@ -83,8 +83,11 @@ export class MycomplainComponent {
 
     public editComplain(id: number, template) {
         this.title = 'Chi tiết đơn khiếu nại';
-        console.log(id);
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
+        this.orderService.getComplain(id)
+            .subscribe(res => {
+                this.complain = res.data.complain;
+                this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
+            });
     }
 
     public confirm(): void {
@@ -92,7 +95,7 @@ export class MycomplainComponent {
         this.orderService.addComplain(this.complain)
             .subscribe(res => {
                 this.modalRef.hide();
-                this.getComplain();
+                this.getComplains();
             });
     }
 
