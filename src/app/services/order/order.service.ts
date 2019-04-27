@@ -171,6 +171,18 @@ export class OrderService {
             );
     }
 
+    getComplain(param: { order_id: number }): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/search`;
+        let params = new HttpParams();
+        Object.keys(param).map((key) => {
+            params = params.append(key, param[key]);
+        });
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getComplain', []))
+            );
+    }
+
     getComplainTypes(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/types`;
         return this.http.get<any>(url)

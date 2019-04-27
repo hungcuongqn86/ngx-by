@@ -4,6 +4,7 @@ export interface Complain {
     id: number;
     order_id: number;
     type: number;
+    otype: { id: number; name: string; };
     money_request: number;
     content: string;
     user_id: number;

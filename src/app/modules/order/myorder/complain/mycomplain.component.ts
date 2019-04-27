@@ -14,10 +14,13 @@ import {UploaderService} from '../../../../uploader.service';
 
 export class MycomplainComponent {
     types: ComplainType[] = [];
+    complains: Complain[] = [];
     modalRef: BsModalRef;
     complain: Complain;
+    title = '';
 
     constructor(public orderService: OrderService, private modalService: BsModalService, private uploaderService: UploaderService) {
+        this.getComplain();
         this.getComplainTypes();
         this.complain = {
             id: null,
@@ -28,6 +31,7 @@ export class MycomplainComponent {
             money_request: null,
             order_id: null,
             status: null,
+            otype: null,
             type: null,
             updated_at: null,
             user_id: null
@@ -35,20 +39,18 @@ export class MycomplainComponent {
     }
 
     public getComplain() {
-        /*this.orderService.showLoading(true);
-        this.orderService.getComplain()
-            .subscribe(types => {
-                this.types = types.data;
+        this.orderService.showLoading(true);
+        this.orderService.getComplain({order_id: this.orderService.orderRe.id})
+            .subscribe(complains => {
+                this.complains = complains.data;
                 this.orderService.showLoading(false);
-            });*/
+            });
     }
 
     public getComplainTypes() {
-        this.orderService.showLoading(true);
         this.orderService.getComplainTypes()
             .subscribe(types => {
                 this.types = types.data;
-                this.orderService.showLoading(false);
             });
     }
 
@@ -64,6 +66,7 @@ export class MycomplainComponent {
     }
 
     public addComplain(template) {
+        this.title = 'Tạo đơn khiếu nại';
         this.complain.order_id = this.orderService.orderRe.id;
         this.complain.status = 1;
         this.complain.is_deleted = 0;
@@ -75,6 +78,12 @@ export class MycomplainComponent {
             };
             this.complain.complain_products.push(pro);
         }
+        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
+    }
+
+    public editComplain(id: number, template) {
+        this.title = 'Chi tiết đơn khiếu nại';
+        console.log(id);
         this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
     }
 
