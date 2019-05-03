@@ -72,14 +72,19 @@ export class MyorderComponent implements OnInit {
         if (this.inputDatCoc.id > 0) {
             this.orderService.postDatCoc(this.inputDatCoc)
                 .subscribe(res => {
-                    this.searchOrders();
-                    this.modalRef.hide();
+                    if (res.status) {
+                        this.searchOrders();
+                        this.modalRef.hide();
+                    } else {
+                        this.errorMessage.push(res.message);
+                    }
                 });
         }
     }
 
     declineDatCoc(): void {
         this.modalRef.hide();
+        this.errorMessage = [];
     }
 
     calTienCoc() {
