@@ -17,7 +17,7 @@ export class UserService {
     static instance: UserService;
     private handleError: HandleError;
     private moduleUri = 'muser/user/';
-    public search = {key: '', page_size: 10, page: 1};
+    public search = {key: '', limit: 20, page: 1};
     public user: User;
     public transaction: Transaction;
 

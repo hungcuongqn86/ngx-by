@@ -70,7 +70,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <pagination [boundaryLinks]="true" [totalItems]="totalItems"
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="complainService.search.limit"
                                 [(ngModel)]="complainService.search.page"
                                 (pageChanged)="pageChanged($event)"
                                 class="pagination-sm pull-right" [maxSize]="6"

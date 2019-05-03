@@ -75,7 +75,6 @@ export class InfoComponent {
 
     private genTongTien() {
         this.tongTien = this.orderService.orderRe.tong;
-        console.log(this.tongTien);
         if (this.orderService.orderRe.package) {
             for (let i = 0; i < this.orderService.orderRe.package.length; i++) {
                 if (this.orderService.orderRe.package[i].ship_khach) {
@@ -83,7 +82,6 @@ export class InfoComponent {
                     const tigia = this.orderService.orderRe.rate;
                     const vnd = ndt * tigia;
                     this.tongTien = this.tongTien + vnd;
-                    console.log(this.tongTien);
                 }
             }
         }

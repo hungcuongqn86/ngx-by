@@ -15,7 +15,7 @@ export class ComplainService {
     static instance: ComplainService;
     private handleError: HandleError;
     private moduleUri = 'complain/';
-    public search = {key: '', status: '', page_size: 20, page: 1};
+    public search = {key: '', status: '', limit: 20, page: 1};
     public complain: Complain;
 
     constructor(private loadingService: LoadingService,

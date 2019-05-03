@@ -81,7 +81,7 @@ export class OrderService {
     static instance: OrderService;
     private handleError: HandleError;
     private moduleUri = 'order/';
-    public search = {key: '', status: '', page_size: 20, page: 1};
+    public search = {key: '', status: '', limit: 20, page: 1};
     public order: OrderCreate;
     public orderRe: Order;
 

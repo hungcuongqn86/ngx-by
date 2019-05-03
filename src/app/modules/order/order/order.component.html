@@ -94,7 +94,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page" [itemsPerPage]="orderService.search.limit"
                                 (pageChanged)="pageChanged($event)"
                                 class="pagination-sm pull-right" [maxSize]="6"
                                 previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
