@@ -57,7 +57,7 @@ export class HistoryComponent implements OnInit {
         this.orderService.postHistory(this.history)
             .subscribe(res => {
                 if (res.status) {
-                    // this.searchOrders();
+                    this.reloadData();
                     this.errorMessage = [];
                     this.reset();
                     this.modalRef.hide();
@@ -70,6 +70,17 @@ export class HistoryComponent implements OnInit {
     }
 
     declineHistory(): void {
+        this.errorMessage = [];
+        this.reset();
         this.modalRef.hide();
+    }
+
+    reloadData() {
+        this.orderService.showLoading(true);
+        this.orderService.getOrder(this.orderService.orderRe.id)
+            .subscribe(order => {
+                this.orderService.orderRe = order.data.order;
+                this.orderService.showLoading(false);
+            });
     }
 }

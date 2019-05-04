@@ -7,11 +7,11 @@ import {Order} from '../services/order/order.service';
 export class TempTongTienHangPipe implements PipeTransform {
     transform(order: Order, output: number): string {
         let vndTotal = order.tong;
+        const tigia = order.rate;
         if (order.package) {
             for (let i = 0; i < order.package.length; i++) {
                 if (order.package[i].ship_khach) {
                     const ndt = order.package[i].ship_khach;
-                    const tigia = order.rate;
                     const vnd = ndt * tigia;
                     vndTotal = vndTotal + vnd;
                 }
