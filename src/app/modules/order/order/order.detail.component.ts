@@ -11,6 +11,7 @@ import {OrderService, Order} from '../../../services/order/order.service';
 export class OrderDetailComponent implements OnInit {
     constructor(private router: Router, private route: ActivatedRoute
         , public orderService: OrderService) {
+        this.orderService.order_renew();
         this.route.params.subscribe(params => {
             if (params['id']) {
                 this.orderService.orderRe.id = params['id'];

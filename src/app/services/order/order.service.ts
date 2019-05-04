@@ -93,29 +93,7 @@ export class OrderService {
         }
 
         if (!this.orderRe) {
-            this.orderRe = {
-                id: null,
-                user_id: null,
-                shop_id: null,
-                rate: 1,
-                is_deleted: 0,
-                created_at: '',
-                updated_at: '',
-                count_product: 0,
-                count_link: 0,
-                tien_hang: 0,
-                phi_tam_tinh: 0,
-                tong: 0,
-                cart: null,
-                user: null,
-                status: null,
-                con_thieu: 0,
-                thanh_toan: 0,
-                shop: null,
-                history: null,
-                package: null,
-                baogia_content: null
-            };
+            this.order_renew();
         }
         return OrderService.instance = OrderService.instance || this;
     }
@@ -128,6 +106,32 @@ export class OrderService {
         this.order = {
             id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
             count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, tong: 0
+        };
+    }
+
+    order_renew() {
+        this.orderRe = {
+            id: null,
+            user_id: null,
+            shop_id: null,
+            rate: 1,
+            is_deleted: 0,
+            created_at: '',
+            updated_at: '',
+            count_product: 0,
+            count_link: 0,
+            tien_hang: 0,
+            phi_tam_tinh: 0,
+            tong: 0,
+            cart: null,
+            user: null,
+            status: null,
+            con_thieu: 0,
+            thanh_toan: 0,
+            shop: null,
+            history: null,
+            package: null,
+            baogia_content: null
         };
     }
 
