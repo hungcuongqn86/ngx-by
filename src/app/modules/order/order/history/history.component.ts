@@ -53,10 +53,19 @@ export class HistoryComponent implements OnInit {
     }
 
     confirmHistory(): void {
+        this.errorMessage = [];
         this.orderService.postHistory(this.history)
             .subscribe(res => {
-                // this.searchOrders();
-                this.modalRef.hide();
+                if (res.status) {
+                    // this.searchOrders();
+                    this.errorMessage = [];
+                    this.reset();
+                    this.modalRef.hide();
+                } else {
+                    for (let i = 0; i < res.data.length; i++) {
+                        this.errorMessage.push(res.data[i]);
+                    }
+                }
             });
     }
 
