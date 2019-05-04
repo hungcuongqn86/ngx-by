@@ -9,6 +9,7 @@ import {AlertModule} from 'ngx-bootstrap/alert';
 import {AppBreadcrumbModule} from '@coreui/angular';
 import {TempPricePipe} from './pipes/price';
 import {TempTotalPricePipe} from './pipes/totalPrice';
+import {TempTongTienHangPipe} from './pipes/tongTienHang';
 import {TempStatusPipe} from './pipes/status';
 import {TempHistoryTypePipe} from './pipes/historyType';
 import {TempDatePipe} from './pipes/date';
@@ -16,9 +17,10 @@ import {TempDatePipe} from './pipes/date';
 @NgModule({
     imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
         ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
-    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempStatusPipe, TempDatePipe, TempHistoryTypePipe],
+    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe
+        , TempDatePipe, TempHistoryTypePipe],
     exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
-        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe, TempStatusPipe,
+        AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe,
         TempDatePipe, TempHistoryTypePipe],
     providers: []
 })

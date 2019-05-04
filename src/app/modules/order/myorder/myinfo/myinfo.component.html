@@ -12,7 +12,7 @@
                         <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe.tong | tempPrice: 1 : 1}} <sup> đ</sup></p>
+                        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
                         <p *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"><i class="fa fa-edge"></i> Đặt tại website: <span class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span> </p>
                         <p *ngIf="orderService.orderRe.shop"><i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{orderService.orderRe.shop.name}}</span> </p>
                     </div>

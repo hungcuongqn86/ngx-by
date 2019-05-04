@@ -14,7 +14,6 @@ export class InfoComponent {
     status: OrderStatus[];
     package: Package;
     modalRef: BsModalRef;
-    tongTien = 0;
 
     constructor(public orderService: OrderService, private modalService: BsModalService) {
         this.package = {
@@ -30,7 +29,6 @@ export class InfoComponent {
             updated_at: null
         };
         this.getStatus();
-        this.genTongTien();
     }
 
     public getStatus() {
@@ -68,23 +66,8 @@ export class InfoComponent {
         this.orderService.getOrder(this.orderService.orderRe.id)
             .subscribe(order => {
                 this.orderService.orderRe = order.data.order;
-                this.genTongTien();
                 this.orderService.showLoading(false);
             });
-    }
-
-    private genTongTien() {
-        this.tongTien = this.orderService.orderRe.tong;
-        if (this.orderService.orderRe.package) {
-            for (let i = 0; i < this.orderService.orderRe.package.length; i++) {
-                if (this.orderService.orderRe.package[i].ship_khach) {
-                    const ndt = this.orderService.orderRe.package[i].ship_khach;
-                    const tigia = this.orderService.orderRe.rate;
-                    const vnd = ndt * tigia;
-                    this.tongTien = this.tongTien + vnd;
-                }
-            }
-        }
     }
 
     public confirm(): void {

@@ -44,7 +44,7 @@
                         <tr>
                             <th width="20%">Đơn hàng</th>
                             <th>Sản phẩm</th>
-                            <th>Tiền hàng</th>
+                            <th width="18%">Tiền hàng</th>
                             <th width="5%" class="text-right">Tác vụ</th>
                         </tr>
                         </thead>
@@ -68,13 +68,13 @@
                                 </p>
                             </td>
                             <td class="text-right">
-                                <p><span class="pull-left">Tiền hàng</span> <span class="money">{{item.tien_hang | tempPrice: 1 : 1}}</span>
+                                <p><span class="pull-left">Tiền hàng</span> <span class="money">{{item | tempTongTienHang: 1}}</span>
                                     <sup> đ</sup></p>
                                 <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
                                                                                    class="money">{{item.thanh_toan | tempPrice: 1 : 1}}</span>
                                     <sup> đ</sup></p>
                                 <p><span class="pull-left">Còn thiếu</span> <span
-                                        *ngIf="item.tien_hang && item.thanh_toan" class="money">{{(item.tien_hang - item.thanh_toan) | tempPrice: 1 : 1}}</span>
+                                        *ngIf="item.tien_hang && item.thanh_toan" class="money">{{item | tempTongTienHang: 2}}</span>
                                     <sup> đ</sup></p>
                             </td>
                             <td class="text-right">
