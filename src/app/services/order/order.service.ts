@@ -175,6 +175,14 @@ export class OrderService {
             );
     }
 
+    postHistory(data: History): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}history/create`;
+        return this.http.post<History>(url, data)
+            .pipe(
+                catchError(this.handleError('postHistory', data))
+            );
+    }
+
     getComplains(param: { order_id: number }): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/search`;
         let params = new HttpParams();
