@@ -20,71 +20,80 @@ const appRoutes: Routes = [
                 loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
                 data: {
                     title: 'Bảng điều khiển'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'mpartner',
                 loadChildren: './modules/mpartner/mpartner.module#MpartnerModule',
                 data: {
                     title: 'Đối tác'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'muser',
                 loadChildren: './modules/muser/muser.module#MuserModule',
                 data: {
                     title: 'Người dùng'
-                }
+                },
+                canActivate: [AppGuard]
             }, {
                 path: 'account',
                 loadChildren: './modules/account/account.module#AccountModule',
                 data: {
                     title: 'Tài khoản'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'mcustumer',
                 loadChildren: './modules/mcustumer/mcustumer.module#McustumerModule',
                 data: {
                     title: 'Khách hàng'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'cart',
                 loadChildren: './modules/cart/cart.module#CartModule',
                 data: {
                     title: 'Giỏ hàng'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'order',
                 loadChildren: './modules/order/order.module#OrderModule',
                 data: {
                     title: 'Đơn hàng'
-                }
+                },
+                canActivate: [AppGuard]
             }, {
                 path: 'complain',
                 loadChildren: './modules/complain/complain.module#ComplainModule',
                 data: {
                     title: 'Khiếu nại'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'wallet',
                 loadChildren: './modules/wallet/wallet.module#WalletModule',
                 data: {
                     title: 'Ví điện tử'
-                }
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'setting',
                 loadChildren: './modules/setting/setting.module#SettingModule',
                 data: {
                     title: 'Cấu hình hệ thống'
-                }
+                },
+                canActivate: [AppGuard]
             }
-        ],
-        canActivate: [AppGuard]
+        ]
     },
     {path: 'login', component: LoginComponent, pathMatch: 'full'},
     {path: 'register', component: RegisterComponent, pathMatch: 'full'},
