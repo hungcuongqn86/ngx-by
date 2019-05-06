@@ -300,6 +300,14 @@ export class OrderService {
             );
     }
 
+    public editCart(item: Cart) {
+        const url = Util.getUri(apiUrl) + `cart/update`;
+        return this.http.put<any>(url, item)
+            .pipe(
+                catchError(this.handleError('editCart', item))
+            );
+    }
+
     public addComplain(data: Complain): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}complain/create`;
         return this.http.post<any>(url, data)

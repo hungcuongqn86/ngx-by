@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
+import {Cart} from '../../../../models/Cart';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -14,6 +15,7 @@ export class InfoComponent {
     status: OrderStatus[];
     pkStatus: PackageStatus[];
     package: Package;
+    cart: Cart;
     modalRef: BsModalRef;
 
     constructor(public orderService: OrderService, private modalService: BsModalService) {
@@ -93,5 +95,19 @@ export class InfoComponent {
 
     public decline(): void {
         this.modalRef.hide();
+    }
+
+    public editCart(item: Cart, template) {
+        this.cart = item;
+        this.modalRef = this.modalService.show(template, {class: 'modal-sm', ignoreBackdropClick: true});
+    }
+
+    public editCartConfirm(): void {
+        this.orderService.showLoading(true);
+        this.orderService.editCart(this.cart)
+            .subscribe(res => {
+                this.modalRef.hide();
+                this.getOrder();
+            });
     }
 }

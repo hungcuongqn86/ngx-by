@@ -51,7 +51,7 @@
             <th>Mã hợp đồng</th>
             <th>Trạng thái shop</th>
             <th>Ghi chú thanh lý</th>
-            <th>Thao tác</th>
+            <th class="text-center">Thao tác</th>
         </tr>
         </thead>
         <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
@@ -72,10 +72,12 @@
                 <td>{{item.status | tempPkStatus : pkStatus}}</td>
                 <td>{{item.note_tl}}</td>
                 <td>
-                    <p style="margin: 0;"><a style="cursor: pointer;" (click)="editPackage(item, template);"
-                                             href="javascript:void(0);">Sửa</a></p>
-                    <p *ngIf="i!==0" style="margin: 0;"><a style="cursor: pointer;" (click)="deletePackage(item);"
-                                                           href="javascript:void(0);">Hủy</a></p>
+                    <p style="margin: 0;" class="text-center"><a style="cursor: pointer;"
+                                                                 (click)="editPackage(item, template);"
+                                                                 href="javascript:void(0);">Sửa</a></p>
+                    <p *ngIf="i!==0" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
+                                                                               (click)="deletePackage(item);"
+                                                                               href="javascript:void(0);">Hủy</a></p>
                 </td>
             </tr>
         </ng-template>
@@ -98,6 +100,7 @@
             <th>Đơn giá</th>
             <th>Thành tiền</th>
             <th>Ghi chú của khách</th>
+            <th class="text-center">Thao tác</th>
         </tr>
         </thead>
         <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
@@ -121,6 +124,11 @@
                     <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount}}</p>
                 </td>
                 <td>{{item.note}}</td>
+                <td>
+                    <p style="margin: 0;" class="text-center"><a style="cursor: pointer;"
+                                                                 (click)="editCart(item, template_edit_cart);"
+                                                                 href="javascript:void(0);">Sửa</a></p>
+                </td>
             </tr>
         </ng-template>
         </tbody>
@@ -183,6 +191,36 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
+    </div>
+</ng-template>
+
+<ng-template #template_edit_cart>
+    <div class="modal-header">
+        <h5 class="modal-title">Sửa đơn đặt hàng</h5>
+    </div>
+    <div class="modal-body">
+        <form novalidate #form1="ngForm">
+            <div class="form-group">
+                <label for="amount">Số lượng khách đặt</label>
+                <input [(ngModel)]="cart.amount" #amount="ngModel" class="form-control"
+                       id="amount"
+                       name="amount"
+                       placeholder="Số lượng khách đặt"
+                       type="number">
+            </div>
+            <div class="form-group">
+                <label for="price">Đơn giá (<span>¥</span>)</label>
+                <input [(ngModel)]="cart.price" #price="ngModel" class="form-control"
+                       id="price"
+                       name="price"
+                       placeholder="Đơn giá"
+                       type="number">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="editCartConfirm()">OK</button>
         <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
     </div>
 </ng-template>
