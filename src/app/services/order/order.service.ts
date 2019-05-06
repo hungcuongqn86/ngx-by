@@ -275,6 +275,15 @@ export class OrderService {
             );
     }
 
+
+    getPkStatus(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/status`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getPkStatus', []))
+            );
+    }
+
     public addPackage(order: number) {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/create`;
         return this.http.post<any>(url, {order_id: order})

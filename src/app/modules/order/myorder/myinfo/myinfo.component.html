@@ -34,6 +34,7 @@
             <th>Mã vận đơn</th>
             <th>Mã hợp đồng</th>
             <th>Trạng thái shop</th>
+            <th>Ghi chú thanh lý</th>
         </tr>
         </thead>
         <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
@@ -46,7 +47,8 @@
                 <td>{{item.ship_khach}}</td>
                 <td>{{item.package_code}}</td>
                 <td>{{item.contract_code}}</td>
-                <td></td>
+                <td>{{item.status | tempPkStatus : pkStatus}}</td>
+                <td>{{item.note_tl}}</td>
             </tr>
         </ng-template>
         </tbody>

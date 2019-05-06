@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
-import {Package} from '../../../../models/Package';
+import {Package, PackageStatus} from '../../../../models/Package';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -12,6 +12,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 export class InfoComponent {
     status: OrderStatus[];
+    pkStatus: PackageStatus[];
     package: Package;
     modalRef: BsModalRef;
 
@@ -26,9 +27,11 @@ export class InfoComponent {
             order_id: null,
             package_code: null,
             status: null,
+            note_tl: null,
             updated_at: null
         };
         this.getStatus();
+        this.getPkStatus();
     }
 
     public getStatus() {
@@ -36,6 +39,15 @@ export class InfoComponent {
         this.orderService.getStatus()
             .subscribe(orders => {
                 this.status = orders.data;
+                this.orderService.showLoading(false);
+            });
+    }
+
+    public getPkStatus() {
+        this.orderService.showLoading(true);
+        this.orderService.getPkStatus()
+            .subscribe(pks => {
+                this.pkStatus = pks.data;
                 this.orderService.showLoading(false);
             });
     }

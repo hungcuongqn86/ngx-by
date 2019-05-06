@@ -6,7 +6,13 @@ export interface Package {
     ship_khach: number;
     ship_tt: number;
     status: number;
+    note_tl: string;
     is_deleted: number;
     created_at: string;
     updated_at: string;
+}
+
+export interface PackageStatus {
+    id: number;
+    name: string;
 }

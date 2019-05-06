@@ -69,8 +69,8 @@
                 <td></td>
                 <td>{{item.package_code}}</td>
                 <td>{{item.contract_code}}</td>
-                <td></td>
-                <td></td>
+                <td>{{item.status | tempPkStatus : pkStatus}}</td>
+                <td>{{item.note_tl}}</td>
                 <td>
                     <p style="margin: 0;"><a style="cursor: pointer;" (click)="editPackage(item, template);"
                                              href="javascript:void(0);">Sửa</a></p>
@@ -162,6 +162,22 @@
                        name="ship_tt"
                        placeholder="Nhập ship thực tế"
                        type="number">
+            </div>
+            <div class="form-group">
+                <label for="status">Trạng thái shop</label>
+                <select [(ngModel)]="package.status"
+                        #status="ngModel"
+                        id="status"
+                        name="status"
+                        class="form-control">
+                    <option *ngFor="let item of pkStatus" value="{{item.id}}">{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="note_tl">Ghi chú thanh lý</label>
+                <textarea [(ngModel)]="package.note_tl" #note_tl="ngModel" id="note_tl" name="note_tl" rows="3"
+                          class="form-control"
+                          placeholder="Ghi chú thanh lý ..."></textarea>
             </div>
         </form>
     </div>
