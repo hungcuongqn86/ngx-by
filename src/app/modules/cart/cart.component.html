@@ -35,7 +35,8 @@
                                     <tr>
                                         <td rowspan="2">
                                             <div class="pull-left">
-                                                <a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}"><img src="{{item.image}}"></a>
+                                                <a target="_blank" rel="noopener noreferrer"
+                                                   href="{{item.pro_link}}"><img src="{{item.image}}"></a>
                                             </div>
                                             <p class="pull-left m-1">{{item.colortxt}}</p>
                                         </td>
@@ -46,12 +47,13 @@
                                         </td>
                                         <td>
                                             <p>{{item.price | tempPrice: shopItem.rate : 1}}<sup>đ</sup></p>
-                                            <p><span>¥</span>{{item.price | tempPrice: 1 : 1}}</p>
+                                            <p><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
                                         </td>
                                         <td>
                                             <p>{{item.price | tempPrice: shopItem.rate :
                                                 shopItem.cart[i].amount}}<sup>đ</sup></p>
-                                            <p><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount}}</p>
+                                            <p><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount :
+                                                false}}</p>
                                         </td>
                                         <td><a href="javascript:void(0)" (click)="openModalDeleteCart(template,item)"><i
                                                 class="fa fa-trash-o"

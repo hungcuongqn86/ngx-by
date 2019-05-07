@@ -4,9 +4,17 @@ import {Pipe, PipeTransform} from '@angular/core';
     name: 'tempPrice'
 })
 export class TempPricePipe implements PipeTransform {
-    transform(ndt: string, tigia: number, soluong: number): string {
+    transform(ndt: string, tigia: number, soluong: number, r: boolean): string {
+        if (r !== false) {
+            r = true;
+        }
         const indt = parseFloat(ndt);
-        const vnd = indt * tigia * soluong;
+        let vnd = 0;
+        if (r) {
+            vnd = Math.round(indt * tigia * soluong);
+        } else {
+            vnd = indt * tigia * soluong;
+        }
         return this.formatCurrency(vnd.toString());
     }
 

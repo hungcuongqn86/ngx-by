@@ -43,7 +43,6 @@
                         <thead>
                         <tr>
                             <th width="20%">Đơn hàng</th>
-                            <th>Sản phẩm</th>
                             <th width="18%">Tiền hàng</th>
                             <th width="5%" class="text-right">Tác vụ</th>
                         </tr>
@@ -55,16 +54,6 @@
                                 </p>
                                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
                                 <p><i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{item.shop.name}}</span>
-                                </p>
-                            </td>
-                            <td>
-                                <p *ngFor="let cart of item.cart">
-                                    <img style="max-width: 50px;" src="{{cart.image}}">
-                                    <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
-                                    <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
-                                    <span> - Số lượng: {{cart.amount}}</span>
-                                    <span> - Đơn giá: {{cart.price | tempPrice: item.rate : 1}}<sup>đ</sup></span>
-                                    <span> - Thành tiền: {{cart.price | tempPrice: item.rate : cart.amount}}<sup>đ</sup></span>
                                 </p>
                             </td>
                             <td class="text-right">
