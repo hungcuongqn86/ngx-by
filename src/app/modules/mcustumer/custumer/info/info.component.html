@@ -40,7 +40,8 @@
             Số điện thoại <code class="highlighter-rouge">*</code>
         </label>
         <div class="col-md-9">
-            <input disabled [(ngModel)]="userService.user.phone_number" #phone_number="ngModel" type="text" id="phone_number"
+            <input disabled [(ngModel)]="userService.user.phone_number" #phone_number="ngModel" type="text"
+                   id="phone_number"
                    name="phone_number"
                    required
                    class="form-control"
@@ -69,6 +70,18 @@
                                     Phải nhập Phí dự kiến!
                                 </span>
             </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="rate">
+            Tỉ giá
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.rate" #rate="ngModel" type="text" id="rate"
+                   name="rate"
+                   required
+                   class="form-control"
+                   placeholder="Tỉ giá">
         </div>
     </div>
 </form>

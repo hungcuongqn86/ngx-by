@@ -21,6 +21,7 @@ export interface User {
     image: string;
     debt: number;
     cost_percent: number;
+    rate: number;
     is_deleted: number;
     created_at: string;
     updated_at: string;
