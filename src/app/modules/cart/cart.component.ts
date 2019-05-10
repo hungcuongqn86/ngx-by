@@ -7,6 +7,7 @@ import {Cart} from '../../models/Cart';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
+import {ErrorMessagesService} from '../../error.messages.service';
 
 @Component({
     selector: 'app-cart',
@@ -23,6 +24,7 @@ export class CartComponent implements OnInit {
     modalRef: BsModalRef;
 
     constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
+                public errorMessagesService: ErrorMessagesService,
                 private router: Router, private modalService: BsModalService) {
 
     }
@@ -105,7 +107,15 @@ export class CartComponent implements OnInit {
             .subscribe(res => {
                 this.orderService.addOrder(this.order)
                     .subscribe(order => {
-                        this.getCarts();
+                        if (order.status) {
+                            this.getCarts();
+                        } else {
+                            this.getCarts();
+                            this.cartService.showLoading(false);
+                            this.errorMessagesService.message = order.message;
+                            this.errorMessagesService.messages = order.data;
+                            this.errorMessagesService.errorModalShown = true;
+                        }
                     });
             });
     }

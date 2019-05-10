@@ -18,6 +18,7 @@ import {Error404Component} from './messages/error404.component';
 import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {MessageService} from './message.service';
+import {ErrorMessagesService} from './error.messages.service';
 import {NgxCaptchaModule} from 'ngx-captcha';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
@@ -99,6 +100,7 @@ import {captchar_key} from './const';
         HttpErrorHandler,
         LoadingService,
         MessageService,
+        ErrorMessagesService,
         {provide: RequestCache, useClass: RequestCacheWithMap},
         httpInterceptorProviders
     ],
