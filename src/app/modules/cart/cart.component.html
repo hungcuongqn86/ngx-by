@@ -41,7 +41,8 @@
                                             <p class="pull-left m-1">{{item.colortxt}}</p>
                                         </td>
                                         <td>
-                                            <p><input disabled [(ngModel)]="shopItem.cart[i].amount" type="number"
+                                            <p><input title="Số lượng" [(ngModel)]="shopItem.cart[i].amount" type="number"
+                                                      (click)="calTienHang(shopItem)"
                                                       id="amount"
                                                       name="amount" class="form-control"></p>
                                         </td>

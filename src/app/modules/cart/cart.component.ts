@@ -68,6 +68,24 @@ export class CartComponent implements OnInit {
         return res;
     }
 
+    public calTienHang(shop: Shop) {
+        const chiet_khau = this.authService.user.cost_percent;
+        const detailData = shop.cart;
+        shop.count_link = shop.cart.length;
+        shop.count_product = 0;
+        shop.tien_hang = 0;
+        for (let j = 0; j < detailData.length; j++) {
+            shop.count_product = shop.count_product + detailData[j].amount;
+            const ndt = parseFloat(detailData[j].price);
+            const tigia = parseFloat(detailData[j].rate);
+            const soluong = detailData[j].amount;
+            const vnd = Math.ceil(ndt * tigia * soluong);
+            shop.tien_hang = shop.tien_hang + vnd;
+        }
+        shop.phi_tam_tinh = Math.ceil((shop.tien_hang * chiet_khau) / 100);
+        shop.tong = shop.tien_hang + shop.phi_tam_tinh;
+    }
+
     public ketDon(item: Shop) {
         this.order.shop_id = item.id;
         this.order.rate = item.rate;
@@ -91,7 +109,8 @@ export class CartComponent implements OnInit {
             });
     }
 
-    public ketDonTatCa() {}
+    public ketDonTatCa() {
+    }
 
     openModalDeleteCart(template: TemplateRef<any>, cart: Cart) {
         this.cart = cart;
