@@ -63,7 +63,7 @@ export class MyorderComponent implements OnInit {
 
     openModal(template: TemplateRef<any>, order: Order) {
         this.inputDatCoc.id = order.id;
-        this.inputDatCoc.tien_hang = order.tien_hang;
+        this.inputDatCoc.tien_hang = order.tien_hang + order.phi_tam_tinh;
         this.calTienCoc();
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     }

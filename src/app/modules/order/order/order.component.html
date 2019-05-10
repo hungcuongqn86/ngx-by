@@ -27,10 +27,15 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-2">
+                                <input [(ngModel)]="orderService.search.code" type="text" id="code" name="code"
+                                       class="form-control"
+                                       placeholder="Mã đơn hàng">
+                            </div>
+                            <div class="col-md-5">
                                 <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
                                        class="form-control"
-                                       placeholder="Tìm kiếm theo mã đơn hàng, tên khách hàng, email, số điện thoại">
+                                       placeholder="Tìm kiếm theo tên khách hàng, email, số điện thoại">
                             </div>
                             <div class="col-md-2">
                                 <button type="button" (click)="searchOrders()"
