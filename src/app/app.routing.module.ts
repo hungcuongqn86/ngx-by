@@ -93,7 +93,8 @@ const appRoutes: Routes = [
                 },
                 canActivate: [AppGuard]
             }
-        ]
+        ],
+        canActivate: [AppGuard]
     },
     {path: 'login', component: LoginComponent, pathMatch: 'full'},
     {path: 'register', component: RegisterComponent, pathMatch: 'full'},
