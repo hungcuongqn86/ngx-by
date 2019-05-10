@@ -16,6 +16,7 @@ export class TransactionComponent {
     types: TransactionType[];
     accounts: BankAccount[];
     transactions: Transaction[];
+    totalItems = 0;
 
     constructor(public userService: UserService, private modalService: BsModalService, public bankAccountService: BankAccountService) {
         this.getTypes();
@@ -27,7 +28,13 @@ export class TransactionComponent {
         this.userService.getTransactions(this.userService.user.id)
             .subscribe(transactions => {
                 this.transactions = transactions.data.data;
+                this.totalItems = transactions.data.total;
             });
+    }
+
+    pageChanged(event: any): void {
+        this.userService.tSearch.page = event.page;
+        this.getTransactions();
     }
 
     private getTypes() {

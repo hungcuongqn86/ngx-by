@@ -18,6 +18,7 @@ export class UserService {
     private handleError: HandleError;
     private moduleUri = 'muser/user/';
     public search = {key: '', limit: 20, page: 1};
+    public tSearch = {limit: 20, page: 1};
     public user: User;
     public transaction: Transaction;
 
@@ -92,6 +93,9 @@ export class UserService {
         const url = Util.getUri(apiV1Url) + `muser/transaction/search`;
         let params = new HttpParams();
         params = params.append('user_id', userid.toString());
+        Object.keys(this.tSearch).map((key) => {
+            params = params.append(key, this.tSearch[key]);
+        });
         return this.http.get<any>(url, {params: params})
             .pipe(
                 catchError(this.handleError('getTransactionTypes', []))
