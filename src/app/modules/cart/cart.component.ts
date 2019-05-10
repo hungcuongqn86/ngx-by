@@ -87,6 +87,7 @@ export class CartComponent implements OnInit {
     }
 
     public ketDon(item: Shop) {
+        this.cartService.showLoading(true);
         this.order.shop_id = item.id;
         this.order.rate = item.rate;
         this.order.count_product = item.count_product;
