@@ -100,6 +100,7 @@
             <th>Đơn giá</th>
             <th>Thành tiền</th>
             <th>Ghi chú của khách</th>
+            <th>Ghi chú của NV</th>
             <th class="text-center">Thao tác</th>
         </tr>
         </thead>
@@ -124,6 +125,7 @@
                     <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
                 </td>
                 <td>{{item.note}}</td>
+                <td>{{item.nv_note}}</td>
                 <td>
                     <p style="margin: 0;" class="text-center"><a style="cursor: pointer;"
                                                                  (click)="editCart(item, template_edit_cart);"
@@ -251,6 +253,12 @@
                        name="price"
                        placeholder="Đơn giá"
                        type="number">
+            </div>
+            <div class="form-group">
+                <label for="nv_note">Ghi chú nhân viên</label>
+                <textarea [(ngModel)]="cart.nv_note" #nv_note="ngModel" id="nv_note" name="nv_note" rows="3"
+                          class="form-control"
+                          placeholder="Ghi chú nhân viên ..."></textarea>
             </div>
         </form>
     </div>

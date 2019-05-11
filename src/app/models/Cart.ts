@@ -12,6 +12,8 @@ export interface Cart {
     method: string;
     name: string;
     note: string;
+    nv_note: string;
+    kho_note: string;
     price: string;
     price_arr: string;
     pro_link: string;
