@@ -4,6 +4,7 @@ import {BankAccountService} from '../../../../services/bankAccount.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {TransactionType, Transaction} from '../../../../models/Transaction';
+import {AuthService} from '../../../../auth.service';
 
 @Component({
     selector: 'app-mcustumer-internal-detail-transaction',
@@ -16,7 +17,8 @@ export class ItransactionComponent {
     types: TransactionType[];
     transactions: Transaction[];
 
-    constructor(public userService: UserService, public bankAccountService: BankAccountService, private modalService: BsModalService) {
+    constructor(public userService: UserService, public bankAccountService: BankAccountService,
+                public authService: AuthService, private modalService: BsModalService) {
         this.getTypes();
         this.getTransactions();
     }

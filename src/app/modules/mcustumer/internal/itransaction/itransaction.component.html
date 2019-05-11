@@ -1,7 +1,8 @@
 <div class="card">
     <div class="card-header"><i class="fa fa-credit-card-alt"></i> <strong>{{bankAccountService.account.name}}</strong>
         <div class="card-header-actions">
-            <button (click)="addTransaction(templateAddTransaction)" class="btn btn-block btn-outline-primary btn-sm"
+            <button *ngIf="authService.hasRole('admin')" (click)="addTransaction(templateAddTransaction)"
+                    class="btn btn-block btn-outline-primary btn-sm"
                     type="button">Thêm
             </button>
         </div>
@@ -23,7 +24,8 @@
                 <td>{{item.created_at}}</td>
                 <td>{{item.code}}</td>
                 <td>
-                    <span *ngIf="item.user" class="badge badge-info">Giao dịch từ tài khoản khách: {{item.user.name}}</span>
+                    <span *ngIf="item.user"
+                          class="badge badge-info">Giao dịch từ tài khoản khách: {{item.user.name}}</span>
                     <span *ngIf="item.otype.value > 0" class="badge badge-success">{{item.otype.name}}</span>
                     <span *ngIf="item.otype.value < 0" class="badge badge-warning">{{item.otype.name}}</span>
                 </td>
