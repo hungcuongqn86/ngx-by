@@ -63,8 +63,8 @@
                 <td><p *ngIf="i===0">{{orderService.orderRe.count_link}}/{{orderService.orderRe.count_product}}</p></td>
                 <td>{{item.ship_khach}}</td>
                 <td>{{item.ship_tt}}</td>
-                <td></td>
-                <td></td>
+                <td><p *ngIf="item.tra_shop">{{item.tra_shop}}</p></td>
+                <td><p *ngIf="item.thanh_toan">{{item.thanh_toan}}</p></td>
                 <td></td>
                 <td></td>
                 <td>{{item.package_code}}</td>
@@ -140,36 +140,71 @@
     </div>
     <div class="modal-body">
         <form novalidate #form="ngForm">
-            <div class="form-group">
-                <label for="package_code">Mã vận đơn</label>
-                <input [(ngModel)]="package.package_code" #package_code="ngModel" class="form-control" id="package_code"
-                       name="package_code"
-                       placeholder="Nhập mã vận đơn"
-                       type="text">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="package_code">Mã vận đơn</label>
+                        <input [(ngModel)]="package.package_code" #package_code="ngModel" class="form-control"
+                               id="package_code"
+                               name="package_code"
+                               placeholder="Nhập mã vận đơn"
+                               type="text">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="contract_code">Mã hợp đồng</label>
+                        <input [(ngModel)]="package.contract_code" #contract_code="ngModel" class="form-control"
+                               id="contract_code"
+                               name="contract_code"
+                               placeholder="Nhập mã hợp đồng"
+                               type="text">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="contract_code">Mã hợp đồng</label>
-                <input [(ngModel)]="package.contract_code" #contract_code="ngModel" class="form-control"
-                       id="contract_code"
-                       name="contract_code"
-                       placeholder="Nhập mã hợp đồng"
-                       type="text">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="ship_khach">Ship khách</label>
+                        <input [(ngModel)]="package.ship_khach" #ship_khach="ngModel" class="form-control"
+                               id="ship_khach"
+                               name="ship_khach"
+                               placeholder="Nhập ship khách"
+                               type="number">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="ship_tt">Ship TT</label>
+                        <input [(ngModel)]="package.ship_tt" #ship_tt="ngModel" class="form-control"
+                               id="ship_tt"
+                               name="ship_tt"
+                               placeholder="Nhập ship thực tế"
+                               type="number">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="ship_khach">Ship khách</label>
-                <input [(ngModel)]="package.ship_khach" #ship_khach="ngModel" class="form-control"
-                       id="ship_khach"
-                       name="ship_khach"
-                       placeholder="Nhập ship khách"
-                       type="number">
-            </div>
-            <div class="form-group">
-                <label for="ship_tt">Ship TT</label>
-                <input [(ngModel)]="package.ship_tt" #ship_tt="ngModel" class="form-control"
-                       id="ship_tt"
-                       name="ship_tt"
-                       placeholder="Nhập ship thực tế"
-                       type="number">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="tra_shop">Trả shop</label>
+                        <input [(ngModel)]="package.tra_shop" disabled #tra_shop="ngModel" class="form-control"
+                               id="tra_shop"
+                               name="tra_shop"
+                               placeholder="Trả shop"
+                               type="number">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="thanh_toan">Thanh toán</label>
+                        <input [(ngModel)]="package.thanh_toan" #thanh_toan="ngModel" class="form-control"
+                               id="thanh_toan"
+                               name="thanh_toan"
+                               placeholder="Thanh toán"
+                               type="number">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="status">Trạng thái shop</label>

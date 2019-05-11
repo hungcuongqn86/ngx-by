@@ -5,6 +5,8 @@ export interface Package {
     contract_code: string;
     ship_khach: number;
     ship_tt: number;
+    tra_shop: number;
+    thanh_toan: number;
     status: number;
     note_tl: string;
     is_deleted: number;

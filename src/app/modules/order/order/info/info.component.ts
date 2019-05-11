@@ -25,6 +25,8 @@ export class InfoComponent {
             contract_code: null,
             ship_khach: null,
             ship_tt: null,
+            tra_shop: null,
+            thanh_toan: null,
             created_at: null,
             order_id: null,
             package_code: null,
@@ -73,6 +75,9 @@ export class InfoComponent {
 
     public editPackage(item: Package, template) {
         this.package = item;
+        if (this.package.tra_shop === null) {
+            this.package.tra_shop = this.orderService.orderRe.tien_hang;
+        }
         this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
     }
 
