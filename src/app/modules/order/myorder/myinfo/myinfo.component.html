@@ -77,7 +77,7 @@
         </thead>
         <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
         <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
-            <tr>
+            <tr class="{{item.amount? '' : 'yl-bg'}}">
                 <td>
                     <p><span class="badge badge-warning">{{item.id}}</span></p>
                     <p><a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}">Xem</a></p>
