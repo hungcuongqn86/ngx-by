@@ -28,6 +28,18 @@ export class AuthService {
         return AuthService.instance = AuthService.instance || this;
     }
 
+    public hasRole(role: string) {
+        if (!this.user || !this.user.roles) {
+            return false;
+        }
+        for (let i = 0; i < this.user.roles.length; i++) {
+            if (role === this.user.roles[i].name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public getAuthorizationToken() {
         const key = this.checkLogin();
         if (key !== '') {
@@ -40,7 +52,7 @@ export class AuthService {
     public setAuthorizationToken(tokens) {
         const key = btoa(tokens_key);
         localStorage.setItem(key, btoa(JSON.stringify(tokens)));
-        const data = { type: 'CART_TOKEN', id: tokens.access_token };
+        const data = {type: 'CART_TOKEN', id: tokens.access_token};
         window.postMessage(data, '*');
     }
 

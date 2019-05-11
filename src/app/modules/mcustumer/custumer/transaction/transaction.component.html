@@ -1,7 +1,8 @@
 <div class="card">
     <div class="card-header"><i class="cui-user icons"></i> <strong>{{userService.user.name}}</strong>
         <div class="card-header-actions">
-            <button (click)="addTransaction(templateAddTransaction)" class="btn btn-block btn-outline-primary btn-sm"
+            <button *ngIf="authService.hasRole('admin')" (click)="addTransaction(templateAddTransaction)"
+                    class="btn btn-block btn-outline-primary btn-sm"
                     type="button">Thêm
             </button>
         </div>
@@ -38,7 +39,8 @@
             </tr>
             </tbody>
         </table>
-        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.search.page" [itemsPerPage]="userService.search.limit"
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page"
+                    [itemsPerPage]="userService.tSearch.limit"
                     (pageChanged)="pageChanged($event)"
                     class="pagination-sm pull-right" [maxSize]="6"
                     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

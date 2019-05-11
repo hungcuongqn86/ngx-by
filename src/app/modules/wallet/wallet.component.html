@@ -30,7 +30,7 @@
             </tr>
             </tbody>
         </table>
-        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.search.page" [itemsPerPage]="userService.search.limit"
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page" [itemsPerPage]="userService.tSearch.limit"
                     (pageChanged)="pageChanged($event)"
                     class="pagination-sm pull-right" [maxSize]="6"
                     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

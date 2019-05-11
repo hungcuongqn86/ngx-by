@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/muser/user.service';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-mcustumer-custumer-detail',
@@ -10,6 +11,7 @@ import {UserService} from '../../../services/muser/user.service';
 
 export class CustumerDetailComponent implements OnInit {
     constructor(private router: Router, private route: ActivatedRoute
+        , public authService: AuthService
         , public userService: UserService) {
         this.route.params.subscribe(params => {
             if (params['id']) {
