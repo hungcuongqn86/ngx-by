@@ -76,7 +76,14 @@ export class InfoComponent {
     public editPackage(item: Package, template) {
         this.package = item;
         if (this.package.tra_shop === null) {
-            this.package.tra_shop = this.orderService.orderRe.tien_hang;
+            let traShop = 0;
+            if (this.orderService.orderRe.cart) {
+                for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
+                    const arrPrice = this.orderService.orderRe.cart[i].price.split('-');
+                    traShop = traShop + Number(arrPrice[0]);
+                }
+            }
+            this.package.tra_shop = traShop;
         }
         this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
     }
