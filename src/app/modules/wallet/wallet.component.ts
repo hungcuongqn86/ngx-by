@@ -11,6 +11,7 @@ import {Transaction} from '../../models/Transaction';
 
 export class WalletComponent {
     transactions: Transaction[];
+    totalItems = 0;
 
     constructor(public userService: UserService, public authService: AuthService) {
         this.getTransactions();
@@ -20,6 +21,12 @@ export class WalletComponent {
         this.userService.getTransactions(this.authService.user.id)
             .subscribe(transactions => {
                 this.transactions = transactions.data.data;
+                this.totalItems = transactions.data.total;
             });
+    }
+
+    pageChanged(event: any): void {
+        this.userService.tSearch.page = event.page;
+        this.getTransactions();
     }
 }
