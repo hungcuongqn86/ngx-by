@@ -13,6 +13,7 @@ import {User} from '../../models/User';
 import {Shop} from '../../models/Shop';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
+import {Comment} from '../../models/Comment';
 
 export interface OrderCreate {
     id: number;
@@ -321,6 +322,24 @@ export class OrderService {
         return this.http.post<any>(url, data)
             .pipe(
                 catchError(this.handleError('editComplain', data))
+            );
+    }
+
+    public getComments(orderId: number): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}comment/getall`;
+        let params = new HttpParams();
+        params = params.append('orderId', orderId.toString());
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getComments', []))
+            );
+    }
+
+    public addComments(data: { orderId: number, content: string }): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}comment/create`;
+        return this.http.post<any>(url, data)
+            .pipe(
+                catchError(this.handleError('addComments', data))
             );
     }
 }

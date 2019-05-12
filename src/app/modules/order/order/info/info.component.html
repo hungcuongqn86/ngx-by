@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
@@ -28,6 +28,27 @@
                     {{orderService.orderRe.user.phone_number}}</p>
                 <p *ngIf="orderService.orderRe.user"><i class="fa fa-envelope"></i> {{orderService.orderRe.user.email}}
                 </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="cui-comment-square icons"></i> <strong>Thông tin trao đổi</strong>
+            </div>
+            <div class="card-body">
+                <div class="comment-content" style="min-height: 200px;">
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="form-group">
+                    <div class="controls">
+                        <div class="input-group"><input class="form-control" id="appendedInputButton" size="16"
+                                                        type="text"><span class="input-group-append"><button
+                                class="btn btn-secondary" type="button">Gửi đi</button></span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
