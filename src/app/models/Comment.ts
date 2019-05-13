@@ -1,6 +1,6 @@
 export interface Comment {
     id: number;
-    order_id: string;
+    order_id: number;
     user_id: string;
     user_name: string;
     content: string;

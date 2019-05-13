@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
+import {Comment} from '../../../../models/Comment';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -17,6 +18,7 @@ export class InfoComponent {
     package: Package;
     cart: Cart;
     modalRef: BsModalRef;
+    comment: Comment;
 
     constructor(public orderService: OrderService, private modalService: BsModalService) {
         this.package = {
@@ -33,6 +35,14 @@ export class InfoComponent {
             status: null,
             note_tl: null,
             updated_at: null
+        };
+        this.comment = {
+            id: null,
+            order_id: null,
+            user_id: null,
+            user_name: null,
+            content: null,
+            created_at: null
         };
         this.getStatus();
         this.getPkStatus();
@@ -121,5 +131,10 @@ export class InfoComponent {
                 this.modalRef.hide();
                 this.getOrder();
             });
+    }
+
+    public addComment(): void {
+        this.comment.order_id = this.orderService.orderRe.id;
+        console.log(this.comment);
     }
 }
