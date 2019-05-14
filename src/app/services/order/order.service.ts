@@ -335,7 +335,7 @@ export class OrderService {
             );
     }
 
-    public addComments(data: { orderId: number, content: string }): Observable<any> {
+    public addComments(data: { order_id: number, content: string, is_admin: number }): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}comment/create`;
         return this.http.post<any>(url, data)
             .pipe(

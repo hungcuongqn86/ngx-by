@@ -4,5 +4,6 @@ export interface Comment {
     user_id: string;
     user_name: string;
     content: string;
+    is_admin: number;
     created_at: string;
 }

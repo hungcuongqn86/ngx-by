@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
@@ -12,13 +12,15 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
     styleUrls: ['./info.component.css']
 })
 
-export class InfoComponent {
+export class InfoComponent implements OnInit, AfterViewChecked {
     status: OrderStatus[];
     pkStatus: PackageStatus[];
     package: Package;
     cart: Cart;
     modalRef: BsModalRef;
     comment: Comment;
+    comments: Comment[];
+    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
     constructor(public orderService: OrderService, private modalService: BsModalService) {
         this.package = {
@@ -42,10 +44,27 @@ export class InfoComponent {
             user_id: null,
             user_name: null,
             content: null,
+            is_admin: 1,
             created_at: null
         };
         this.getStatus();
         this.getPkStatus();
+        this.getChat();
+    }
+
+    ngOnInit() {
+        this.scrollToBottom();
+    }
+
+    ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        } catch (err) {
+        }
     }
 
     public getStatus() {
@@ -54,6 +73,13 @@ export class InfoComponent {
             .subscribe(orders => {
                 this.status = orders.data;
                 this.orderService.showLoading(false);
+            });
+    }
+
+    public getChat() {
+        this.orderService.getComments(this.orderService.orderRe.id)
+            .subscribe(data => {
+                this.comments = data.data;
             });
     }
 
@@ -134,7 +160,16 @@ export class InfoComponent {
     }
 
     public addComment(): void {
-        this.comment.order_id = this.orderService.orderRe.id;
-        console.log(this.comment);
+        if (this.comment.content) {
+            this.orderService.addComments({
+                order_id: this.orderService.orderRe.id,
+                content: this.comment.content,
+                is_admin: this.comment.is_admin
+            })
+                .subscribe(res => {
+                    this.comment.content = null;
+                    this.getChat();
+                });
+        }
     }
 }
