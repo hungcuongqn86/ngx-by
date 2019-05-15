@@ -37,7 +37,8 @@ export class OrderComponent implements OnInit {
     }
 
     public editOrder(id) {
-        this.router.navigate([`/order/list/detail/${id}`]);
+        const win = window.open(`./order/list/detail/${id}`, '_blank');
+        win.focus();
     }
 
     public searchOrders() {

@@ -116,7 +116,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             if (this.orderService.orderRe.cart) {
                 for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
                     const arrPrice = this.orderService.orderRe.cart[i].price.split('-');
-                    traShop = traShop + Number(arrPrice[0]);
+                    traShop = traShop + (Number(arrPrice[0]) * this.orderService.orderRe.cart[i].amount);
                 }
             }
             this.package.tra_shop = traShop;
