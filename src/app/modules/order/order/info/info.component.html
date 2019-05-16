@@ -97,7 +97,7 @@
                 <td>{{item.note_tl}}</td>
                 <td>
                     <p style="margin: 0;" class="text-center"><a style="cursor: pointer;"
-                                                                 (click)="editPackage(item, template);"
+                                                                 (click)="editPackage(item, template, i);"
                                                                  href="javascript:void(0);">Sửa</a></p>
                     <p *ngIf="i!==0" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
                                                                                (click)="deletePackage(item);"
@@ -116,6 +116,7 @@
     <table class="table table-bordered table-sm">
         <thead>
         <tr>
+            <th>STT</th>
             <th>Mã, link</th>
             <th>Hình ảnh</th>
             <th>Màu sắc</th>
@@ -131,6 +132,7 @@
         <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
         <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
             <tr class="{{item.amount? '' : 'yl-bg'}}">
+                <td>{{i+1}}</td>
                 <td>
                     <p><span class="badge badge-warning">{{item.id}}</span></p>
                     <p><a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}">Xem</a></p>

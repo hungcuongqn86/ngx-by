@@ -109,9 +109,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             });
     }
 
-    public editPackage(item: Package, template) {
+    public editPackage(item: Package, template, firt: number) {
         this.package = item;
-        if (this.package.tra_shop === null) {
+        if (firt === 0) {
             let traShop = 0;
             if (this.orderService.orderRe.cart) {
                 for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
