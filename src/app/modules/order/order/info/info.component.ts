@@ -23,6 +23,22 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
     constructor(public orderService: OrderService, private modalService: BsModalService) {
+        this.reNewPackage();
+        this.comment = {
+            id: null,
+            order_id: null,
+            user_id: null,
+            user_name: null,
+            content: null,
+            is_admin: 1,
+            created_at: null
+        };
+        this.getStatus();
+        this.getPkStatus();
+        this.getChat();
+    }
+
+    reNewPackage() {
         this.package = {
             id: null,
             is_deleted: null,
@@ -38,18 +54,6 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             note_tl: null,
             updated_at: null
         };
-        this.comment = {
-            id: null,
-            order_id: null,
-            user_id: null,
-            user_name: null,
-            content: null,
-            is_admin: 1,
-            created_at: null
-        };
-        this.getStatus();
-        this.getPkStatus();
-        this.getChat();
     }
 
     ngOnInit() {
@@ -137,6 +141,29 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         this.orderService.editPackage(this.package)
             .subscribe(res => {
                 this.modalRef.hide();
+                this.getOrder();
+            });
+    }
+
+    public selectPackage(item: Package, firt: number) {
+        this.package = item;
+        if (firt === 0) {
+            let traShop = 0;
+            if (this.orderService.orderRe.cart) {
+                for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
+                    const arrPrice = this.orderService.orderRe.cart[i].price.split('-');
+                    traShop = traShop + (Number(arrPrice[0]) * this.orderService.orderRe.cart[i].amount);
+                }
+            }
+            this.package.tra_shop = traShop;
+        }
+    }
+
+    public updatePackage() {
+        this.orderService.showLoading(true);
+        this.orderService.editPackage(this.package)
+            .subscribe(res => {
+                this.reNewPackage();
                 this.getOrder();
             });
     }

@@ -91,14 +91,17 @@
                 <td><p *ngIf="item.thanh_toan">{{item.thanh_toan}}</p></td>
                 <td></td>
                 <td></td>
-                <td>{{item.package_code}}</td>
+                <td (click)="selectPackage(item,i)"><input *ngIf="package.id === item.id" [(ngModel)]="package.package_code" #package_code="ngModel" class="form-control"
+                           id="package_code"
+                           name="package_code"
+                           (blur)="updatePackage()"
+                           type="text">
+                    <p *ngIf="package.id !== item.id">{{item.package_code}}</p>
+                </td>
                 <td>{{item.contract_code}}</td>
                 <td>{{item.status | tempPkStatus : pkStatus}}</td>
                 <td>{{item.note_tl}}</td>
                 <td>
-                    <p style="margin: 0;" class="text-center"><a style="cursor: pointer;"
-                                                                 (click)="editPackage(item, template, i);"
-                                                                 href="javascript:void(0);">Sửa</a></p>
                     <p *ngIf="i!==0" class="text-center" style="margin: 0;"><a style="cursor: pointer;"
                                                                                (click)="deletePackage(item);"
                                                                                href="javascript:void(0);">Hủy</a></p>
@@ -170,14 +173,14 @@
         <form novalidate #form="ngForm">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="package_code">Mã vận đơn</label>
                         <input [(ngModel)]="package.package_code" #package_code="ngModel" class="form-control"
                                id="package_code"
                                name="package_code"
                                placeholder="Nhập mã vận đơn"
                                type="text">
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
