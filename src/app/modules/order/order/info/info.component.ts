@@ -3,8 +3,6 @@ import {OrderService, OrderStatus} from '../../../../services/order/order.servic
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -17,14 +15,14 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     pkStatus: PackageStatus[];
     package: Package;
     cart: Cart;
-    modalRef: BsModalRef;
     comment: Comment;
     comments: Comment[];
     col: string;
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    constructor(public orderService: OrderService, private modalService: BsModalService) {
+    constructor(public orderService: OrderService) {
         this.reNewPackage();
+        this.reNewCart();
         this.comment = {
             id: null,
             order_id: null,
@@ -37,6 +35,38 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         this.getStatus();
         this.getPkStatus();
         this.getChat();
+    }
+
+    reNewCart() {
+        this.cart = {
+            id: null,
+            amount: null,
+            begin_amount: null,
+            color: null,
+            colortxt: null,
+            count: null,
+            created_at: null,
+            domain: null,
+            image: null,
+            is_deleted: null,
+            kho_note: null,
+            method: null,
+            name: null,
+            note: null,
+            nv_note: null,
+            price: null,
+            price_arr: null,
+            pro_link: null,
+            pro_properties: null,
+            rate: null,
+            shop_id: null,
+            site: null,
+            status: null,
+            size: null,
+            sizetxt: null,
+            updated_at: null,
+            user_id: null
+        };
     }
 
     reNewPackage() {
@@ -147,22 +177,18 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
     public hideInput() {
         this.reNewPackage();
+        this.reNewCart();
     }
 
-    public decline(): void {
-        this.modalRef.hide();
-    }
-
-    public editCart(item: Cart, template) {
+    public selectCart(item: Cart, col: string) {
+        this.col = col;
         this.cart = item;
-        this.modalRef = this.modalService.show(template, {class: 'modal-sm', ignoreBackdropClick: true});
     }
 
     public editCartConfirm(): void {
         this.orderService.showLoading(true);
         this.orderService.editCart(this.cart)
             .subscribe(res => {
-                this.modalRef.hide();
                 this.getOrder();
             });
     }
