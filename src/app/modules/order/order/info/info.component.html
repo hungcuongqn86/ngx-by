@@ -91,10 +91,16 @@
                 <td><p *ngIf="item.thanh_toan">{{item.thanh_toan}}</p></td>
                 <td></td>
                 <td></td>
-                <td (click)="selectPackage(item,i)"><input *ngIf="package.id === item.id" [(ngModel)]="package.package_code" #package_code="ngModel" class="form-control"
+                <td (click)="selectPackage(item,i)">
+                    <input *ngIf="package.id === item.id"
+                           [(ngModel)]="package.package_code"
+                           #package_code="ngModel"
+                           class="form-control"
                            id="package_code"
                            name="package_code"
-                           (blur)="updatePackage()"
+                           (change)="updatePackage()"
+                           (blur)="hideInput()"
+                           appAutofocus
                            type="text">
                     <p *ngIf="package.id !== item.id">{{item.package_code}}</p>
                 </td>

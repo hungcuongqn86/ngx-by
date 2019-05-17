@@ -113,21 +113,6 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             });
     }
 
-    public editPackage(item: Package, template, firt: number) {
-        this.package = item;
-        if (firt === 0) {
-            let traShop = 0;
-            if (this.orderService.orderRe.cart) {
-                for (let i = 0; i < this.orderService.orderRe.cart.length; i++) {
-                    const arrPrice = this.orderService.orderRe.cart[i].price.split('-');
-                    traShop = traShop + (Number(arrPrice[0]) * this.orderService.orderRe.cart[i].amount);
-                }
-            }
-            this.package.tra_shop = traShop;
-        }
-        this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
-    }
-
     public getOrder() {
         this.orderService.getOrder(this.orderService.orderRe.id)
             .subscribe(order => {
@@ -163,9 +148,12 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         this.orderService.showLoading(true);
         this.orderService.editPackage(this.package)
             .subscribe(res => {
-                this.reNewPackage();
                 this.getOrder();
             });
+    }
+
+    public hideInput() {
+        this.reNewPackage();
     }
 
     public decline(): void {

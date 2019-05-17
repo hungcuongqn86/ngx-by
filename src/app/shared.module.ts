@@ -14,16 +14,17 @@ import {TempStatusPipe} from './pipes/status';
 import {TempPkStatusPipe} from './pipes/pkStatus';
 import {TempHistoryTypePipe} from './pipes/historyType';
 import {TempDatePipe} from './pipes/date';
+import {AutofocusDirective} from './directive/autoFocus';
 
 @NgModule({
     imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
         ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
     declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe
-        , TempDatePipe, TempHistoryTypePipe],
+        , TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
     exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
         AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe,
         TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe,
-        TempDatePipe, TempHistoryTypePipe],
+        TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
     providers: []
 })
 export class SharedModule {
