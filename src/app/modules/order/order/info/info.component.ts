@@ -20,6 +20,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     modalRef: BsModalRef;
     comment: Comment;
     comments: Comment[];
+    col: string;
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
     constructor(public orderService: OrderService, private modalService: BsModalService) {
@@ -121,16 +122,8 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             });
     }
 
-    public confirm(): void {
-        this.orderService.showLoading(true);
-        this.orderService.editPackage(this.package)
-            .subscribe(res => {
-                this.modalRef.hide();
-                this.getOrder();
-            });
-    }
-
-    public selectPackage(item: Package, firt: number) {
+    public selectPackage(item: Package, firt: number, col: string) {
+        this.col = col;
         this.package = item;
         if (firt === 0) {
             let traShop = 0;
