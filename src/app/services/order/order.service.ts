@@ -140,7 +140,9 @@ export class OrderService {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}search`;
         let params = new HttpParams();
         Object.keys(this.search).map((key) => {
-            params = params.append(key, this.search[key]);
+            if (this.search[key]) {
+                params = params.append(key, this.search[key]);
+            }
         });
         return this.http.get<any>(url, {params: params})
             .pipe(
