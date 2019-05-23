@@ -82,7 +82,7 @@ export class OrderService {
     static instance: OrderService;
     private handleError: HandleError;
     private moduleUri = 'order/';
-    public search = {key: '', code: '', status: '', limit: 20, page: 1};
+    public search = {key: '', code: '', package_code: '', status: '', limit: 20, page: 1};
     public order: OrderCreate;
     public orderRe: Order;
 
