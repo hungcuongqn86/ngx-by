@@ -12,6 +12,7 @@ import {TempTotalPricePipe} from './pipes/totalPrice';
 import {TempTongTienHangPipe} from './pipes/tongTienHang';
 import {TempStatusPipe} from './pipes/status';
 import {TempPkStatusPipe} from './pipes/pkStatus';
+import {TempCountByStatusPipe} from './pipes/countByStatus';
 import {TempHistoryTypePipe} from './pipes/historyType';
 import {TempDatePipe} from './pipes/date';
 import {AutofocusDirective} from './directive/autoFocus';
@@ -19,11 +20,11 @@ import {AutofocusDirective} from './directive/autoFocus';
 @NgModule({
     imports: [AppBreadcrumbModule.forRoot(), PaginationModule.forRoot(),
         ModalModule.forRoot(), ProgressbarModule.forRoot(), TabsModule.forRoot(), BsDatepickerModule.forRoot(), AlertModule.forRoot()],
-    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe
+    declarations: [MessageDirective, TempPricePipe, TempTotalPricePipe, TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe
         , TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
     exports: [MessageDirective, PaginationModule, ModalModule, ProgressbarModule, TabsModule,
         AppBreadcrumbModule, BsDatepickerModule, AlertModule, TempPricePipe, TempTotalPricePipe,
-        TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe,
+        TempTongTienHangPipe, TempStatusPipe, TempPkStatusPipe, TempCountByStatusPipe,
         TempDatePipe, TempHistoryTypePipe, AutofocusDirective],
     providers: []
 })

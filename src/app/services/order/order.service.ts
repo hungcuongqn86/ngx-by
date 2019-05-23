@@ -150,6 +150,14 @@ export class OrderService {
             );
     }
 
+    getCountByStatus(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}count`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getCountByStatus', []))
+            );
+    }
+
     getMyOrders(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}myorder`;
         let params = new HttpParams();

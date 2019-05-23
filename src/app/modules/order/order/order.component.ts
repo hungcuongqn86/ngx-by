@@ -15,6 +15,7 @@ import {Subscription} from 'rxjs';
 export class OrderComponent implements OnInit, OnDestroy {
     order: OrderCreate;
     orders: Order[];
+    counts: { status: number, total: number }[];
     status: OrderStatus[] = [];
     totalItems = 0;
     modalRef: BsModalRef;
@@ -25,7 +26,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
     constructor(public orderService: OrderService, private modalService: BsModalService,
                 private router: Router) {
-
+        this.counts = null;
     }
 
     ngOnInit() {
@@ -52,7 +53,7 @@ export class OrderComponent implements OnInit, OnDestroy {
             .subscribe(orders => {
                 this.orders = orders.data.data;
                 this.totalItems = orders.data.total;
-                this.orderService.showLoading(false);
+                this.getCountByStatus();
             });
     }
 
@@ -61,6 +62,15 @@ export class OrderComponent implements OnInit, OnDestroy {
         this.orderService.getStatus()
             .subscribe(orders => {
                 this.status = orders.data;
+                this.orderService.showLoading(false);
+            });
+    }
+
+    public getCountByStatus() {
+        this.orderService.showLoading(true);
+        this.orderService.getCountByStatus()
+            .subscribe(data => {
+                this.counts = data.data;
                 this.orderService.showLoading(false);
             });
     }
