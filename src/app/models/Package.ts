@@ -12,6 +12,9 @@ export interface Package {
     thanh_toan: number;
     status: number;
     note_tl: string;
+    weight: number;
+    weight_qd: number;
+    tien_can: number;
     is_deleted: number;
     created_at: string;
     updated_at: string;

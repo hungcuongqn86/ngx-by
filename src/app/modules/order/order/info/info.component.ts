@@ -84,6 +84,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             package_code: null,
             status: null,
             note_tl: null,
+            weight: null,
+            weight_qd: null,
+            tien_can: null,
             updated_at: null
         };
     }

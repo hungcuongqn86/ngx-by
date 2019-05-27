@@ -49,4 +49,13 @@ export class PackageService {
                 catchError(this.handleError('getPkStatus', []))
             );
     }
+
+
+    public editPackage(item: Package) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
+        return this.http.post<any>(url, item)
+            .pipe(
+                catchError(this.handleError('editPackage', item))
+            );
+    }
 }
