@@ -14,7 +14,7 @@ import {Package} from '../../models/Package';
 export class PackageService {
     static instance: PackageService;
     private handleError: HandleError;
-    private moduleUri = 'package/';
+    private moduleUri = 'order/package/';
     public search = {key: '', code: '', package_code: '', status: '', limit: 20, page: 1};
     public package: Package;
 
@@ -39,6 +39,14 @@ export class PackageService {
         return this.http.get<any>(url, {params: params})
             .pipe(
                 catchError(this.handleError('getPackages', []))
+            );
+    }
+
+    getPkStatus(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}status`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getPkStatus', []))
             );
     }
 }

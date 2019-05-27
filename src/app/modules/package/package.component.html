@@ -23,7 +23,7 @@
                             </div>
                         </ng-template>
                     </tab>
-                    <tab *ngFor="let item of status">
+                    <tab *ngFor="let item of pkStatus">
                         <ng-template tabHeading>
                             <div style="padding: 10px;" (click)="selectTab(item.id)">&nbsp;{{item.name}} <span
                                     class="badge badge-pill badge-danger">{{ item.id | tempCountByStatus : counts}}</span>

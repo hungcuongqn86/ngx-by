@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
-import {Package} from '../../models/Package';
+import {Package, PackageStatus} from '../../models/Package';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -13,16 +13,20 @@ import {Subscription} from 'rxjs';
 
 export class PackageComponent implements OnInit, OnDestroy {
     packages: Package[];
+    pkStatus: PackageStatus[];
     totalItems = 0;
     errorMessage: string[] = [];
+    counts: { status: number, total: number }[];
     sub: Subscription;
 
     constructor(public packageService: PackageService,
                 private router: Router) {
+        this.counts = null;
     }
 
     ngOnInit() {
         this.searchPackages();
+        this.getPkStatus();
     }
 
     pageChanged(event: any): void {
@@ -41,6 +45,20 @@ export class PackageComponent implements OnInit, OnDestroy {
                 this.totalItems = data.data.total;
                 this.packageService.showLoading(false);
             });
+    }
+
+    public getPkStatus() {
+        this.packageService.showLoading(true);
+        this.packageService.getPkStatus()
+            .subscribe(pks => {
+                this.pkStatus = pks.data;
+                this.packageService.showLoading(false);
+            });
+    }
+
+    selectTab(status: string = null) {
+        this.packageService.search.status = status;
+        this.searchPackages();
     }
 
     ngOnDestroy() {
