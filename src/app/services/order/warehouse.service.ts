@@ -47,7 +47,7 @@ export class WarehouseService {
 
     bill(user_id: number, pkidlist: string[]) {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/create`;
-        return this.http.post<History>(url, {user_id: user_id, pkidlist: pkidlist})
+        return this.http.post<History>(url, {user_id: user_id, pkcodelist: pkidlist})
             .pipe(
                 catchError(this.handleError('bill', []))
             );
