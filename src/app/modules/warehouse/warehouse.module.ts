@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 
 import {OrderService} from '../../services/order/order.service';
+import {WarehouseService} from '../../services/order/warehouse.service';
 import {WaitComponent} from './wait/wait.component';
 import {BillComponent} from './bill/bill.component';
 
@@ -17,7 +18,7 @@ import {SharedModule} from '../../shared.module';
         BillComponent
     ],
     exports: [],
-    providers: [OrderService]
+    providers: [OrderService, WarehouseService]
 })
 export class WarehouseModule {
 }
