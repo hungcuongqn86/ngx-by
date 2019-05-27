@@ -80,6 +80,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             thanh_toan: null,
             created_at: null,
             order_id: null,
+            order: null,
             package_code: null,
             status: null,
             note_tl: null,
