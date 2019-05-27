@@ -47,7 +47,8 @@ export class WaitComponent implements OnInit, OnDestroy {
     }
 
     public warehouse(item: WarehouseWait) {
-        console.log(item);
+        const win = window.open(`./warehouse/bill/create/${item.id}`, '_blank');
+        win.focus();
     }
 
     ngOnDestroy() {

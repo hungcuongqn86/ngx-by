@@ -48,7 +48,7 @@
                         <tr>
                             <th>Khách hàng</th>
                             <th>Thông tin xuất kho</th>
-                            <th width="18%">Thông tin thêm</th>
+                            <th width="25%" class="text-left">Thông tin thêm</th>
                             <th width="18%">Ghi chú</th>
                             <th width="5%" class="text-right">Tác vụ</th>
                         </tr>
@@ -68,7 +68,7 @@
                                     <thead>
                                     <tr>
                                         <th>Số lượng</th>
-                                        <th>Mã vận đơn</th>
+                                        <th class="text-left">Mã vận đơn</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -76,7 +76,7 @@
                                         <td></td>
                                         <td class="text-left">
                                             <ng-template ngFor let-order [ngForOf]="item.order">
-                                                <p *ngFor="let package of order.package">{{package.package_code}}</p>
+                                                <p *ngFor="let package of order.package">{{package.package_code}} / {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
                                             </ng-template>
                                         </td>
                                     </tr>
