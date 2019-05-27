@@ -18,6 +18,12 @@ const routes: Routes = [
         }
     },
     {
+        path: 'bill/detail/:id', component: BillComponent,
+        data: {
+            title: 'Chi tiết phiếu xuất'
+        }
+    },
+    {
         path: 'bill/create/:id', component: BillComponent,
         data: {
             title: 'Phiếu xuất'
