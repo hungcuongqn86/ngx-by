@@ -77,6 +77,13 @@ const appRoutes: Routes = [
                 },
                 canActivate: [AppGuard]
             }, {
+                path: 'package',
+                loadChildren: './modules/package/package.module#PackageModule',
+                data: {
+                    title: 'Kiện hàng'
+                },
+                canActivate: [AppGuard]
+            }, {
                 path: 'warehouse',
                 loadChildren: './modules/warehouse/warehouse.module#WarehouseModule',
                 data: {
