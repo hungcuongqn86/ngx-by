@@ -34,3 +34,14 @@ ul.nav-tabs li.nav-item .nav-link .tab-title{
 .table p span.money {
     color: #a94442;
 }
+
+.packages-code {
+    font-weight: bold;
+    color: #20a8d8;
+    font-size: 12px;
+}
+
+.packages-inf {
+    width: 50%;
+    display: inline-block;
+}

@@ -35,15 +35,15 @@
                     <form novalidate (ngSubmit)="searchPackages()" #form="ngForm">
                         <div class="form-group row">
                             <div class="col-md-2">
-                                <input [(ngModel)]="packageService.search.code" type="text" id="code" name="code"
-                                       class="form-control"
-                                       placeholder="Mã đơn hàng">
-                            </div>
-                            <div class="col-md-2">
                                 <input [(ngModel)]="packageService.search.package_code" type="text" id="package_code"
                                        name="package_code"
                                        class="form-control"
                                        placeholder="Mã vận đơn">
+                            </div>
+                            <div class="col-md-2">
+                                <input [(ngModel)]="packageService.search.code" type="text" id="code" name="code"
+                                       class="form-control"
+                                       placeholder="Mã đơn hàng">
                             </div>
                             <div class="col-md-5">
                                 <input [(ngModel)]="packageService.search.key" type="text" id="key" name="key"
@@ -60,43 +60,42 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Đơn hàng</th>
-                            <th>Khách hàng</th>
-                            <th width="18%">Tiền hàng</th>
-                            <th width="5%" class="text-right">Tác vụ</th>
+                            <th style="width: 20%">Kiện hàng</th>
+                            <th>Thông tin</th>
+                            <th>Ngày</th>
+                            <th>Trạng thái</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let item of orders">
+                        <tr *ngFor="let item of packages">
                             <td>
-                                <p>ID: {{item.id}} <span *ngIf="status" class="badge badge-danger">{{item.status | tempStatus: status}}</span>
+                                <p class="text-center packages-code">{{item.package_code? item.package_code : '--'}}</p>
+                                <p class="text-center"><span class="packages-status badge badge-info">{{item.status | tempPkStatus :
+                                    pkStatus}}</span></p>
+                                <p><span class="packages-inf">Cân nặng</span><span
+                                        class="packages-inf text-right"></span>
                                 </p>
-                                <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                                <p><span class="packages-inf">Quy đổi</span><span
+                                        class="packages-inf text-right"></span>
+                                </p>
+                                <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
+                                                                                (click)="gotoOrder(item.order_id)"><span
+                                        class="packages-inf text-right">{{item.order_id}}</span></a>
+                                </p>
+                                <p><span class="packages-inf">Mã kiện</span><span class="packages-inf text-right">{{item.id}}</span>
+                                </p>
+                                <p><span class="packages-inf">Tên shop</span><span *ngIf="item.order.shop"
+                                        class="packages-inf text-right">{{item.order.shop.name}}</span></p>
                             </td>
                             <td>
-                                <p><i class="fa fa-user"></i> {{item.user.name}} - {{item.user.phone_number}}</p>
-                                <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
+                                <p title="Khách hàng">{{item.order.user.email}}</p>
+                                <p title="Khách hàng">{{item.order.user.phone_number}}</p>
                             </td>
                             <td class="text-right">
-                                <p><span class="pull-left">Tiền hàng</span> <span class="money">{{item | tempTongTienHang: 1}}</span>
-                                    <sup> đ</sup></p>
-                                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
-                                                                                   class="money">{{item.thanh_toan | tempPrice: 1 : 1}}</span>
-                                    <sup> đ</sup></p>
-                                <p><span class="pull-left">Còn thiếu</span> <span
-                                        *ngIf="item.tien_hang && item.thanh_toan" class="money">{{item | tempTongTienHang: 2}}</span>
-                                    <sup> đ</sup></p>
+
                             </td>
                             <td class="text-right">
-                                <button (click)="editOrder(item.id)" class="btn btn-sm btn-ghost-primary"
-                                        type="button">
-                                    Chi tiết
-                                </button>
-                                <button *ngIf="item.status===1" (click)="openModal(template,item)"
-                                        class="btn btn-sm btn-ghost-primary"
-                                        type="button">
-                                    Báo giá
-                                </button>
+
                             </td>
                         </tr>
                         </tbody>

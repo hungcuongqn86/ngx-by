@@ -1,6 +1,9 @@
+import {Order} from '../services/order/order.service';
+
 export interface Package {
     id: number;
     order_id: number;
+    order: Order;
     package_code: string;
     contract_code: string;
     ship_khach: number;
