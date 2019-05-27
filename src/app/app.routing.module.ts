@@ -76,6 +76,13 @@ const appRoutes: Routes = [
                     title: 'Khiếu nại'
                 },
                 canActivate: [AppGuard]
+            }, {
+                path: 'warehouse',
+                loadChildren: './modules/warehouse/warehouse.module#WarehouseModule',
+                data: {
+                    title: 'Kho Việt Nam'
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'wallet',
