@@ -9,6 +9,7 @@ import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
 import {WarehouseWait} from '../../models/Warehouse';
+import {History} from './order.service';
 
 @Injectable()
 export class WarehouseService {
@@ -41,6 +42,14 @@ export class WarehouseService {
         return this.http.get<any>(url, {params: params})
             .pipe(
                 catchError(this.handleError('getWarehouseWait', []))
+            );
+    }
+
+    bill(user_id: number, pkidlist: string[]) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/create`;
+        return this.http.post<History>(url, {user_id: user_id, pkidlist: pkidlist})
+            .pipe(
+                catchError(this.handleError('bill', []))
             );
     }
 }

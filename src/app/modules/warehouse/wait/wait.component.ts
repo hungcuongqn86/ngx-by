@@ -46,9 +46,24 @@ export class WaitComponent implements OnInit, OnDestroy {
             });
     }
 
-    public warehouse(item: WarehouseWait) {
-        const win = window.open(`./warehouse/bill/create/${item.id}`, '_blank');
-        win.focus();
+    public bill(item: WarehouseWait) {
+        const user_id = item.id;
+        const pkidlist = [];
+        for (let i = 0; i < item.order.length; i++) {
+            for (let j = 0; j < item.order[i].package.length; j++) {
+                if (item.order[i].package[j].package_code) {
+                    pkidlist.push(item.order[i].package[j].package_code);
+                }
+            }
+        }
+        this.warehouseService.showLoading(true);
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+        this.sub = this.warehouseService.bill(user_id, pkidlist)
+            .subscribe(data => {
+                this.warehouseService.showLoading(false);
+            });
     }
 
     ngOnDestroy() {
