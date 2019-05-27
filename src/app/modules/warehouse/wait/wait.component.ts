@@ -1,10 +1,7 @@
-import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {WarehouseWait} from '../../../models/Warehouse';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 
 @Component({
