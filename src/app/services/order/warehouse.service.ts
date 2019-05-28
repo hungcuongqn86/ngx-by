@@ -8,7 +8,7 @@ import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
-import {WarehouseWait} from '../../models/Warehouse';
+import {Bill} from '../../models/Warehouse';
 import {History} from './order.service';
 
 @Injectable()
@@ -50,6 +50,14 @@ export class WarehouseService {
         return this.http.post<History>(url, {user_id: user_id, pkcodelist: pkidlist})
             .pipe(
                 catchError(this.handleError('bill', []))
+            );
+    }
+
+    getBill(id: number) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/detail/${id}`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getBill', []))
             );
     }
 }

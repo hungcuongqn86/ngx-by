@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService, Order} from '../../../services/order/order.service';
 import {WarehouseService} from '../../../services/order/warehouse.service';
+import {Bill} from '../../../models/Warehouse';
 
 @Component({
     selector: 'app-bill-detail',
@@ -10,26 +10,27 @@ import {WarehouseService} from '../../../services/order/warehouse.service';
 })
 
 export class BillDetailComponent implements OnInit {
-    constructor(private router: Router, private route: ActivatedRoute, public warehouseService: WarehouseService
-        , public orderService: OrderService) {
-        this.orderService.order_renew();
+    bill: Bill = null;
+    id: number;
+
+    constructor(private router: Router, private route: ActivatedRoute, public warehouseService: WarehouseService) {
         this.route.params.subscribe(params => {
             if (params['id']) {
-                this.orderService.orderRe.id = params['id'];
+                this.id = params['id'];
             }
         });
     }
 
     ngOnInit() {
-        if (this.orderService.orderRe.id !== null) {
-            this.orderService.getOrder(this.orderService.orderRe.id)
-                .subscribe(order => {
-                    this.orderService.orderRe = order.data.order;
+        if (this.id !== null) {
+            this.warehouseService.getBill(this.id)
+                .subscribe(data => {
+                    this.bill = data.data.bill;
                 });
         }
     }
 
     public backlist() {
-        this.router.navigate(['/order/list']);
+        this.router.navigate(['/warehouse/bill']);
     }
 }

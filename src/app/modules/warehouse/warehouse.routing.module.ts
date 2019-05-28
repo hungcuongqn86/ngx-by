@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {WaitComponent} from './wait/wait.component';
 import {BillComponent} from './bill/bill.component';
+import {BillDetailComponent} from './bill/bill.detail.component';
 
 const routes: Routes = [
     {
@@ -18,15 +19,9 @@ const routes: Routes = [
         }
     },
     {
-        path: 'bill/detail/:id', component: BillComponent,
+        path: 'bill/detail/:id', component: BillDetailComponent,
         data: {
-            title: 'Chi tiết phiếu xuất'
-        }
-    },
-    {
-        path: 'bill/create/:id', component: BillComponent,
-        data: {
-            title: 'Phiếu xuất'
+            title: 'Phiếu xuất kho'
         }
     }
 ];
