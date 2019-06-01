@@ -39,3 +39,8 @@ export interface Bill {
     package: Package[];
     so_ma: number;
 }
+
+export interface BillStatus {
+    id: number;
+    name: string;
+}

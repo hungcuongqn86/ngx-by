@@ -4,7 +4,7 @@ import {WarehouseService} from '../../../services/order/warehouse.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
-import {Bill} from '../../../models/Warehouse';
+import {Bill, BillStatus} from '../../../models/Warehouse';
 
 @Component({
     selector: 'app-warehouse-bill',
@@ -15,6 +15,8 @@ import {Bill} from '../../../models/Warehouse';
 
 export class BillComponent implements OnInit, OnDestroy {
     bills: Bill;
+    status: BillStatus[] = [];
+    counts: { status: number, total: number }[] = [];
     totalItems = 0;
     modalRef: BsModalRef;
     errorMessage: string[] = [];
@@ -42,7 +44,18 @@ export class BillComponent implements OnInit, OnDestroy {
             .subscribe(bills => {
                 this.bills = bills.data.data;
                 this.totalItems = bills.data.total;
+                this.warehouseService.showLoading(false);
             });
+    }
+
+    selectTab(status: string = null) {
+        this.warehouseService.billSearch.status = status;
+        this.searchBills();
+    }
+
+    public gotoDetail(id) {
+        const win = window.open(`./warehouse/bill/detail/${id}`, '_blank');
+        win.focus();
     }
 
     ngOnDestroy() {

@@ -17,7 +17,7 @@ export class WarehouseService {
     private handleError: HandleError;
     private moduleUri = 'order/warehouse/';
     public waitSearch = {code: '', package_code: '', email: '', limit: 20, page: 1};
-    public billSearch = {code: '', status: '', limit: 20, page: 1};
+    public billSearch = {code: '', status: '', key: '', limit: 20, page: 1};
 
     constructor(private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
