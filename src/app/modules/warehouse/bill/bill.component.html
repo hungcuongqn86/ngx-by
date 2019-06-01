@@ -82,7 +82,10 @@
                                 1}}</p></td>
                             <td>{{item.employee.name}}</td>
                             <td>{{item.so_ma}}</td>
-                            <td>{{item.status}}</td>
+                            <td>
+                                <span class="packages-status badge badge-info">{{item.status | tempPkStatus :
+                                    status}}</span>
+                            </td>
                             <td class="text-right">
                                 <button (click)="gotoDetail(item.id)" class="btn btn-sm btn-ghost-primary"
                                         type="button">
