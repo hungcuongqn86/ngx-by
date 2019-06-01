@@ -27,6 +27,7 @@ export class BillComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.getBillStatus();
         this.searchBills();
     }
 
@@ -56,6 +57,15 @@ export class BillComponent implements OnInit, OnDestroy {
     public gotoDetail(id) {
         const win = window.open(`./warehouse/bill/detail/${id}`, '_blank');
         win.focus();
+    }
+
+    public getBillStatus() {
+        this.warehouseService.showLoading(true);
+        this.warehouseService.getBillStatus()
+            .subscribe(data => {
+                this.status = data.data;
+                this.warehouseService.showLoading(false);
+            });
     }
 
     ngOnDestroy() {

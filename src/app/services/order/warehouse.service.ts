@@ -54,6 +54,14 @@ export class WarehouseService {
             );
     }
 
+    getBillStatus(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/status`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getPkStatus', []))
+            );
+    }
+
     getBills(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}bills`;
         let params = new HttpParams();
