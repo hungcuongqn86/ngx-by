@@ -109,6 +109,13 @@ export class PackageComponent implements OnInit, OnDestroy {
 
     public updatePackage() {
         this.packageService.showLoading(true);
+        if (!this.package.weight_qd) {
+            if (this.package.weight < 0.5) {
+                this.package.weight_qd = 0.5;
+            } else {
+                this.package.weight_qd = this.package.weight;
+            }
+        }
         this.packageService.editPackage(this.package)
             .subscribe(res => {
                 this.searchPackages();
