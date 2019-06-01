@@ -10,6 +10,8 @@ export interface WarehouseWait {
     debt: number;
     cost_percent: number;
     package: Package[];
+    tien_xuat_kho: number;
+    tien_thieu_xuat_kho: number;
     rate: number;
     order: Order[];
     is_deleted: number;

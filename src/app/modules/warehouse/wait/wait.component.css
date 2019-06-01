@@ -34,3 +34,8 @@ ul.nav-tabs li.nav-item .nav-link .tab-title{
 .table p span.money {
     color: #a94442;
 }
+
+.packages-inf {
+    width: 50%;
+    display: inline-block;
+}
