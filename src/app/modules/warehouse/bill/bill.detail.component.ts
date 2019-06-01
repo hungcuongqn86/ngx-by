@@ -13,8 +13,10 @@ export class BillDetailComponent implements OnInit {
     bill: Bill = null;
     id: number;
     date: string;
+    report: { tong_can_nang: number, tong_tien_can: number, tong_thanh_ly: number };
 
     constructor(private router: Router, private route: ActivatedRoute, public warehouseService: WarehouseService) {
+        this.report = {tong_can_nang: 0, tong_thanh_ly: 0, tong_tien_can: 0};
         this.route.params.subscribe(params => {
             if (params['id']) {
                 this.id = params['id'];
@@ -27,7 +29,7 @@ export class BillDetailComponent implements OnInit {
             this.warehouseService.getBill(this.id)
                 .subscribe(data => {
                     this.bill = data.data.bill;
-                    console.log(this.bill);
+                    this.genReport();
                 });
         }
         const currentDate = new Date();
@@ -38,6 +40,15 @@ export class BillDetailComponent implements OnInit {
         const minutes = currentDate.getMinutes();
         const seconds = currentDate.getSeconds();
         this.date = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    }
+
+    private genReport() {
+        this.report = {tong_can_nang: 0, tong_thanh_ly: 0, tong_tien_can: 0};
+        for (let i = 0; i < this.bill.package.length; i++) {
+            this.report.tong_can_nang = Number(this.report.tong_can_nang) + Number(this.bill.package[i].weight_qd);
+            this.report.tong_tien_can = Number(this.report.tong_tien_can) + Number(this.bill.package[i].tien_can);
+            this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
+        }
     }
 
     public backlist() {

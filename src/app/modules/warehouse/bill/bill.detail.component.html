@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>a. Tiền (2+3+4+5)</td>
                                     <td class="text-right">
-                                        {{(bill.tien_can + bill.tien_thanh_ly) | tempPrice: 1 : 1 : false}}
+                                        {{(report.tong_tien_can + report.tong_thanh_ly) | tempPrice: 1 : 1 : false}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -74,11 +74,13 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class="text-center">{{bill.tong_can}}</td>
-                                    <td class="text-right  bold">{{bill.tien_can | tempPrice: 1 : 1 : false}}</td>
+                                    <td class="text-center">{{report.tong_can_nang}}</td>
+                                    <td class="text-right  bold">{{report.tong_tien_can | tempPrice: 1 : 1 : false}}
+                                    </td>
                                     <td class="bold text-right">0</td>
                                     <td class="bold text-right">0</td>
-                                    <td class="text-right bold "> {{bill.tien_thanh_ly | tempPrice: 1 : 1 : false}}</td>
+                                    <td class="text-right bold "> {{report.tong_thanh_ly | tempPrice: 1 : 1 : false}}
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
