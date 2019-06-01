@@ -16,7 +16,7 @@
                 <div class="card-header">
                     <strong>Phiếu xuất kho</strong>
                 </div>
-                <div *ngIf="bill" class="card-body">
+                <div *ngIf="bill" id="printarea" class="card-body">
                     <h3 class="text-center">PHIẾU XUẤT KHO</h3>
                     <p class="text-center"><i>(Mã phiếu <b>{{bill.id}}</b>)</i> Hà Nội</p>
                     <div class="row">
@@ -208,4 +208,14 @@
             </div>
         </div>
     </div><!--/.row-->
+</div>
+<div class="toolbar">
+    <button onclick="window.print();" class="btn btn-sm btn-primary"
+            type="button">
+        In
+    </button>
+    <button class="btn btn-sm btn-primary"
+            type="button">
+        Xuất kho
+    </button>
 </div>
