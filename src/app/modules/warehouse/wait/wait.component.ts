@@ -1,7 +1,9 @@
-import {Component, OnInit, ViewEncapsulation, OnDestroy} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, OnDestroy, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {WarehouseWait} from '../../../models/Warehouse';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -16,8 +18,9 @@ export class WaitComponent implements OnInit, OnDestroy {
     totalItems = 0;
     errorMessage: string[] = [];
     sub: Subscription;
+    modalRef: BsModalRef;
 
-    constructor(public warehouseService: WarehouseService,
+    constructor(public warehouseService: WarehouseService, private modalService: BsModalService,
                 private router: Router) {
     }
 
@@ -43,7 +46,7 @@ export class WaitComponent implements OnInit, OnDestroy {
             });
     }
 
-    public bill(item: WarehouseWait) {
+    public bill(item: WarehouseWait, template: TemplateRef<any>) {
         const user_id = item.id;
         const pkidlist = [];
         for (let i = 0; i < item.order.length; i++) {
@@ -60,7 +63,16 @@ export class WaitComponent implements OnInit, OnDestroy {
         this.sub = this.warehouseService.bill(user_id, pkidlist)
             .subscribe(data => {
                 this.warehouseService.showLoading(false);
+                if (!data.status) {
+                    this.errorMessage = data.data;
+                    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+                }
             });
+    }
+
+    decline(): void {
+        this.errorMessage = [];
+        this.modalRef.hide();
     }
 
     ngOnDestroy() {

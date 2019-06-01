@@ -76,7 +76,8 @@
                                         <td></td>
                                         <td class="text-left">
                                             <ng-template ngFor let-order [ngForOf]="item.order">
-                                                <p *ngFor="let package of order.package">{{package.package_code}} / {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
+                                                <p *ngFor="let package of order.package">{{package.package_code}} /
+                                                    {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
                                             </ng-template>
                                         </td>
                                     </tr>
@@ -85,7 +86,7 @@
                             </td>
                             <td></td>
                             <td class="text-right">
-                                <button (click)="bill(item)" class="btn btn-sm btn-ghost-primary"
+                                <button (click)="bill(item, template)" class="btn btn-sm btn-ghost-primary"
                                         type="button">
                                     Tạo phiếu
                                 </button>
@@ -106,3 +107,17 @@
         <!--/.col-->
     </div>
 </div><!-- /.container-fluid -->
+
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Thông báo từ hệ thống!</h5>
+    </div>
+    <div class="modal-body">
+        <alert type="danger" *ngIf="errorMessage.length > 0">
+            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+        </alert>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="decline()">OK</button>
+    </div>
+</ng-template>
