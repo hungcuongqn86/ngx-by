@@ -101,6 +101,8 @@ export class PackageComponent implements OnInit, OnDestroy {
             weight: null,
             weight_qd: null,
             tien_can: null,
+            gia_can: null,
+            tien_thanh_ly: null,
             updated_at: null
         };
     }

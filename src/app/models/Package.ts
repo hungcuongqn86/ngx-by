@@ -15,6 +15,8 @@ export interface Package {
     weight: number;
     weight_qd: number;
     tien_can: number;
+    gia_can: number;
+    tien_thanh_ly: number;
     is_deleted: number;
     created_at: string;
     updated_at: string;

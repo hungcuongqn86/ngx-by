@@ -119,16 +119,15 @@
                                         <a href="./order/list/detail/{{item.order.id}}"
                                            target="_blank">{{item.order.id}}</a>
                                     </td>
-                                    <td class="text-right">0</td>
+                                    <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
+                                        tempPrice: 1 : 1 : false}}</p></td>
                                     <td><br></td>
                                     <td class="text-right">{{item.weight}}</td>
                                     <td class="text-right">{{item.weight_qd}}</td>
-                                    <td class="text-right">19.000</td>
-                                    <td class="text-right">19.000
-                                        <br>
-                                        <span rel="tooltip" title=""
-                                              data-original-title="Thành tiền sau chiết khấu">19.000<span
-                                                class="g-no-print">(?)</span></span>
+                                    <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
+                                        tempPrice: 1 : 1 : false}}</p></td>
+                                    <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can |
+                                        tempPrice: 1 : 1 : false}}</p>
                                     </td>
                                     <td class="text-right">0</td>
                                     <td class="text-right ">0</td>
