@@ -35,11 +35,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         if (this.id !== null) {
-            this.warehouseService.getBill(this.id)
-                .subscribe(data => {
-                    this.bill = data.data.bill;
-                    this.genReport();
-                });
+            this.getBill();
         }
         const currentDate = new Date();
         const day = ('0' + currentDate.getDate()).slice(-2);
@@ -49,6 +45,14 @@ export class BillDetailComponent implements OnInit, OnDestroy {
         const minutes = currentDate.getMinutes();
         const seconds = currentDate.getSeconds();
         this.date = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    }
+
+    private getBill() {
+        this.warehouseService.getBill(this.id)
+            .subscribe(data => {
+                this.bill = data.data.bill;
+                this.genReport();
+            });
     }
 
     private genReport() {
@@ -78,7 +82,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
                     this.errorMessage = data.data;
                     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
                 } else {
-                    this.router.navigate([`/warehouse/bill/detail/${data.data.id}`]);
+                    this.getBill();
                 }
             });
     }
