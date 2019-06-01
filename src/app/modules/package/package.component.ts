@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation, TemplateRef, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
 import {Package, PackageStatus} from '../../models/Package';
 import {Subscription} from 'rxjs';
@@ -21,8 +21,13 @@ export class PackageComponent implements OnInit, OnDestroy {
     counts: { status: number, total: number }[];
     sub: Subscription;
 
-    constructor(public packageService: PackageService,
+    constructor(public packageService: PackageService, private route: ActivatedRoute,
                 private router: Router) {
+        this.route.params.subscribe(params => {
+            if (params['package_code']) {
+                this.packageService.search.package_code = params['package_code'];
+            }
+        });
         this.counts = null;
         this.reNewPackage();
     }

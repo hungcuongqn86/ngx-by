@@ -9,6 +9,12 @@ const routes: Routes = [
         data: {
             title: 'Kiện hàng'
         }
+    },
+    {
+        path: ':package_code', component: PackageComponent,
+        data: {
+            title: 'Kiện hàng'
+        }
     }
 ];
 

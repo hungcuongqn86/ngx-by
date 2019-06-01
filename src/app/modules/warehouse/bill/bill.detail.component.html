@@ -110,23 +110,19 @@
                                     <td>
                                         <span>
                                             <a target="_blank"
-                                               href="https://timhangquangchau.com/thqc/order-shop/lading?lading_code=609265077514">
+                                               href="./package/{{item.package_code}}">
                                                 {{item.package_code}}
                                             </a>
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="https://timhangquangchau.com/thqc/rel/49198/detail"
+                                        <a href="./order/list/detail/{{item.order.id}}"
                                            target="_blank">{{item.order.id}}</a>
                                     </td>
                                     <td class="text-right">0</td>
                                     <td><br></td>
-                                    <td class="text-right">1.00</td>
-                                    <td class="text-right">1.00<br>
-                                        <span rel="tooltip" title=""
-                                              data-original-title="Tổng số cân của cả đơn">1.00<span
-                                                class="g-no-print">(?)</span></span>
-                                    </td>
+                                    <td class="text-right">{{item.weight}}</td>
+                                    <td class="text-right">{{item.weight_qd}}</td>
                                     <td class="text-right">19.000</td>
                                     <td class="text-right">19.000
                                         <br>
