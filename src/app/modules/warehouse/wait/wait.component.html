@@ -61,7 +61,12 @@
                                 <p>{{item.phone_number}}</p>
                             </td>
                             <td>
-
+                                <p>
+                                    <button (click)="bill(item, template)" class="btn btn-sm btn-ghost-primary"
+                                            type="button">
+                                        Xem tiền thiếu
+                                    </button>
+                                </p>
                             </td>
                             <td class="text-right">
                                 <table class="table table-bordered">
@@ -73,12 +78,10 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td></td>
+                                        <td>{{item.package.length}}</td>
                                         <td class="text-left">
-                                            <ng-template ngFor let-order [ngForOf]="item.order">
-                                                <p *ngFor="let package of order.package">{{package.package_code}} /
-                                                    {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
-                                            </ng-template>
+                                            <p *ngFor="let package of item.package">{{package.package_code}} /
+                                                {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
                                         </td>
                                     </tr>
                                     </tbody>

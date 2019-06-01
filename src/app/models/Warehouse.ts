@@ -9,6 +9,7 @@ export interface WarehouseWait {
     phone_number: string;
     debt: number;
     cost_percent: number;
+    package: Package[];
     rate: number;
     order: Order[];
     is_deleted: number;
