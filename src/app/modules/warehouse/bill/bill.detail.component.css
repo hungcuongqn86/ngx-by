@@ -1,0 +1,12 @@
+.bg-success {
+    background-color: #dff0d8 !important;
+    color: #333;
+}
+
+h4, .h4 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 12px;
+}
