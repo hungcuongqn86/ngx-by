@@ -82,6 +82,8 @@ export class WaitComponent implements OnInit, OnDestroy {
                 if (!data.status) {
                     this.errorMessage = data.data;
                     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+                } else {
+                    this.router.navigate([`/warehouse/bill/${data.data.id}`]);
                 }
             });
     }
