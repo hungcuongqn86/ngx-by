@@ -83,4 +83,12 @@ export class WarehouseService {
                 catchError(this.handleError('getBill', []))
             );
     }
+
+    xuatKho(id: number): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/xuatKho`;
+        return this.http.post<History>(url, {id: id})
+            .pipe(
+                catchError(this.handleError('xuatKho', []))
+            );
+    }
 }

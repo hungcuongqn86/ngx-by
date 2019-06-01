@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {Bill} from '../../../models/Warehouse';
 import {Cart} from '../../../models/Cart';
+import {Subscription} from 'rxjs';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
     selector: 'app-bill-detail',
@@ -10,14 +13,18 @@ import {Cart} from '../../../models/Cart';
     styleUrls: ['./bill.detail.component.css']
 })
 
-export class BillDetailComponent implements OnInit {
+export class BillDetailComponent implements OnInit, OnDestroy {
     bill: Bill = null;
     id: number;
     date: string;
     report: { tong_can_nang: number, tong_tien_can: number, tong_thanh_ly: number };
     carts: Cart[] = [];
+    sub: Subscription;
+    errorMessage: string[] = [];
+    modalRef: BsModalRef;
 
-    constructor(private router: Router, private route: ActivatedRoute, public warehouseService: WarehouseService) {
+    constructor(private router: Router, private route: ActivatedRoute,
+                public warehouseService: WarehouseService, private modalService: BsModalService) {
         this.report = {tong_can_nang: 0, tong_thanh_ly: 0, tong_tien_can: 0};
         this.route.params.subscribe(params => {
             if (params['id']) {
@@ -59,7 +66,35 @@ export class BillDetailComponent implements OnInit {
         }
     }
 
+    public xuatKho(item: Bill, template: TemplateRef<any>) {
+        this.warehouseService.showLoading(true);
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+        this.sub = this.warehouseService.xuatKho(item.id)
+            .subscribe(data => {
+                this.warehouseService.showLoading(false);
+                if (!data.status) {
+                    this.errorMessage = data.data;
+                    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+                } else {
+                    this.router.navigate([`/warehouse/bill/detail/${data.data.id}`]);
+                }
+            });
+    }
+
     public backlist() {
         this.router.navigate(['/warehouse/bill']);
+    }
+
+    decline(): void {
+        this.errorMessage = [];
+        this.modalRef.hide();
+    }
+
+    ngOnDestroy() {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
     }
 }
