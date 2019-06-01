@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {Bill} from '../../../models/Warehouse';
+import {Cart} from '../../../models/Cart';
 
 @Component({
     selector: 'app-bill-detail',
@@ -14,6 +15,7 @@ export class BillDetailComponent implements OnInit {
     id: number;
     date: string;
     report: { tong_can_nang: number, tong_tien_can: number, tong_thanh_ly: number };
+    carts: Cart[] = [];
 
     constructor(private router: Router, private route: ActivatedRoute, public warehouseService: WarehouseService) {
         this.report = {tong_can_nang: 0, tong_thanh_ly: 0, tong_tien_can: 0};
@@ -48,6 +50,12 @@ export class BillDetailComponent implements OnInit {
             this.report.tong_can_nang = Number(this.report.tong_can_nang) + Number(this.bill.package[i].weight_qd);
             this.report.tong_tien_can = Number(this.report.tong_tien_can) + Number(this.bill.package[i].tien_can);
             this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
+            for (let j = 0; j < this.bill.package[i].order.cart.length; j++) {
+                const checkExit = this.carts.findIndex(x => x.id === this.bill.package[i].order.cart[j].id);
+                if (checkExit < 0) {
+                    this.carts.push(this.bill.package[i].order.cart[j]);
+                }
+            }
         }
     }
 

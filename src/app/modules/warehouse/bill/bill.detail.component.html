@@ -137,9 +137,9 @@
                             </ng-template>
                             <tr>
                                 <td colspan="3"></td>
-                                <td class="text-right ">0</td>
+                                <td class="text-right ">{{report.tong_thanh_ly | tempPrice: 1 : 1 : false}}</td>
                                 <td colspan="4"></td>
-                                <td class="text-right ">41.800</td>
+                                <td class="text-right ">{{report.tong_tien_can | tempPrice: 1 : 1 : false}}</td>
                                 <td class="text-right ">0</td>
                                 <td class="text-right ">0</td>
                             </tr>
@@ -164,68 +164,25 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="bg-success">
-                                <td><a href="https://timhangquangchau.com/thqc/rel/49198/detail"
-                                       target="_blank">49198</a></td>
-                                <td>
-                                    <a href="https://item.taobao.com/item.htm?spm=a230r.1.999.31.7663523cPKZ6sZ&amp;id=520408768312&amp;ns=1#detail"
-                                       target="_blank"> 154554</a></td>
-                                <td>红色</td>
-                                <td>35</td>
-                                <td></td>
-                                <td class="text-right">108.00</td>
-                                <td class="text-right">1</td>
-                                <td class="text-right">0</td>
-                                <td class="text-right">
-                                    <span class="text-right view-field warehouse_quantity">1</span>
-                                </td>
-
-                                <td>
-                                    <span class="text-right view-field lack_note"></span>
-                                </td>
-                            </tr>
-                            <tr data-url="https://timhangquangchau.com/thqc/orderDetails/sua-link-154557"
-                                class="bg-success">
-                                <td><a href="https://timhangquangchau.com/thqc/rel/49201/detail"
-                                       target="_blank">49201</a></td>
-                                <td>
-                                    <a href="https://item.taobao.com/item.htm?spm=a230r.1.999.1.4ab5523cmqGf3K&amp;id=587967901731&amp;ns=1#detail"
-                                       target="_blank"> 154557</a></td>
-                                <td>香槟色</td>
-                                <td>35</td>
-                                <td></td>
-                                <td class="text-right">138.00</td>
-                                <td class="text-right">1</td>
-                                <td class="text-right">0</td>
-                                <td class="text-right">
-                                    <span class="text-right view-field warehouse_quantity">1</span>
-                                </td>
-
-                                <td>
-                                    <span class="text-right view-field lack_note"></span>
-                                </td>
-                            </tr>
-                            <tr data-url="https://timhangquangchau.com/thqc/orderDetails/sua-link-160536"
-                                class="bg-success">
-                                <td><a href="https://timhangquangchau.com/thqc/rel/51180/detail"
-                                       target="_blank">51180</a></td>
-                                <td>
-                                    <a href="https://item.taobao.com/item.htm?spm=a230r.1.999.16.2dbc523cjiijIw&amp;id=580919799124&amp;ns=1#detail"
-                                       target="_blank"> 160536</a></td>
-                                <td>白色樱桃</td>
-                                <td>0-2岁/头围44-50cm</td>
-                                <td></td>
-                                <td class="text-right">28.80</td>
-                                <td class="text-right">1</td>
-                                <td class="text-right">0</td>
-                                <td class="text-right">
-                                    <span class="text-right view-field warehouse_quantity">1</span>
-                                </td>
-
-                                <td>
-                                    <span class="text-right view-field lack_note"></span>
-                                </td>
-                            </tr>
+                            <ng-template ngFor let-item [ngForOf]="carts" let-i="index">
+                                <tr class="bg-success">
+                                    <td><a href="./order/list/detail/{{item.order_id}}"
+                                           target="_blank">{{item.order_id}}</a></td>
+                                    <td>
+                                        <a href="{{item.pro_link}}"
+                                           target="_blank"> {{item.id}}</a></td>
+                                    <td>{{item.colortxt}}</td>
+                                    <td>{{item.sizetxt}}</td>
+                                    <td>{{item.note}}</td>
+                                    <td class="text-right">{{item.price}}</td>
+                                    <td class="text-right">{{item.amount}}</td>
+                                    <td class="text-right">0</td>
+                                    <td class="text-right">{{item.amount}}</td>
+                                    <td>
+                                        <span class="text-right view-field lack_note"></span>
+                                    </td>
+                                </tr>
+                            </ng-template>
                             </tbody>
                         </table>
                     </div>
