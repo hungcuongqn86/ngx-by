@@ -84,8 +84,8 @@ export class WarehouseService {
             );
     }
 
-    xuatKho(id: number): Observable<any> {
-        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/xuatKho`;
+    billConfirm(id: number): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/confirm`;
         return this.http.post<History>(url, {id: id})
             .pipe(
                 catchError(this.handleError('xuatKho', []))

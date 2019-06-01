@@ -71,7 +71,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
         if (this.sub) {
             this.sub.unsubscribe();
         }
-        this.sub = this.warehouseService.xuatKho(item.id)
+        this.sub = this.warehouseService.billConfirm(item.id)
             .subscribe(data => {
                 this.warehouseService.showLoading(false);
                 if (!data.status) {
