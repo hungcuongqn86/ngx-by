@@ -17,6 +17,7 @@ export class WarehouseService {
     private handleError: HandleError;
     private moduleUri = 'order/warehouse/';
     public waitSearch = {code: '', package_code: '', email: '', limit: 20, page: 1};
+    public billSearch = {code: '', status: '', limit: 20, page: 1};
 
     constructor(private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -50,6 +51,20 @@ export class WarehouseService {
         return this.http.post<History>(url, {user_id: user_id, pkcodelist: pkidlist})
             .pipe(
                 catchError(this.handleError('bill', []))
+            );
+    }
+
+    getBills(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bills`;
+        let params = new HttpParams();
+        Object.keys(this.billSearch).map((key) => {
+            if (this.billSearch[key]) {
+                params = params.append(key, this.billSearch[key]);
+            }
+        });
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('getBills', []))
             );
     }
 
