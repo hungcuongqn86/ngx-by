@@ -84,4 +84,16 @@
                    placeholder="Tỉ giá">
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="weight_price">
+            Giá cân nặng
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.weight_price" #weight_price="ngModel" type="text" id="weight_price"
+                   name="weight_price"
+                   required
+                   class="form-control"
+                   placeholder="Giá cân nặng">
+        </div>
+    </div>
 </form>
