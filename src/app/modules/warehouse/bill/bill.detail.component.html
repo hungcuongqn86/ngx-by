@@ -55,6 +55,12 @@
                                     <td>b. Số dư hiện tại</td>
                                     <td class="text-right">{{bill.user.debt | tempPrice: 1 : 1 : false}}</td>
                                 </tr>
+                                <tr *ngIf="bill && bill.status===1">
+                                    <td>Số dư sau khi xuất kho (b - a)</td>
+                                    <td class="text-right">{{(bill.user.debt - (report.tong_tien_can +
+                                        report.tong_thanh_ly)) | tempPrice: 1 : 1 : false}}
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
