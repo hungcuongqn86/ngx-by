@@ -158,6 +158,14 @@ export class OrderService {
             );
     }
 
+    getMyCountByStatus(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}mycount`;
+        return this.http.get<any>(url)
+            .pipe(
+                catchError(this.handleError('getMyCountByStatus', []))
+            );
+    }
+
     getMyOrders(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}myorder`;
         let params = new HttpParams();

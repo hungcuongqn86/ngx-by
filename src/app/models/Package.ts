@@ -17,6 +17,7 @@ export interface Package {
     tien_can: number;
     gia_can: number;
     tien_thanh_ly: number;
+    bill_id: number;
     is_deleted: number;
     created_at: string;
     updated_at: string;

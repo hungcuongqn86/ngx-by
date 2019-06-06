@@ -15,6 +15,7 @@ import {AuthService} from '../../../auth.service';
 export class MyorderComponent implements OnInit {
     order: OrderCreate;
     orders: Order[];
+    counts: { status: number, total: number }[];
     status: OrderStatus[];
     modalRef: BsModalRef;
     totalItems = 0;
@@ -25,6 +26,7 @@ export class MyorderComponent implements OnInit {
                 public auth: AuthService,
                 private router: Router) {
         this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
+        this.counts = null;
     }
 
     ngOnInit() {
@@ -47,6 +49,15 @@ export class MyorderComponent implements OnInit {
             .subscribe(orders => {
                 this.orders = orders.data.data;
                 this.totalItems = orders.data.total;
+                this.getMyCountByStatus();
+            });
+    }
+
+    public getMyCountByStatus() {
+        this.orderService.showLoading(true);
+        this.orderService.getMyCountByStatus()
+            .subscribe(data => {
+                this.counts = data.data;
                 this.orderService.showLoading(false);
             });
     }
@@ -60,6 +71,10 @@ export class MyorderComponent implements OnInit {
             });
     }
 
+    selectTab(status: string = null) {
+        this.orderService.search.status = status;
+        this.searchOrders();
+    }
 
     openModal(template: TemplateRef<any>, order: Order) {
         this.inputDatCoc.id = order.id;

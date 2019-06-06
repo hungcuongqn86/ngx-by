@@ -74,6 +74,11 @@ export class PackageComponent implements OnInit, OnDestroy {
         win.focus();
     }
 
+    gotoBill(billId: number) {
+        const win = window.open(`./warehouse/bill/detail/${billId}`, '_blank');
+        win.focus();
+    }
+
     public selectPackage(item: Package, col: string) {
         this.col = col;
         this.package = item;
@@ -103,7 +108,8 @@ export class PackageComponent implements OnInit, OnDestroy {
             tien_can: null,
             gia_can: null,
             tien_thanh_ly: null,
-            updated_at: null
+            updated_at: null,
+            bill_id: null
         };
     }
 
