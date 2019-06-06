@@ -48,17 +48,17 @@
                                 <tr>
                                     <td>a. Tiền (2+3+4+5)</td>
                                     <td class="text-right">
-                                        {{(report.tong_tien_can + report.tong_thanh_ly) | tempPrice: 1 : 1 : false}}
+                                        {{(report.tong_tien_can + report.tong_thanh_ly) | tempPrice: 1 : 1}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>b. Số dư hiện tại</td>
-                                    <td class="text-right">{{bill.user.debt | tempPrice: 1 : 1 : false}}</td>
+                                    <td class="text-right">{{bill.user.debt | tempPrice: 1 : 1}}</td>
                                 </tr>
                                 <tr *ngIf="bill && bill.status===1">
                                     <td>Số dư sau khi xuất kho (b - a)</td>
                                     <td class="text-right">{{(bill.user.debt - (report.tong_tien_can +
-                                        report.tong_thanh_ly)) | tempPrice: 1 : 1 : false}}
+                                        report.tong_thanh_ly)) | tempPrice: 1 : 1}}
                                     </td>
                                 </tr>
                                 </tbody>
@@ -81,11 +81,11 @@
                                 <tbody>
                                 <tr>
                                     <td class="text-center">{{report.tong_can_nang}}</td>
-                                    <td class="text-right  bold">{{report.tong_tien_can | tempPrice: 1 : 1 : false}}
+                                    <td class="text-right  bold">{{report.tong_tien_can | tempPrice: 1 : 1}}
                                     </td>
                                     <td class="bold text-right">0</td>
                                     <td class="bold text-right">0</td>
-                                    <td class="text-right bold "> {{report.tong_thanh_ly | tempPrice: 1 : 1 : false}}
+                                    <td class="text-right bold "> {{report.tong_thanh_ly | tempPrice: 1 : 1}}
                                     </td>
                                 </tr>
                                 </tbody>
@@ -128,14 +128,14 @@
                                            target="_blank">{{item.order.id}}</a>
                                     </td>
                                     <td class="text-right"><p *ngIf="item.tien_thanh_ly">{{item.tien_thanh_ly |
-                                        tempPrice: 1 : 1 : false}}</p></td>
+                                        tempPrice: 1 : 1}}</p></td>
                                     <td><br></td>
                                     <td class="text-right">{{item.weight}}</td>
                                     <td class="text-right">{{item.weight_qd}}</td>
                                     <td class="text-right"><p *ngIf="item.gia_can">{{item.gia_can |
-                                        tempPrice: 1 : 1 : false}}</p></td>
+                                        tempPrice: 1 : 1}}</p></td>
                                     <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can |
-                                        tempPrice: 1 : 1 : false}}</p>
+                                        tempPrice: 1 : 1}}</p>
                                     </td>
                                     <td class="text-right">0</td>
                                     <td class="text-right ">0</td>
@@ -143,9 +143,9 @@
                             </ng-template>
                             <tr>
                                 <td colspan="3"></td>
-                                <td class="text-right ">{{report.tong_thanh_ly | tempPrice: 1 : 1 : false}}</td>
+                                <td class="text-right ">{{report.tong_thanh_ly | tempPrice: 1 : 1}}</td>
                                 <td colspan="4"></td>
-                                <td class="text-right ">{{report.tong_tien_can | tempPrice: 1 : 1 : false}}</td>
+                                <td class="text-right ">{{report.tong_tien_can | tempPrice: 1 : 1}}</td>
                                 <td class="text-right ">0</td>
                                 <td class="text-right ">0</td>
                             </tr>
