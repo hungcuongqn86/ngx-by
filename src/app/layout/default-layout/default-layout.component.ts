@@ -8,6 +8,7 @@ import {AuthService} from '../../auth.service';
 })
 export class DefaultLayoutComponent {
     public navItems = [];
+    public notify = [];
     public sidebarMinimized = true;
     private changes: MutationObserver;
     public element: HTMLElement = document.body;
@@ -35,7 +36,7 @@ export class DefaultLayoutComponent {
     public getNotyfication() {
         this.auth.getNotyfication()
             .subscribe(notiData => {
-                this.navItems = notiData.data;
+                this.notify = notiData.data;
             });
     }
 

@@ -31,6 +31,10 @@
   width: 200px;
 }
 
+.app-header .dropdown-item {
+  font-size: 12px;
+}
+
 @media print {
   body * {
     visibility: hidden;

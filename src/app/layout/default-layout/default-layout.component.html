@@ -28,10 +28,10 @@
         <li class="nav-item dropdown" dropdown>
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
                dropdownToggle (click)="false"><i class="fa fa-comment-o"></i><span
-                    class="badge badge-pill badge-info">5</span></a>
+                    class="badge badge-pill badge-info"><span *ngIf="notify.length">{{notify.length}}</span></span></a>
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-                <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>1452</strong></a>
-                <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>5541</strong></a>
+                <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"><i
+                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order.id}}</strong></a>
             </div>
         </li>
         <li *ngIf="auth.user" class="nav-item dropdown" dropdown placement="bottom right">
