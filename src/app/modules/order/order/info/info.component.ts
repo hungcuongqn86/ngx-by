@@ -3,6 +3,7 @@ import {OrderService, OrderStatus} from '../../../../services/order/order.servic
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -20,7 +21,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     col: string;
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    constructor(public orderService: OrderService) {
+    constructor(public orderService: OrderService, private route: ActivatedRoute) {
         this.reNewPackage();
         this.reNewCart();
         this.comment = {
@@ -34,7 +35,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         };
         this.getStatus();
         this.getPkStatus();
-        this.getChat();
+        this.route.params.subscribe(params => {
+            this.getChat();
+        });
     }
 
     reNewCart() {

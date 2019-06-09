@@ -15,11 +15,15 @@ export class OrderDetailComponent implements OnInit {
         this.route.params.subscribe(params => {
             if (params['id']) {
                 this.orderService.orderRe.id = params['id'];
+                this.getOrder();
             }
         });
     }
 
     ngOnInit() {
+    }
+
+    private getOrder() {
         if (this.orderService.orderRe.id !== null) {
             this.orderService.getOrder(this.orderService.orderRe.id)
                 .subscribe(order => {

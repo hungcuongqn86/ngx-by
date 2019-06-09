@@ -40,6 +40,10 @@ export class DefaultLayoutComponent {
             });
     }
 
+    gotoOrder(orderId: number) {
+        this.router.navigate([`./order/list/detail/${orderId}`]);
+    }
+
     public profile() {
         this.router.navigate([`/account/profile`]);
     }

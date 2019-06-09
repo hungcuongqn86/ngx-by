@@ -30,8 +30,9 @@
                dropdownToggle (click)="false"><i class="fa fa-comment-o"></i><span
                     class="badge badge-pill badge-info"><span *ngIf="notify.length">{{notify.length}}</span></span></a>
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-                <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"><i
-                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order.id}}</strong></a>
+                <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"
+                   (click)="gotoOrder(item.order.id)"><i
+                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order.id}}</strong> - <span>{{item.created_at}}</span></a>
             </div>
         </li>
         <li *ngIf="auth.user" class="nav-item dropdown" dropdown placement="bottom right">
