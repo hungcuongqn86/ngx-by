@@ -77,6 +77,14 @@ export class AuthService {
             );
     }
 
+    public getNotyfication(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `order/comments`;
+        return this.http
+            .get<any>(url).pipe(
+                catchError(this.handleError('getNotyfication', []))
+            );
+    }
+
     public register(useri): Observable<{}> {
         const url = Util.getUri(apiV1Url) + `register`;
         return this.http.post(url, useri, httpOptions)

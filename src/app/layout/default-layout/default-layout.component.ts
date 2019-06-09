@@ -22,12 +22,20 @@ export class DefaultLayoutComponent {
             attributes: true
         });
         this.getNavItems();
+        this.getNotyfication();
     }
 
     public getNavItems() {
         this.auth.getNav()
             .subscribe(navdata => {
                 this.navItems = navdata.success;
+            });
+    }
+
+    public getNotyfication() {
+        this.auth.getNotyfication()
+            .subscribe(notiData => {
+                this.navItems = notiData.data;
             });
     }
 
