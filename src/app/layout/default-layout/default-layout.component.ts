@@ -23,7 +23,9 @@ export class DefaultLayoutComponent {
             attributes: true
         });
         this.getNavItems();
-        this.getNotyfication();
+        setInterval(() => {
+            this.getNotyfication();
+        }, 8000);
     }
 
     public getNavItems() {
