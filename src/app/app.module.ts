@@ -23,6 +23,7 @@ import {NgxCaptchaModule} from 'ngx-captcha';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {SharedModule} from './shared.module';
+import {OrderService} from './services/order/order.service';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
@@ -101,6 +102,7 @@ import {captchar_key} from './const';
         LoadingService,
         MessageService,
         ErrorMessagesService,
+        OrderService,
         {provide: RequestCache, useClass: RequestCacheWithMap},
         httpInterceptorProviders
     ],

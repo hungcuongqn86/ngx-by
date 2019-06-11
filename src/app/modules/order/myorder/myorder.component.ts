@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/order/order.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -22,11 +22,16 @@ export class MyorderComponent implements OnInit {
     inputDatCoc: { id: number; dc_percent_value: number; dc_value: number; content: string; tien_hang: number };
     errorMessage: string[] = [];
 
-    constructor(public orderService: OrderService, private modalService: BsModalService,
+    constructor(public orderService: OrderService, private modalService: BsModalService, private route: ActivatedRoute,
                 public auth: AuthService,
                 private router: Router) {
         this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
         this.counts = null;
+        this.route.params.subscribe(params => {
+            if (params['status']) {
+                this.selectTab(params['status']);
+            }
+        });
     }
 
     ngOnInit() {
@@ -49,18 +54,19 @@ export class MyorderComponent implements OnInit {
             .subscribe(orders => {
                 this.orders = orders.data.data;
                 this.totalItems = orders.data.total;
-                this.getMyCountByStatus();
+                this.orderService.showLoading(false);
+                // this.getMyCountByStatus();
             });
     }
 
-    public getMyCountByStatus() {
+    /*public getMyCountByStatus() {
         this.orderService.showLoading(true);
         this.orderService.getMyCountByStatus()
             .subscribe(data => {
                 this.counts = data.data;
                 this.orderService.showLoading(false);
             });
-    }
+    }*/
 
     public getStatus() {
         this.orderService.showLoading(true);

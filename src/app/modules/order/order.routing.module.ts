@@ -5,6 +5,7 @@ import {OrderComponent} from './order/order.component';
 import {OrderDetailComponent} from './order/order.detail.component';
 import {MyorderComponent} from './myorder/myorder.component';
 import {MyorderDetailComponent} from './myorder/myorder.detail.component';
+
 const routes: Routes = [
     {
         path: 'list', component: OrderComponent,
@@ -20,6 +21,12 @@ const routes: Routes = [
     },
     {
         path: 'myorder', component: MyorderComponent,
+        data: {
+            title: 'Đơn hàng'
+        }
+    },
+    {
+        path: 'myorder/:status', component: MyorderComponent,
         data: {
             title: 'Đơn hàng'
         }
