@@ -353,6 +353,14 @@ export class OrderService {
             );
     }
 
+    public setIsRead(orderId: number): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}comment/isread`;
+        return this.http.post<any>(url, {order_id: orderId})
+            .pipe(
+                catchError(this.handleError('setIsRead', []))
+            );
+    }
+
     public addComments(data: { order_id: number, content: string, is_admin: number }): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}comment/create`;
         return this.http.post<any>(url, data)

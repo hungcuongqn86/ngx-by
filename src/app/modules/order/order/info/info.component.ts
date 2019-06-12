@@ -125,6 +125,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         this.orderService.getComments(this.orderService.orderRe.id)
             .subscribe(data => {
                 this.comments = data.data;
+                this.setIsRead();
             });
     }
 
@@ -215,5 +216,11 @@ export class InfoComponent implements OnInit, AfterViewChecked {
                     this.getChat();
                 });
         }
+    }
+
+    private setIsRead() {
+        this.orderService.setIsRead(this.orderService.orderRe.id)
+            .subscribe(data => {
+            });
     }
 }

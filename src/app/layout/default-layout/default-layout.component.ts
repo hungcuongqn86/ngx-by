@@ -26,10 +26,12 @@ export class DefaultLayoutComponent {
             attributes: true
         });
         this.getNavItems();
+        this.getNotyfication();
+        this.getMyCountByStatus();
         setInterval(() => {
             this.getNotyfication();
             this.getMyCountByStatus();
-        }, 10000);
+        }, 15000);
     }
 
     public getNavItems() {
@@ -59,7 +61,7 @@ export class DefaultLayoutComponent {
                 }
             }
         }
-        this.getMyCountByStatus();
+        // this.getMyCountByStatus();
     }
 
     public getNotyfication() {
@@ -90,9 +92,9 @@ export class DefaultLayoutComponent {
             .subscribe(data => {
                 this.counts = data.data;
                 for (let i = 0; i < this.navItems.length; i++) {
-                    if (this.navItems[i].url === '/order/myorder') {
+                    if (this.navItems[i].url === '/order/myorder' && this.navItems[i] && this.navItems[i].children) {
                         for (let j = 0; j < this.navItems[i].children.length; j++) {
-                            if (this.navItems[i].children[j].status) {
+                            if (this.navItems[i].children[j] && this.navItems[i].children[j].status) {
                                 for (let s = 0; s < this.counts.length; s++) {
                                     if (this.navItems[i].children[j].status === `order_${this.counts[s].status}`) {
                                         this.navItems[i].children[j].name = `${this.navItems[i].children[j].view} (${this.counts[s].total})`;

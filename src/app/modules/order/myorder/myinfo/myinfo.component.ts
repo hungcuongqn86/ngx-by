@@ -50,6 +50,13 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
         this.orderService.getComments(this.orderService.orderRe.id)
             .subscribe(data => {
                 this.comments = data.data;
+                this.setIsRead();
+            });
+    }
+
+    private setIsRead() {
+        this.orderService.setIsRead(this.orderService.orderRe.id)
+            .subscribe(data => {
             });
     }
 

@@ -35,7 +35,7 @@ export class MyorderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.searchOrders();
+        // this.searchOrders();
         this.getStatus();
     }
 
