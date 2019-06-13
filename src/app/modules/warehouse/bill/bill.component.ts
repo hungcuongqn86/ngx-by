@@ -14,6 +14,7 @@ import {Bill, BillStatus} from '../../../models/Warehouse';
 })
 
 export class BillComponent implements OnInit, OnDestroy {
+    bill: Bill;
     bills: Bill;
     status: BillStatus[] = [];
     counts: { status: number, total: number }[] = [];
@@ -59,6 +60,18 @@ export class BillComponent implements OnInit, OnDestroy {
         win.focus();
     }
 
+    public deleteBill(item: Bill, template: TemplateRef<any>) {
+        this.bill = item;
+        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    }
+
+    private _deleteBill() {
+        this.warehouseService.deleteBill(this.bill.id)
+            .subscribe(data => {
+                this.searchBills();
+            });
+    }
+
     public getBillStatus() {
         this.warehouseService.showLoading(true);
         this.warehouseService.getBillStatus()
@@ -66,6 +79,15 @@ export class BillComponent implements OnInit, OnDestroy {
                 this.status = data.data;
                 this.warehouseService.showLoading(false);
             });
+    }
+
+    confirm(): void {
+        this._deleteBill();
+        this.modalRef.hide();
+    }
+
+    decline(): void {
+        this.modalRef.hide();
     }
 
     ngOnDestroy() {

@@ -91,4 +91,12 @@ export class WarehouseService {
                 catchError(this.handleError('xuatKho', []))
             );
     }
+
+    deleteBill(id: number) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}bill/delete`;
+        return this.http.post<History>(url, {id: id})
+            .pipe(
+                catchError(this.handleError('deleteBill', []))
+            );
+    }
 }
