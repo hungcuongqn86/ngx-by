@@ -38,8 +38,8 @@
                         <tbody>
                         <tr *ngFor="let item of users">
                             <td><i class="fa fa-user"></i> {{item.name}}
-                                <a *ngIf="item.phone_number" href="{{item.phone_number}}">  <i class="fa fa-phone-square"></i> {{item.phone_number}}</a></td>
-                            <td><i class="fa fa-envelope-square"></i> <a href="{{item.email}}"> {{item.email}}</a></td>
+                                <a *ngIf="item.phone_number && authService.hasRole('admin')" href="{{item.phone_number}}">  <i class="fa fa-phone-square"></i> {{item.phone_number}}</a></td>
+                            <td><p *ngIf="authService.hasRole('admin')"><i class="fa fa-envelope-square"></i> <a href="{{item.email}}"> {{item.email}}</a></p></td>
                             <td class="text-right">
                                 <button (click)="editPartner(item.id)" class="btn btn-sm btn-ghost-primary"
                                         type="button">

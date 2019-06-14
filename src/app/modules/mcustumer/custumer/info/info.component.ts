@@ -3,6 +3,7 @@ import {UserService} from '../../../../services/muser/user.service';
 import {PartnerService} from '../../../../services/mpartner/partner.service';
 import {Role} from '../../../../models/User';
 import {Partner} from '../../../../models/Partner';
+import {AuthService} from '../../../../auth.service';
 
 @Component({
     selector: 'app-mcustumer-custumer-detail-info',
@@ -14,7 +15,7 @@ export class InfoComponent {
     roles: Role[];
     partners: Partner[];
 
-    constructor(public userService: UserService, private partnerService: PartnerService) {
+    constructor(public userService: UserService, private partnerService: PartnerService, public authService: AuthService) {
         this.getRoles();
         this.getPartners();
     }

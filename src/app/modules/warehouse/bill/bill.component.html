@@ -72,8 +72,9 @@
                             <td>{{item.id}}</td>
                             <td>{{item.created_at}}</td>
                             <td>
-                                <p title="Email">{{item.user.email}}</p>
-                                <p title="Số điện thoại">{{item.user.phone_number}}</p>
+                                <p title="Name">{{item.user.name}}</p>
+                                <p *ngIf="authService.hasRole('admin')" title="Email">{{item.user.email}}</p>
+                                <p *ngIf="authService.hasRole('admin')" title="Số điện thoại">{{item.user.phone_number}}</p>
                             </td>
                             <td class="text-right">{{item.tong_can}}</td>
                             <td class="text-right"><p *ngIf="item.tien_can">{{item.tien_can | tempPrice: 1 : 1}}</p>

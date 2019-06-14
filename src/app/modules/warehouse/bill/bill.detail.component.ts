@@ -6,6 +6,7 @@ import {Cart} from '../../../models/Cart';
 import {Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-bill-detail',
@@ -23,7 +24,7 @@ export class BillDetailComponent implements OnInit, OnDestroy {
     errorMessage: string[] = [];
     modalRef: BsModalRef;
 
-    constructor(private router: Router, private route: ActivatedRoute,
+    constructor(private router: Router, private route: ActivatedRoute, public authService: AuthService,
                 public warehouseService: WarehouseService, private modalService: BsModalService) {
         this.report = {tong_can_nang: 0, tong_thanh_ly: 0, tong_tien_can: 0};
         this.route.params.subscribe(params => {

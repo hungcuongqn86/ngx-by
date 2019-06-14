@@ -5,6 +5,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {Bill, BillStatus} from '../../../models/Warehouse';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-warehouse-bill',
@@ -23,7 +24,7 @@ export class BillComponent implements OnInit, OnDestroy {
     errorMessage: string[] = [];
     sub: Subscription;
 
-    constructor(public warehouseService: WarehouseService, private modalService: BsModalService,
+    constructor(public warehouseService: WarehouseService, private modalService: BsModalService, public authService: AuthService,
                 private router: Router) {
     }
 

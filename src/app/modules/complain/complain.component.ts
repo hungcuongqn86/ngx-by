@@ -3,6 +3,7 @@ import {ComplainService} from '../../services/order/complain.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Complain, ComplainType} from '../../models/Complain';
+import {AuthService} from '../../auth.service';
 
 @Component({
     selector: 'app-complain',
@@ -18,7 +19,7 @@ export class ComplainComponent {
     title = '';
     totalItems = 0;
 
-    constructor(public complainService: ComplainService, private modalService: BsModalService) {
+    constructor(public complainService: ComplainService, public authService: AuthService, private modalService: BsModalService) {
         this.getComplains();
         this.getComplainTypes();
         this.complainReset();

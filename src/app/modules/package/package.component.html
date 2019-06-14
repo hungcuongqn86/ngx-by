@@ -115,8 +115,9 @@
                                 </p>
                             </td>
                             <td>
-                                <p title="Khách hàng">{{item.order.user.email}}</p>
-                                <p title="Khách hàng">{{item.order.user.phone_number}}</p>
+                                <p title="Khách hàng">{{item.order.user.name}}</p>
+                                <p *ngIf="authService.hasRole('admin')" title="Khách hàng">{{item.order.user.email}}</p>
+                                <p *ngIf="authService.hasRole('admin')" title="Khách hàng">{{item.order.user.phone_number}}</p>
                             </td>
                             <td class="text-right">
 

@@ -4,6 +4,7 @@ import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
+import {AuthService} from '../../../../auth.service';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -21,7 +22,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     col: string;
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    constructor(public orderService: OrderService, private route: ActivatedRoute) {
+    constructor(public orderService: OrderService, private route: ActivatedRoute, public authService: AuthService) {
         this.reNewPackage();
         this.reNewCart();
         this.comment = {

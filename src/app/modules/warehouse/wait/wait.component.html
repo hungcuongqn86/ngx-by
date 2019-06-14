@@ -56,9 +56,9 @@
                         <tbody>
                         <tr *ngFor="let item of warehouseWait">
                             <td>
-                                <p>{{item.email}}</p>
+                                <p *ngIf="authService.hasRole('admin')">{{item.email}}</p>
                                 <p>{{item.name}}</p>
-                                <p>{{item.phone_number}}</p>
+                                <p *ngIf="authService.hasRole('admin')">{{item.phone_number}}</p>
                             </td>
                             <td>
                                 <p>

@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewEncapsulation, OnDestroy, TemplateRef} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WarehouseService} from '../../../services/order/warehouse.service';
 import {WarehouseWait} from '../../../models/Warehouse';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-warehouse-wait',
@@ -20,7 +21,7 @@ export class WaitComponent implements OnInit, OnDestroy {
     sub: Subscription;
     modalRef: BsModalRef;
 
-    constructor(public warehouseService: WarehouseService, private modalService: BsModalService,
+    constructor(public warehouseService: WarehouseService, private modalService: BsModalService, public authService: AuthService,
                 private router: Router) {
     }
 

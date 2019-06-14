@@ -46,9 +46,9 @@
                         <tr *ngFor="let item of complains">
                             <td>
                                 <div *ngIf="item.order">
-                                    <p><i class="fa fa-user"></i> {{item.order.user.name}} -
-                                        {{item.order.user.phone_number}}</p>
-                                    <p><i class="fa fa-envelope"></i> {{item.order.user.email}}</p>
+                                    <p><i class="fa fa-user"></i> {{item.order.user.name}} <span *ngIf="authService.hasRole('admin')"> -
+                                        {{item.order.user.phone_number}}</span></p>
+                                    <p *ngIf="authService.hasRole('admin')"><i class="fa fa-envelope"></i> {{item.order.user.email}}</p>
                                 </div>
                             </td>
                             <td>

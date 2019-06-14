@@ -4,6 +4,7 @@ import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/o
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-order',
@@ -24,7 +25,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
     inputBaoGia = {id: null, content: null};
 
-    constructor(public orderService: OrderService, private modalService: BsModalService,
+    constructor(public orderService: OrderService, private modalService: BsModalService, public authService: AuthService,
                 private router: Router) {
         this.counts = null;
     }

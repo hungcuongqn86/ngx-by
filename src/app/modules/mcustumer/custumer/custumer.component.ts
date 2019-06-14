@@ -4,6 +4,7 @@ import {UserService} from '../../../services/muser/user.service';
 import {User} from '../../../models/User';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {AuthService} from '../../../auth.service';
 
 @Component({
     selector: 'app-custumer',
@@ -18,7 +19,7 @@ export class CustumerComponent implements OnInit {
     totalItems = 0;
     modalRef: BsModalRef;
 
-    constructor(public userService: UserService,
+    constructor(public userService: UserService, public authService: AuthService,
                 private router: Router, private modalService: BsModalService) {
 
     }

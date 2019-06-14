@@ -72,8 +72,8 @@
                                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
                             </td>
                             <td>
-                                <p><i class="fa fa-user"></i> {{item.user.name}} - {{item.user.phone_number}}</p>
-                                <p><i class="fa fa-envelope"></i> {{item.user.email}}</p>
+                                <p><i class="fa fa-user"></i> {{item.user.name}} <span *ngIf="authService.hasRole('admin')">- {{item.user.phone_number}}</span></p>
+                                <p *ngIf="authService.hasRole('admin')"><i class="fa fa-envelope"></i> {{item.user.email}}</p>
                             </td>
                             <td class="text-right">
                                 <p><span class="pull-left">Tiền hàng</span> <span class="money">{{item | tempTongTienHang: 1}}</span>

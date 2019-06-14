@@ -30,11 +30,11 @@
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td>{{bill.user.email}}</td>
+                                    <td><p *ngIf="authService.hasRole('admin')">{{bill.user.email}}</p></td>
                                 </tr>
                                 <tr>
                                     <td>Điện thoại</td>
-                                    <td>{{bill.user.phone_number}}</td>
+                                    <td><p *ngIf="authService.hasRole('admin')">{{bill.user.phone_number}}</p></td>
                                 </tr>
                                 </tbody>
                             </table>

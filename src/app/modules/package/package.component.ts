@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PackageService} from '../../services/package/package.service';
 import {Package, PackageStatus} from '../../models/Package';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../../auth.service';
 
 @Component({
     selector: 'app-package',
@@ -21,7 +22,7 @@ export class PackageComponent implements OnInit, OnDestroy {
     counts: { status: number, total: number }[];
     sub: Subscription;
 
-    constructor(public packageService: PackageService, private route: ActivatedRoute,
+    constructor(public packageService: PackageService, private route: ActivatedRoute, public authService: AuthService,
                 private router: Router) {
         this.route.params.subscribe(params => {
             if (params['package_code']) {
