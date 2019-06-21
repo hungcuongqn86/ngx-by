@@ -150,6 +150,20 @@ export class OrderService {
             );
     }
 
+    exportOrders(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}export`;
+        let params = new HttpParams();
+        Object.keys(this.search).map((key) => {
+            if (this.search[key]) {
+                params = params.append(key, this.search[key]);
+            }
+        });
+        return this.http.get<any>(url, {params: params})
+            .pipe(
+                catchError(this.handleError('exportOrders', []))
+            );
+    }
+
     getCountByStatus(): Observable<any> {
         const url = Util.getUri(apiV1Url) + `${this.moduleUri}count`;
         return this.http.get<any>(url)

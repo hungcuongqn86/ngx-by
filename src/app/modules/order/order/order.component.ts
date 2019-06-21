@@ -58,6 +58,18 @@ export class OrderComponent implements OnInit, OnDestroy {
             });
     }
 
+    public exportOrders() {
+        this.orderService.showLoading(true);
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+        this.sub = this.orderService.exportOrders()
+            .subscribe(data => {
+                console.log(data);
+                this.orderService.showLoading(false);
+            });
+    }
+
     public getStatus() {
         this.orderService.showLoading(true);
         this.orderService.getStatus()
