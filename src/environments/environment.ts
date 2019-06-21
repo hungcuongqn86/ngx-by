@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    basename: ''
+    basename: '',
+    backend: 'http://quangchauonline.com/'
 };
 
 /*

@@ -5,6 +5,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../../auth.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-order',
@@ -65,7 +66,7 @@ export class OrderComponent implements OnInit, OnDestroy {
         }
         this.sub = this.orderService.exportOrders()
             .subscribe(data => {
-                console.log(data);
+                window.open(environment.backend + 'exports/' + data.data.file, '_blank');
                 this.orderService.showLoading(false);
             });
     }
