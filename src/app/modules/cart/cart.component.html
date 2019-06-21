@@ -42,7 +42,7 @@
                                         </td>
                                         <td>
                                             <p><input title="Số lượng" [(ngModel)]="shopItem.cart[i].amount" type="number"
-                                                      (change)="calTienHang(shopItem)"
+                                                      (change)="updateCart(shopItem.cart[i]);"
                                                       id="amount"
                                                       name="amount" class="form-control"></p>
                                         </td>
@@ -65,6 +65,7 @@
                                                 [(ngModel)]="shopItem.cart[i].note" type="text"
                                                 class="form-control"
                                                 placeholder="Ghi chú link"
+                                                (change)="updateCart(shopItem.cart[i])"
                                                 value=""></td>
                                     </tr>
                                 </ng-template>

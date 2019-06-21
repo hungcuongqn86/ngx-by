@@ -147,6 +147,14 @@ export class CartComponent implements OnInit {
         }
     }
 
+    updateCart(cart: Cart) {
+        this.cartService.showLoading(true);
+        this.cartService.updateCart(cart)
+            .subscribe(res => {
+                this.getCarts();
+            });
+    }
+
     openModalDeleteShop(template: TemplateRef<any>, shop: Shop) {
         this.shop = shop;
         this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
