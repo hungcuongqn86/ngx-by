@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     basename: '/admin',
-    backend: 'http://quangchauonline.com/'
+    backend: 'https://api.quangchau247online.com/public/'
 };
