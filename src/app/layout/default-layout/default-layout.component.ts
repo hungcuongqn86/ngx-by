@@ -15,6 +15,7 @@ export class DefaultLayoutComponent {
     public element: HTMLElement = document.body;
     public status: OrderStatus[];
     public counts: { status: number, total: number }[];
+    public loadSub = true;
 
     constructor(public auth: AuthService, private router: Router, public orderService: OrderService) {
 
@@ -61,7 +62,7 @@ export class DefaultLayoutComponent {
                 }
             }
         }
-        // this.getMyCountByStatus();
+        this.loadSub = false;
     }
 
     public getNotyfication() {
