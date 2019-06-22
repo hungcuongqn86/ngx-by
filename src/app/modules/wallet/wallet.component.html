@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header"><i class="cui-user icons"></i> <strong>{{authService.user.name}}</strong></div>
     <div class="card-body">
-        <table class="table table-bordered table-striped table-sm">
+        <table class="table table-bordered table-striped table-sm table-data">
             <thead>
             <tr>
                 <th>Ngày giao dịch</th>
@@ -23,14 +23,19 @@
                 <td>{{item.content}}</td>
                 <td class="text-right">
                     <span *ngIf="item.otype.value > 0" class="badge badge-success float-left">+</span>
-                    <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value | tempPrice : 1 : 1}} <sup>đ</sup>
+                    <span *ngIf="item.otype.value < 0" class="badge badge-warning float-left">-</span>{{item.value |
+                    tempPrice : 1 : 1}} <sup>đ</sup>
                 </td>
-                <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></span></td>
+                <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></span>
+                </td>
                 <td *ngIf="i>0" class="text-right">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></td>
             </tr>
             </tbody>
         </table>
-        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page" [itemsPerPage]="userService.tSearch.limit"
+    </div>
+    <div class="card-footer">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="userService.tSearch.page"
+                    [itemsPerPage]="userService.tSearch.limit"
                     (pageChanged)="pageChanged($event)"
                     class="pagination-sm pull-right" [maxSize]="6"
                     previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
