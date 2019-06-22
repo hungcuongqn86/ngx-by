@@ -3,7 +3,8 @@
         [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 'auto', height: '98%', alt: 'Petbook Logo'}"
         [navbarBrandMinimized]="{src: 'assets/img/brand/logo.png', width: 'auto', height: '98%', alt: 'Petbook Logo'}"
         [sidebarToggler]="'lg'"
-        [asideMenuToggler]="'lg'">
+        [mobileAsideMenuToggler]=false
+        [asideMenuToggler]=false>
     <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
             <a class="nav-link" target="_blank" href="https://quangchau247online.com/blog-2/"><i
@@ -64,7 +65,7 @@
     <main id="main" class="main">
         <router-outlet></router-outlet>
     </main>
-    <app-aside [fixed]="true" [display]="false">
+    <!--<app-aside [fixed]="true" [display]="false">
         <tabset>
             <tab>
                 <ng-template tabHeading><i class="icon-list"></i></ng-template>
@@ -82,7 +83,7 @@
                 </div>
             </tab>
         </tabset>
-    </app-aside>
+    </app-aside>-->
 </div>
 <app-footer>
     <span><a href="#">quangchauonline</a> &copy; 2019 creativeLabs.</span>

@@ -27,10 +27,6 @@
   background: #0000004a;
 }
 
-.app-header .navbar-brand {
-  width: 200px;
-}
-
 .app-header .dropdown-item {
   font-size: 12px;
 }
@@ -47,5 +43,11 @@
   }
   #printarea * {
     visibility: visible;
+  }
+}
+
+@media (max-width: 767px) {
+  .main .container-fluid {
+    padding: 0 15px;
   }
 }
