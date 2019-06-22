@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </form>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-data">
                         <thead>
                         <tr>
                             <th>Đơn hàng</th>
@@ -109,6 +109,9 @@
                         </tr>
                         </tbody>
                     </table>
+
+                </div>
+                <div class="card-footer">
                     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"
                                 [itemsPerPage]="orderService.search.limit"
                                 (pageChanged)="pageChanged($event)"

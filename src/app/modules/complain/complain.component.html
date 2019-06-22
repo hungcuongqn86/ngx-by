@@ -70,6 +70,9 @@
                         </tr>
                         </tbody>
                     </table>
+
+                </div>
+                <div class="card-footer">
                     <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="complainService.search.limit"
                                 [(ngModel)]="complainService.search.page"
                                 (pageChanged)="pageChanged($event)"

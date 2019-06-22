@@ -45,3 +45,13 @@ ul.nav-tabs li.nav-item .nav-link .tab-title{
     width: 50%;
     display: inline-block;
 }
+
+@media (max-width: 767px) {
+    .card-body {
+        overflow: auto;
+    }
+
+    .table-data {
+        width: max-content;
+    }
+}
