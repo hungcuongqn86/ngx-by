@@ -6,18 +6,22 @@ import {OrderDetailComponent} from './order/order.detail.component';
 import {MyorderComponent} from './myorder/myorder.component';
 import {MyorderDetailComponent} from './myorder/myorder.detail.component';
 
+import {OrderGuardService} from './order.guard.service';
+
 const routes: Routes = [
     {
         path: 'list', component: OrderComponent,
         data: {
             title: 'Đơn hàng'
-        }
+        },
+        canActivate: [OrderGuardService]
     },
     {
         path: 'list/detail/:id', component: OrderDetailComponent,
         data: {
             title: 'Chi tiết đơn hàng'
-        }
+        },
+        canActivate: [OrderGuardService]
     },
     {
         path: 'myorder', component: MyorderComponent,

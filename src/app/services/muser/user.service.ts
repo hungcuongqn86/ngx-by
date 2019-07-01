@@ -43,7 +43,7 @@ export class UserService {
 
     reset() {
         this.user = {
-            id: null, name: null, partner: null, role_id: null, roles: null, transaction: null,
+            id: null, name: null, partner: null, role_id: null, roles: null, transaction: null, type: null,
             phone_number: null, password: null, c_password: null, partner_id: clientid, cost_percent: null, weight_price: null,
             email: null, is_deleted: 0, created_at: '', updated_at: '', image: null, debt: null, rate: null
         };
