@@ -38,7 +38,8 @@
                                                 <a target="_blank" rel="noopener noreferrer"
                                                    href="{{item.pro_link}}"><img src="{{item.image}}"></a>
                                             </div>
-                                            <p class="pull-left m-1 colortxt">{{item.colortxt}}</p>
+                                            <p *ngIf="item.sizetxt" class="pull-left m-1 colortxt">{{item.sizetxt}}</p>
+                                            <p *ngIf="item.colortxt" class="pull-left m-1 colortxt">{{item.colortxt}}</p>
                                         </td>
                                         <td>
                                             <p><input title="Số lượng" [(ngModel)]="shopItem.cart[i].amount" type="number"
