@@ -23,6 +23,7 @@ export interface User {
     debt: number;
     cost_percent: number;
     rate: number;
+    deposit: string;
     weight_price: number;
     is_deleted: number;
     created_at: string;

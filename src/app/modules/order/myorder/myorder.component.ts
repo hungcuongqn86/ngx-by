@@ -21,11 +21,13 @@ export class MyorderComponent implements OnInit {
     totalItems = 0;
     inputDatCoc: { id: number; dc_percent_value: number; dc_value: number; content: string; tien_hang: number };
     errorMessage: string[] = [];
+    arrDeposit = [];
 
     constructor(public orderService: OrderService, private modalService: BsModalService, private route: ActivatedRoute,
                 public auth: AuthService,
                 private router: Router) {
         this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
+        this.arrDeposit = this.auth.user.deposit.split(',');
         this.counts = null;
         this.route.params.subscribe(params => {
             if (params['status']) {
@@ -37,6 +39,7 @@ export class MyorderComponent implements OnInit {
     ngOnInit() {
         // this.searchOrders();
         this.getStatus();
+        console.log(this.arrDeposit);
     }
 
     pageChanged(event: any): void {

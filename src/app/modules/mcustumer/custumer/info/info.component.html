@@ -73,13 +73,23 @@
         </div>
     </div>
     <div class="form-group row">
+        <label class="col-md-3 col-form-label" for="deposit">
+            Các mức đặt cọc (phân cách nhau bởi dấu ',')
+        </label>
+        <div class="col-md-9">
+            <input [(ngModel)]="userService.user.deposit" #deposit="ngModel" type="text" id="deposit"
+                   name="deposit"
+                   class="form-control"
+                   placeholder="Các mức đặt cọc">
+        </div>
+    </div>
+    <div class="form-group row">
         <label class="col-md-3 col-form-label" for="rate">
             Tỉ giá
         </label>
         <div class="col-md-9">
             <input [(ngModel)]="userService.user.rate" #rate="ngModel" type="text" id="rate"
                    name="rate"
-                   required
                    class="form-control"
                    placeholder="Tỉ giá">
         </div>
@@ -91,7 +101,6 @@
         <div class="col-md-9">
             <input [(ngModel)]="userService.user.weight_price" #weight_price="ngModel" type="text" id="weight_price"
                    name="weight_price"
-                   required
                    class="form-control"
                    placeholder="Giá cân nặng">
         </div>
