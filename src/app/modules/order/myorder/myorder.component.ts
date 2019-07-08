@@ -31,15 +31,14 @@ export class MyorderComponent implements OnInit {
         this.counts = null;
         this.route.params.subscribe(params => {
             if (params['status']) {
-                this.selectTab(params['status']);
+                const type = params['type'] ? params['type'] : '';
+                this.selectTab(params['status'], type);
             }
         });
     }
 
     ngOnInit() {
-        // this.searchOrders();
         this.getStatus();
-        console.log(this.arrDeposit);
     }
 
     pageChanged(event: any): void {
@@ -58,18 +57,8 @@ export class MyorderComponent implements OnInit {
                 this.orders = orders.data.data;
                 this.totalItems = orders.data.total;
                 this.orderService.showLoading(false);
-                // this.getMyCountByStatus();
             });
     }
-
-    /*public getMyCountByStatus() {
-        this.orderService.showLoading(true);
-        this.orderService.getMyCountByStatus()
-            .subscribe(data => {
-                this.counts = data.data;
-                this.orderService.showLoading(false);
-            });
-    }*/
 
     public getStatus() {
         this.orderService.showLoading(true);
@@ -80,8 +69,18 @@ export class MyorderComponent implements OnInit {
             });
     }
 
-    selectTab(status: string = null) {
-        this.orderService.search.status = status;
+    selectTab(status: string = null, type: string = null) {
+        this.orderService.search.status = '0';
+        this.orderService.search.pk_status = '0';
+
+        if (type === 'od') {
+            this.orderService.search.status = status;
+        }
+
+        if (type === 'pk') {
+            this.orderService.search.pk_status = status;
+        }
+
         this.searchOrders();
     }
 
