@@ -73,7 +73,11 @@ export class DefaultLayoutComponent {
     }
 
     gotoOrder(orderId: number) {
-        this.router.navigate([`./order/list/detail/${orderId}`]);
+        if (this.auth.user.type) {
+            this.router.navigate([`./order/myorder/detail/${orderId}`]);
+        } else {
+            this.router.navigate([`./order/list/detail/${orderId}`]);
+        }
     }
 
     public profile() {
