@@ -27,6 +27,10 @@ export class MyorderComponent implements OnInit {
                 public auth: AuthService,
                 private router: Router) {
         this.inputDatCoc = {id: 0, content: null, dc_percent_value: 80, dc_value: null, tien_hang: null};
+        this.order = {
+            id: null, user_id: null, shop_id: null, cart_ids: null, rate: 1, is_deleted: 0, created_at: '', updated_at: '',
+            count_product: 0, count_link: 0, tien_hang: 0, phi_tam_tinh: 0, tong: 0
+        };
         this.arrDeposit = this.auth.user.deposit.split(',');
         this.counts = null;
         this.route.params.subscribe(params => {
@@ -120,5 +124,39 @@ export class MyorderComponent implements OnInit {
         const n = number.split('').reverse().join('');
         const n2 = n.replace(/\d\d\d(?!$)/g, '$&,');
         return n2.split('').reverse().join('');
+    }
+
+    openDeleteModal(template: TemplateRef<any>, order: Order) {
+        this.order = {
+            id: order.id,
+            user_id: order.user_id,
+            shop_id: order.shop_id,
+            cart_ids: null,
+            rate: order.rate,
+            is_deleted: order.is_deleted,
+            created_at: order.created_at,
+            updated_at: order.updated_at,
+            count_product: order.count_product,
+            count_link: order.count_link,
+            tien_hang: order.tien_hang,
+            phi_tam_tinh: order.phi_tam_tinh,
+            tong: order.tong
+        };
+        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    }
+
+    confirmDeleteOrder(): void {
+        if (this.order) {
+            this.order.is_deleted = 1;
+            this.orderService.editOrder(this.order)
+                .subscribe(res => {
+                    if (res.status) {
+                        this.searchOrders();
+                        this.modalRef.hide();
+                    } else {
+                        this.errorMessage.push(res.message);
+                    }
+                });
+        }
     }
 }
