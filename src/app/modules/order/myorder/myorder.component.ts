@@ -96,14 +96,17 @@ export class MyorderComponent implements OnInit {
     }
 
     confirmDatCoc(): void {
+        this.orderService.showLoading(true);
         if (this.inputDatCoc.id > 0) {
             this.orderService.postDatCoc(this.inputDatCoc)
                 .subscribe(res => {
                     if (res.status) {
                         this.searchOrders();
+                        this.orderService.showLoading(false);
                         this.modalRef.hide();
                     } else {
                         this.errorMessage.push(res.message);
+                        this.orderService.showLoading(false);
                     }
                 });
         }
