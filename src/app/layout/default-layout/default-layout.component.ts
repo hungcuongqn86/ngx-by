@@ -14,7 +14,7 @@ export class DefaultLayoutComponent {
     private changes: MutationObserver;
     public element: HTMLElement = document.body;
     public status: { id: number, name: string, type: string }[];
-    public counts: { status: number, total: number }[];
+    public counts: { status: number, total: number, type: string }[];
     public loadSub = true;
 
     constructor(public auth: AuthService, private router: Router, public orderService: OrderService) {
@@ -28,7 +28,6 @@ export class DefaultLayoutComponent {
         });
         this.getNavItems();
         this.getNotyfication();
-        this.getMyCountByStatus();
         setInterval(() => {
             this.getNotyfication();
             this.getMyCountByStatus();
@@ -56,13 +55,13 @@ export class DefaultLayoutComponent {
                         name: this.status[j].name,
                         url: `/order/myorder/${this.status[j].id}/${this.status[j].type}`,
                         icon: 'fa fa-folder',
-                        status: 'order_' + this.status[j].id,
+                        status: this.status[j].type + '_' + this.status[j].id,
                         view: this.status[j].name
                     });
                 }
             }
         }
-        this.loadSub = false;
+        this.getMyCountByStatus();
     }
 
     public getNotyfication() {
@@ -89,7 +88,7 @@ export class DefaultLayoutComponent {
             {id: 1, name: 'Chờ báo giá', type: 'od'},
             {id: 2, name: 'Chờ đặt cọc', type: 'od'},
             {id: 3, name: 'Đang mua hàng', type: 'od'},
-            {id: 4, name: 'Đã mua hàng', type: 'od'},
+            {id: 2, name: 'Đã mua hàng', type: 'pk'},
             {id: 3, name: 'Shop đang giao hàng', type: 'pk'},
             {id: 4, name: 'Kho Trung Quốc nhận hàng', type: 'pk'},
             {id: 5, name: 'Đang trên đường về VN', type: 'pk'},
@@ -101,6 +100,7 @@ export class DefaultLayoutComponent {
     }
 
     public getMyCountByStatus() {
+        this.loadSub = true;
         this.orderService.getMyCountByStatus()
             .subscribe(data => {
                 this.counts = data.data;
@@ -109,7 +109,7 @@ export class DefaultLayoutComponent {
                         for (let j = 0; j < this.navItems[i].children.length; j++) {
                             if (this.navItems[i].children[j] && this.navItems[i].children[j].status) {
                                 for (let s = 0; s < this.counts.length; s++) {
-                                    if (this.navItems[i].children[j].status === `order_${this.counts[s].status}`) {
+                                    if (this.navItems[i].children[j].status === `${this.counts[s].type}_${this.counts[s].status}`) {
                                         this.navItems[i].children[j].name = `${this.navItems[i].children[j].view} (${this.counts[s].total})`;
                                     }
                                 }
@@ -117,6 +117,7 @@ export class DefaultLayoutComponent {
                         }
                     }
                 }
+                this.loadSub = false;
             });
     }
 }
