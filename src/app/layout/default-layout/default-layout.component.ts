@@ -15,7 +15,6 @@ export class DefaultLayoutComponent {
     public element: HTMLElement = document.body;
     public status: { id: number, name: string, type: string }[];
     public counts: { status: number, total: number, type: string }[];
-    public loadSub = true;
 
     constructor(public auth: AuthService, private router: Router, public orderService: OrderService) {
 
@@ -43,24 +42,6 @@ export class DefaultLayoutComponent {
     }
 
     private genSubMenu() {
-        for (let i = 0; i < this.navItems.length; i++) {
-            if (this.navItems[i].url === '/order/myorder') {
-                this.navItems[i].children = [{
-                    name: 'Tất cả',
-                    url: '/order/myorder/0/od',
-                    icon: 'fa fa-folder'
-                }];
-                for (let j = 0; j < this.status.length; j++) {
-                    this.navItems[i].children.push({
-                        name: this.status[j].name,
-                        url: `/order/myorder/${this.status[j].id}/${this.status[j].type}`,
-                        icon: 'fa fa-folder',
-                        status: this.status[j].type + '_' + this.status[j].id,
-                        view: this.status[j].name
-                    });
-                }
-            }
-        }
         this.getMyCountByStatus();
     }
 
@@ -100,24 +81,40 @@ export class DefaultLayoutComponent {
     }
 
     public getMyCountByStatus() {
-        this.loadSub = true;
-        this.orderService.getMyCountByStatus()
-            .subscribe(data => {
-                this.counts = data.data;
-                for (let i = 0; i < this.navItems.length; i++) {
-                    if (this.navItems[i].url === '/order/myorder' && this.navItems[i] && this.navItems[i].children) {
-                        for (let j = 0; j < this.navItems[i].children.length; j++) {
-                            if (this.navItems[i].children[j] && this.navItems[i].children[j].status) {
-                                for (let s = 0; s < this.counts.length; s++) {
-                                    if (this.navItems[i].children[j].status === `${this.counts[s].type}_${this.counts[s].status}`) {
-                                        this.navItems[i].children[j].name = `${this.navItems[i].children[j].view} (${this.counts[s].total})`;
+        for (let i = 0; i < this.navItems.length; i++) {
+            if (this.navItems[i].url === '/order/myorder') {
+                this.navItems[i].children = [{
+                    name: 'Tất cả',
+                    url: '/order/myorder/0/od',
+                    icon: 'fa fa-folder'
+                }];
+                for (let j = 0; j < this.status.length; j++) {
+                    this.navItems[i].children.push({
+                        name: this.status[j].name,
+                        url: `/order/myorder/${this.status[j].id}/${this.status[j].type}`,
+                        icon: 'fa fa-folder',
+                        status: this.status[j].type + '_' + this.status[j].id,
+                        view: this.status[j].name
+                    });
+                }
+                this.orderService.getMyCountByStatus()
+                    .subscribe(data => {
+                        this.counts = data.data;
+                        for (let i = 0; i < this.navItems.length; i++) {
+                            if (this.navItems[i].url === '/order/myorder' && this.navItems[i] && this.navItems[i].children) {
+                                for (let j = 0; j < this.navItems[i].children.length; j++) {
+                                    if (this.navItems[i].children[j] && this.navItems[i].children[j].status) {
+                                        for (let s = 0; s < this.counts.length; s++) {
+                                            if (this.navItems[i].children[j].status === `${this.counts[s].type}_${this.counts[s].status}`) {
+                                                this.navItems[i].children[j].name = `${this.navItems[i].children[j].view} (${this.counts[s].total})`;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                }
-                this.loadSub = false;
-            });
+                    });
+            }
+        }
     }
 }
