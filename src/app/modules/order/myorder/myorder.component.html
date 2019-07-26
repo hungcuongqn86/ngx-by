@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <p *ngFor="let cart of item.cart">
-                                    <img style="max-width: 50px;" src="{{cart.image}}">
+                                    <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;" src="{{cart.image}}"></a>
                                     <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
                                     <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
                                     <span> - Số lượng: {{cart.amount}}</span>
