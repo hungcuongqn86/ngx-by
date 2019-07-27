@@ -19,7 +19,8 @@ export class TempTongTienHangPipe implements PipeTransform {
         }
 
         if (output === 2) {
-            const conThieu = vndTotal - order.thanh_toan;
+            let conThieu = vndTotal - order.thanh_toan;
+            conThieu = Math.round(conThieu * 100) / 100;
             return this.formatCurrency(conThieu.toString());
         }
         return this.formatCurrency(vndTotal.toString());
