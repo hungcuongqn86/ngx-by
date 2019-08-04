@@ -60,8 +60,11 @@ export class BillDetailComponent implements OnInit, OnDestroy {
         this.report = {tong_can_nang: 0, tong_thanh_ly: 0, tong_tien_can: 0};
         for (let i = 0; i < this.bill.package.length; i++) {
             this.report.tong_can_nang = Number(this.report.tong_can_nang) + Number(this.bill.package[i].weight_qd);
+            this.report.tong_can_nang = Math.round(this.report.tong_can_nang * 100) / 100;
             this.report.tong_tien_can = Number(this.report.tong_tien_can) + Number(this.bill.package[i].tien_can);
+            this.report.tong_tien_can = Math.round(this.report.tong_tien_can * 100) / 100;
             this.report.tong_thanh_ly = Number(this.report.tong_thanh_ly) + Number(this.bill.package[i].tien_thanh_ly);
+            this.report.tong_thanh_ly = Math.round(this.report.tong_thanh_ly * 100) / 100;
             for (let j = 0; j < this.bill.package[i].order.cart.length; j++) {
                 const checkExit = this.carts.findIndex(x => x.id === this.bill.package[i].order.cart[j].id);
                 if (checkExit < 0) {

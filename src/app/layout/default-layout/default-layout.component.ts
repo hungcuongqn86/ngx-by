@@ -15,6 +15,7 @@ export class DefaultLayoutComponent {
     public element: HTMLElement = document.body;
     public status: { id: number, name: string, type: string }[];
     public counts: { status: number, total: number, type: string }[];
+    public load = true;
 
     constructor(public auth: AuthService, private router: Router, public orderService: OrderService) {
 
@@ -83,38 +84,42 @@ export class DefaultLayoutComponent {
     public getMyCountByStatus() {
         for (let i = 0; i < this.navItems.length; i++) {
             if (this.navItems[i].url === '/order/myorder') {
+                this.orderService.getMyCountByStatus()
+                    .subscribe(data => {
+                        this.genMenuText(data.data);
+                    });
+            }
+        }
+    }
+
+    private genMenuText(data) {
+        this.counts = data;
+        const temNav = [];
+        for (let i = 0; i < this.navItems.length; i++) {
+            if (this.navItems[i].url === '/order/myorder') {
                 this.navItems[i].children = [{
                     name: 'Tất cả',
                     url: '/order/myorder/0/od',
                     icon: 'fa fa-folder'
                 }];
-                for (let j = 0; j < this.status.length; j++) {
+                for (let istatus = 0; istatus < this.status.length; istatus++) {
+                    let name = this.status[istatus].name;
+                    for (let s = 0; s < this.counts.length; s++) {
+                        if ((this.status[istatus].type === this.counts[s].type) && (this.status[istatus].id === this.counts[s].status)) {
+                            name = `${this.status[istatus].name} (${this.counts[s].total})`;
+                        }
+                    }
                     this.navItems[i].children.push({
-                        name: this.status[j].name,
-                        url: `/order/myorder/${this.status[j].id}/${this.status[j].type}`,
+                        name: name,
+                        url: `/order/myorder/${this.status[istatus].id}/${this.status[istatus].type}`,
                         icon: 'fa fa-folder',
-                        status: this.status[j].type + '_' + this.status[j].id,
-                        view: this.status[j].name
+                        status: this.status[istatus].type + '_' + this.status[istatus].id,
+                        view: this.status[istatus].name
                     });
                 }
-                this.orderService.getMyCountByStatus()
-                    .subscribe(data => {
-                        this.counts = data.data;
-                        for (let i = 0; i < this.navItems.length; i++) {
-                            if (this.navItems[i].url === '/order/myorder' && this.navItems[i] && this.navItems[i].children) {
-                                for (let j = 0; j < this.navItems[i].children.length; j++) {
-                                    if (this.navItems[i].children[j] && this.navItems[i].children[j].status) {
-                                        for (let s = 0; s < this.counts.length; s++) {
-                                            if (this.navItems[i].children[j].status === `${this.counts[s].type}_${this.counts[s].status}`) {
-                                                this.navItems[i].children[j].name = `${this.navItems[i].children[j].view} (${this.counts[s].total})`;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
             }
+            temNav.push(this.navItems[i]);
         }
+        this.navItems = temNav;
     }
 }
