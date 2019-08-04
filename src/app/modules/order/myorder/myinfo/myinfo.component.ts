@@ -2,6 +2,7 @@ import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angul
 import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {PackageStatus} from '../../../../models/Package';
 import {Comment} from '../../../../models/Comment';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-myorder-detail-info',
@@ -16,7 +17,7 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     comments: Comment[];
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    constructor(public orderService: OrderService) {
+    constructor(public orderService: OrderService, private route: ActivatedRoute) {
         this.comment = {
             id: null,
             order_id: null,
@@ -28,7 +29,9 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
         };
         this.getStatus();
         this.getPkStatus();
-        this.getChat();
+        this.route.params.subscribe(params => {
+            this.getChat();
+        });
     }
 
     ngOnInit() {
