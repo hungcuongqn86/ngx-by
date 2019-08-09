@@ -15,7 +15,13 @@ export class TempPricePipe implements PipeTransform {
         } else {
             vnd = indt * tigia * soluong;
         }
-        return this.formatCurrency(vnd.toString());
+
+        if (vnd >= 0) {
+            return this.formatCurrency(vnd.toString());
+        } else {
+            vnd = 0 - vnd;
+            return '-' + this.formatCurrency(vnd.toString());
+        }
     }
 
     formatCurrency(number: string) {
