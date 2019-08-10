@@ -14,6 +14,7 @@ export class TempPricePipe implements PipeTransform {
             vnd = Math.round(indt * tigia * soluong);
         } else {
             vnd = indt * tigia * soluong;
+            vnd = Math.round(vnd * 100) / 100;
         }
 
         if (vnd >= 0) {
