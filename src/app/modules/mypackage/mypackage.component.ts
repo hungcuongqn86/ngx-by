@@ -14,8 +14,6 @@ import {AuthService} from '../../auth.service';
 
 export class MypackageComponent implements OnInit, OnDestroy {
     packages: Package[];
-    package: Package;
-    col: string;
     pkStatus: PackageStatus[];
     totalItems = 0;
     errorMessage: string[] = [];
@@ -30,7 +28,6 @@ export class MypackageComponent implements OnInit, OnDestroy {
             }
         });
         this.counts = null;
-        this.reNewPackage();
     }
 
     ngOnInit() {
@@ -71,62 +68,8 @@ export class MypackageComponent implements OnInit, OnDestroy {
     }
 
     gotoOrder(orderId: number) {
-        const win = window.open(`./order/list/detail/${orderId}`, '_blank');
+        const win = window.open(`./order/myorder/detail/${orderId}`, '_blank');
         win.focus();
-    }
-
-    gotoBill(billId: number) {
-        const win = window.open(`./warehouse/bill/detail/${billId}`, '_blank');
-        win.focus();
-    }
-
-    public selectPackage(item: Package, col: string) {
-        this.col = col;
-        this.package = item;
-    }
-
-    public hideInput() {
-        this.reNewPackage();
-    }
-
-    reNewPackage() {
-        this.package = {
-            id: null,
-            is_deleted: null,
-            contract_code: null,
-            ship_khach: null,
-            ship_tt: null,
-            tra_shop: null,
-            thanh_toan: null,
-            created_at: null,
-            order_id: null,
-            order: null,
-            package_code: null,
-            status: null,
-            note_tl: null,
-            weight: null,
-            weight_qd: null,
-            tien_can: null,
-            gia_can: null,
-            tien_thanh_ly: null,
-            updated_at: null,
-            bill_id: null
-        };
-    }
-
-    public updatePackage() {
-        this.packageService.showLoading(true);
-        if (!this.package.weight_qd) {
-            if (this.package.weight < 0.5) {
-                this.package.weight_qd = 0.5;
-            } else {
-                this.package.weight_qd = this.package.weight;
-            }
-        }
-        this.packageService.editPackage(this.package)
-            .subscribe(res => {
-                this.searchPackages();
-            });
     }
 
     ngOnDestroy() {

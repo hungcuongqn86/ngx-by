@@ -45,11 +45,6 @@
                                        class="form-control"
                                        placeholder="Mã đơn hàng">
                             </div>
-                            <div class="col-md-5">
-                                <input [(ngModel)]="packageService.search.key" type="text" id="key" name="key"
-                                       class="form-control"
-                                       placeholder="Tìm kiếm theo tên khách hàng, email, số điện thoại">
-                            </div>
                             <div class="col-md-2">
                                 <button type="submit" (click)="searchPackages()"
                                         class="btn btn-primary">Tìm kiếm
@@ -60,10 +55,8 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th style="width: 20%">Kiện hàng</th>
-                            <th>Thông tin</th>
-                            <th>Ngày</th>
-                            <th style="width: 20%">Trạng thái</th>
+                            <th style="width: 40%">Kiện hàng</th>
+                            <th>Đơn hàng</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -72,37 +65,13 @@
                                 <p class="text-center packages-code">{{item.package_code? item.package_code : '--'}}</p>
                                 <p class="text-center"><span class="packages-status badge badge-info">{{item.status | tempPkStatus :
                                     pkStatus}}</span></p>
-                                <p><span class="packages-inf">Cân nặng</span><span
-                                        (click)="selectPackage(item,'weight')"
-                                        class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'weight'))"
-                                           [(ngModel)]="package.weight"
-                                           #weight="ngModel"
-                                           class="form-control"
-                                           id="weight"
-                                           name="weight"
-                                           (change)="updatePackage()"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span *ngIf="((package.id !== item.id) || (col !== 'weight'))">{{item.weight? item.weight : '0.00'}}</span>
-                                </span>
+                                <p>
+                                    <span class="packages-inf">Cân nặng</span>
+                                    <span class="packages-inf text-right badge badge-info">{{item.weight? item.weight : '0.00'}}</span>
                                 </p>
-                                <p><span class="packages-inf">Quy đổi</span><span
-                                        (click)="selectPackage(item,'weight_qd')"
-                                        class="packages-inf text-right badge badge-info">
-                                    <input *ngIf="((package.id === item.id) && (col === 'weight_qd'))"
-                                           [(ngModel)]="package.weight_qd"
-                                           #weight_qd="ngModel"
-                                           class="form-control"
-                                           id="weight_qd"
-                                           name="weight_qd"
-                                           (change)="updatePackage()"
-                                           (blur)="hideInput()"
-                                           appAutofocus
-                                           type="number">
-                                <span *ngIf="((package.id !== item.id) || (col !== 'weight_qd'))">{{item.weight_qd? item.weight_qd : '0.00'}}</span>
-                                </span>
+                                <p>
+                                    <span class="packages-inf">Quy đổi</span>
+                                    <span class="packages-inf text-right badge badge-info">{{item.weight_qd? item.weight_qd : '0.00'}}</span>
                                 </p>
                                 <p><span class="packages-inf">Đơn hàng</span><a href="javascript:void(0);"
                                                                                 (click)="gotoOrder(item.order_id)"><span
@@ -115,17 +84,11 @@
                                 </p>
                             </td>
                             <td>
-                                <p title="Khách hàng">{{item.order.user.name}}</p>
-                                <p *ngIf="authService.hasRole('admin')" title="Khách hàng">{{item.order.user.email}}</p>
-                                <p *ngIf="authService.hasRole('admin')" title="Khách hàng">{{item.order.user.phone_number}}</p>
-                            </td>
-                            <td class="text-right">
-
-                            </td>
-                            <td>
-                                <p *ngIf="item.bill_id"><span class="packages-inf">Phiếu xuất: </span><a href="javascript:void(0);"
-                                                                                (click)="gotoBill(item.bill_id)"><span
-                                        class="packages-inf text-right"><strong>{{item.bill_id}}</strong></span></a>
+                                <p><i class="fa fa-qrcode"></i> Mã đơn: {{item.order.id}}</p>
+                                <p><i class="fa fa-calendar"></i> Ngày tạo: {{item.order.created_at | tempDate}}</p>
+                                <p><i class="fa fa-money"></i> Tổng tiền: {{item.order | tempTongTienHang : 1}} <sup>
+                                    đ</sup>
+                                </p>
                             </td>
                         </tr>
                         </tbody>
