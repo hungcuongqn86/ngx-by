@@ -258,14 +258,14 @@
                                     appAutofocus
                                     type="number">
                             <div *ngIf="((cart.id !== item.id) || (col !== 'price'))">
-                                <p *ngIf="orderService.orderRe.shop">{{item.price | tempPrice:
-                                    orderService.orderRe.shop.rate :
+                                <p *ngIf="orderService.orderRe">{{item.price | tempPrice:
+                                    orderService.orderRe.rate :
                                     1}}<sup>đ</sup></p>
                                 <p><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
                             </div>
                         </td>
                         <td>
-                            <p>{{item.price | tempPrice: orderService.orderRe.shop.rate : item.amount}}<sup>đ</sup></p>
+                            <p>{{item.price | tempPrice: orderService.orderRe.rate : item.amount}}<sup>đ</sup></p>
                             <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
                         </td>
                         <td>{{item.note}}</td>
