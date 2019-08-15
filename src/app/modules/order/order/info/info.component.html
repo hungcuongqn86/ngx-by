@@ -5,14 +5,16 @@
                 <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
             </div>
             <div class="card-body">
-                <p><i class="fa fa-map-marker"></i> Trạng thái: <span class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
+                <p><i class="fa fa-map-marker"></i> Trạng thái: <span
+                        class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
                 </p>
                 <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.id}} <i class="fa fa-calendar"></i></p>
                 <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
                 <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
                 </p>
                 <p><i class="fa fa-edge"></i> Đặt tại website: <span
-                        *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]" class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span>
+                        *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"
+                        class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span>
                 </p>
             </div>
         </div>
@@ -96,7 +98,7 @@
                                    class="form-control"
                                    id="ship_khach"
                                    name="ship_khach"
-                                   (change)="updatePackage()"
+                                   (change)="updatePackage(template)"
                                    (blur)="hideInput()"
                                    appAutofocus
                                    type="number">
@@ -109,7 +111,7 @@
                                    class="form-control"
                                    id="ship_tt"
                                    name="ship_tt"
-                                   (change)="updatePackage()"
+                                   (change)="updatePackage(template)"
                                    (blur)="hideInput()"
                                    appAutofocus
                                    type="number">
@@ -123,7 +125,7 @@
                                    class="form-control"
                                    id="thanh_toan"
                                    name="thanh_toan"
-                                   (change)="updatePackage()"
+                                   (change)="updatePackage(template)"
                                    (blur)="hideInput()"
                                    appAutofocus
                                    type="number">
@@ -139,7 +141,7 @@
                                    class="form-control"
                                    id="package_code"
                                    name="package_code"
-                                   (change)="updatePackage()"
+                                   (change)="updatePackage(template)"
                                    (blur)="hideInput()"
                                    appAutofocus
                                    type="text">
@@ -152,7 +154,7 @@
                                    class="form-control"
                                    id="contract_code"
                                    name="contract_code"
-                                   (change)="updatePackage()"
+                                   (change)="updatePackage(template)"
                                    (blur)="hideInput()"
                                    appAutofocus
                                    type="text">
@@ -165,7 +167,7 @@
                                     #status="ngModel"
                                     id="status"
                                     name="status"
-                                    (change)="updatePackage()"
+                                    (change)="updatePackage(template)"
                                     (blur)="hideInput()"
                                     appAutofocus
                                     class="form-control">
@@ -182,7 +184,7 @@
                               name="note_tl"
                               rows="3"
                               class="form-control"
-                              (change)="updatePackage()"
+                              (change)="updatePackage(template)"
                               (blur)="hideInput()"
                               appAutofocus>
                     </textarea>
@@ -225,7 +227,7 @@
                 <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
                 <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
                     <tr class="{{item.amount? '' : 'yl-bg'}}">
-                        <td>{{i+1}}</td>
+                        <td>{{i + 1}}</td>
                         <td>
                             <p><span class="badge badge-warning">{{item.id}}</span></p>
                             <p><a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}">Xem</a></p>
@@ -290,3 +292,16 @@
         </div>
     </div>
 </form>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Thông báo lỗi</h5>
+    </div>
+    <div class="modal-body">
+        <alert type="danger" *ngIf="errorMessage.length > 0">
+            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+        </alert>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+    </div>
+</ng-template>

@@ -1,10 +1,11 @@
-import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit} from '@angular/core';
-import {OrderService, OrderStatus} from '../../../../services/order/order.service';
+import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit, TemplateRef} from '@angular/core';
+import {Order, OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../../auth.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
     selector: 'app-order-detail-info',
@@ -13,16 +14,19 @@ import {AuthService} from '../../../../auth.service';
 })
 
 export class InfoComponent implements OnInit, AfterViewChecked {
+    modalRef: BsModalRef;
     status: OrderStatus[];
     pkStatus: PackageStatus[];
     package: Package;
     cart: Cart;
     comment: Comment;
     comments: Comment[];
+    errorMessage: string[] = [];
     col: string;
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    constructor(public orderService: OrderService, private route: ActivatedRoute, public authService: AuthService) {
+    constructor(public orderService: OrderService, private route: ActivatedRoute,
+                public authService: AuthService, private modalService: BsModalService) {
         this.reNewPackage();
         this.reNewCart();
         this.comment = {
@@ -179,11 +183,17 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         }
     }
 
-    public updatePackage() {
+    public updatePackage(template: TemplateRef<any>) {
         this.orderService.showLoading(true);
         this.orderService.editPackage(this.package)
             .subscribe(res => {
-                this.getOrder();
+                if (res.status) {
+                    this.getOrder();
+                } else {
+                    this.errorMessage = res.data;
+                    this.openErrorModal(template);
+                    this.getOrder();
+                }
             });
     }
 
@@ -223,5 +233,13 @@ export class InfoComponent implements OnInit, AfterViewChecked {
         this.orderService.setIsRead(this.orderService.orderRe.id)
             .subscribe(data => {
             });
+    }
+
+    openErrorModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+    }
+
+    declineError(): void {
+        this.modalRef.hide();
     }
 }
