@@ -76,6 +76,9 @@
                                                          class="badge badge-danger">{{item.status | tempStatus: status}}</span>
                                 </p>
                                 <p>Ngày tạo: {{item.created_at | tempDate}}</p>
+                                <p><i class="fa fa fa-anchor"></i> Shop: <span
+                                        class="badge badge-info"> {{item.shop.name}}</span>
+                                </p>
                             </td>
                             <td>
                                 <p><i class="fa fa-user"></i> {{item.user.name}} <span
