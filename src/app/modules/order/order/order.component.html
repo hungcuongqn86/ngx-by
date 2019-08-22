@@ -60,6 +60,12 @@
                             </div>
                         </div>
                     </form>
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="orderService.search.page"
+                                [itemsPerPage]="orderService.search.limit"
+                                (pageChanged)="pageChanged($event)"
+                                class="pagination-sm pull-right" [maxSize]="6"
+                                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"></pagination>
                     <table class="table table-bordered table-data">
                         <thead>
                         <tr>
