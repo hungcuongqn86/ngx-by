@@ -14,13 +14,49 @@
                         <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
                     </div>
                     <div class="col-md-6">
-                        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup>
-                            đ</sup>
+                        <!--<p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup>
+                            đ</sup>-->
                         <p *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"><i class="fa fa-edge"></i>
                             Đặt tại website: <span
                                     class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span></p>
                         <p *ngIf="orderService.orderRe.shop"><i class="fa fa fa-anchor"></i> Shop: <span
                                 class="badge badge-danger"> {{orderService.orderRe.shop.name}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bang_phi">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> <strong>Tổng phí</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Tiền hàng</strong></p>
+                        <p>(1) Tiền hàng <span class="pull-right"><strong>{{(orderService.orderRe.tien_hang - orderService.orderRe.phi_tam_tinh).toString() | tempPrice: 1 : 1 : false}}
+                            <sup> đ</sup></strong></span></p>
+                        <p>(2) Phí trả thêm (nếu có) <span class="pull-right"><strong>{{orderService.orderRe.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}}
+                            <sup> đ</sup></strong></span></p>
+                        <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
+                        </p>
+                        <p>(4) Phí mua hàng <span class="pull-right"><strong>0<sup> đ</sup></strong></span></p>
+                        <p>(5) Phí kiểm đếm <span class="pull-right"><strong>0<sup> đ</sup></strong></span></p>
+                        <p>(6) Tổng = 1 + 2 + 3 + 4 + 5 <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 1}} <sup>
+                            đ</sup></strong></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Tiền cân nặng</strong></p>
+                        <p>Số cân nặng <span
+                                class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang}}</strong></span></p>
+                        <p>Cân nặng quy đổi <span
+                                class="pull-right"><strong>{{orderService.bang_phi.tong_can_nang_qd}}</strong></span>
+                        </p>
+                        <p>(7) Tiền cân nặng <span class="pull-right"><strong>{{orderService.bang_phi.tong_tien_can.toString() | tempPrice: 1 : 1 : false}}<sup> đ</sup></strong></span>
+                        </p>
+                        <p>(8) Đóng gỗ <span class="pull-right"><strong>0<sup> đ</sup></strong></span></p>
+                        <p>(9) Cước vận phát sinh (nếu có) <span
+                                class="pull-right"><strong>0<sup> đ</sup></strong></span></p>
                     </div>
                 </div>
             </div>

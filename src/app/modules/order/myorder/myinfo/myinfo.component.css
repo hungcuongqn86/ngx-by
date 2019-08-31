@@ -42,3 +42,8 @@ img {
         width: max-content;
     }
 }
+
+.bang_phi p {
+    margin: 3px 0;
+    border-bottom: 1px dotted #ddd;
+}

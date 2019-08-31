@@ -24,7 +24,25 @@ export class MyorderDetailComponent implements OnInit {
             this.orderService.getOrder(this.orderService.orderRe.id)
                 .subscribe(order => {
                     this.orderService.orderRe = order.data.order;
+                    this.genBangphi();
                 });
+        }
+    }
+
+    private genBangphi() {
+        this.orderService.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0};
+        for (let i = 0; i < this.orderService.orderRe.package.length; i++) {
+            this.orderService.bang_phi.tong_can_nang = Number(this.orderService.bang_phi.tong_can_nang)
+                + Number(this.orderService.orderRe.package[i].weight);
+            this.orderService.bang_phi.tong_can_nang = Math.round(this.orderService.bang_phi.tong_can_nang * 100) / 100;
+
+            this.orderService.bang_phi.tong_can_nang_qd = Number(this.orderService.bang_phi.tong_can_nang_qd)
+                + Number(this.orderService.orderRe.package[i].weight_qd);
+            this.orderService.bang_phi.tong_can_nang_qd = Math.round(this.orderService.bang_phi.tong_can_nang_qd * 100) / 100;
+
+            this.orderService.bang_phi.tong_tien_can = Number(this.orderService.bang_phi.tong_tien_can)
+                + Number(this.orderService.orderRe.package[i].tien_can);
+            this.orderService.bang_phi.tong_tien_can = Math.round(this.orderService.bang_phi.tong_tien_can * 100) / 100;
         }
     }
 

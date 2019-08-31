@@ -85,6 +85,7 @@ export class OrderService {
     public search = {key: '', code: '', package_code: '', status: '', pk_status: '', limit: 20, page: 1};
     public order: OrderCreate;
     public orderRe: Order;
+    public bang_phi: { tong_can_nang: number, tong_can_nang_qd: number, tong_tien_can: number };
 
     constructor(private loadingService: LoadingService,
                 private http: HttpClient, httpErrorHandler: HttpErrorHandler) {
@@ -96,6 +97,7 @@ export class OrderService {
         if (!this.orderRe) {
             this.order_renew();
         }
+        this.bang_phi = {tong_can_nang: 0, tong_can_nang_qd: 0, tong_tien_can: 0};
         return OrderService.instance = OrderService.instance || this;
     }
 
