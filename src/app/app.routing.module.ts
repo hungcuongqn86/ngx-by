@@ -22,6 +22,14 @@ const appRoutes: Routes = [
                     title: 'Bảng điều khiển'
                 },
                 canActivate: [AppGuard]
+            },
+            {
+                path: 'notification',
+                loadChildren: './modules/notification/notification.module#NotificationModule',
+                data: {
+                    title: 'Thông báo'
+                },
+                canActivate: [AppGuard]
             }
             , {
                 path: 'mpartner',

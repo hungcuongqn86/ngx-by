@@ -37,7 +37,10 @@
     overflow: auto;">
                 <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"
                    (click)="gotoOrder(item.order.id)"><i
-                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order.id}}</strong> - <span>{{item.created_at}}</span></a>
+                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order.id}}</strong> -
+                    <span>{{item.created_at}}</span></a>
+                <p class="center-footer-menu" style="text-align: center;line-height: 35px; margin-top: 10px;"><a
+                        href="javascript:void(0);" (click)="gotoNotification()">Xem tất cả</a></p>
             </div>
         </li>
         <li *ngIf="auth.user" class="nav-item dropdown" dropdown placement="bottom right">
@@ -61,7 +64,8 @@
 </app-header>
 <div class="app-body">
     <app-sidebar [fixed]="true" [display]="'lg'">
-        <app-sidebar-nav *ngIf="load" [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+        <app-sidebar-nav *ngIf="load" [navItems]="navItems" [perfectScrollbar]
+                         [disabled]="sidebarMinimized"></app-sidebar-nav>
         <app-sidebar-minimizer></app-sidebar-minimizer>
     </app-sidebar>
     <!-- Main content -->

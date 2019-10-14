@@ -61,6 +61,10 @@ export class DefaultLayoutComponent {
         }
     }
 
+    gotoNotification() {
+        this.router.navigate([`./notification`]);
+    }
+
     public profile() {
         this.router.navigate([`/account/profile`]);
     }
