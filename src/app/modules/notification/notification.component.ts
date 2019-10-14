@@ -21,7 +21,7 @@ export class NotificationComponent implements OnInit {
     }
 
     public getNotyfication() {
-        this.auth.getNotyfication()
+        this.auth.getAllComment()
             .subscribe(notiData => {
                 this.notify = notiData.data;
             });

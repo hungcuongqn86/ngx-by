@@ -85,6 +85,14 @@ export class AuthService {
             );
     }
 
+    public getAllComment(): Observable<any> {
+        const url = Util.getUri(apiV1Url) + `order/allcomments`;
+        return this.http
+            .get<any>(url).pipe(
+                catchError(this.handleError('getAllComment', []))
+            );
+    }
+
     public register(useri): Observable<{}> {
         const url = Util.getUri(apiV1Url) + `register`;
         return this.http.post(url, useri, httpOptions)

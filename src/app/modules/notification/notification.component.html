@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let item of notify">
+                        <tr *ngFor="let item of notify" class="{{(item.comment_users.length? '': 'unread')}}">
                             <td>{{item.id}}</td>
                             <td>{{item.created_at}}</td>
                             <td>{{item.content}}</td>
