@@ -18,6 +18,7 @@
                         <tr>
                             <th width="5%">ID</th>
                             <th width="15%">Thời gian</th>
+                            <th width="15%">Đơn hàng</th>
                             <th>Nội dung</th>
                             <th class="text-right">#</th>
                         </tr>
@@ -26,7 +27,8 @@
                         <tr *ngFor="let item of notify" class="{{(item.comment_users.length? '': 'unread')}}">
                             <td>{{item.id}}</td>
                             <td>{{item.created_at}}</td>
-                            <td>{{item.content}}</td>
+                            <td>{{item.order.id}}</td>
+                            <td>[{{item.user_name}}] {{item.content}}</td>
                             <td class="text-right">
                                 <button (click)="gotoOrder(item.order.id)" class="btn btn-sm btn-ghost-primary"
                                         type="button">
