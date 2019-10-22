@@ -140,7 +140,6 @@
                     <th>Đơn giá</th>
                     <th>Thành tiền</th>
                     <th>Ghi chú</th>
-                    <th>Ghi chú NV</th>
                 </tr>
                 </thead>
                 <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
@@ -165,7 +164,6 @@
                             <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount: false}}</p>
                         </td>
                         <td>{{item.note}}</td>
-                        <td>{{item.nv_note}}</td>
                     </tr>
                 </ng-template>
                 </tbody>
