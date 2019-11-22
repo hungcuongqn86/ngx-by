@@ -35,7 +35,7 @@
                 </td>
                 <td *ngIf="i===0" class="text-right"><span class="badge badge-danger">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></span>
                 </td>
-                <td *ngIf="i>0" class="text-right">{{item.debt}} <sup>đ</sup></td>
+                <td *ngIf="i>0" class="text-right">{{item.debt | tempPrice : 1 : 1}} <sup>đ</sup></td>
             </tr>
             </tbody>
         </table>
