@@ -86,7 +86,7 @@
                             <td>
                                 <p><i class="fa fa-qrcode"></i> Mã đơn: {{item.order.id}}</p>
                                 <p><i class="fa fa-calendar"></i> Ngày tạo: {{item.order.created_at | tempDate}}</p>
-                                <p><i class="fa fa-money"></i> Tổng tiền: {{item.order | tempTongTienHang : 1}} <sup>
+                                <p *ngIf="!nv"><i class="fa fa-money"></i> Tổng tiền: {{item.order | tempTongTienHang : 1}} <sup>
                                     đ</sup>
                                 </p>
                             </td>

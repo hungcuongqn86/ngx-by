@@ -4,6 +4,7 @@ import {PackageService} from '../../services/package/package.service';
 import {Package, PackageStatus} from '../../models/Package';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../auth.service';
+import {email_nv} from '../../const';
 
 @Component({
     selector: 'app-mypackage',
@@ -19,6 +20,7 @@ export class MypackageComponent implements OnInit, OnDestroy {
     errorMessage: string[] = [];
     counts: { status: number, total: number }[];
     sub: Subscription;
+    nv = false;
 
     constructor(public packageService: PackageService, private route: ActivatedRoute, public authService: AuthService,
                 private router: Router) {
@@ -28,6 +30,7 @@ export class MypackageComponent implements OnInit, OnDestroy {
             }
         });
         this.counts = null;
+        this.nv = email_nv.includes(authService.user.email);
     }
 
     ngOnInit() {

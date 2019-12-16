@@ -4,6 +4,7 @@ import {Order, OrderCreate, OrderService, OrderStatus} from '../../../services/o
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
+import {email_nv} from '../../../const';
 
 @Component({
     selector: 'app-myorder',
@@ -22,6 +23,7 @@ export class MyorderComponent implements OnInit {
     inputDatCoc: { id: number; dc_percent_value: number; dc_value: number; content: string; tien_hang: number };
     errorMessage: string[] = [];
     arrDeposit = [];
+    nv = false;
 
     constructor(public orderService: OrderService, private modalService: BsModalService, private route: ActivatedRoute,
                 public auth: AuthService,
@@ -39,6 +41,7 @@ export class MyorderComponent implements OnInit {
                 this.selectTab(params['status'], type);
             }
         });
+        this.nv = email_nv.includes(auth.user.email);
     }
 
     ngOnInit() {

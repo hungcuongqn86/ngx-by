@@ -31,7 +31,7 @@ export class DefaultLayoutComponent {
         setInterval(() => {
             this.getNotyfication();
             this.getMyCountByStatus();
-        }, 15000);
+        }, 20000);
     }
 
     public getNavItems() {

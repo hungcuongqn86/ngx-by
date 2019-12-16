@@ -8,6 +8,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../auth.service';
 import {ErrorMessagesService} from '../../error.messages.service';
+import {email_nv} from '../../const';
 
 @Component({
     selector: 'app-cart',
@@ -22,11 +23,12 @@ export class CartComponent implements OnInit {
     cart: Cart;
     order: OrderCreate;
     modalRef: BsModalRef;
+    nv = false;
 
     constructor(public cartService: CartService, private authService: AuthService, private orderService: OrderService,
                 public errorMessagesService: ErrorMessagesService,
                 private router: Router, private modalService: BsModalService) {
-
+        this.nv = email_nv.includes(authService.user.email);
     }
 
     ngOnInit() {

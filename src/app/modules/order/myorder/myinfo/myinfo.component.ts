@@ -3,6 +3,8 @@ import {OrderService, OrderStatus} from '../../../../services/order/order.servic
 import {PackageStatus} from '../../../../models/Package';
 import {Comment} from '../../../../models/Comment';
 import {ActivatedRoute} from '@angular/router';
+import {AuthService} from '../../../../auth.service';
+import {email_nv} from '../../../../const';
 
 @Component({
     selector: 'app-myorder-detail-info',
@@ -15,9 +17,10 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
     pkStatus: PackageStatus[];
     comment: Comment;
     comments: Comment[];
+    nv = false;
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    constructor(public orderService: OrderService, private route: ActivatedRoute) {
+    constructor(public orderService: OrderService, private route: ActivatedRoute, public auth: AuthService) {
         this.comment = {
             id: null,
             order_id: null,
@@ -32,6 +35,7 @@ export class MyinfoComponent implements OnInit, AfterViewChecked {
         this.route.params.subscribe(params => {
             this.getChat();
         });
+        this.nv = email_nv.includes(auth.user.email);
     }
 
     ngOnInit() {

@@ -62,19 +62,19 @@
                                     <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
                                     <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
                                     <span> - Số lượng: {{cart.amount}}</span>
-                                    <span> - Đơn giá: {{cart.price | tempPrice: item.rate : 1 : false}}
+                                    <span *ngIf="!nv"> - Đơn giá: {{cart.price | tempPrice: item.rate : 1 : false}}
                                         <sup>đ</sup></span>
-                                    <span> - Thành tiền: {{cart.price | tempPrice: item.rate : cart.amount: false}}<sup>đ</sup></span>
+                                    <span *ngIf="!nv"> - Thành tiền: {{cart.price | tempPrice: item.rate : cart.amount: false}}<sup>đ</sup></span>
                                 </p>
                             </td>
                             <td class="text-right">
-                                <p><span class="pull-left">Tiền hàng</span> <span
+                                <p *ngIf="!nv"><span class="pull-left">Tiền hàng</span> <span
                                         class="money">{{item | tempTongTienHang: 1}}</span>
                                     <sup> đ</sup></p>
-                                <p><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
+                                <p *ngIf="!nv"><span class="pull-left">Thanh toán</span> <span *ngIf="item.thanh_toan"
                                                                                    class="money">{{item.thanh_toan.toString() | tempPrice: 1 : 1 : false}}</span>
                                     <sup> đ</sup></p>
-                                <p><span class="pull-left">Còn thiếu</span> <span
+                                <p *ngIf="!nv"><span class="pull-left">Còn thiếu</span> <span
                                         *ngIf="item.tien_hang && item.thanh_toan"
                                         class="money">{{item | tempTongTienHang: 2}}</span>
                                     <sup> đ</sup></p>
@@ -84,12 +84,12 @@
                                         type="button">
                                     Chi tiết
                                 </button>
-                                <button *ngIf="item.status===2" (click)="openModal(template,item)"
+                                <button *ngIf="!nv && item.status===2" (click)="openModal(template,item)"
                                         class="btn btn-sm btn-ghost-primary"
                                         type="button">
                                     Đặt cọc
                                 </button>
-                                <button *ngIf="item.status < 3" (click)="openDeleteModal(delete_template,item)"
+                                <button *ngIf="!nv && item.status < 3" (click)="openDeleteModal(delete_template,item)"
                                         class="btn btn-sm btn-ghost-primary"
                                         type="button">
                                     Xóa
