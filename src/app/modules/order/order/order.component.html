@@ -45,7 +45,13 @@
                                        class="form-control"
                                        placeholder="Mã vận đơn">
                             </div>
-                            <div class="col-md-5">
+                          <div class="col-md-2">
+                            <input [(ngModel)]="orderService.search.contract_code" type="text" id="contract_code"
+                                   name="contract_code"
+                                   class="form-control"
+                                   placeholder="Mã hợp đồng">
+                          </div>
+                            <div class="col-md-3">
                                 <input [(ngModel)]="orderService.search.key" type="text" id="key" name="key"
                                        class="form-control"
                                        placeholder="Tìm kiếm theo tên khách hàng, email, số điện thoại, shop (tên cửa hàng)">
