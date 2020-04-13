@@ -25,6 +25,7 @@
                                 <tr>
                                     <th width="30%">Sản phẩm</th>
                                     <th>Số lượng</th>
+                                    <th>Tỷ giá</th>
                                     <th>Đơn giá</th>
                                     <th>Tiền hàng</th>
                                     <th>#</th>
@@ -48,11 +49,14 @@
                                                       name="amount" class="form-control"></p>
                                         </td>
                                         <td>
-                                            <p *ngIf="!nv">{{item.price | tempPrice: shopItem.rate : 1}}<sup>đ</sup></p>
+                                          <p *ngIf="!nv">{{item.rate}}</p>
+                                        </td>
+                                        <td>
+                                            <p *ngIf="!nv">{{item.price | tempPrice: item.rate : 1}}<sup>đ</sup></p>
                                             <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
                                         </td>
                                         <td>
-                                            <p *ngIf="!nv">{{item.price | tempPrice: shopItem.rate :
+                                            <p *ngIf="!nv">{{item.price | tempPrice: item.rate :
                                                 shopItem.cart[i].amount}}<sup>đ</sup></p>
                                             <p *ngIf="!nv"><span>¥</span>{{item.price | tempPrice: 1 : shopItem.cart[i].amount :
                                                 false}}</p>
