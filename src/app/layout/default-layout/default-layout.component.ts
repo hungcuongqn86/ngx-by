@@ -1,7 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth.service';
-import {Order, OrderCreate, OrderService, OrderStatus} from '../../services/order/order.service';
+import { Order, OrderCreate, OrderService, OrderStatus } from '../../services/order/order.service';
+import { environment } from '../../../environments/environment';
+
+declare const firebase: any;
 
 @Component({
     selector: 'app-dashboard',
@@ -15,9 +18,20 @@ export class DefaultLayoutComponent {
     public element: HTMLElement = document.body;
     public status: { id: number, name: string, type: string }[];
     public counts: { status: number, total: number, type: string }[];
-    public load = true;
+  public load = true;
+  public notificationDatabase: any;
+  public notificationData: any;
 
     constructor(public auth: AuthService, private router: Router, public orderService: OrderService) {
+      firebase.initializeApp(environment.firebase);
+      this.notificationDatabase = firebase.database().ref("dathangqc0/2");
+      const myjs = this;
+      this.notificationDatabase.on("value", function (snapshot) {
+        myjs.notificationData = snapshot.val();
+        console.log(121212, myjs.notificationData);
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
 
         this.changes = new MutationObserver((mutations) => {
             this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
