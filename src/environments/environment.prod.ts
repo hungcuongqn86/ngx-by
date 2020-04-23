@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   basename: '/admin',
   backend: 'https://api.quangchau247online.com/public/',
+  appId: "dathangqc0",
   firebase: {
     apiKey: "AIzaSyBtTPUa19nLkReMDWXTFr6U43D166n9MVE",
     authDomain: "banhangqc.firebaseapp.com",

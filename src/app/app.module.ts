@@ -11,6 +11,7 @@ import {RequestCache, RequestCacheWithMap} from './request-cache.service';
 
 import {AppComponent} from './app.component';
 import {AuthService} from './auth.service';
+import { FirebaseService} from './firebase.service';
 import {HttpErrorHandler} from './http-error-handler.service';
 import {LoadingService} from './loading.service';
 import {MessagesComponent} from './messages/messages.component';
@@ -97,7 +98,8 @@ import {captchar_key} from './const';
     ],
     providers: [
         AppGuard,
-        AuthService,
+      AuthService,
+      FirebaseService,
         HttpErrorHandler,
         LoadingService,
         MessageService,

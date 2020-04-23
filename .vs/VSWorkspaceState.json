@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\layout",
+    "\\src\\app\\layout\\default-layout",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\app\\auth.service.ts",
   "PreviewInSolutionExplorer": false
 }
