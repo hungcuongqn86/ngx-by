@@ -42,7 +42,11 @@ export class DefaultLayoutComponent {
     const myjs = this;
     this.notificationDatabase
       .on("value", function (snapshot) {
-        myjs.notify = Object.values(snapshot.val());
+        if (snapshot.val()) {
+          myjs.notify = Object.values(snapshot.val());
+        } else {
+          myjs.notify = [];
+        }
       }, function (errorObject) {
         console.log("Notification failed: " + errorObject.code);
       });
