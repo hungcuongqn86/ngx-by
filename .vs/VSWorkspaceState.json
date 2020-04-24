@@ -7,6 +7,6 @@
     "\\src\\app\\layout\\default-layout",
     "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\auth.service.ts",
+  "SelectedNode": "\\src\\polyfills.ts",
   "PreviewInSolutionExplorer": false
 }

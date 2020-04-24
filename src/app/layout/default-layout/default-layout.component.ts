@@ -20,7 +20,7 @@ export class DefaultLayoutComponent {
   public counts: { status: number, total: number, type: string }[];
   public load = true;
   public notificationDatabase: any;
-  public notificationData: any;
+  public countByStatusDatabase: any;
 
   constructor(public auth: AuthService, public firebaseService: FirebaseService, private router: Router, public orderService: OrderService) {
     this.setupNotification();
@@ -32,9 +32,6 @@ export class DefaultLayoutComponent {
         attributes: true
     });
     this.getNavItems();
-    setInterval(() => {
-        this.getMyCountByStatus();
-    }, 20000);
   }
 
   private setupNotification() {
@@ -97,14 +94,22 @@ export class DefaultLayoutComponent {
   }
 
   public getMyCountByStatus() {
-      for (let i = 0; i < this.navItems.length; i++) {
-          if (this.navItems[i].url === '/order/myorder') {
-              this.orderService.getMyCountByStatus()
-                  .subscribe(data => {
-                      this.genMenuText(data.data);
-                  });
-          }
+    for (let i = 0; i < this.navItems.length; i++) {
+      if (this.navItems[i].url === '/order/myorder') {
+        this.countByStatusDatabase = this.firebaseService.setDatabase("mycount/" + this.auth.user.id);
+        const myjs = this;
+        this.countByStatusDatabase
+          .on("value", function (snapshot) {
+            if (snapshot.val()) {
+              myjs.genMenuText(Object.values(snapshot.val()));
+            } else {
+              myjs.genMenuText(Object.values([]));
+            }
+          }, function (errorObject) {
+              console.log("getMyCountByStatus failed: " + errorObject.code);
+          });
       }
+    }
   }
 
   private genMenuText(data) {
