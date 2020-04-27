@@ -46,7 +46,7 @@
                             <th>Số kiện</th>
                             <th>Ngày tạo</th>
                             <th>Trạng thái</th>
-                            <th width="5%">Tác vụ</th>
+                            <th width="10%">Tác vụ</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,9 +58,16 @@
                             <td>{{item.status}}</td>
                             <td>
                               <button (click)="editShipping(item.id, templateShipping)"
-                                      class="btn btn-sm btn-ghost-primary"
+                                      class="btn btn-sm btn-primary"
+                                      style="margin-right: 10px;"
                                       type="button">
                                 Chi tiết
+                              </button>
+                              <button (click)="editShipping(item.id, templateShipping)"
+                                      class="btn btn-sm btn-warning"
+                                      style="margin-right: 10px;"
+                                      type="button">
+                                Hủy
                               </button>
                             </td>
                           </tr>
