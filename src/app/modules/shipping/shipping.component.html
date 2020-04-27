@@ -26,7 +26,7 @@
                             <div class="col-md-2">
                               <button type="button" (click)="getShippings()"
                                       class="btn btn-primary">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-search" aria-hidden="true"></i>
                                 Tìm kiếm
                               </button>
 
@@ -55,7 +55,7 @@
                             <td>{{item.content}}</td>
                             <td>{{item.package_count}}</td>
                             <td>{{item.created_at | tempDate}}</td>
-                            <td>{{item.status}}</td>
+                            <td>{{item.statusname}}</td>
                             <td>
                               <button (click)="editShipping(item.id, templateShipping)"
                                       class="btn btn-sm btn-primary"
@@ -63,7 +63,7 @@
                                       type="button">
                                 Chi tiết
                               </button>
-                              <button (click)="editShipping(item.id, templateShipping)"
+                              <button (click)="openModalDelete(deltemplate, item)"
                                       class="btn btn-sm btn-warning"
                                       style="margin-right: 10px;"
                                       type="button">
@@ -141,4 +141,14 @@
         <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
         <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
     </div>
+</ng-template>
+
+<ng-template #deltemplate>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn muốn hủy yêu cầu này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+  </div>
 </ng-template>

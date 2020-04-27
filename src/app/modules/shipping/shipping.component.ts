@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, TemplateRef} from '@angular/core';
 import { ShippingService} from '../../services/shipping/shipping.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -71,5 +71,25 @@ export class ShippingComponent {
 
   public decline(): void {
       this.modalRef.hide();
+  }
+
+  public openModalDelete(template: TemplateRef<any>, shipping: Shipping) {
+    this.shippingService.shipping = shipping;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public confirmDelete(): void {
+    this.delete();
+    this.modalRef.hide();
+  }
+
+  private delete() {
+    if (this.shippingService.shipping) {
+      this.shippingService.shipping.is_deleted = 1;
+      this.shippingService.editShipping(this.shippingService.shipping)
+        .subscribe(res => {
+          this.getShippings();
+        });
+    }
   }
 }
