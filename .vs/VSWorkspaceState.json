@@ -3,10 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\layout",
-    "\\src\\app\\layout\\default-layout",
-    "\\src\\environments"
+    "\\src\\app\\models",
+    "\\src\\app\\modules",
+    "\\src\\app\\modules\\order\\myorder",
+    "\\src\\app\\modules\\shipping",
+    "\\src\\app\\services",
+    "\\src\\app\\services\\shipping"
   ],
-  "SelectedNode": "\\src\\polyfills.ts",
+  "SelectedNode": "\\src\\app\\models\\Shipping.ts",
   "PreviewInSolutionExplorer": false
 }

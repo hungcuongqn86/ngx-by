@@ -69,7 +69,14 @@ const appRoutes: Routes = [
                     title: 'Giỏ hàng'
                 },
                 canActivate: [AppGuard]
-            }
+          }, {
+            path: 'shipping',
+              loadChildren: './modules/shipping/shipping.module#ShippingModule',
+            data: {
+              title: 'Yêu cầu ký gửi'
+            },
+            canActivate: [AppGuard]
+          }
             , {
                 path: 'order',
                 loadChildren: './modules/order/order.module#OrderModule',
