@@ -67,9 +67,17 @@ export class ShippingService {
       );
   }
 
+  public addShipping(data: Shipping): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
+    return this.http.post<any>(url, data)
+      .pipe(
+        catchError(this.handleError('addShipping', data))
+      );
+  }
+
   public editShipping(data: Shipping): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}update`;
-    return this.http.post<any>(url, data)
+    return this.http.put<any>(url, data)
       .pipe(
         catchError(this.handleError('editShipping', data))
       );

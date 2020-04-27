@@ -14,37 +14,19 @@ import {AuthService} from '../../auth.service';
 export class ShippingComponent {
   shippings: Shipping[] = [];
   modalRef: BsModalRef;
-  shipping: Shipping;
   title = '';
   totalItems = 0;
 
   constructor(public shippingService: ShippingService, public authService: AuthService, private modalService: BsModalService) {
-      this.getShippings();
-      this.shippingReset();
-    }
-
-  private shippingReset() {
-    this.shipping = {
-      id: null,
-      code: '',
-      content: '',
-      created_at: null,
-      is_deleted: null,
-      package_count: 0,
-      order_id: null,
-      order: null,
-      status: null,
-      updated_at: null,
-      user_id: null
-    };
+    this.getShippings();
   }
 
   public getShippings() {
     this.shippingService.showLoading(true);
     this.shippingService.getShippings()
-          .subscribe(complains => {
-              // this.complains = complains.data.data;
-              // this.totalItems = complains.data.total;
+          .subscribe(shippings => {
+              this.shippings = shippings.data.data;
+              this.totalItems = shippings.data.total;
             this.shippingService.showLoading(false);
           });
   }
@@ -63,18 +45,28 @@ export class ShippingComponent {
     this.title = 'Chi tiết yêu cầu ký gửi';
     this.shippingService.getShipping(id)
     .subscribe(res => {
-      this.shipping = res.data.complain;
+      this.shippingService.shipping = res.data.shipping;
       this.modalRef = this.modalService.show(template, {class: 'modal-lg', ignoreBackdropClick: true});
     });
   }
 
-  public confirm(): void {
+  public confirm() {
     this.shippingService.showLoading(true);
-    this.shippingService.editShipping(this.shipping)
-    .subscribe(res => {
-        this.modalRef.hide();
-      this.getShippings();
-    });
+    if (this.shippingService.shipping.id === null) {
+      this.shippingService.addShipping(this.shippingService.shipping).subscribe(
+        res => {
+          this.modalRef.hide();
+          this.getShippings();
+        }
+      );
+    } else {
+      this.shippingService.editShipping(this.shippingService.shipping).subscribe(
+        res => {
+          this.modalRef.hide();
+          this.getShippings();
+        }
+      );
+    }
   }
 
   public decline(): void {

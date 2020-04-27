@@ -24,7 +24,7 @@
                                        placeholder="Nhập từ tìm kiếm ">
                             </div>
                             <div class="col-md-2">
-                              <button type="button" (click)="getComplains()"
+                              <button type="button" (click)="getShippings()"
                                       class="btn btn-primary">
                                 <i class="fa fa-user"></i>
                                 Tìm kiếm
@@ -51,13 +51,13 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let item of shippings">
-                            <td>{{item.code}}</td>
+                            <td>{{item.id}}</td>
                             <td>{{item.content}}</td>
                             <td>{{item.package_count}}</td>
                             <td>{{item.created_at | tempDate}}</td>
                             <td>{{item.status}}</td>
                             <td>
-                              <button (click)="editShipping(item.id, templateComplain)"
+                              <button (click)="editShipping(item.id, templateShipping)"
                                       class="btn btn-sm btn-ghost-primary"
                                       type="button">
                                 Chi tiết
@@ -88,20 +88,20 @@
     </div>
     <div class="modal-body">
       <form novalidate #form="ngForm">
-        <div class="form-group" *ngIf="shipping.id">
+        <div class="form-group" *ngIf="shippingService.shipping.id">
           <label for="content">
             Mã yêu cầu
           </label>
-          <input [(ngModel)]="shipping.code" class="form-control"
-                 id="code"
-                 name="code"
+          <input [(ngModel)]="shippingService.shipping.id" class="form-control"
+                 id="id"
+                 name="id"
                  type="text">
         </div>
         <div class="form-group">
           <label for="content">
             Thông tin yêu cầu <code class="highlighter-rouge">*</code>
           </label>
-          <textarea [(ngModel)]="shipping.content" #content="ngModel" class="form-control" id="content"
+          <textarea [(ngModel)]="shippingService.shipping.content" #content="ngModel" class="form-control" id="content"
                     name="content" required
                     placeholder="..." rows="3"></textarea>
           <div [hidden]="content.valid || content.untouched">
@@ -115,7 +115,7 @@
           <label for="money_request">
             Số kiện hàng<code class="highlighter-rouge">*</code>
           </label>
-          <input [(ngModel)]="shipping.package_count" #package_count="ngModel" class="form-control"
+          <input [(ngModel)]="shippingService.shipping.package_count" #package_count="ngModel" class="form-control"
                  id="package_count"
                  name="package_count"
                  required
