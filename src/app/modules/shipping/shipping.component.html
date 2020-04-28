@@ -77,7 +77,7 @@
                               type="button">
                         Chi tiết
                       </button>
-                      <button *ngIf="item.status==1" (click)="editShipping(item.id, templateShipping)"
+                      <button *ngIf="item.status==1" (click)="openModalApprove(approvetemplate, item)"
                               class="btn btn-sm btn-primary btn-action"
                               type="button">
                         Xác nhận
@@ -166,6 +166,16 @@
     <div class="btn-group btn-group-toggle">
       <button type="button" class="btn btn-warning" (click)="confirmReject()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #approvetemplate>
+  <div class="modal-body text-center">
+    <p>Bạn có chắc chắn duyệt yêu cầu này!?</p>
+    <div class="btn-group btn-group-toggle">
+      <button type="button" class="btn btn-primary" (click)="confirmApprove()">Yes</button>
+      <button type="button" class="btn btn-warning" (click)="decline()">No</button>
     </div>
   </div>
 </ng-template>

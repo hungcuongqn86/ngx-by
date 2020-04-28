@@ -83,6 +83,26 @@ export class ShippingComponent {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
+  public openModalApprove(template: TemplateRef<any>, shipping: Shipping) {
+    this.shippingService.shipping = shipping;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public confirmApprove(): void {
+    this.approve();
+    this.modalRef.hide();
+  }
+
+  private approve() {
+    if (this.shippingService.shipping) {
+      this.shippingService.shipping.status = 2;
+      this.shippingService.approveShipping(this.shippingService.shipping)
+        .subscribe(res => {
+          this.getShippings();
+        });
+    }
+  }
+
   public confirmReject(): void {
     this.reject();
     this.modalRef.hide();
@@ -91,7 +111,7 @@ export class ShippingComponent {
   private reject() {
     if (this.shippingService.shipping) {
       this.shippingService.shipping.status = 3;
-      this.shippingService.editShipping(this.shippingService.shipping)
+      this.shippingService.approveShipping(this.shippingService.shipping)
         .subscribe(res => {
           this.getShippings();
         });
