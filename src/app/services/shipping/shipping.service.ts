@@ -113,7 +113,7 @@ export class ShippingService {
 
   public approveShipping(data: Shipping): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}approve`;
-    return this.http.put<any>(url, data)
+    return this.http.post<any>(url, data)
       .pipe(
         catchError(this.handleError('editShipping', data))
       );
