@@ -38,6 +38,7 @@ export class MyshippingComponent {
 
   public addShipping(template) {
     this.title = 'Thêm mới yêu cầu ký gửi';
+    this.shippingService.reset();
     this.modalRef = this.modalService.show(template, { class: 'modal-lg', ignoreBackdropClick: true });
   }
 

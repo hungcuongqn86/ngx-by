@@ -16,7 +16,7 @@
                     <i class="fa fa-cubes"></i> Danh sách yêu cầu đã tạo
                 </div>
                 <div class="card-body">
-                    <form novalidate (ngSubmit)="getComplains()" #form="ngForm">
+                    <form novalidate (ngSubmit)="getShippings()" #form="ngForm">
                       <div class="form-group row">
                         <div class="col-md-3">
                           <input [(ngModel)]="shippingService.search.code" type="text" id="code" name="code"
@@ -63,7 +63,7 @@
                             <td>{{item.created_at | tempDate}}</td>
                             <td>
                               <p><span class="badge badge-info">{{item.statusname}}</span></p>
-                              <p>
+                              <p *ngIf="item.status==2">
                                 Mã đơn hàng:
                                 <a href="javascript:void(0);" (click)="gotoOrder(item.order_id)">
                                   <span><strong>{{item.order_id}}</strong></span>

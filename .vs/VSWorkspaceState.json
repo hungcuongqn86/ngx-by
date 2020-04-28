@@ -3,13 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\models",
     "\\src\\app\\modules",
+    "\\src\\app\\modules\\order",
     "\\src\\app\\modules\\order\\myorder",
-    "\\src\\app\\modules\\shipping",
-    "\\src\\app\\services",
-    "\\src\\app\\services\\shipping"
+    "\\src\\app\\modules\\order\\myorder\\myinfo",
+    "\\src\\app\\modules\\order\\order",
+    "\\src\\app\\modules\\package",
+    "\\src\\scss"
   ],
-  "SelectedNode": "\\src\\app\\models\\Shipping.ts",
+  "SelectedNode": "\\src\\app\\modules\\shipping\\myshipping.component.ts",
   "PreviewInSolutionExplorer": false
 }
