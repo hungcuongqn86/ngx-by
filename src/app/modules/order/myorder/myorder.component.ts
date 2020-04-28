@@ -45,7 +45,7 @@ export class MyorderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getStatus();
+        // this.getStatus();
     }
 
     pageChanged(event: any): void {

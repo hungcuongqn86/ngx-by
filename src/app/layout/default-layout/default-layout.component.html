@@ -7,16 +7,19 @@
         [asideMenuToggler]=false>
     <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
-            <a class="nav-link" target="_blank" href="https://quangchau247online.com/blog-2/"><i
-                    class="fa fa-file-text-o"></i> Hướng dẫn</a>
+          <a class="nav-link" target="_blank" href="https://quangchau247online.com/blog-2/">
+            <i class="fa fa-file-text-o"></i> Hướng dẫn
+          </a>
         </li>
         <li class="nav-item px-3">
             <a class="nav-link" target="_blank" href="https://quangchau247online.com/huong-dan-nap-tien-vao-tai-khoan/"><i
-                    class="fa fa-money"></i> Nạp tiền</a>
+                    class="fa fa-money"></i> Nạp tiền
+          </a>
         </li>
         <li class="nav-item px-3">
             <a class="nav-link" target="_blank" href="https://www.taobao.com/"><i class="fa fa-chrome"></i>
-                taobao.com</a>
+                taobao.com
+          </a>
         </li>
         <li class="nav-item px-3">
             <a class="nav-link" target="_blank" href="https://www.tmall.com/"><i class="fa fa-chrome"></i> tmall.com</a>
@@ -36,8 +39,8 @@
             <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown" style="max-height: 500px;
     overflow: auto;">
                 <a *ngFor="let item of notify" class="dropdown-item" href="javascript:void(0);"
-                   (click)="gotoOrder(item.order.id)"><i
-                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order.id}}</strong> -
+                   (click)="gotoOrder(item.order_id)"><i
+                        class="fa fa-comments-o"></i> Có trao đổi đơn hàng <strong>{{item.order_id}}</strong> -
                     <span>{{item.created_at}}</span></a>
                 <p class="center-footer-menu" style="text-align: center;line-height: 35px; margin-top: 10px;"><a
                         href="javascript:void(0);" (click)="gotoNotification()">Xem tất cả</a></p>
