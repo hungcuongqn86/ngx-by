@@ -15,7 +15,7 @@ export class ShippingService {
   static instance: ShippingService;
   private handleError: HandleError;
   private moduleUri = 'shipping/';
-  public search = {key: '', status: '', limit: 20, page: 1};
+  public search = {code: '', key: '', status: '', limit: 20, page: 1};
   public shipping: Shipping;
 
   constructor(private loadingService: LoadingService,
@@ -56,6 +56,18 @@ export class ShippingService {
     return this.http.get<any>(url, {params: params})
       .pipe(
         catchError(this.handleError('getShippings', []))
+      );
+  }
+
+  public getMyShippings(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myshipping`;
+    let params = new HttpParams();
+    Object.keys(this.search).map((key) => {
+      params = params.append(key, this.search[key]);
+    });
+    return this.http.get<any>(url, { params: params })
+      .pipe(
+        catchError(this.handleError('getMyShippings', []))
       );
   }
 
