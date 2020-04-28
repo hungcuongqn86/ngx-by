@@ -79,6 +79,22 @@ export class ShippingService {
       );
   }
 
+  public getStatus(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}status`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getStatus', []))
+      );
+  }
+
+  public getCountByStatus(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}count`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError(this.handleError('getCountByStatus', []))
+      );
+  }
+
   public addShipping(data: Shipping): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}create`;
     return this.http.post<any>(url, data)

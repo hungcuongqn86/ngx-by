@@ -1,14 +1,15 @@
-import { Component, TemplateRef} from '@angular/core';
+import { Component, ViewEncapsulation, TemplateRef} from '@angular/core';
 import { ShippingService} from '../../services/shipping/shipping.service';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { Shipping} from '../../models/Shipping';
+import { Shipping, ShippingStatus } from '../../models/Shipping';
 import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-shipping',
   templateUrl: './shipping.component.html',
-  styleUrls: ['./shipping.component.css']
+  styleUrls: ['./shipping.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ShippingComponent {
@@ -16,8 +17,11 @@ export class ShippingComponent {
   modalRef: BsModalRef;
   title = '';
   totalItems = 0;
+  status: ShippingStatus[] = [];
+  counts: { status: number, total: number }[];
 
   constructor(public shippingService: ShippingService, public authService: AuthService, private modalService: BsModalService) {
+    this.getStatus();
     this.getShippings();
   }
 
@@ -25,8 +29,9 @@ export class ShippingComponent {
     this.shippingService.showLoading(true);
     this.shippingService.getShippings()
           .subscribe(shippings => {
-              this.shippings = shippings.data.data;
-              this.totalItems = shippings.data.total;
+            this.shippings = shippings.data.data;
+            this.totalItems = shippings.data.total;
+            this.getCountByStatus();
             this.shippingService.showLoading(false);
           });
   }
@@ -91,5 +96,34 @@ export class ShippingComponent {
           this.getShippings();
         });
     }
+  }
+
+  public getStatus() {
+    this.shippingService.showLoading(true);
+    this.shippingService.getStatus()
+      .subscribe(res => {
+        this.status = res.data;
+        this.shippingService.showLoading(false);
+      });
+  }
+
+  public getCountByStatus() {
+    this.shippingService.showLoading(true);
+    this.shippingService.getCountByStatus()
+      .subscribe(data => {
+        this.counts = data.data;
+        this.shippingService.showLoading(false);
+      });
+  }
+
+  selectTab(status: string = null) {
+    this.shippingService.search.status = status;
+    this.getShippings();
+  }
+
+  ngOnDestroy() {
+    /*if (this.sub) {
+      this.sub.unsubscribe();
+    }*/
   }
 }

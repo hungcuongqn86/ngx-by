@@ -1,5 +1,10 @@
 import {Order} from '../services/order/order.service';
 
+export interface ShippingStatus {
+  id: number;
+  name: string;
+}
+
 export interface Shipping {
   id: number;
   code: string;

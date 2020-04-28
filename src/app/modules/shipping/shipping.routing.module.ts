@@ -6,6 +6,7 @@ import { MyshippingComponent } from './myshipping.component';
 
 const routes: Routes = [
   { path: '', component: ShippingComponent, data: { title: 'Yêu cầu ký gửi' }},
+  { path: 'list', component: ShippingComponent, data: { title: 'Yêu cầu ký gửi' }},
   { path: 'myshipping', component: MyshippingComponent, data: { title: 'Yêu cầu ký gửi' }},
 ];
 
