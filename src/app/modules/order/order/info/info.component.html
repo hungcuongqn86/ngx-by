@@ -207,7 +207,7 @@
             </table>
         </div>
     </div>
-    <div class="card">
+    <div *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0" class="card">
         <div class="card-body">
             <table class="table table-bordered table-sm">
                 <thead>
@@ -224,7 +224,7 @@
                     <th>Ghi chú của NV</th>
                 </tr>
                 </thead>
-                <tbody *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0">
+                <tbody>
                 <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
                     <tr class="{{item.amount? '' : 'yl-bg'}}">
                         <td>{{i + 1}}</td>

@@ -61,7 +61,15 @@
                             <td>{{item.content}}</td>
                             <td>{{item.package_count}}</td>
                             <td>{{item.created_at | tempDate}}</td>
-                            <td>{{item.statusname}}</td>
+                            <td>
+                              <p><span class="badge badge-info">{{item.statusname}}</span></p>
+                              <p>
+                                Mã đơn hàng:
+                                <a href="javascript:void(0);" (click)="gotoOrder(item.order_id)">
+                                  <span><strong>{{item.order_id}}</strong></span>
+                                </a>
+                              </p>
+                            </td>
                             <td>
                               <button (click)="editShipping(item.id, templateShipping)"
                                       class="btn btn-sm btn-primary"
@@ -69,7 +77,7 @@
                                       type="button">
                                 Chi tiết
                               </button>
-                              <button (click)="openModalDelete(deltemplate, item)"
+                              <button *ngIf="item.status==1" (click)="openModalDelete(deltemplate, item)"
                                       class="btn btn-sm btn-warning"
                                       style="margin-right: 10px;"
                                       type="button">

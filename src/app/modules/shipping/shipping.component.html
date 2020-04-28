@@ -70,7 +70,14 @@
                     <td>{{item.content}}</td>
                     <td>{{item.package_count}}</td>
                     <td>{{item.created_at | tempDate}}</td>
-                    <td>{{item.statusname}}</td>
+                    <td>
+                      <p><span class="badge badge-info">{{item.statusname}}</span></p>
+                      <p>Mã đơn hàng:
+                        <a href="javascript:void(0);" (click)="gotoOrder(item.order_id)">
+                          <span><strong>{{item.order_id}}</strong></span>
+                        </a>
+                      </p>
+                    </td>
                     <td>
                       <button (click)="editShipping(item.id, templateShipping)"
                               class="btn btn-sm btn-primary btn-action"
@@ -172,7 +179,7 @@
 
 <ng-template #approvetemplate>
   <div class="modal-body text-center">
-    <p>Bạn có chắc chắn duyệt yêu cầu này!?</p>
+    <p>Xác nhận sẽ tạo đơn hàng ký gửi, Bạn có chắc chắn xác nhận yêu cầu này!?</p>
     <div class="btn-group btn-group-toggle">
       <button type="button" class="btn btn-primary" (click)="confirmApprove()">Yes</button>
       <button type="button" class="btn btn-warning" (click)="decline()">No</button>

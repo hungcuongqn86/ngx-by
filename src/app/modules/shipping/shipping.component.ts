@@ -141,6 +141,11 @@ export class ShippingComponent {
     this.getShippings();
   }
 
+  gotoOrder(orderId: number) {
+    const win = window.open(`./order/list/detail/${orderId}`, '_blank');
+    win.focus();
+  }
+
   ngOnDestroy() {
     /*if (this.sub) {
       this.sub.unsubscribe();
