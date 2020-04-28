@@ -73,20 +73,17 @@
                     <td>{{item.statusname}}</td>
                     <td>
                       <button (click)="editShipping(item.id, templateShipping)"
-                              class="btn btn-sm btn-primary"
-                              style="margin-right: 10px;"
+                              class="btn btn-sm btn-primary btn-action"
                               type="button">
                         Chi tiết
                       </button>
-                      <button (click)="editShipping(item.id, templateShipping)"
-                              class="btn btn-sm btn-primary"
-                              style="margin-right: 10px;"
+                      <button *ngIf="item.status==1" (click)="editShipping(item.id, templateShipping)"
+                              class="btn btn-sm btn-primary btn-action"
                               type="button">
                         Xác nhận
                       </button>
-                      <button (click)="openModalDelete(deltemplate, item)"
-                              class="btn btn-sm btn-warning"
-                              style="margin-right: 10px;"
+                      <button *ngIf="item.status==1" (click)="openModalReject(rejecttemplate, item)"
+                              class="btn btn-sm btn-warning btn-action"
                               type="button">
                         Từ chối
                       </button>
@@ -159,16 +156,15 @@
       </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
         <button type="button" class="btn btn-warning" (click)="decline()">Cancel</button>
     </div>
 </ng-template>
 
-<ng-template #deltemplate>
+<ng-template #rejecttemplate>
   <div class="modal-body text-center">
-    <p>Bạn có chắc chắn muốn hủy yêu cầu này!?</p>
+    <p>Bạn có chắc chắn muốn từ chối yêu cầu này!?</p>
     <div class="btn-group btn-group-toggle">
-      <button type="button" class="btn btn-warning" (click)="confirmDelete()">Yes</button>
+      <button type="button" class="btn btn-warning" (click)="confirmReject()">Yes</button>
       <button type="button" class="btn btn-primary" (click)="decline()">No</button>
     </div>
   </div>

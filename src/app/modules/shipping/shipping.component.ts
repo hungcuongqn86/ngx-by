@@ -78,19 +78,19 @@ export class ShippingComponent {
       this.modalRef.hide();
   }
 
-  public openModalDelete(template: TemplateRef<any>, shipping: Shipping) {
+  public openModalReject(template: TemplateRef<any>, shipping: Shipping) {
     this.shippingService.shipping = shipping;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
-  public confirmDelete(): void {
-    this.delete();
+  public confirmReject(): void {
+    this.reject();
     this.modalRef.hide();
   }
 
-  private delete() {
+  private reject() {
     if (this.shippingService.shipping) {
-      this.shippingService.shipping.is_deleted = 1;
+      this.shippingService.shipping.status = 3;
       this.shippingService.editShipping(this.shippingService.shipping)
         .subscribe(res => {
           this.getShippings();
@@ -116,7 +116,7 @@ export class ShippingComponent {
       });
   }
 
-  selectTab(status: string = null) {
+  selectTab(status: string = '0') {
     this.shippingService.search.status = status;
     this.getShippings();
   }
