@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpErrorHandler, HandleError} from './http-error-handler.service';
 import { User } from './models/User';
 import { environment } from '../environments/environment';
+import * as firebase from 'firebase';
 
-declare const firebase: any;
+// declare const firebase: any;
 
 /** Mock client-side authentication/authorization service */
 @Injectable()

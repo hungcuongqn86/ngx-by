@@ -30,10 +30,7 @@
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/scss/style.scss"
             ],
-            "scripts": [
-              "node_modules/firebase/firebase.js",
-              "node_modules/firebase/firebase-database.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
