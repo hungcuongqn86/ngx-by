@@ -4,8 +4,6 @@ import {AuthService} from '../../auth.service';
 import { FirebaseService} from '../../firebase.service';
 import { Order, OrderCreate, OrderService, OrderStatus } from '../../services/order/order.service';
 
-declare const firebase: any;
-
 @Component({
     selector: 'app-dashboard',
     templateUrl: './default-layout.component.html'
