@@ -60,15 +60,15 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
 
     public exportOrders() {
-        this.orderService.showLoading(true);
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-        this.sub = this.orderService.exportOrders()
-            .subscribe(data => {
-                window.open(environment.backend + 'exports/' + data.data.file, '_blank');
-                this.orderService.showLoading(false);
-            });
+      this.orderService.showLoading(true);
+      if (this.sub) {
+        this.sub.unsubscribe();
+      }
+      this.sub = this.orderService.exportOrders()
+        .subscribe(data => {
+          window.open(environment.backend + 'order/download/' + data.data, '_blank');
+          this.orderService.showLoading(false);
+        });
     }
 
     public getStatus() {
