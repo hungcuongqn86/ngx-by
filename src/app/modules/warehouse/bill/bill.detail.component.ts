@@ -99,8 +99,8 @@ export class BillDetailComponent implements OnInit, OnDestroy {
     }
     this.sub = this.warehouseService.exportBill(item.id)
       .subscribe(data => {
-        // window.open(environment.backend + 'order/download/' + data.data, '_blank');
         this.warehouseService.showLoading(false);
+        const win = window.open(data.data);
       });
   }
 
