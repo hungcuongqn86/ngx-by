@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {AuthService} from '../../../auth.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-bill-detail',
@@ -90,6 +91,18 @@ export class BillDetailComponent implements OnInit, OnDestroy {
                 }
             });
     }
+
+  public exportBill(item: Bill) {
+    this.warehouseService.showLoading(true);
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+    this.sub = this.warehouseService.exportBill(item.id)
+      .subscribe(data => {
+        // window.open(environment.backend + 'order/download/' + data.data, '_blank');
+        this.warehouseService.showLoading(false);
+      });
+  }
 
     public backlist() {
         this.router.navigate(['/warehouse/bill']);
