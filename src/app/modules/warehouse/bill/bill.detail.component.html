@@ -211,11 +211,16 @@
             </tbody>
           </table>
         </div>
+        <div *ngIf="!bill" class="card-body">
+          <alert type="warning">
+            <p>Không tồn tại phiếu xuất!</p>
+          </alert>
+        </div>
       </div>
     </div>
   </div><!--/.row-->
 </div>
-<div class="toolbar">
+<div *ngIf="bill" class="toolbar">
   <button (click)="exportBill(bill)" class="btn btn-sm btn-primary"
           type="button">
     Export
