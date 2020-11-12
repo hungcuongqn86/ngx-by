@@ -192,7 +192,8 @@
               </tbody>
             </table>
           </div>
-          <p class="text-right">Ngày <b>{{date}}</b></p>
+          <p class="text-right">Hà Nội, ngày {{bill.created_at | date: 'dd'}} tháng {{bill.created_at | date: 'MM'}}
+            năm {{bill.created_at | date: 'yyyy'}}.</p>
           <table class="table">
             <thead>
             <tr>
