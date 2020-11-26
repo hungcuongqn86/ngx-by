@@ -41,7 +41,7 @@
             <div class="card-header">
                 <i class="cui-comment-square icons"></i> <strong>Thông tin trao đổi</strong>
             </div>
-            <div #scrollMe class="card-body comment-content">
+            <div #scrollMe class="card-body comment-content" >
                 <div *ngFor="let item of comments" class="comment-item {{item.is_admin? 'admin-comment-item': ''}}"
                      title="{{item.created_at}}">
                     <b>{{item.user_name}}: </b>{{item.content}}
