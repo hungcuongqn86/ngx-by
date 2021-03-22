@@ -61,7 +61,7 @@
         </div>
     </div>
 </div>
-<p class="text-right"><span>Tỉ giá: {{orderService.orderRe.rate}}</span></p>
+<p class="text-right"><span>Tỉ giá kết đơn: {{orderService.orderRe.cart[0].rate}}</span></p>
 <form novalidate #form="ngForm" class="form-horizontal">
     <div class="card">
         <div class="card-body">
@@ -220,6 +220,7 @@
                     <th>Màu sắc</th>
                     <th>Size/mẫu</th>
                     <th>Khách đặt</th>
+                    <th>Tỉ giá</th>
                     <th>Đơn giá</th>
                     <th>Thành tiền</th>
                     <th>Ghi chú của khách</th>
@@ -250,6 +251,7 @@
                                     type="number">
                             <p *ngIf="((cart.id !== item.id) || (col !== 'amount'))">{{item.amount}}</p>
                         </td>
+                        <td><p>{{item.rate}}</p></td>
                         <td (click)="selectCart(item,'price')">
                             <input
                                     *ngIf="((cart.id === item.id) && (col === 'price'))"
@@ -269,7 +271,7 @@
                             </div>
                         </td>
                         <td>
-                            <p>{{item.price | tempPrice: orderService.orderRe.rate : item.amount}}<sup>đ</sup></p>
+                            <p>{{item.price | tempPrice: item.rate : item.amount}}<sup>đ</sup></p>
                             <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
                         </td>
                         <td>{{item.note}}</td>
