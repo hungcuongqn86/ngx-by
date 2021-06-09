@@ -29,7 +29,7 @@ import {AutofocusDirective} from './directive/autoFocus';
     providers: []
 })
 export class SharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<SharedModule> {
         return {
             ngModule: SharedModule
         };

@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/ngx-vansu",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,6 +35,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -128,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "ngx-vansu"
+  "defaultProject": "ngx-vansu",
+  "cli": {
+    "analytics": "e6b61389-5310-48cc-b7ff-9e935259166f"
+  }
 }
