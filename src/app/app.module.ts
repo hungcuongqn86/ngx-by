@@ -3,10 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientXsrfModule} from '@angular/common/http';
-
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './in-memory-data.service';
-
 import {RequestCache, RequestCacheWithMap} from './request-cache.service';
 
 import {AppComponent} from './app.component';
@@ -27,12 +23,6 @@ import {SharedModule} from './shared.module';
 import {OrderService} from './services/order/order.service';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
-import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true
-};
 
 // Import containers
 import {DefaultLayoutComponent} from './layout';
@@ -64,17 +54,6 @@ import {captchar_key} from './const';
             cookieName: 'My-Xsrf-Cookie',
             headerName: 'My-Xsrf-Header',
         }),
-
-        // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-        // and returns simulated server responses.
-        // Remove it when a real server is ready to receive requests.
-        HttpClientInMemoryWebApiModule.forRoot(
-            InMemoryDataService, {
-                dataEncapsulation: false,
-                passThruUnknownUrl: true,
-                put204: false // return entity after PUT/update
-            }
-        ),
         routing,
         AppAsideModule,
         AppFooterModule,
