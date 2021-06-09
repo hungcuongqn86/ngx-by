@@ -16,7 +16,7 @@ import {LoginComponent} from './auth/login.component';
 import {RegisterComponent} from './auth/register.component';
 import {MessageService} from './message.service';
 import {ErrorMessagesService} from './error.messages.service';
-import {NgxCaptchaModule} from 'ngx-captcha';
+// import {NgxCaptchaModule} from 'ngx-captcha';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {SharedModule} from './shared.module';
@@ -60,9 +60,9 @@ import {captchar_key} from './const';
         AppHeaderModule,
         AppSidebarModule,
         PerfectScrollbarModule,
-        NgxCaptchaModule.forRoot({
+        /*NgxCaptchaModule.forRoot({
             reCaptcha2SiteKey: captchar_key
-        }),
+        }),*/
         TabsModule.forRoot(),
         BsDropdownModule.forRoot(),
         SharedModule.forRoot()
