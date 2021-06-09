@@ -17,7 +17,7 @@ const appRoutes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+                loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
                 data: {
                     title: 'Bảng điều khiển'
                 },
@@ -25,7 +25,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'notification',
-                loadChildren: './modules/notification/notification.module#NotificationModule',
+                loadChildren: () => import('./modules/notification/notification.module').then(m => m.NotificationModule),
                 data: {
                     title: 'Thông báo'
                 },
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
             }
             , {
                 path: 'mpartner',
-                loadChildren: './modules/mpartner/mpartner.module#MpartnerModule',
+                loadChildren: () => import('./modules/mpartner/mpartner.module').then(m => m.MpartnerModule),
                 data: {
                     title: 'Đối tác'
                 },
@@ -41,14 +41,14 @@ const appRoutes: Routes = [
             }
             , {
                 path: 'muser',
-                loadChildren: './modules/muser/muser.module#MuserModule',
+                loadChildren: () => import('./modules/muser/muser.module').then(m => m.MuserModule),
                 data: {
                     title: 'Người dùng'
                 },
                 canActivate: [AppGuard]
             }, {
                 path: 'account',
-                loadChildren: './modules/account/account.module#AccountModule',
+                loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule),
                 data: {
                     title: 'Tài khoản'
                 },
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
             }
             , {
                 path: 'mcustumer',
-                loadChildren: './modules/mcustumer/mcustumer.module#McustumerModule',
+                loadChildren: () => import('./modules/mcustumer/mcustumer.module').then(m => m.McustumerModule),
                 data: {
                     title: 'Khách hàng'
                 },
@@ -64,14 +64,14 @@ const appRoutes: Routes = [
             }
             , {
                 path: 'cart',
-                loadChildren: './modules/cart/cart.module#CartModule',
+                loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
                 data: {
                     title: 'Giỏ hàng'
                 },
                 canActivate: [AppGuard]
           }, {
             path: 'shipping',
-              loadChildren: './modules/shipping/shipping.module#ShippingModule',
+              loadChildren: () => import('./modules/shipping/shipping.module').then(m => m.ShippingModule),
             data: {
               title: 'Yêu cầu ký gửi'
             },
@@ -79,35 +79,35 @@ const appRoutes: Routes = [
           }
             , {
                 path: 'order',
-                loadChildren: './modules/order/order.module#OrderModule',
+                loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule),
                 data: {
                     title: 'Đơn hàng'
                 },
                 canActivate: [AppGuard]
             }, {
                 path: 'complain',
-                loadChildren: './modules/complain/complain.module#ComplainModule',
+                loadChildren: () => import('./modules/complain/complain.module').then(m => m.ComplainModule),
                 data: {
                     title: 'Khiếu nại'
                 },
                 canActivate: [AppGuard]
             }, {
                 path: 'package',
-                loadChildren: './modules/package/package.module#PackageModule',
+                loadChildren: () => import('./modules/package/package.module').then(m => m.PackageModule),
                 data: {
                     title: 'Kiện hàng'
                 },
                 canActivate: [AppGuard]
             }, {
                 path: 'mypackage',
-                loadChildren: './modules/mypackage/mypackage.module#MypackageModule',
+                loadChildren: () => import('./modules/mypackage/mypackage.module').then(m => m.MypackageModule),
                 data: {
                     title: 'Kiện hàng'
                 },
                 canActivate: [AppGuard]
             }, {
                 path: 'warehouse',
-                loadChildren: './modules/warehouse/warehouse.module#WarehouseModule',
+                loadChildren: () => import('./modules/warehouse/warehouse.module').then(m => m.WarehouseModule),
                 data: {
                     title: 'Kho Việt Nam'
                 },
@@ -115,7 +115,7 @@ const appRoutes: Routes = [
             }
             , {
                 path: 'wallet',
-                loadChildren: './modules/wallet/wallet.module#WalletModule',
+                loadChildren: () => import('./modules/wallet/wallet.module').then(m => m.WalletModule),
                 data: {
                     title: 'Ví điện tử'
                 },
@@ -123,7 +123,7 @@ const appRoutes: Routes = [
             }
             , {
                 path: 'setting',
-                loadChildren: './modules/setting/setting.module#SettingModule',
+                loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule),
                 data: {
                     title: 'Cấu hình hệ thống'
                 },
