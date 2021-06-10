@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpClientXsrfModule} from '@angular/common/http';
+import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {RequestCache, RequestCacheWithMap} from './request-cache.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {AuthService} from './auth.service';
-import { FirebaseService} from './firebase.service';
+import {FirebaseService} from './firebase.service';
 import {HttpErrorHandler} from './http-error-handler.service';
 import {LoadingService} from './loading.service';
 import {MessagesComponent} from './messages/messages.component';
@@ -23,71 +23,63 @@ import {SharedModule} from './shared.module';
 import {OrderService} from './services/order/order.service';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-
 // Import containers
 import {DefaultLayoutComponent} from './layout';
-
-const APP_CONTAINERS = [
-    DefaultLayoutComponent
-];
-
-import {
-    AppAsideModule,
-    AppHeaderModule,
-    AppFooterModule,
-    AppSidebarModule,
-} from '@coreui/angular';
+import {AppAsideModule, AppFooterModule, AppHeaderModule, AppSidebarModule,} from '@coreui/angular';
 
 import {httpInterceptorProviders} from './http-interceptors';
 import {routing} from './app.routing.module';
 import {AppGuard} from './app.guard.service';
 
-import {captchar_key} from './const';
+const APP_CONTAINERS = [
+  DefaultLayoutComponent
+];
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        // import HttpClientModule after BrowserModule.
-        HttpClientModule,
-        HttpClientXsrfModule.withOptions({
-            cookieName: 'My-Xsrf-Cookie',
-            headerName: 'My-Xsrf-Header',
-        }),
-        routing,
-        AppAsideModule,
-        AppFooterModule,
-        AppHeaderModule,
-        AppSidebarModule,
-        PerfectScrollbarModule,
-        /*NgxCaptchaModule.forRoot({
-            reCaptcha2SiteKey: captchar_key
-        }),*/
-        TabsModule.forRoot(),
-        BsDropdownModule.forRoot(),
-        SharedModule.forRoot()
-    ],
-    declarations: [
-        AppComponent,
-        ...APP_CONTAINERS,
-        MessagesComponent,
-        Error404Component,
-        LoginComponent,
-        RegisterComponent
-    ],
-    providers: [
-        AppGuard,
-      AuthService,
-      FirebaseService,
-        HttpErrorHandler,
-        LoadingService,
-        MessageService,
-        ErrorMessagesService,
-        OrderService,
-        {provide: RequestCache, useClass: RequestCacheWithMap},
-        httpInterceptorProviders
-    ],
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    // import HttpClientModule after BrowserModule.
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'My-Xsrf-Cookie',
+      headerName: 'My-Xsrf-Header',
+    }),
+    routing,
+    AppAsideModule,
+    AppFooterModule,
+    AppHeaderModule,
+    AppSidebarModule,
+    PerfectScrollbarModule,
+    /*NgxCaptchaModule.forRoot({
+        reCaptcha2SiteKey: captchar_key
+    }),*/
+    TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    SharedModule.forRoot()
+  ],
+  declarations: [
+    AppComponent,
+    ...APP_CONTAINERS,
+    MessagesComponent,
+    Error404Component,
+    LoginComponent,
+    RegisterComponent
+  ],
+  providers: [
+    AppGuard,
+    AuthService,
+    FirebaseService,
+    HttpErrorHandler,
+    LoadingService,
+    MessageService,
+    ErrorMessagesService,
+    OrderService,
+    {provide: RequestCache, useClass: RequestCacheWithMap},
+    httpInterceptorProviders
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

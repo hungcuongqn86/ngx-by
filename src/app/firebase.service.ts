@@ -3,6 +3,7 @@ import {HttpErrorHandler, HandleError} from './http-error-handler.service';
 import { User } from './models/User';
 import { environment } from '../environments/environment';
 import firebase from 'firebase/app';
+import 'firebase/database';
 
 // declare const firebase: any;
 
