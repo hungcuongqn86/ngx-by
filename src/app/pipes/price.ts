@@ -4,7 +4,7 @@ import {Pipe, PipeTransform} from '@angular/core';
     name: 'tempPrice'
 })
 export class TempPricePipe implements PipeTransform {
-    transform(ndt: string, tigia: number, soluong: number, r: boolean): string {
+    transform(ndt: string, tigia: number, soluong: number, r: boolean = true): string {
         if (r !== false) {
             r = true;
         }

@@ -251,7 +251,7 @@
                                     type="number">
                             <p *ngIf="((cart.id !== item.id) || (col !== 'amount'))">{{item.amount}}</p>
                         </td>
-                        <td><p>{{item.rate}}</p></td>
+                        <td><p>{{orderService.orderRe.rate}}</p></td>
                         <td (click)="selectCart(item,'price')">
                             <input
                                     *ngIf="((cart.id === item.id) && (col === 'price'))"
@@ -265,13 +265,13 @@
                                     type="number">
                             <div *ngIf="((cart.id !== item.id) || (col !== 'price'))">
                                 <p *ngIf="orderService.orderRe">{{item.price | tempPrice:
-                                  item.rate :
+                                  orderService.orderRe.rate :
                                     1}}<sup>đ</sup></p>
                                 <p><span>¥</span>{{item.price | tempPrice: 1 : 1 : false}}</p>
                             </div>
                         </td>
                         <td>
-                            <p>{{item.price | tempPrice: item.rate : item.amount}}<sup>đ</sup></p>
+                            <p>{{item.price | tempPrice: orderService.orderRe.rate : item.amount}}<sup>đ</sup></p>
                             <p><span>¥</span>{{item.price | tempPrice: 1 : item.amount : false}}</p>
                         </td>
                         <td>{{item.note}}</td>

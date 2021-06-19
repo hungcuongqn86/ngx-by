@@ -82,11 +82,11 @@
                                 <tbody>
                                 <tr *ngIf="!nv">
                                     <td>Tiền hàng</td>
-                                    <td>{{shopItem.tien_hang | tempPrice: 1 : 1}}<sup>đ</sup></td>
+                                    <td>{{shopItem.tien_hang.toString() | tempPrice: 1 : 1}}<sup>đ</sup></td>
                                 </tr>
                                 <tr *ngIf="!nv">
                                     <td>Phí tạm tính</td>
-                                    <td>{{shopItem.phi_tam_tinh | tempPrice: 1 : 1}}<sup>đ</sup></td>
+                                    <td>{{shopItem.phi_tam_tinh.toString() | tempPrice: 1 : 1}}<sup>đ</sup></td>
                                 </tr>
                                 <tr *ngIf="!nv">
                                     <td>#</td>
@@ -94,7 +94,7 @@
                                 </tr>
                                 <tr *ngIf="!nv">
                                     <td>Tổng</td>
-                                    <td>{{shopItem.tong | tempPrice: 1 : 1}}<sup>đ</sup></td>
+                                    <td>{{shopItem.tong.toString() | tempPrice: 1 : 1}}<sup>đ</sup></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
