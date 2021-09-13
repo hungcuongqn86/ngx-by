@@ -61,14 +61,9 @@
                             </p>
                           </td>
                             <td>
-                                <p *ngFor="let cart of item.cart">
-                                    <a target="_blank" href="{{cart.pro_link}}"><img style="max-width: 50px;" src="{{cart.image}}"></a>
-                                    <span *ngIf="cart.colortxt">{{cart.colortxt}}</span>
-                                    <span *ngIf="cart.sizetxt">{{cart.sizetxt}}</span>
-                                    <span> - Số lượng: {{cart.amount}}</span>
-                                    <span *ngIf="!nv"> - Đơn giá: {{cart.price | tempPrice: item.rate : 1 : false}}
-                                        <sup>đ</sup></span>
-                                    <span *ngIf="!nv"> - Thành tiền: {{cart.price | tempPrice: item.rate : cart.amount: false}}<sup>đ</sup></span>
+                                <p style="position: relative;">
+                                    <a target="_blank" href="{{item.cart[0].pro_link}}"><img style="max-width: 50px;" src="{{item.cart[0].image}}"></a>
+                                    <span style="margin-left: 5px; position: absolute;"> Số lượng <br>{{item.count_product}}/{{item.count_link}}</span>
                                 </p>
                             </td>
                             <td class="text-right">
