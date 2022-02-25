@@ -57,7 +57,7 @@
                             </p>
                             <p>Ngày tạo: {{item.created_at | tempDate}}</p>
                             <p>
-                              <i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-danger"> {{item.shop.name}}</span>
+                              <i class="fa fa fa-anchor"></i> Shop: <span class="badge badge-info" [innerHTML]="item.shop.name"></span>
                             </p>
                           </td>
                             <td>
