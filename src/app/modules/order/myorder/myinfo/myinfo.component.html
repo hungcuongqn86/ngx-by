@@ -40,14 +40,14 @@
           <div class="col-md-6">
             <p><strong>Tiền hàng</strong></p>
             <p>(1) Tiền hàng <span
-              class="pull-right"><strong>{{(orderService.orderRe.tien_hang - orderService.orderRe.phi_tam_tinh).toString() | tempPrice: 1 : 1 : false}}
+              class="pull-right"><strong>{{(orderService.orderRe.tien_hang).toString() | tempPrice: 1 : 1 : false}}
               <sup> đ</sup></strong></span></p>
             <p>(2) Phí trả thêm (nếu có) <span
-              class="pull-right"><strong>{{orderService.orderRe.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}}
+              class="pull-right"><strong>
               <sup> đ</sup></strong></span></p>
             <p>(3) Ship nội địa TQ <span class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 3}}<sup> đ</sup></strong></span>
             </p>
-            <p>(4) Phí mua hàng <span class="pull-right"><strong>0<sup> đ</sup></strong></span></p>
+            <p>(4) Phí mua hàng <span class="pull-right"><strong>{{orderService.orderRe.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}}<sup> đ</sup></strong></span></p>
             <p>(5) Phí kiểm đếm <span class="pull-right"><strong>0<sup> đ</sup></strong></span></p>
             <p>(6) Tổng = 1 + 2 + 3 + 4 + 5 <span
               class="pull-right"><strong>{{orderService.orderRe | tempTongTienHang : 1}} <sup>
