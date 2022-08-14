@@ -205,6 +205,10 @@
     </tr>
     </tbody>
   </table>
+
+  <p class="text-right"><button
+    (click)="editPrice(prices)"
+    class="btn btn-primary" type="button">Sửa đơn giá</button></p>
   <table *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0" class="table table-bordered table-sm">
     <thead>
     <tr>
@@ -295,11 +299,35 @@
         <h5 class="modal-title">Thông báo lỗi</h5>
     </div>
     <div class="modal-body">
-        <alert type="danger" *ngIf="errorMessage.length > 0">
+        <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
             <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
         </alert>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
     </div>
+</ng-template>
+<ng-template #prices>
+  <div class="modal-header">
+    <h5 class="modal-title">Sửa đơn giá</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form1="ngForm">
+      <div class="form-group">
+        <label for="priceMulti">Đơn giá</label>
+        <input class="form-control" required id="priceMulti" name="priceMulti"
+               [(ngModel)]="priceMulti"
+               value=""
+               placeholder="Đơn giá" type="text">
+      </div>
+      <p></p>
+      <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
+        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="confirmPrice()">OK</button>
+    <button type="button" class="btn btn-warning" (click)="declineError()">Cancel</button>
+  </div>
 </ng-template>

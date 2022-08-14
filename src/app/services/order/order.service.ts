@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
-import {HttpErrorHandler, HandleError} from '../../http-error-handler.service';
+import {HandleError, HttpErrorHandler} from '../../http-error-handler.service';
 import {Util} from '../../helper/lib';
 import {apiUrl, apiV1Url} from '../../const';
 import {LoadingService} from '../../loading.service';
@@ -13,7 +13,6 @@ import {User} from '../../models/User';
 import {Shop} from '../../models/Shop';
 import {Package} from '../../models/Package';
 import {Complain} from '../../models/Complain';
-import {Comment} from '../../models/Comment';
 
 export interface OrderCreate {
     id: number;
@@ -340,6 +339,14 @@ export class OrderService {
         return this.http.put<any>(url, item)
             .pipe(
                 catchError(this.handleError('editCart', item))
+            );
+    }
+
+    public editPrices(items, val: number) {
+        const url = Util.getUri(apiV1Url) + `${this.moduleUri}prices`;
+        return this.http.post<any>(url, {items: items, val: val})
+            .pipe(
+                catchError(this.handleError('editPrices', items))
             );
     }
 

@@ -25,6 +25,8 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   col: string;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
+  public priceMulti = 0;
+
   constructor(public orderService: OrderService, private route: ActivatedRoute,
               public authService: AuthService, private modalService: BsModalService) {
     this.reNewPackage();
@@ -113,6 +115,28 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   selectAll(checked: any) {
     this.orderService.orderRe.cart.forEach(x => x.isChecked = checked);
+  }
+
+  editPrice(template: TemplateRef<any>) {
+    const cartItems = this.orderService.orderRe.cart.filter(x => x.isChecked).map(x => x.id);
+    console.log(cartItems);
+    if (cartItems && cartItems.length) {
+      this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+    }
+  }
+
+  confirmPrice() {
+    const cartItems = this.orderService.orderRe.cart.filter(x => x.isChecked).map(x => x.id);
+    this.orderService.showLoading(true);
+    this.orderService.editPrices(cartItems, this.priceMulti)
+      .subscribe(res => {
+        if (res.status) {
+          this.getOrder();
+          this.modalRef.hide();
+        } else {
+          this.errorMessage = res.data;
+        }
+      });
   }
 
   scrollToBottom(): void {
