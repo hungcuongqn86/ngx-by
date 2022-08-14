@@ -318,7 +318,8 @@
         <input class="form-control" required id="priceMulti" name="priceMulti"
                [(ngModel)]="priceMulti"
                value=""
-               placeholder="Đơn giá" type="text">
+               min="0"
+               placeholder="Đơn giá" type="number">
       </div>
       <p></p>
       <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">

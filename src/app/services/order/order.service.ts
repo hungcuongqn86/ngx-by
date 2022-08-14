@@ -343,7 +343,7 @@ export class OrderService {
     }
 
     public editPrices(items, val: number) {
-        const url = Util.getUri(apiV1Url) + `${this.moduleUri}prices`;
+        const url = Util.getUri(apiUrl) + `cart/prices`;
         return this.http.post<any>(url, {items: items, val: val})
             .pipe(
                 catchError(this.handleError('editPrices', items))

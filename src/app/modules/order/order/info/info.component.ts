@@ -118,8 +118,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   editPrice(template: TemplateRef<any>) {
+    this.errorMessage = [];
+    this.priceMulti = 0;
     const cartItems = this.orderService.orderRe.cart.filter(x => x.isChecked).map(x => x.id);
-    console.log(cartItems);
     if (cartItems && cartItems.length) {
       this.modalRef = this.modalService.show(template, {class: 'modal-md'});
     }
@@ -135,6 +136,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
           this.modalRef.hide();
         } else {
           this.errorMessage = res.data;
+          this.orderService.showLoading(false);
         }
       });
   }
