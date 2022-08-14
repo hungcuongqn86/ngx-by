@@ -342,9 +342,9 @@ export class OrderService {
             );
     }
 
-    public editPrices(items, val: number) {
+    public editPrices(items, val: number, order_id: number) {
         const url = Util.getUri(apiUrl) + `cart/prices`;
-        return this.http.post<any>(url, {items: items, val: val})
+        return this.http.post<any>(url, {items: items, val: val, order_id: order_id})
             .pipe(
                 catchError(this.handleError('editPrices', items))
             );

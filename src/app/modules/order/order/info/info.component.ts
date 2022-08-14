@@ -129,7 +129,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   confirmPrice() {
     const cartItems = this.orderService.orderRe.cart.filter(x => x.isChecked).map(x => x.id);
     this.orderService.showLoading(true);
-    this.orderService.editPrices(cartItems, this.priceMulti)
+    this.orderService.editPrices(cartItems, this.priceMulti, this.orderService.orderRe.id)
       .subscribe(res => {
         if (res.status) {
           this.getOrder();
