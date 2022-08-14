@@ -1,5 +1,5 @@
-import {Component, AfterViewChecked, ElementRef, ViewChild, OnInit, TemplateRef} from '@angular/core';
-import {Order, OrderService, OrderStatus} from '../../../../services/order/order.service';
+import {AfterViewChecked, Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {OrderService, OrderStatus} from '../../../../services/order/order.service';
 import {Package, PackageStatus} from '../../../../models/Package';
 import {Cart} from '../../../../models/Cart';
 import {Comment} from '../../../../models/Comment';
@@ -73,7 +73,8 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       size: null,
       sizetxt: null,
       updated_at: null,
-      user_id: null
+      user_id: null,
+      isChecked: false
     };
   }
 
@@ -108,6 +109,10 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     // this.scrollToBottom();
+  }
+
+  selectAll(checked: any) {
+    this.orderService.orderRe.cart.forEach(x => x.isChecked = checked);
   }
 
   scrollToBottom(): void {
