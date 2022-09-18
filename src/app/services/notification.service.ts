@@ -3,9 +3,10 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class NotificationService {
-    static instance: NotificationService;
+  static instance: NotificationService;
+  public search = {key: ''};
 
-    constructor(public http: HttpClient) {
-        return NotificationService.instance = NotificationService.instance || this;
-    }
+  constructor(public http: HttpClient) {
+    return NotificationService.instance = NotificationService.instance || this;
+  }
 }
