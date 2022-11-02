@@ -88,11 +88,11 @@
                                         type="button">
                                     Đặt cọc
                                 </button>
-                                <button *ngIf="!nv && item.status < 3" (click)="openDeleteModal(delete_template,item)"
+                                <!--<button *ngIf="!nv && item.status < 3" (click)="openDeleteModal(delete_template,item)"
                                         class="btn btn-sm btn-ghost-primary"
                                         type="button">
                                     Xóa
-                                </button>
+                                </button>-->
                             </td>
                         </tr>
                         </tbody>
@@ -169,7 +169,7 @@
     </div>
 </ng-template>
 
-<ng-template #delete_template>
+<!--<ng-template #delete_template>
     <div class="modal-body text-center">
         <p>Bạn có chắc chắn muốn xóa đơn hàng này!?</p>
         <div class="btn-group btn-group-toggle">
@@ -177,4 +177,4 @@
             <button type="button" class="btn btn-primary" (click)="declineDatCoc()">No</button>
         </div>
     </div>
-</ng-template>
+</ng-template>-->
