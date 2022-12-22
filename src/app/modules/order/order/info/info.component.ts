@@ -137,6 +137,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
           }
         }
       } else {
+        this.pkage_code_list = this.pkage_code_list.split(' ').join(' ');
         const arrPkCodef = this.pkage_code_list.split('\n');
         for (let i = 0; i < arrPkCodef.length; i++) {
           const arrcode = arrPkCodef[i].trim().split(' ');
@@ -144,6 +145,10 @@ export class InfoComponent implements OnInit, AfterViewChecked {
             arrPkCode.push(arrcode[0]);
           }
         }
+      }
+
+      if (arrPkCode.length) {
+        
       }
     }
     console.log(arrPkCode);
