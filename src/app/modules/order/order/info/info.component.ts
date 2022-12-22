@@ -148,10 +148,19 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       }
 
       if (arrPkCode.length) {
-        
+        this.orderService.showLoading(true);
+        this.orderService.pkcodeImport(arrPkCode)
+          .subscribe(res => {
+            if (res.status) {
+              this.getOrder();
+              this.modalRef.hide();
+            } else {
+              this.errorMessage = res.data;
+              this.orderService.showLoading(false);
+            }
+          });
       }
     }
-    console.log(arrPkCode);
   }
 
   editPrice(template: TemplateRef<any>) {
