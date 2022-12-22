@@ -139,9 +139,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       } else {
         const arrPkCodef = this.pkage_code_list.split('\n');
         for (let i = 0; i < arrPkCodef.length; i++) {
-          const arrcode = arrPkCodef[i].split(' ');
-          if (code) {
-            arrPkCode.push(code);
+          const arrcode = arrPkCodef[i].trim().split(' ');
+          if (arrcode && arrcode[0]) {
+            arrPkCode.push(arrcode[0]);
           }
         }
       }
