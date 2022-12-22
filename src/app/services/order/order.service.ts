@@ -342,9 +342,9 @@ export class OrderService {
       );
   }
 
-  public pkcodeImport(items) {
+  public pkcodeImport(order_id, items) {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/import`;
-    return this.http.post<any>(url, {items: items})
+    return this.http.post<any>(url, {order_id: order_id, items: items})
       .pipe(
         catchError(this.handleError('pkcodeImport', items))
       );

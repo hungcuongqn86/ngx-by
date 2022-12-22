@@ -149,7 +149,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
       if (arrPkCode.length) {
         this.orderService.showLoading(true);
-        this.orderService.pkcodeImport(arrPkCode)
+        this.orderService.pkcodeImport(this.orderService.orderRe.id, arrPkCode)
           .subscribe(res => {
             if (res.status) {
               this.getOrder();
