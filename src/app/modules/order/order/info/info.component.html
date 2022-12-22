@@ -1,65 +1,67 @@
 <div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
-            </div>
-            <div class="card-body">
-                <p><i class="fa fa-map-marker"></i> Trạng thái: <span
-                        class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
-                </p>
-                <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.id}} <i class="fa fa-calendar"></i></p>
-                <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
-                <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
-              <p><i class="fa fa-money"></i> Đã thanh toán: <span *ngIf="orderService.orderRe.thanh_toan">{{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}} <sup> đ</sup></span>
-                <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
-                </p>
-                <p><i class="fa fa-edge"></i> Đặt tại website: <span
-                        *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"
-                        class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span>
-                </p>
-            </div>
-        </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> <strong>Thông tin đơn hàng</strong>
+      </div>
+      <div class="card-body">
+        <p><i class="fa fa-map-marker"></i> Trạng thái: <span
+          class="badge badge-danger"> {{orderService.orderRe.status | tempStatus: status}}</span>
+        </p>
+        <p><i class="fa fa-qrcode"></i> Mã đơn: {{orderService.orderRe.id}} <i class="fa fa-calendar"></i></p>
+        <p><i class="fa fa-calendar"></i> Ngày tạo: {{orderService.orderRe.created_at | tempDate}}</p>
+        <p><i class="fa fa-money"></i> Tổng tiền: {{orderService.orderRe | tempTongTienHang : 1}} <sup> đ</sup>
+        <p><i class="fa fa-money"></i> Đã thanh toán: <span
+          *ngIf="orderService.orderRe.thanh_toan">{{orderService.orderRe.thanh_toan.toString() | tempPrice: 1 : 1 : true}}
+          <sup> đ</sup></span>
+        <p><i class="fa fa-money"></i> Còn thiếu: {{orderService.orderRe | tempTongTienHang : 2}} <sup> đ</sup>
+        </p>
+        <p><i class="fa fa-edge"></i> Đặt tại website: <span
+          *ngIf="orderService.orderRe.cart && orderService.orderRe.cart[0]"
+          class="badge badge-danger"> {{orderService.orderRe.cart[0].site}}</span>
+        </p>
+      </div>
     </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
-            </div>
-            <div class="card-body">
-                <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.name}}</p>
-                <p *ngIf="orderService.orderRe.user && authService.hasRole('admin')"><i class="fa fa-phone-square"></i>
-                    {{orderService.orderRe.user.phone_number}}</p>
-                <p *ngIf="orderService.orderRe.user && authService.hasRole('admin')"><i class="fa fa-envelope"></i>
-                    {{orderService.orderRe.user.email}}
-                </p>
-            </div>
-        </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> <strong>Thông tin khách hàng</strong>
+      </div>
+      <div class="card-body">
+        <p *ngIf="orderService.orderRe.user"><i class="fa fa-user"></i> {{orderService.orderRe.user.name}}</p>
+        <p *ngIf="orderService.orderRe.user && authService.hasRole('admin')"><i class="fa fa-phone-square"></i>
+          {{orderService.orderRe.user.phone_number}}</p>
+        <p *ngIf="orderService.orderRe.user && authService.hasRole('admin')"><i class="fa fa-envelope"></i>
+          {{orderService.orderRe.user.email}}
+        </p>
+      </div>
     </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <i class="cui-comment-square icons"></i> <strong>Thông tin trao đổi</strong>
-            </div>
-            <div #scrollMe class="card-body comment-content" >
-                <div *ngFor="let item of comments" class="comment-item {{item.is_admin? 'admin-comment-item': ''}}"
-                     title="{{item.created_at}}">
-                    <b>{{item.user_name}}: </b>{{item.content}}
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="form-group">
-                    <div class="controls">
-                        <div class="input-group"><input [(ngModel)]="comment.content" #content="ngModel"
-                                                        class="form-control" id="content" name="content" size="16"
-                                                        type="text"><span class="input-group-append"><button
-                                (click)="addComment()"
-                                class="btn btn-secondary" type="button">Gửi đi</button></span></div>
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="cui-comment-square icons"></i> <strong>Thông tin trao đổi</strong>
+      </div>
+      <div #scrollMe class="card-body comment-content">
+        <div *ngFor="let item of comments" class="comment-item {{item.is_admin? 'admin-comment-item': ''}}"
+             title="{{item.created_at}}">
+          <b>{{item.user_name}}: </b>{{item.content}}
         </div>
+      </div>
+      <div class="card-footer">
+        <div class="form-group">
+          <div class="controls">
+            <div class="input-group"><input [(ngModel)]="comment.content" #content="ngModel"
+                                            class="form-control" id="content" name="content" size="16"
+                                            type="text"><span class="input-group-append"><button
+              (click)="addComment()"
+              class="btn btn-secondary" type="button">Gửi đi</button></span></div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <p class="text-right"><span>Tỉ giá kết đơn: {{orderService.orderRe.rate}}</span></p>
 <form novalidate #form="ngForm" class="form-horizontal">
@@ -199,17 +201,26 @@
       </tr>
     </ng-template>
     <tr>
-      <td colspan="15" class="text-right"><a (click)="addPackage();" style="cursor: pointer;"
-                                             href="javascript:void(0);"><i
-        class="fa fa-plus-square"></i> Thêm mã vận đơn</a></td>
+      <td colspan="15" class="text-right">
+        <a (click)="addPackage();" style="cursor: pointer;"
+           href="javascript:void(0);"><i
+          class="fa fa-plus-square"></i> Thêm mã vận đơn</a>
+        <a (click)="packageCodeImport(package_code_import);" style="cursor: pointer; margin-left: 10px;"
+           href="javascript:void(0);"><i
+          class="fa fa-plus-square"></i> Import</a>
+      </td>
     </tr>
     </tbody>
   </table>
 
-  <p class="text-right"><button
-    (click)="editPrice(prices)"
-    class="btn btn-primary" type="button">Sửa đơn giá</button></p>
-  <table *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0" class="table table-bordered table-sm">
+  <p class="text-right">
+    <button
+      (click)="editPrice(prices)"
+      class="btn btn-primary" type="button">Sửa đơn giá
+    </button>
+  </p>
+  <table *ngIf="orderService.orderRe && orderService.orderRe.cart && orderService.orderRe.cart.length > 0"
+         class="table table-bordered table-sm">
     <thead>
     <tr>
       <th><input #checkAll type="checkbox" title="" class="" id="checkall" (change)="selectAll(checkAll.checked)"></th>
@@ -229,7 +240,8 @@
     <tbody>
     <ng-template ngFor let-item [ngForOf]="orderService.orderRe.cart" let-i="index">
       <tr class="{{item.amount? '' : 'yl-bg'}}">
-        <td><input type="checkbox" [(ngModel)]="item.isChecked" id="{{item.id}}" title="" class="checkitem" name="checkitem"></td>
+        <td><input type="checkbox" [(ngModel)]="item.isChecked" id="{{item.id}}" title="" class="checkitem"
+                   name="checkitem"></td>
         <td>{{i + 1}}</td>
         <td>
           <p><span class="badge badge-warning">{{item.id}}</span></p>
@@ -295,17 +307,17 @@
   </table>
 </form>
 <ng-template #template>
-    <div class="modal-header">
-        <h5 class="modal-title">Thông báo lỗi</h5>
-    </div>
-    <div class="modal-body">
-        <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
-            <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
-        </alert>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">Thông báo lỗi</h5>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
+      <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+    </alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="declineError()">OK</button>
+  </div>
 </ng-template>
 <ng-template #prices>
   <div class="modal-header">
@@ -329,6 +341,43 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="confirmPrice()">OK</button>
+    <button type="button" class="btn btn-warning" (click)="declineError()">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #package_code_import>
+  <div class="modal-header">
+    <h5 class="modal-title">Thêm nhiều mã vận đơn</h5>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form1="ngForm">
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" id="fomat1" name="fomat_r" value="1"
+                 [(ngModel)]="pkage_code_list_type"
+                 type="radio">
+          <label class="form-check-label" for="fomat1"> Tất cả MÃ trên một dòng </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" id="fomat2" name="fomat_r" value="2"
+                 [(ngModel)]="pkage_code_list_type"
+                 type="radio">
+          <label class="form-check-label" for="fomat2"> Mỗi MÃ một dòng </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <textarea required [(ngModel)]="pkage_code_list" id="pkage_code_list"
+                  name="pkage_code_list"
+                  rows="8"
+                  class="form-control"></textarea>
+      </div>
+      <p></p>
+      <alert type="danger" *ngIf="errorMessage && errorMessage.length > 0">
+        <p *ngFor="let error of errorMessage"><strong>Lỗi!</strong> {{error}}</p>
+      </alert>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="confirmImport()">OK</button>
     <button type="button" class="btn btn-warning" (click)="declineError()">Cancel</button>
   </div>
 </ng-template>

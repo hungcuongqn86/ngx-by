@@ -26,6 +26,8 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   public priceMulti = 0;
+  public pkage_code_list = '';
+  public pkage_code_list_type = '1';
 
   constructor(public orderService: OrderService, private route: ActivatedRoute,
               public authService: AuthService, private modalService: BsModalService) {
@@ -115,6 +117,36 @@ export class InfoComponent implements OnInit, AfterViewChecked {
 
   selectAll(checked: any) {
     this.orderService.orderRe.cart.forEach(x => x.isChecked = checked);
+  }
+
+  packageCodeImport(template: TemplateRef<any>) {
+    this.errorMessage = [];
+    this.pkage_code_list = '';
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+  }
+
+  confirmImport() {
+    const arrPkCode = [];
+    if (this.pkage_code_list) {
+      if (this.pkage_code_list_type === '1') {
+        const arrPkCodef = this.pkage_code_list.split(',');
+        for (let i = 0; i < arrPkCodef.length; i++) {
+          const code = arrPkCodef[i].trim();
+          if (code) {
+            arrPkCode.push(code);
+          }
+        }
+      } else {
+        const arrPkCodef = this.pkage_code_list.split('\n');
+        for (let i = 0; i < arrPkCodef.length; i++) {
+          const arrcode = arrPkCodef[i].split(' ');
+          if (code) {
+            arrPkCode.push(code);
+          }
+        }
+      }
+    }
+    console.log(arrPkCode);
   }
 
   editPrice(template: TemplateRef<any>) {
