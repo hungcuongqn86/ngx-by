@@ -181,6 +181,19 @@ export class OrderService {
       );
   }
 
+  getDatcocOrders(): Observable<any> {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}myorder`;
+    let params = new HttpParams();
+    params = params.append('status', '2');
+    params = params.append('pk_status', '0');
+    params = params.append('limit', '1000');
+    params = params.append('page', '1');
+    return this.http.get<any>(url, {params: params})
+      .pipe(
+        catchError(this.handleError('getDatcocOrders', []))
+      );
+  }
+
   getMyOrders(): Observable<any> {
     const url = Util.getUri(apiV1Url) + `${this.moduleUri}myorder`;
     let params = new HttpParams();
