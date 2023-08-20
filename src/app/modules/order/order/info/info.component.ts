@@ -26,6 +26,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   public priceMulti = 0;
+  public pkage_list = [];
   public pkage_code_list = '';
   public pkage_code_list_type = '1';
 
@@ -103,7 +104,8 @@ export class InfoComponent implements OnInit, AfterViewChecked {
       gia_can: null,
       tien_thanh_ly: null,
       updated_at: null,
-      bill_id: null
+      bill_id: null,
+      isChecked: false
     };
   }
 
@@ -119,10 +121,38 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     this.orderService.orderRe.cart.forEach(x => x.isChecked = checked);
   }
 
+  pkSelectAll(checked: any) {
+    this.orderService.orderRe.package.forEach(x => x.isChecked = checked);
+  }
+
   packageCodeImport(template: TemplateRef<any>) {
     this.errorMessage = [];
     this.pkage_code_list = '';
     this.modalRef = this.modalService.show(template, {class: 'modal-md'});
+  }
+
+  packageCodeRemove(template: TemplateRef<any>) {
+    this.errorMessage = [];
+    this.pkage_list = this.orderService.orderRe.package.filter(x => x.isChecked).map(x => x.id);
+    if (this.pkage_list && this.pkage_list.length) {
+      this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    }
+  }
+
+  confirmPackageCodeRemove() {
+    if (this.pkage_list.length) {
+      this.orderService.showLoading(true);
+      this.orderService.removePackages(this.orderService.orderRe.id, this.pkage_list)
+        .subscribe(res => {
+          if (res.status) {
+            this.getOrder();
+            this.modalRef.hide();
+          } else {
+            this.errorMessage = res.data;
+            this.orderService.showLoading(false);
+          }
+        });
+    }
   }
 
   confirmImport() {

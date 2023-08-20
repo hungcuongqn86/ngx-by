@@ -68,7 +68,7 @@
   <table class="table table-bordered table-sm">
     <thead>
     <tr>
-      <th><input #pxCheckAll type="checkbox" title="" class="" id="pxCheckAll" (change)="selectAll(pxCheckAll.checked)"></th>
+      <th><input #pxCheckAll type="checkbox" title="" class="" id="pxCheckAll" (change)="pkSelectAll(pxCheckAll.checked)"></th>
       <th>Mã KS</th>
       <th>Tên shop</th>
       <th>Ghi chú</th>
@@ -89,8 +89,8 @@
     <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
     <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
       <tr>
-        <td><input type="checkbox" [(ngModel)]="item.isChecked" id="pk_{{item.id}}" title="" class="checkitem"
-                   name="checkitem"></td>
+        <td><input *ngIf="i!==0"  type="checkbox" [(ngModel)]="item.isChecked" id="pk_{{item.id}}" title="" class="pkcheckitem"
+                   name="pkcheckitem"></td>
         <td>{{item.id}}</td>
         <td><p *ngIf="i===0">{{orderService.orderRe.shop.name}}</p></td>
         <td></td>
@@ -211,6 +211,9 @@
         <a (click)="packageCodeImport(package_code_import);" style="cursor: pointer; margin-left: 10px;"
            href="javascript:void(0);"><i
           class="fa fa-plus-square"></i> Import</a>
+        <a (click)="packageCodeRemove(remove_template);" style="cursor: pointer; margin-left: 10px;"
+           href="javascript:void(0);"><i
+          class="fa fa-window-close"></i> Hủy</a>
       </td>
     </tr>
     </tbody>
@@ -383,4 +386,13 @@
     <button type="button" class="btn btn-primary" (click)="confirmImport()">OK</button>
     <button type="button" class="btn btn-warning" (click)="declineError()">Cancel</button>
   </div>
+</ng-template>
+<ng-template #remove_template>
+    <div class="modal-body text-center">
+        <p>Bạn có chắc chắn muốn hủy!?</p>
+        <div class="btn-group btn-group-toggle">
+            <button type="button" class="btn btn-warning" (click)="confirmPackageCodeRemove()" >Yes</button>
+            <button type="button" class="btn btn-primary" (click)="declineError()">No</button>
+        </div>
+    </div>
 </ng-template>

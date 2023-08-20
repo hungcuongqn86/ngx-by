@@ -347,6 +347,14 @@ export class OrderService {
       );
   }
 
+  public removePackages(order_id, items) {
+    const url = Util.getUri(apiV1Url) + `${this.moduleUri}package/remove`;
+    return this.http.post<any>(url, {order_id: order_id, items: items})
+      .pipe(
+        catchError(this.handleError('editPackage', items))
+      );
+  }
+
   public editCart(item: Cart) {
     const url = Util.getUri(apiUrl) + `cart/update`;
     return this.http.put<any>(url, item)
