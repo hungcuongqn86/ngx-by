@@ -68,6 +68,7 @@
   <table class="table table-bordered table-sm">
     <thead>
     <tr>
+      <th><input #pxCheckAll type="checkbox" title="" class="" id="pxCheckAll" (change)="selectAll(pxCheckAll.checked)"></th>
       <th>Mã KS</th>
       <th>Tên shop</th>
       <th>Ghi chú</th>
@@ -88,6 +89,8 @@
     <tbody *ngIf="orderService.orderRe && orderService.orderRe.package && orderService.orderRe.package.length > 0">
     <ng-template ngFor let-item [ngForOf]="orderService.orderRe.package" let-i="index">
       <tr>
+        <td><input type="checkbox" [(ngModel)]="item.isChecked" id="pk_{{item.id}}" title="" class="checkitem"
+                   name="checkitem"></td>
         <td>{{item.id}}</td>
         <td><p *ngIf="i===0">{{orderService.orderRe.shop.name}}</p></td>
         <td></td>
@@ -201,7 +204,7 @@
       </tr>
     </ng-template>
     <tr>
-      <td colspan="15" class="text-right">
+      <td colspan="16" class="text-right">
         <a (click)="addPackage();" style="cursor: pointer;"
            href="javascript:void(0);"><i
           class="fa fa-plus-square"></i> Thêm mã vận đơn</a>
