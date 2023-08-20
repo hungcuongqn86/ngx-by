@@ -110,7 +110,8 @@ export class PackageComponent implements OnInit, OnDestroy {
             gia_can: null,
             tien_thanh_ly: null,
             updated_at: null,
-            bill_id: null
+            bill_id: null,
+            isChecked: false
         };
     }
 
