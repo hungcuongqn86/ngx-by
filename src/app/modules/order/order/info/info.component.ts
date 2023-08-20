@@ -122,7 +122,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   pkSelectAll(checked: any) {
-    this.orderService.orderRe.package.forEach(x => x.isChecked = checked);
+    this.orderService.orderRe.package.slice(1).forEach(x => {;
+      x.isChecked = checked;
+    });
   }
 
   packageCodeImport(template: TemplateRef<any>) {
@@ -134,6 +136,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   packageCodeRemove(template: TemplateRef<any>) {
     this.errorMessage = [];
     this.pkage_list = this.orderService.orderRe.package.filter(x => x.isChecked).map(x => x.id);
+    console.log(this.orderService.orderRe.package, this.pkage_list);
     if (this.pkage_list && this.pkage_list.length) {
       this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     }
@@ -279,6 +282,9 @@ export class InfoComponent implements OnInit, AfterViewChecked {
     this.orderService.getOrder(this.orderService.orderRe.id)
       .subscribe(order => {
         this.orderService.orderRe = order.data.order;
+        this.orderService.orderRe.package.forEach(x => x.isChecked = false);
+        this.orderService.orderRe.cart.forEach(x => x.isChecked = false);
+        console.log('12121212', this.orderService.orderRe.package);
         this.orderService.showLoading(false);
       });
   }
