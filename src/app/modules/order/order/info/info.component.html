@@ -357,20 +357,6 @@
   <div class="modal-body">
     <form novalidate #form1="ngForm">
       <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" id="fomat1" name="fomat_r" value="1"
-                 [(ngModel)]="pkage_code_list_type"
-                 type="radio">
-          <label class="form-check-label" for="fomat1"> Tất cả MÃ trên một dòng </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" id="fomat2" name="fomat_r" value="2"
-                 [(ngModel)]="pkage_code_list_type"
-                 type="radio">
-          <label class="form-check-label" for="fomat2"> Mỗi MÃ một dòng </label>
-        </div>
-      </div>
-      <div class="form-group">
         <textarea required [(ngModel)]="pkage_code_list" id="pkage_code_list"
                   name="pkage_code_list"
                   rows="8"

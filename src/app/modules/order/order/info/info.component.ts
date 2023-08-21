@@ -28,7 +28,6 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   public priceMulti = 0;
   public pkage_list = [];
   public pkage_code_list = '';
-  public pkage_code_list_type = '1';
 
   constructor(public orderService: OrderService, private route: ActivatedRoute,
               public authService: AuthService, private modalService: BsModalService) {
@@ -122,7 +121,7 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   }
 
   pkSelectAll(checked: any) {
-    this.orderService.orderRe.package.slice(1).forEach(x => {;
+    this.orderService.orderRe.package.slice(1).forEach(x => {
       x.isChecked = checked;
     });
   }
@@ -161,22 +160,13 @@ export class InfoComponent implements OnInit, AfterViewChecked {
   confirmImport() {
     const arrPkCode = [];
     if (this.pkage_code_list) {
-      if (this.pkage_code_list_type === '1') {
-        const arrPkCodef = this.pkage_code_list.split(',');
-        for (let i = 0; i < arrPkCodef.length; i++) {
-          const code = arrPkCodef[i].trim();
-          if (code) {
-            arrPkCode.push(code);
-          }
-        }
-      } else {
-        this.pkage_code_list = this.pkage_code_list.split(' ').join(' ');
-        const arrPkCodef = this.pkage_code_list.split('\n');
-        for (let i = 0; i < arrPkCodef.length; i++) {
-          const arrcode = arrPkCodef[i].trim().split(' ');
-          if (arrcode && arrcode[0]) {
-            arrPkCode.push(arrcode[0]);
-          }
+      this.pkage_code_list = this.pkage_code_list.split(' ').join(' ');
+      this.pkage_code_list = this.pkage_code_list.split('\t').join(' ');
+      const arrPkCodef = this.pkage_code_list.split('\n');
+      for (let i = 0; i < arrPkCodef.length; i++) {
+        const pkitem = arrPkCodef[i].trim().split(' ').join('|');
+        if (pkitem) {
+          arrPkCode.push(pkitem);
         }
       }
 
