@@ -71,7 +71,6 @@
       <th><input #pxCheckAll type="checkbox" title="" class="" id="pxCheckAll" (change)="pkSelectAll(pxCheckAll.checked)"></th>
       <th>Mã KS</th>
       <th>Tên shop</th>
-      <th>Ghi chú</th>
       <th>Tổng link/Tg SL</th>
       <th>Ship khách</th>
       <th>Ship TT</th>
@@ -81,6 +80,7 @@
       <th>Nhận lại</th>
       <th>Mã vận đơn</th>
       <th>Mã hợp đồng</th>
+      <th>Cân nặng</th>
       <th>Trạng thái shop</th>
       <th>Ghi chú thanh lý</th>
       <th class="text-center">Thao tác</th>
@@ -93,7 +93,6 @@
                    name="pkcheckitem"></td>
         <td>{{item.id}}</td>
         <td><p *ngIf="i===0">{{orderService.orderRe.shop.name}}</p></td>
-        <td></td>
         <td><p *ngIf="i===0">
           {{orderService.orderRe.count_link}}/{{orderService.orderRe.count_product}}</p></td>
         <td (click)="selectPackage(item,i,'ship_khach')">
@@ -166,6 +165,7 @@
           <p *ngIf="((package.id !== item.id) || (col !== 'contract_code'))">
             {{item.contract_code}}</p>
         </td>
+        <td><p *ngIf="item.weight_qd">{{item.weight_qd}}</p></td>
         <td (click)="selectPackage(item,i,'status')">
           <select *ngIf="((package.id === item.id) && (col === 'status'))"
                   [(ngModel)]="package.status"
