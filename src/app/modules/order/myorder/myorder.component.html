@@ -135,6 +135,20 @@
         </div>
         <div class="col-6">
           <div class="form-group">
+            <label for="content">Phí tạm tính </label>
+            <p><strong>{{inputDatCoc.phi_tam_tinh.toString() | tempPrice: 1 : 1 : false}}</strong><sup>đ</sup>
+            </p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="content">Ship TQ </label>
+            <p><strong>{{inputDatCoc.ship_khach.toString() | tempPrice: 1 : 1 : false}}</strong><span>¥</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
             <label for="content">Dư nợ hiện tại</label>
             <p><strong>{{auth.user.debt.toString() | tempPrice: 1 : 1 : false}}</strong><sup>đ</sup></p>
           </div>
