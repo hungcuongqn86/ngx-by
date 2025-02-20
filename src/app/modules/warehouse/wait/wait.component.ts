@@ -50,15 +50,18 @@ export class WaitComponent implements OnInit, OnDestroy {
     private genData(data: WarehouseWait[]): WarehouseWait[] {
         for (let i = 0; i < data.length; i++) {
             const packages = [];
+            let weight = 0;
             for (let j = 0; j < data[i].order.length; j++) {
                 for (let k = 0; k < data[i].order[j].package.length; k++) {
                     const checkExit = packages.findIndex(x => x.id === data[i].order[j].package[k].id);
                     if (checkExit < 0) {
                         packages.push(data[i].order[j].package[k]);
+                        weight += data[i].order[j].package[k].weight_qd;
                     }
                 }
             }
             data[i].package = packages;
+            data[i].weight = weight;
         }
         return data;
     }

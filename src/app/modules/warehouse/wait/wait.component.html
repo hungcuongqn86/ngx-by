@@ -95,13 +95,15 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Số lượng</th>
-                                        <th class="text-left">Mã vận đơn</th>
+                                        <th>Số lượng/Tổng cân nặng</th>
+                                        <th class="text-left">Mã vận đơn/Cân nặng</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>{{item.package.length}}</td>
+                                        <td>
+                                            <p>{{item.package.length}}/{{item.weight}}</p>
+                                        </td>
                                         <td class="text-left">
                                             <p *ngFor="let package of item.package">{{package.package_code}} /
                                                 {{package.weight_qd ? package.weight_qd : '0.00'}}</p>
