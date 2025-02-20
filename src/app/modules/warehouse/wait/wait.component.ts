@@ -56,7 +56,7 @@ export class WaitComponent implements OnInit, OnDestroy {
                     const checkExit = packages.findIndex(x => x.id === data[i].order[j].package[k].id);
                     if (checkExit < 0) {
                         packages.push(data[i].order[j].package[k]);
-                        weight += data[i].order[j].package[k].weight_qd;
+                        weight += Number(data[i].order[j].package[k].weight_qd);
                     }
                 }
             }
