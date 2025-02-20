@@ -168,7 +168,9 @@ export class MyorderComponent implements OnInit {
 
     calTienCoc() {
         let tong_tien = this.inputDatCoc.tien_hang + this.inputDatCoc.phi_tam_tinh;
-        if (this.inputDatCoc.dc_percent_value === 100) {
+        console.log('calTienCoc', this.inputDatCoc);
+        if (this.inputDatCoc.dc_percent_value.toString() === '100') {
+            console.log('calTienCoc1', this.inputDatCoc);
             tong_tien = tong_tien + this.inputDatCoc.ship_khach;
         }
 
