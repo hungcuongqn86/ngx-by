@@ -253,7 +253,7 @@
           <p><span class="badge badge-warning">{{item.id}}</span></p>
           <p><a target="_blank" rel="noopener noreferrer" href="{{item.pro_link}}">Xem</a></p>
         </td>
-        <td><img src="{{item.image}}"></td>
+        <td><img referrerPolicy="no-referrer" src="{{item.image}}"></td>
         <td><p *ngIf="item.colortxt" class="pull-left m-1">{{item.colortxt}}</p></td>
         <td><p *ngIf="item.sizetxt" class="pull-left m-1">{{item.sizetxt}}</p></td>
         <td (click)="selectCart(item,'amount')">

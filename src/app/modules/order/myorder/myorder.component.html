@@ -68,7 +68,7 @@
               </td>
               <td>
                 <p style="position: relative;">
-                  <a *ngIf="(item.cart && (item.cart.length > 0))" target="_blank" href="{{item.cart[0].pro_link}}"><img
+                  <a *ngIf="(item.cart && (item.cart.length > 0))" target="_blank" href="{{item.cart[0].pro_link}}"><img referrerPolicy="no-referrer"
                     style="max-width: 50px;" src="{{item.cart[0].image}}"></a>
                   <span style="margin-left: 5px; position: absolute;"> Số lượng <br>{{item.count_product}}
                     /{{item.count_link}}</span>
