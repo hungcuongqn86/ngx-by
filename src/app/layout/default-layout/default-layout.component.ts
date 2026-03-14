@@ -84,7 +84,7 @@ export class DefaultLayoutComponent {
       {id: 1, name: 'Chờ báo giá', type: 'od'},
       {id: 2, name: 'Chờ đặt cọc', type: 'od'},
       {id: 3, name: 'Đang mua hàng', type: 'od'},
-      {id: 2, name: 'Đã mua hàng', type: 'pk'},
+      {id: 4, name: 'Đã mua hàng', type: 'od'},
       {id: 3, name: 'Shop đang giao hàng', type: 'pk'},
       {id: 4, name: 'Kho Trung Quốc nhận hàng', type: 'pk'},
       {id: 5, name: 'Đang trên đường về VN', type: 'pk'},
