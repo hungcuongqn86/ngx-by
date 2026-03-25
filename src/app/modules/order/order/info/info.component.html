@@ -356,6 +356,13 @@
   </div>
   <div class="modal-body">
     <form novalidate #form1="ngForm">
+		<alert style="line-height: 3px;">
+			<p>Định dạng:<strong> Mã Vận Đơn|Mã Hợp Đồng|Cân nặng</strong></p>
+			<p><strong>Ví Dụ:</strong></p>
+			<p>910051870233|3290605608474917792|4.5</p>
+			<p>910051870232|3290605608474917791|15.1</p>
+			<p>910051870231|3290605608474917790|1.1</p>
+		</alert>
       <div class="form-group">
         <textarea required [(ngModel)]="pkage_code_list" id="pkage_code_list"
                   name="pkage_code_list"
