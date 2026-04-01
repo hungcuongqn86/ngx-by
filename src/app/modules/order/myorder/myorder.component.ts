@@ -72,6 +72,7 @@ export class MyorderComponent implements OnInit {
     }
 
     public searchDatCocOrders() {
+		console.log('searchDatCocOrders');
         this.orderService.getDatcocOrders()
             .subscribe(orders => {
                 this.calTongCoc(orders.data.data);
